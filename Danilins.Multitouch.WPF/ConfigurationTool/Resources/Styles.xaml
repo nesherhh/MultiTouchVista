@@ -1,0 +1,9 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+	xmlns:Models="clr-namespace:Danilins.Multitouch.ConfigurationTool.Models;assembly=">
+	
+	<DataTemplate DataType="{x:Type Models:InputProviderModel}">
+		<TextBlock Text="{Binding Path=Name, Mode=Default}"/>		
+	</DataTemplate>
+</ResourceDictionary>
