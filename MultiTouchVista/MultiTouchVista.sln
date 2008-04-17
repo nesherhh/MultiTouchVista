@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiTouchVista", "MultiTouchVista\MultiTouchVista.csproj", "{C052B1B0-16DB-4622-961D-CE8A1BF1BA16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMultiInput", "IMultiInput\IMultiInput.csproj", "{9E81AF1B-D0EB-4FB0-AA71-308335106197}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiMouse", "MultiMouse\MultiMouse.csproj", "{05F914EB-2582-4064-80AA-6D8408CDF032}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs06.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = IMultiInput\\IMultiInput.csproj
+		SccProjectName1 = IMultiInput
+		SccLocalPath1 = IMultiInput
+		SccProjectUniqueName2 = MultiMouse\\MultiMouse.csproj
+		SccProjectName2 = MultiMouse
+		SccLocalPath2 = MultiMouse
+		SccProjectUniqueName3 = MultiTouchVista\\MultiTouchVista.csproj
+		SccProjectName3 = MultiTouchVista
+		SccLocalPath3 = MultiTouchVista
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C052B1B0-16DB-4622-961D-CE8A1BF1BA16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C052B1B0-16DB-4622-961D-CE8A1BF1BA16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C052B1B0-16DB-4622-961D-CE8A1BF1BA16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C052B1B0-16DB-4622-961D-CE8A1BF1BA16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E81AF1B-D0EB-4FB0-AA71-308335106197}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E81AF1B-D0EB-4FB0-AA71-308335106197}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E81AF1B-D0EB-4FB0-AA71-308335106197}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E81AF1B-D0EB-4FB0-AA71-308335106197}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05F914EB-2582-4064-80AA-6D8408CDF032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05F914EB-2582-4064-80AA-6D8408CDF032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05F914EB-2582-4064-80AA-6D8408CDF032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05F914EB-2582-4064-80AA-6D8408CDF032}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
