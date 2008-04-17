@@ -1,0 +1,14 @@
+﻿<mtc:MultitouchWindow
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mtc="clr-namespace:Danilins.Multitouch.Controls;assembly=Danilins.Multitouch.Controls"
+	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    x:Class="SampleApp.Window1"
+    Title="Window1">
+	<mtc:MultitouchWindow.Resources>
+		<DataTemplate DataType="{x:Type sys:String}">
+			<Image Source="{Binding}" Width="640" Height="480"/>
+		</DataTemplate>
+	</mtc:MultitouchWindow.Resources>
+	<mtc:MultitouchList x:Name="itemsControl"/>
+</mtc:MultitouchWindow>

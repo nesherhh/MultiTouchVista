@@ -1,0 +1,18 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:Converters="clr-namespace:Danilins.Multitouch.Common.Converters;assembly=Danilins.Multitouch.Common"
+	x:Class="Danilins.Multitouch.Providers.Configuration.Controls.FilterControl"
+	x:Name="UserControl">
+
+	<UserControl.Resources>
+		<Converters:FilterToImageSourceConverter x:Key="FilterToImageSourceConverter"/>
+	</UserControl.Resources>
+
+	<GroupBox Header="{Binding Path=Name, Mode=OneWay}" Margin="5,5,5,5" MinHeight="100" MinWidth="100" Padding="5,5,5,5">
+		<StackPanel DataContext="{Binding Path=Model, ElementName=UserControl, Mode=OneWay}" x:Name="LayoutRoot">
+			<Image Source="{Binding Path=LastResult, Converter={StaticResource FilterToImageSourceConverter}, Mode=OneWay}" MaxHeight="240" MaxWidth="320"/>
+			<ItemsControl ItemsSource="{Binding Path=Properties, Mode=Default}"/>
+		</StackPanel>
+	</GroupBox>
+</UserControl>

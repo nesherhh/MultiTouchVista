@@ -1,0 +1,8 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+	xmlns:Models="clr-namespace:Danilins.Multitouch.ConfigurationTool.Models" 
+	xmlns:Converters="clr-namespace:Danilins.Multitouch.ConfigurationTool.Converters;assembly=">
+	<ObjectDataProvider x:Key="MainModelDS" ObjectType="{x:Type Models:MainModel}"/>
+	<Converters:WindowStateToShowInTaskbarConverter x:Key="winStateConverter"/>
+</ResourceDictionary>

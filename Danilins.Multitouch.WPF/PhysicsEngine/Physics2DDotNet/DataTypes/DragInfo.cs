@@ -1,0 +1,95 @@
+#region MIT License
+/*
+ * Copyright (c) 2005-2007 Jonathan Mark Porter. http://physics2d.googlepages.com/
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy 
+ * of this software and associated documentation files (the "Software"), to deal 
+ * in the Software without restriction, including without limitation the rights to 
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of 
+ * the Software, and to permit persons to whom the Software is furnished to do so, 
+ * subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be 
+ * included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ */
+#endregion
+
+
+#if UseDouble
+using Scalar = System.Double;
+#else
+using Scalar = System.Single;
+#endif
+using System;
+using System.Collections.Generic;
+
+using AdvanceMath;
+
+namespace Physics2DDotNet
+{
+    public sealed class FluidInfo
+    {
+        Vector2D centroid;
+        Scalar area;
+        Vector2D dragCenter;
+        Scalar dragArea;
+
+        public FluidInfo(Vector2D dragCenter, 
+                         Scalar dragArea, 
+                         Vector2D centroid, 
+                         Scalar area)
+        {
+            this.centroid = centroid;
+            this.area = area;
+            this.dragCenter = dragCenter;
+            this.dragArea = dragArea;
+        }
+
+        public Vector2D Centroid
+        {
+            get { return centroid; }
+        }
+        public Scalar Area
+        {
+            get { return area; }
+        }
+        public Vector2D DragCenter
+        {
+            get { return dragCenter; }
+        }
+        public Scalar DragArea
+        {
+            get { return dragArea; }
+        }
+    }
+
+    public sealed class DragInfo
+    {
+        Vector2D dragCenter;
+        Scalar dragArea;
+        
+        public DragInfo(Vector2D dragCenter, Scalar dragArea)
+        {
+            this.dragCenter = dragCenter;
+            this.dragArea = dragArea;
+        }
+        /// <summary>
+        /// (In Body Coordinates)
+        /// </summary>
+        public Vector2D DragCenter
+        {
+            get { return dragCenter; }
+        }
+        public Scalar DragArea
+        {
+            get { return dragArea; }
+        }
+    }
+}

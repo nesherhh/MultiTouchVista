@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
+  <Comment CommentText="Configuration">
+    <Position X="11.653" Y="0.5" Height="3.085" Width="1.19" />
+  </Comment>
+  <Class Name="Danilins.Multitouch.Providers.BitmapProvider">
+    <Position X="5" Y="3.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+      <Compartment Name="Protected" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="collector" Type="Danilins.Multitouch.Providers.BlobCollector" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="4.964" />
+        <Point X="4.625" Y="4.964" />
+        <Point X="4.625" Y="5.531" />
+        <Point X="2.75" Y="5.531" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAEAAAAAAAAIAQAACAAACACAABAAAAAAAAAAA=</HashCode>
+      <FileName>BitmapProvider.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="collector" />
+      <Field Name="filters" />
+      <Field Name="recognizer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.BlobCollector" Collapsed="true">
+    <Position X="0.5" Y="5.25" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAgAAAAgAAAAgAAAAAAQEAAAgAQAAAAAA=</HashCode>
+      <FileName>BlobCollector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.ContactRecognizer">
+    <Position X="0.5" Y="3.5" Width="3" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AlCAAAAAAQAAAABBAAQABCAAgAAIACAAAQAAAAAAAgA=</HashCode>
+      <FileName>ContactRecognizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.CursorData" Collapsed="true">
+    <Position X="10" Y="6.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAARCAAAEAAAAAAgAAAAIAgAAAAAAQAAAYAA=</HashCode>
+      <FileName>CursorData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pointer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.MouseEmulation" Collapsed="true">
+    <Position X="1" Y="7" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Danilins.Multitouch.Providers.MouseEmulation.MouseAction" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MouseEmulation.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>MouseEmulation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.MousePointer" Collapsed="true">
+    <Position X="10.25" Y="7.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAgAIAAgBAAAEAAAEBAEAAAAAAAAAAAoAAAEGBAAAAI=</HashCode>
+      <FileName>MousePointer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.MultipointMouseProvider" BaseTypeListCollapsed="true">
+    <Position X="8" Y="3.5" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="deviceList" Type="Danilins.Multitouch.Providers.CursorData" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10" Y="5.636" />
+        <Point X="10" Y="6.011" />
+        <Point X="11.312" Y="6.011" />
+        <Point X="11.312" Y="6.5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.534" Y="0.35" Height="0.182" Width="2.693" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AVQAAAAQAGAAEAQAQAAACIAAABCACAAAIAAAAABCAEA=</HashCode>
+      <FileName>MultipointMouseProvider.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="deviceList" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.VideoCaptureProvider">
+    <Position X="3.75" Y="6.25" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAAACECBAACQQQAAAAAAAAAAAAAAAAAAAgAAAAEA=</HashCode>
+      <FileName>VideoCaptureProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.VideoFileProvider">
+    <Position X="6.25" Y="6.25" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAECBAAKYQQAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>VideoFileProvider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.Configuration.FilterCollection" Collapsed="true">
+    <Position X="13" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEICAAAAAAAAIAAACAAABAAAAAABAAAACAAAAABAAAA=</HashCode>
+      <FileName>Configuration\FilterCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.Configuration.FilterElement" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAYAAAAAAAAA=</HashCode>
+      <FileName>Configuration\FilterElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.Configuration.FilterParameterCollection" Collapsed="true">
+    <Position X="14.75" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEICAAAAAAAAIAAACAAABAAAAAABAAAACAAAAABAAAA=</HashCode>
+      <FileName>Configuration\FilterParameterCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.Configuration.FilterParameterElement" Collapsed="true">
+    <Position X="14.75" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAgAAAAAAA=</HashCode>
+      <FileName>Configuration\FilterParameterElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.Configuration.FiltersSection" Collapsed="true">
+    <Position X="13" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configuration\FiltersSection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.Filters.FilterPipe" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgoAAAAAAABAAAgACABAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Filters\FilterPipe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Danilins.Multitouch.Providers.InputProvider">
+    <Position X="6.25" Y="0.5" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Protected" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AABAAAAAACAAAAAAAAAAAAAAAACAAAAAAQAEACBAAAA=</HashCode>
+      <FileName>InputProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Danilins.Multitouch.Common.Providers.IInputProvider">
+    <Position X="3.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

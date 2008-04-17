@@ -1,0 +1,169 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C024C0B1-401B-4644-8918-D87C28716898}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Physics2DDotNet</RootNamespace>
+    <AssemblyName>Physics2DDotNet</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\MultitouchStrongKey.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;UseDouble</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ALVector2D.cs" />
+    <Compile Include="Collections\AdvReaderWriterLock.cs" />
+    <Compile Include="Collections\ImplicitCastCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Collections\ReadOnlyThreadSafeCollection.cs" />
+    <Compile Include="DataTypes\BodyProxy.cs" />
+    <Compile Include="DataTypes\CollectionEventArgs.cs" />
+    <Compile Include="DataTypes\DragInfo.cs" />
+    <Compile Include="DataTypes\MassInfo.cs" />
+    <Compile Include="DataTypes\Matrices.cs" />
+    <Compile Include="DataTypes\RemovedEventArgs.cs" />
+    <Compile Include="DataTypes\TimeStep.cs" />
+    <Compile Include="Detectors\BroadPhaseCollisionDetector.cs" />
+    <Compile Include="Detectors\BruteForceDetector.cs" />
+    <Compile Include="Detectors\SelectiveSweepDetector.cs" />
+    <Compile Include="Detectors\FrameCoherentSAPDetector.cs" />
+    <Compile Include="Detectors\SpatialHashDetector.cs" />
+    <Compile Include="Ignorers\AdvGroupIgnorer.cs" />
+    <Compile Include="Ignorers\GroupCollection.cs" />
+    <Compile Include="Ignorers\GroupIgnorer.cs" />
+    <Compile Include="Ignorers\Ignorer.cs" />
+    <Compile Include="Ignorers\ObjectIgnorer.cs" />
+    <Compile Include="Joints\AngleJoint.cs" />
+    <Compile Include="Joints\FixedAngleJoint.cs" />
+    <Compile Include="Joints\FixedHingeJoint.cs" />
+    <Compile Include="Joints\HingeJoint.cs" />
+    <Compile Include="DataTypes\Coefficients.cs" />
+    <Compile Include="DataTypes\CollisionEventArgs.cs" />
+    <Compile Include="Detectors\SweepAndPruneDetector.cs" />
+    <Compile Include="DistanceGrid.cs" />
+    <Compile Include="PhysicsHelper.cs" />
+    <Compile Include="Interfaces.cs" />
+    <Compile Include="DataTypes\IntersectionInfo.cs" />
+    <Compile Include="Joints\Joint.cs" />
+    <Compile Include="Lifespan.cs" />
+    <Compile Include="DataTypes\PairID.cs" />
+    <Compile Include="PhysicsEngine.cs" />
+    <Compile Include="Body.cs" />
+    <Compile Include="DataTypes\PhysicsState.cs" />
+    <Compile Include="PhysicsLogics\ExplosionLogic.cs" />
+    <Compile Include="PhysicsLogics\GlobalFluidLogic.cs" />
+    <Compile Include="PhysicsLogics\GravityField.cs" />
+    <Compile Include="PhysicsLogics\GravityPointField.cs" />
+    <Compile Include="PhysicsLogics\GravityPointMass.cs" />
+    <Compile Include="PhysicsLogics\LineFluidLogic.cs" />
+    <Compile Include="PhysicsLogics\PhysicsLogic.cs" />
+    <Compile Include="PhysicsLogics\RaySegmentsCollisionLogic.cs" />
+    <Compile Include="PhysicsLogics\VelocityLimitLogic.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shapes\BitmapHelper.cs" />
+    <Compile Include="Shapes\CircleShape.cs" />
+    <Compile Include="Shapes\MultiPolygonShape.cs" />
+    <Compile Include="Shapes\ParticleShape.cs" />
+    <Compile Include="Shapes\PolygonShape.cs" />
+    <Compile Include="Shapes\RaySegmentsShape.cs" />
+    <Compile Include="Shapes\RectangleShape.cs" />
+    <Compile Include="Shapes\ShapeHelper.cs" />
+    <Compile Include="Solvers\CollisionSolver.cs" />
+    <Compile Include="Solvers\ISequentialImpulsesJoint.cs" />
+    <Compile Include="Solvers\SequentialImpulses.cs" />
+    <Compile Include="Shapes\Shape.cs" />
+    <Compile Include="DataTypes\UpdatedEventArgs.cs" />
+    <Compile Include="PhysicsTimer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdvanceMath\AdvanceMath.csproj">
+      <Project>{A979FDB4-7AB7-444E-9632-77D69D22D743}</Project>
+      <Name>AdvanceMath</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\MultitouchStrongKey.snk">
+      <Link>MultitouchStrongKey.snk</Link>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

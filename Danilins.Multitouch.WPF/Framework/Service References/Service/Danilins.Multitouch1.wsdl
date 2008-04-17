@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:tns="http://Danilins.Multitouch" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" targetNamespace="http://Danilins.Multitouch" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://Danilins.Multitouch/Imports">
+      <xsd:import namespace="http://Danilins.Multitouch" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Windows" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMultitouchService_RegisterApplication_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterApplication" />
+  </wsdl:message>
+  <wsdl:message name="IMultitouchService_UnregisterApplication_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnregisterApplication" />
+  </wsdl:message>
+  <wsdl:message name="IMultitouchService_EnableLegacySupport_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnableLegacySupport" />
+  </wsdl:message>
+  <wsdl:message name="IMultitouchService_DisableLegacySupport_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisableLegacySupport" />
+  </wsdl:message>
+  <wsdl:message name="IMultitouchService_ProcessContact_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ProcessContact" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="IMultitouchService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RegisterApplication">
+      <wsdl:input wsam:Action="http://Danilins.Multitouch/IMultitouchService/RegisterApplication" message="tns:IMultitouchService_RegisterApplication_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UnregisterApplication">
+      <wsdl:input wsam:Action="http://Danilins.Multitouch/IMultitouchService/UnregisterApplication" message="tns:IMultitouchService_UnregisterApplication_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="EnableLegacySupport">
+      <wsdl:input wsam:Action="http://Danilins.Multitouch/IMultitouchService/EnableLegacySupport" message="tns:IMultitouchService_EnableLegacySupport_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="DisableLegacySupport">
+      <wsdl:input wsam:Action="http://Danilins.Multitouch/IMultitouchService/DisableLegacySupport" message="tns:IMultitouchService_DisableLegacySupport_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ProcessContact">
+      <wsdl:output wsam:Action="http://Danilins.Multitouch/IMultitouchService/ProcessContact" message="tns:IMultitouchService_ProcessContact_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

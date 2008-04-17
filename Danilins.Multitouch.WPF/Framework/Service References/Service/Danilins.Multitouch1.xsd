@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://Danilins.Multitouch" elementFormDefault="qualified" targetNamespace="http://Danilins.Multitouch" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Windows" />
+  <xs:simpleType name="ContactState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Down" />
+      <xs:enumeration value="Up" />
+      <xs:enumeration value="Move" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ContactState" nillable="true" type="tns:ContactState" />
+  <xs:element name="RegisterApplication">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnregisterApplication">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EnableLegacySupport">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisableLegacySupport">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcessContact">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="contacts" nillable="true" type="tns:ArrayOfContactInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfContactInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContactInfo" nillable="true" type="tns:ContactInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContactInfo" nillable="true" type="tns:ArrayOfContactInfo" />
+  <xs:complexType name="ContactInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="area" type="xs:double" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="center" type="q1:Point" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="delta" type="q2:Vector" />
+      <xs:element minOccurs="0" name="deltaArea" type="xs:double" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="displacement" type="q3:Vector" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="predictedPos" type="q4:Point" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="rect" type="q5:Rect" />
+      <xs:element minOccurs="0" name="state" type="tns:ContactState" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ContactInfo" nillable="true" type="tns:ContactInfo" />
+</xs:schema>

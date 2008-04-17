@@ -1,0 +1,37 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:Danilins.Multitouch.Providers.Configuration.Controls;assembly="
+    xmlns:Commands="clr-namespace:Danilins.Multitouch.Common.Commands;assembly=Danilins.Multitouch.Common"
+    xmlns:Converters="clr-namespace:Danilins.Multitouch.Common.Converters;assembly=Danilins.Multitouch.Common"
+    x:Class="Danilins.Multitouch.Providers.Configuration.View.FilterConfigurationView"
+    x:Name="Window" DataContext="{Binding Path=Model, ElementName=Window, Mode=Default}">
+	<UserControl.Resources>
+		<Converters:FilterToImageSourceConverter x:Key="FilterToImageSourceConverter"/>
+		<DataTemplate x:Key="FiltersTemplate">
+			<Controls:FilterControl Model="{Binding Mode=OneWay}"/>
+		</DataTemplate>
+		<ItemsPanelTemplate x:Key="FilterListPanel">
+			<WrapPanel IsItemsHost="True"/>
+		</ItemsPanelTemplate>
+	</UserControl.Resources>
+	<DockPanel LastChildFill="True">
+		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="10">
+			<StackPanel.Resources>
+				<Style TargetType="Button">
+					<Setter Property="Margin" Value="5"/>
+					<Setter Property="Width" Value="50"/>
+				</Style>
+			</StackPanel.Resources>
+			<Button Content="Cancel" IsCancel="True" />
+			<Button Content="OK" IsDefault="True"
+					Command="{Binding AcceptCommand.Command}"
+					CommandParameter="{Binding ElementName=Window}"
+					Commands:CreateCommandBinding.Command="{Binding AcceptCommand}"/>
+		</StackPanel>
+		<ItemsControl ItemsSource="{Binding Path=Filters, Mode=Default}"
+					  ItemTemplate="{DynamicResource FiltersTemplate}"
+					  ItemsPanel="{DynamicResource FilterListPanel}"
+					  ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+	</DockPanel>
+</UserControl>

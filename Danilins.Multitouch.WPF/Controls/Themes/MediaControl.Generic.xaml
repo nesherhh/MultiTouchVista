@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="clr-namespace:Danilins.Multitouch.Controls">
+	<Style TargetType="{x:Type local:MediaControl}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:MediaControl}">
+					<Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+							<MediaElement x:Name="mediaElement"
+										  Grid.Row="0" Grid.RowSpan="2"
+										  Source="{TemplateBinding Source}"/>
+							<Grid Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition/>
+								</Grid.ColumnDefinitions>
+								<Button Grid.Column="0" Command="{x:Static MediaCommands.TogglePlayPause}" Content="Play/Pause"/>
+								<Button Grid.Column="1" Command="{x:Static MediaCommands.Stop}" Content="Stop"/>
+								<Slider x:Name="timelineSlider" Grid.Column="2" HorizontalAlignment="Stretch"/>
+							</Grid>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

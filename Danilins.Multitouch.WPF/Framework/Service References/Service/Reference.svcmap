@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="44c61c2c-fe8f-4442-98ac-b038b504b4fa" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.pipe://localhost/Danilins.Multitouch.Logic.Service/MultitouchService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Danilins.Multitouch1.wsdl" MetadataType="Wsdl" ID="a5c69dc2-3549-40fb-85ab-11ec2931cdf4" SourceId="1" SourceUrl="net.pipe://localhost/Danilins.Multitouch.Logic.Service/MultitouchService/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="e89b6c04-b86c-4ca9-9626-49ce08ec1ae6" SourceId="1" SourceUrl="net.pipe://localhost/Danilins.Multitouch.Logic.Service/MultitouchService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="863d37be-a979-48a5-9f98-bd7fd97ec8fc" SourceId="1" SourceUrl="net.pipe://localhost/Danilins.Multitouch.Logic.Service/MultitouchService/mex" />
+    <MetadataFile FileName="Danilins.Multitouch1.xsd" MetadataType="Schema" ID="90510af2-5157-425f-ac25-78e68e207f2d" SourceId="1" SourceUrl="net.pipe://localhost/Danilins.Multitouch.Logic.Service/MultitouchService/mex" />
+    <MetadataFile FileName="System.Windows1.xsd" MetadataType="Schema" ID="b1186ff4-bc23-43b4-b454-33973271f99d" SourceId="1" SourceUrl="net.pipe://localhost/Danilins.Multitouch.Logic.Service/MultitouchService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
