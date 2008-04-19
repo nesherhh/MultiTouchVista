@@ -63,6 +63,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\AForge.NET\Release\AForge.Video.VFW.dll</HintPath>
     </Reference>
+    <Reference Include="CsTI, Version=1.0.3031.24010, Culture=neutral, PublicKeyToken=00398046511f1e5f, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\MultiTouchLib\multitouch\dotNetMTF\CsTI\CsTI\Release\CsTI.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -126,6 +130,7 @@
     </Compile>
     <Compile Include="Native\RawInput.cs" />
     <Compile Include="Native\Win32.cs" />
+    <Compile Include="TouchLibProvider.cs" />
     <Compile Include="VideoCaptureProvider.cs" />
     <Compile Include="VideoFileProvider.cs" />
   </ItemGroup>
