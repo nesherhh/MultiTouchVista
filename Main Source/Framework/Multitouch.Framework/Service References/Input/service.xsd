@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Multitouch.Contracts" />
+  <xs:element name="Subscribe">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubscribeResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Unsubscribe">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnsubscribeResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ContactChanged">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+        <xs:element minOccurs="0" name="x" type="xs:double" />
+        <xs:element minOccurs="0" name="y" type="xs:double" />
+        <xs:element minOccurs="0" name="width" type="xs:double" />
+        <xs:element minOccurs="0" name="height" type="xs:double" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Multitouch.Contracts" minOccurs="0" name="state" type="q1:ContactState" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
