@@ -68,17 +68,19 @@
     <Compile Include="ExternalInterfaces\ApplicationInterfaceService.cs" />
     <Compile Include="ExternalInterfaces\IApplicationInterfaceCallback.cs" />
     <Compile Include="ExternalInterfaces\IApplicationInterface.cs" />
-    <Compile Include="frmDebugConsole.cs">
+    <Compile Include="Views\Context.cs" />
+    <Compile Include="Views\DebugConsole.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDebugConsole.Designer.cs">
-      <DependentUpon>frmDebugConsole.cs</DependentUpon>
+    <Compile Include="Views\DebugConsole.Designer.cs">
+      <DependentUpon>DebugConsole.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmOptions.cs">
+    <Compile Include="Views\EventArgs.cs" />
+    <Compile Include="Views\Options.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmOptions.Designer.cs">
-      <DependentUpon>frmOptions.cs</DependentUpon>
+    <Compile Include="Views\Options.Designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
     </Compile>
     <Compile Include="InputProviderManager.cs" />
     <Compile Include="MultitouchException.cs" />
@@ -97,11 +99,17 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Views\OutputStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -111,12 +119,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmDebugConsole.resx">
-      <DependentUpon>frmDebugConsole.cs</DependentUpon>
+    <EmbeddedResource Include="Views\DebugConsole.resx">
+      <DependentUpon>DebugConsole.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOptions.resx">
-      <DependentUpon>frmOptions.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Options.resx">
+      <DependentUpon>Options.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="MultitouchService.resx">
@@ -127,10 +135,16 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="nui-white 16.ico" />
-    <Content Include="nui-white.ico" />
+    <None Include="Resources\MultitouchIcon.ico" />
+    <Content Include="Resources\nui-white 16.ico" />
+    <Content Include="Resources\nui-white.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
