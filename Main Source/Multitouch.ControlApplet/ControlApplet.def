@@ -1,0 +1,5 @@
+LIBRARY ControlApplet
+DESCRIPTION 'Control Panel Applet'
+EXPORTS
+	CPlApplet
+
