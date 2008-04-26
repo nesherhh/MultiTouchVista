@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 
 namespace TestApplication
 {
@@ -10,6 +11,21 @@ namespace TestApplication
 		public Window1()
 		{
 			InitializeComponent();
+		}
+
+		private void Button_NewContact(object sender, System.Windows.RoutedEventArgs e)
+		{
+			MessageBox.Show("new contact");
+		}
+
+		private void Button_ContactMoved(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("contact moved");
+		}
+
+		private void Button_ContactRemoved(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("contact removed");
 		}
 	}
 }

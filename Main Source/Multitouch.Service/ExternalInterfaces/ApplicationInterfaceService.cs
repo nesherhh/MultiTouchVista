@@ -32,7 +32,20 @@ namespace Multitouch.Service.ExternalInterfaces
 		public static void ContactChanged(ContactChangedEventArgs e)
 		{
 			if (ContactChangedEvent != null)
-				ContactChangedEvent(null, e);
+			{
+				Delegate[] invocationList = ContactChangedEvent.GetInvocationList();
+				foreach (EventHandler<ContactChangedEventArgs> d in invocationList)
+				{
+					try
+					{
+						d(null, e);
+					}
+					catch (Exception)
+					{
+						ContactChangedEvent -= d;
+					}
+				}
+			}
 		}
 	}
 }

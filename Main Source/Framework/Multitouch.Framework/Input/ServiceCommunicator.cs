@@ -1,25 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
 using System.ServiceModel;
-using System.Windows;
 
 namespace Multitouch.Framework.Input
 {
 	class ServiceCommunicator
 	{
-		MultitouchLogic logic;
+		CommunicationLogic logic;
 		ApplicationInterfaceClient client;
         IApplicationInterfaceCallback contactDispatcher;
 
-		public ServiceCommunicator(MultitouchLogic logic)
+		public ServiceCommunicator(CommunicationLogic logic)
 		{
 			this.logic = logic;
-			Application.Current.Exit += Current_Exit;
-		}
-
-		void Current_Exit(object sender, ExitEventArgs e)
-		{
-			Disconnect();
 		}
 
 		public void Connect()
@@ -44,7 +37,7 @@ namespace Multitouch.Framework.Input
 			}
 		}
 
-		void Disconnect()
+		public void Disconnect()
 		{
 			if(contactDispatcher != null)
 			{

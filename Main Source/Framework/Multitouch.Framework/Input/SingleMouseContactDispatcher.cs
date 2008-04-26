@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
 namespace Multitouch.Framework.Input
 {
 	class SingleMouseContactDispatcher : IApplicationInterfaceCallback
 	{
-		public SingleMouseContactDispatcher(MultitouchLogic logic)
+		public SingleMouseContactDispatcher(CommunicationLogic logic)
 		{
 		}
 

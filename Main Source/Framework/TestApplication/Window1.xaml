@@ -4,6 +4,8 @@
 		xmlns:mt="http://schemas.multitouch.com/Multitouch/2008/04"
 		Title="Window1" Height="300" Width="300">
     <Grid>
-        
+		<Button mt:MultitouchScreen.NewContact="Button_NewContact"
+				mt:MultitouchScreen.ContactMoved="Button_ContactMoved"
+				mt:MultitouchScreen.ContactRemoved="Button_ContactRemoved"/>
     </Grid>
 </mt:Window>

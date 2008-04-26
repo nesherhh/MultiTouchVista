@@ -35,12 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="PresentationFramework">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -59,13 +53,11 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Input\IContactHandler.cs" />
     <Compile Include="Input\MultitouchServiceContactDispatcher.cs" />
-    <Compile Include="Input\MultitouchLogic.cs" />
+    <Compile Include="Input\CommunicationLogic.cs" />
     <Compile Include="Input\ServiceCommunicator.cs" />
     <Compile Include="Input\SingleMouseContactDispatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

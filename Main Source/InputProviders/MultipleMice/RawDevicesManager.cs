@@ -11,10 +11,17 @@ namespace MultipleMice
 		InputProvider inputProvider;
 		DeviceCollection devices;
 		ContactCollection contacts;
+		int screenWidth;
+		int screenHeight;
+		double mouseSpeed;
 
 		public RawDevicesManager(InputProvider inputProvider)
 		{
 			this.inputProvider = inputProvider;
+			mouseSpeed = SystemInformation.MouseSpeed * 0.15;
+			screenWidth = Screen.PrimaryScreen.Bounds.Width;
+			screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
 			devices = new DeviceCollection();
 			contacts = new ContactCollection();
 
@@ -52,8 +59,18 @@ namespace MultipleMice
 				DeviceState state = devices[e.Handle];
 				MouseData data = (MouseData)e.GetRawData();
 
-				state.X += data.X;
-				state.Y += data.Y;
+				state.X += (int)(data.X * mouseSpeed);
+				state.Y += (int)(data.Y * mouseSpeed);
+
+				if (state.X <= 0)
+					state.X = 0;
+				if (state.Y <= 0)
+					state.Y = 0;
+				if (state.X >= screenWidth)
+					state.X = screenWidth;
+				if (state.Y >= screenHeight)
+					state.Y = screenHeight;
+
 				state.ButtonState = data.ButtonState;
 
 				MouseContact contact = null;

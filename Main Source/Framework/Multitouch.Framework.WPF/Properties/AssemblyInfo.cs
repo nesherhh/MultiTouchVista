@@ -57,4 +57,6 @@ using System.Windows.Markup;
 
 
 [assembly: XmlnsDefinition("http://schemas.multitouch.com/Multitouch/2008/04", "Multitouch.Framework.WPF")]
+[assembly: XmlnsDefinition("http://schemas.multitouch.com/Multitouch/2008/04", "Multitouch.Framework.WPF.Controls")]
+[assembly: XmlnsDefinition("http://schemas.multitouch.com/Multitouch/2008/04", "Multitouch.Framework.WPF.Input")]
 [assembly: XmlnsPrefix("http://schemas.multitouch.com/Multitouch/2008/04", "mt")]
