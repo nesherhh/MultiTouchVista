@@ -18,9 +18,16 @@ namespace Multitouch.Service
 			//};
 			//ServiceBase.Run(ServicesToRun);
 
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Context());
+			//Application.EnableVisualStyles();
+			//Application.SetCompatibleTextRenderingDefault(false);
+			//Application.Run(new Context());
+
+			MultitouchInput input = new MultitouchInput();
+			input.Start();
+			Console.WriteLine("Multi-touch input service is running.");
+			Console.WriteLine("Press ENTER to stop and exit.");
+			Console.ReadLine();
+			input.Stop();
 		}
 	}
 }

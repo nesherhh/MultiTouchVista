@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using MultipleMice.Native;
 using Multitouch.Contracts;
@@ -43,9 +44,9 @@ namespace MultipleMice
 			X = data.X;
 			Y = data.Y;
 
-			if(data.ButtonState == MouseButtonState.None)
+			if (data.ButtonState == MouseButtonState.None)
 				State = ContactState.Moved;
-			else if(data.ButtonState == MouseButtonState.LeftUp)
+			else if (data.ButtonState == MouseButtonState.LeftUp)
 				State = ContactState.Removed;
 		}
 

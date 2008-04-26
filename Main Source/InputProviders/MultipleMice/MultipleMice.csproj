@@ -48,6 +48,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -60,15 +61,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContactCollection.cs" />
+    <Compile Include="DebugCursor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DeviceCollection.cs" />
     <Compile Include="DeviceState.cs" />
     <Compile Include="InputProvider.cs" />
     <Compile Include="MouseContactChangedEventArgs.cs" />
     <Compile Include="MouseContact.cs" />
     <Compile Include="Native\Win32.cs" />
+    <Compile Include="Native\Win32Interop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Native\RawInput.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RawDevicesManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GlassDiscImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -69,6 +69,17 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Input\Contact.cs" />
+    <Compile Include="Input\Extensions.cs" />
+    <Compile Include="Input\InputElement.cs" />
+    <Compile Include="Input\MultitouchInputProvider.cs" />
+    <Compile Include="Input\MultitouchLogic.cs" />
+    <Compile Include="Input\ContactEventArgs.cs" />
+    <Compile Include="Input\MultitouchScreen.cs" />
+    <Compile Include="Input\MultitouchDevice.cs" />
+    <Compile Include="Input\NewContactEventArgs.cs" />
+    <Compile Include="Input\RawMultitouchReport.cs" />
+    <Compile Include="Native\Win32.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -82,10 +93,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Window.cs" />
+    <Compile Include="Controls\Window.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
