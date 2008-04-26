@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singletouch.Service", "Singletouch.Service.csproj", "{83BEC00B-8A02-4C02-8BA5-225BA1E1C7AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singletouch.Service", "Singletouch.Service\Singletouch.Service.csproj", "{83BEC00B-8A02-4C02-8BA5-225BA1E1C7AF}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
