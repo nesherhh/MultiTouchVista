@@ -1,11 +1,20 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Multitouch.Framework.WPF.Input
 {
-	public class MultitouchDevice : InputDevice
+	public enum MatchCriteria
+	{
+		LogicalParent,
+		Exact
+	}
+
+	class MultitouchDevice : InputDevice
 	{
 		Point rawPosition;
 		IInputElement target;
@@ -14,12 +23,9 @@ namespace Multitouch.Framework.WPF.Input
 		IInputElement touchCapture;
 		MethodInfo globalHitTestMethod;
 
-		public MultitouchDevice()
-		{
-			Type mouseDeviceType = typeof(MouseDevice);
-			globalHitTestMethod = mouseDeviceType.GetMethod("GlobalHitTest", BindingFlags.Static | BindingFlags.NonPublic,
-				null, new[] { typeof(Point), typeof(PresentationSource) }, null);
-		}
+		internal Point LastTapPoint { get; set; }
+		internal int TapCount { get; set; }
+		internal int LastTapTime { get; set; }
 
 		public override PresentationSource ActiveSource
 		{
@@ -36,9 +42,15 @@ namespace Multitouch.Framework.WPF.Input
 			get { return touchCapture; }
 		}
 
-		internal Point LastTapPoint { get; set; }
-		internal int TapCount { get; set; }
-		internal int LastTapTime { get; set; }
+		public IDictionary<int, Contact> AllContacts { get; private set; }
+
+		public MultitouchDevice()
+		{
+			AllContacts = new Dictionary<int, Contact>();
+			Type mouseDeviceType = typeof(MouseDevice);
+			globalHitTestMethod = mouseDeviceType.GetMethod("GlobalHitTest", BindingFlags.Static | BindingFlags.NonPublic,
+				null, new[] { typeof(Point), typeof(PresentationSource) }, null);
+		}
 
 		public Point GetPosition(IInputElement relativeTo)
 		{
@@ -51,7 +63,7 @@ namespace Multitouch.Framework.WPF.Input
 		internal void UpdateState(RawMultitouchReport rawReport)
 		{
 			source = rawReport.InputSource;
-			rawPosition = new Point(rawReport.X, rawReport.Y);
+			rawPosition = rawReport.Contact.Position;
 		}
 
 		internal IInputElement FindTarget(PresentationSource inputSource, Point position)
@@ -112,7 +124,7 @@ namespace Multitouch.Framework.WPF.Input
 			return (IInputElement)globalHitTestMethod.Invoke(null, new object[] { position, inputSource });
 		}
 
-		public void ChangeOver(IInputElement newTarget)
+		internal void ChangeOver(IInputElement newTarget)
 		{
 			if (Target != newTarget)
 				target = newTarget;
@@ -159,6 +171,34 @@ namespace Multitouch.Framework.WPF.Input
 				touchCapture = element;
 				captureMode = mode;
 			}
+		}
+
+		public IDictionary<int, Contact> GetContacts(UIElement element, MatchCriteria criteria)
+		{
+			Dictionary<int, Contact> result;
+			if(criteria == MatchCriteria.Exact)
+			{
+				result = (from contact in AllContacts.Values
+				          where element == contact.Element
+				          select contact).ToDictionary(contact => contact.Id);
+			}
+			else if(criteria == MatchCriteria.LogicalParent)
+			{
+				result = (from contact in AllContacts.Values
+						  where IsParent(contact.Element, element)
+						  select contact).ToDictionary(contact => contact.Id);
+			}
+			else
+				result = new Dictionary<int, Contact>();
+			return result;
+		}
+
+		bool IsParent(UIElement element, UIElement parent)
+		{
+			UIElement current = element;
+			while (current != null && current != parent)
+				current = VisualTreeHelper.GetParent(current) as UIElement;
+			return current != null;
 		}
 	}
 }
