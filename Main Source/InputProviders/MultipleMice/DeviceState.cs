@@ -29,8 +29,6 @@ namespace MultipleMice
 
 		void ThreadWorker()
 		{
-			//if (debugCursor.InvokeRequired)
-			//    debugCursor.Invoke((Action)ThreadWorker);
 			debugCursor.Show(new Point(X, Y));
 			Application.Run();
 		}

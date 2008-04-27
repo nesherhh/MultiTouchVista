@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\ReadOnlyDictionary.cs" />
     <Compile Include="Input\IContactHandler.cs" />
     <Compile Include="Input\MultitouchServiceContactDispatcher.cs" />
     <Compile Include="Input\CommunicationLogic.cs" />

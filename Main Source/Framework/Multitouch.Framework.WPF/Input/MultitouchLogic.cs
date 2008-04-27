@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Multitouch.Framework.Input;
+using System.Diagnostics;
 
 namespace Multitouch.Framework.WPF.Input
 {
@@ -57,18 +57,24 @@ namespace Multitouch.Framework.WPF.Input
 				if (report != null && !report.Handled)
 				{
 					MultitouchDevice multitouchDevice = report.MultitouchDevice;
-					Point clientPoint = report.InputSource.RootVisual.PointFromScreen(new Point(report.X, report.Y));
+
+					if (report.Contact.State != ContactState.Removed)
+						multitouchDevice.AllContacts[report.Contact.Id] = report.Contact;
+					else
+						multitouchDevice.AllContacts.Remove(report.Contact.Id);
+
+					Point clientPoint = report.InputSource.RootVisual.PointFromScreen(new Point(report.Contact.X, report.Contact.Y));
                     HitTestResult test = VisualTreeHelper.HitTest(report.InputSource.RootVisual, clientPoint);
 					if (test != null)
 					{
 						IInputElement hitTest = test.VisualHit as IInputElement;
 						if (report.MultitouchDevice.Captured != hitTest)
 							UpdateCapture((DependencyObject)hitTest, e);
+						report.Contact.SetElement((UIElement)test.VisualHit);
 					}
 				}
 			}
-			if (e.StagingItem.Input.RoutedEvent == null)
-				Debug.WriteLine("routed event null");
+			Debug.Assert(e.StagingItem.Input.RoutedEvent != null, "routed event null");
 		}
 
 		void inputManager_PreNotifyInput(object sender, NotifyInputEventArgs e)
@@ -112,8 +118,7 @@ namespace Multitouch.Framework.WPF.Input
 					}
 				}
 			}
-			if (e.StagingItem.Input.RoutedEvent == null)
-				Debug.WriteLine("routed event null");
+			Debug.Assert(e.StagingItem.Input.RoutedEvent != null, "routed event null");
 		}
 
 		void inputManager_PostProcessInput(object sender, ProcessInputEventArgs e)
@@ -139,7 +144,7 @@ namespace Multitouch.Framework.WPF.Input
 
 		void PromoteRawToPreview(RawMultitouchReport report, ProcessInputEventArgs e)
 		{
-			RoutedEvent routedEvent = GetPreviewEventFromRawMultitouchState(report.State);
+			RoutedEvent routedEvent = GetPreviewEventFromRawMultitouchState(report.Contact.State);
 			if(routedEvent != null)
 			{
 				ContactEventArgs args;
@@ -148,7 +153,6 @@ namespace Multitouch.Framework.WPF.Input
 				else
 					args = new ContactEventArgs(report.MultitouchDevice, report, report.Timestamp);
 				args.RoutedEvent = routedEvent;
-				Trace.TraceInformation("raw to preview: {0} - time: {1}", routedEvent.Name, e.StagingItem.Input.Timestamp);
 				e.PushInput(args, e.StagingItem);
 			}
 		}
@@ -182,7 +186,6 @@ namespace Multitouch.Framework.WPF.Input
 					else
 						mainArgs = new ContactEventArgs(multitouchDevice, previewArgs.Contact, previewArgs.Timestamp);
 					mainArgs.RoutedEvent = mainEvent;
-					Trace.TraceInformation("preview to main: {0} - time: {1}", mainEvent.Name, e.StagingItem.Input.Timestamp);
 					e.PushInput(mainArgs, e.StagingItem);
 				}
 			}

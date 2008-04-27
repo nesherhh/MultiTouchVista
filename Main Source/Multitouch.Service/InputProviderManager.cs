@@ -31,11 +31,6 @@ namespace Multitouch.Service
 
 		void inputProvider_ContactChanged(object sender, ContactChangedEventArgs e)
 		{
-			IContact contact = e.Contact;
-			string contactString = string.Format("ID: {0}, XY: {1};{2} W:{3}, H:{4}, State: {5}", contact.Id, contact.X, contact.Y, contact.Width,
-				contact.Height, contact.State);
-			Console.WriteLine(contactString);
-
 			ApplicationInterfaceService.ContactChanged(e);
 		}
 
