@@ -281,6 +281,10 @@
 			RelativePath=".\res\MultitouchIcon.ico"
 			>
 		</File>
+		<File
+			RelativePath=".\resource.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
