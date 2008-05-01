@@ -9,7 +9,6 @@ namespace Multitouch.Framework.Input
 		public SingleMouseContactDispatcher(CommunicationLogic logic)
 		{
 			this.logic = logic;
-			System.
 		}
 
 		public void ContactChanged(int id, double x, double y, double width, double height, ContactState state)
