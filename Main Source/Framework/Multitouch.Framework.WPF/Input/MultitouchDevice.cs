@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Phydeaux.Utilities;
 
 namespace Multitouch.Framework.WPF.Input
 {
@@ -21,7 +22,7 @@ namespace Multitouch.Framework.WPF.Input
 		PresentationSource source;
 		CaptureMode captureMode;
 		IInputElement touchCapture;
-		MethodInfo globalHitTestMethod;
+		StaticFunc<MouseDevice, IInputElement, Point, PresentationSource> globalHitTest;
 
 		internal Point LastTapPoint { get; set; }
 		internal int TapCount { get; set; }
@@ -47,9 +48,9 @@ namespace Multitouch.Framework.WPF.Input
 		public MultitouchDevice()
 		{
 			AllContacts = new Dictionary<int, Contact>();
-			Type mouseDeviceType = typeof(MouseDevice);
-			globalHitTestMethod = mouseDeviceType.GetMethod("GlobalHitTest", BindingFlags.Static | BindingFlags.NonPublic,
-				null, new[] { typeof(Point), typeof(PresentationSource) }, null);
+
+			globalHitTest = Dynamic<MouseDevice>.Static.Function<IInputElement>.Explicit<Point, PresentationSource>.CreateDelegate(
+				"GlobalHitTest", new[] {typeof(Point), typeof(PresentationSource)});
 		}
 
 		public Point GetPosition(IInputElement relativeTo)
@@ -121,7 +122,7 @@ namespace Multitouch.Framework.WPF.Input
 
 		internal IInputElement GlobalHitTest(PresentationSource inputSource, Point position)
 		{
-			return (IInputElement)globalHitTestMethod.Invoke(null, new object[] { position, inputSource });
+			return globalHitTest.Invoke(position, inputSource);
 		}
 
 		internal void ChangeOver(IInputElement newTarget)

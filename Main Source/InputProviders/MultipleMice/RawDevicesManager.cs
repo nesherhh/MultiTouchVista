@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using MultipleMice.Native;
@@ -14,9 +18,15 @@ namespace MultipleMice
 		int screenWidth;
 		int screenHeight;
 		double mouseSpeed;
+		Rectangle virtualScreen;
+
+		const ushort PEN_X_MAX = 9650;
+		const ushort PEN_Y_MAX = 7188;
 
 		public RawDevicesManager(InputProvider inputProvider)
 		{
+			virtualScreen = SystemInformation.VirtualScreen;
+
 			this.inputProvider = inputProvider;
 			mouseSpeed = SystemInformation.MouseSpeed * 0.15;
 			screenWidth = Screen.PrimaryScreen.Bounds.Width;
@@ -25,8 +35,16 @@ namespace MultipleMice
 			devices = new DeviceCollection();
 			contacts = new ContactCollection();
 
-			foreach (RawDevice mouseDevice in RawDevice.GetRawDevices().Where(d => d.RawType == RawType.Mouse))
-				devices.Add(new DeviceState(mouseDevice));
+			IEnumerable<RawDevice> rawDevices = from device in RawDevice.GetRawDevices()
+												where (device.RawType == RawType.Device &&
+														device.GetRawInfo().UsagePage == HID_USAGE_PAGE_DIGITIZER &&
+														device.GetRawInfo().Usage == HID_USAGE_DIGITIZER_PEN) ||
+														device.RawType == RawType.Mouse
+												select device;
+
+
+			foreach (RawDevice mouseDevice in rawDevices)
+				devices.Add(new DeviceStatus(mouseDevice));
 
 			Thread inputThread = new Thread(InputWorker);
 			inputThread.IsBackground = true;
@@ -40,13 +58,22 @@ namespace MultipleMice
 		void InputWorker()
 		{
 			RawDevice.RegisterRawDevices(0x01, 0x02, InputMode.BackgroundMode | InputMode.SuppressMessages);
+			RawDevice.RegisterRawDevices(HID_USAGE_PAGE_DIGITIZER, HID_USAGE_DIGITIZER_PEN, InputMode.BackgroundMode);
 			RawDevice.RawInput += RawDevice_RawInput;
 			Application.Run();
 		}
 
+		public const ushort HID_USAGE_PAGE_DIGITIZER = 0x0D;
+		public const ushort HID_USAGE_DIGITIZER_DIGITIZER = 1;
+		public const ushort HID_USAGE_DIGITIZER_PEN = 2;
+		public const ushort HID_USAGE_DIGITIZER_LIGHTPEN = 3;
+		public const ushort HID_USAGE_DIGITIZER_TOUCHSCREEN = 4;
+
+
 		public void Dispose()
 		{
 			RawDevice.UnregisterRawDevices(0x01, 0x02);
+			RawDevice.UnregisterRawDevices(HID_USAGE_PAGE_DIGITIZER, HID_USAGE_DIGITIZER_PEN);
 			RawDevice.RawInput -= RawDevice_RawInput;
 			Application.Exit();
 			inputProvider.IsRunning = false;
@@ -56,32 +83,31 @@ namespace MultipleMice
 		{
 			if (devices.Contains(e.Handle))
 			{
-				DeviceState state = devices[e.Handle];
-				MouseData data = (MouseData)e.GetRawData();
+				DeviceStatus state = devices[e.Handle];
+				MouseData mouseData = e.GetRawData() as MouseData;
+				if (mouseData != null)
+					UpdateMouse(mouseData, state);
+				else
+				{
+					DeviceData deviceData = e.GetRawData() as DeviceData;
+					if (deviceData != null)
+						UpdatePen(deviceData, state);
+				}
 
-				state.X += (int)(data.X * mouseSpeed);
-				state.Y += (int)(data.Y * mouseSpeed);
-
-				if (state.X <= 0)
-					state.X = 0;
-				if (state.Y <= 0)
-					state.Y = 0;
-				if (state.X >= screenWidth)
-					state.X = screenWidth;
-				if (state.Y >= screenHeight)
-					state.Y = screenHeight;
-
-				state.ButtonState = data.ButtonState;
+				if(state.ButtonState == DeviceState.None)
+					return;
 
 				MouseContact contact = null;
-				if (state.ButtonState == MouseButtonState.LeftDown)
+				if (state.ButtonState == DeviceState.Down)
 				{
 					contact = new MouseContact(state);
+					//Debug.WriteLine("Down: " + contact);
 					contacts.Add(contact);
 				}
-				else if ((state.ButtonState == MouseButtonState.None || state.ButtonState == MouseButtonState.LeftUp) && contacts.Contains(e.Handle))
+				else if ((state.ButtonState == DeviceState.Move || state.ButtonState == DeviceState.Up) && contacts.Contains(e.Handle))
 				{
 					contact = contacts[e.Handle];
+					//Debug.WriteLine("Move: " + contact);
 					contact.Update(state);
 				}
 				if (contact != null)
@@ -89,8 +115,62 @@ namespace MultipleMice
 					MouseContactChangedEventArgs args = new MouseContactChangedEventArgs(contact);
 					inputProvider.OnContactChanged(args);
 				}
-				if (state.ButtonState == MouseButtonState.LeftUp)
+				if (state.ButtonState == DeviceState.Up)
+				{
+					//Debug.WriteLine("Up: " + contact);
 					contacts.Remove(e.Handle);
+				}
+			}
+		}
+
+		void UpdatePen(DeviceData deviceData, DeviceStatus state)
+		{
+			int count;
+			int size;
+			IntPtr ptr = deviceData.GetDataPtr(out size, out count);
+			PEN_DATA pen_DATA = (PEN_DATA)Marshal.PtrToStructure(ptr, typeof(PEN_DATA));
+
+			int x = pen_DATA.X * virtualScreen.Width / PEN_X_MAX;
+			int y = pen_DATA.Y * virtualScreen.Height / PEN_Y_MAX;
+
+			state.X = x;
+			state.Y = y;
+
+			if((pen_DATA.Status & PenStatus.PenTipDown) == PenStatus.PenTipDown && state.ButtonState == DeviceState.None)
+				state.ButtonState = DeviceState.Down;
+			else if ((pen_DATA.Status & PenStatus.PenTipDown) == PenStatus.PenTipDown && (state.ButtonState == DeviceState.Down || state.ButtonState == DeviceState.Move))
+				state.ButtonState = DeviceState.Move;
+			else if ((pen_DATA.Status & PenStatus.InRange) == PenStatus.InRange && (state.ButtonState == DeviceState.Move || state.ButtonState == DeviceState.Down))
+				state.ButtonState = DeviceState.Up;
+			else
+				state.ButtonState = DeviceState.None;
+		}
+
+		void UpdateMouse(MouseData mouseData, DeviceStatus state)
+		{
+			state.X += (int)(mouseData.X * mouseSpeed);
+			state.Y += (int)(mouseData.Y * mouseSpeed);
+
+			if (state.X <= 0)
+				state.X = 0;
+			if (state.Y <= 0)
+				state.Y = 0;
+			if (state.X >= screenWidth)
+				state.X = screenWidth;
+			if (state.Y >= screenHeight)
+				state.Y = screenHeight;
+
+			switch (mouseData.ButtonState)
+			{
+				case MouseButtonState.LeftDown:
+					state.ButtonState = DeviceState.Down;
+					break;
+				case MouseButtonState.LeftUp:
+					state.ButtonState = DeviceState.Up;
+					break;
+				case MouseButtonState.None:
+					state.ButtonState = DeviceState.Move;
+					break;
 			}
 		}
 	}

@@ -1,0 +1,2489 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DynamicUtilities</name>
+    </assembly>
+    <members>
+        <member name="T:Phydeaux.Utilities.ConstructorParams`1">
+            <summary>Defines a delegate to a constructor with a params array of weak-typed argument values.</summary>
+            <typeparam name="T">The type of the constructed object</typeparam>
+            <param name="parameters">The array of argument values (weak-typed)</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Constructor`1">
+            <summary>Defines a delegate to a constructor that takes no arguments.</summary>
+            <typeparam name="T">The type of the constructed object</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Constructor`2">
+            <summary>Defines a delegate to a constructor that takes a single strong-typed argument.</summary>
+            <typeparam name="T">The type of the constructed object</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Constructor`3">
+            <summary>Defines a delegate to a constructor that takes two strong-typed arguments.</summary>
+            <typeparam name="T">The type of the constructed object</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Constructor`4">
+            <summary>Defines a delegate to a constructor that takes three strong-typed arguments.</summary>
+            <typeparam name="T">The type of the constructed object</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Constructor`5">
+            <summary>Defines a delegate to a constructor that takes four strong-typed arguments.</summary>
+            <typeparam name="T">The type of the constructed object</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Constructor`6">
+            <summary>Defines a delegate to a constructor that takes five strong-typed arguments.</summary>
+            <typeparam name="T">The type of the constructed object</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Constructor`7">
+            <summary>Defines a delegate to a constructor that takes six strong-typed arguments.</summary>
+            <typeparam name="T">The type of the constructed object</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Constructor`8">
+            <summary>Defines a delegate to a constructor that takes seven strong-typed arguments.</summary>
+            <typeparam name="T">The type of the constructed object</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Constructor`9">
+            <summary>Defines a delegate to a constructor that takes eight strong-typed arguments.</summary>
+            <typeparam name="T">The type of the constructed object</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <param name="arg8">The eighth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Constructor`10">
+            <summary>Defines a delegate to a constructor that takes nine strong-typed arguments.</summary>
+            <typeparam name="T">The type of the constructed object</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <param name="arg8">The eighth argument value</param>
+            <typeparam name="V9">The type of the ninth argument</typeparam>
+            <param name="arg9">The ninth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.ProcParams`1">
+            <summary>Defines a delegate to a instance procedure (method that doesn't return anything) with a params array of weak-typed
+            argument values.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <param name="parameters">The array of argument values (weak-typed)</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Proc`1">
+            <summary>Defines a delegate to a instance procedure (method that doesn't return anything) that takes no arguments</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Proc`2">
+            <summary>Defines a delegate to a instance procedure (method that doesn't return anything) that takes a single
+            strong-typed argument.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Proc`3">
+            <summary>Defines a delegate to a instance procedure (method that doesn't return anything) that takes two
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Proc`4">
+            <summary>Defines a delegate to a instance procedure (method that doesn't return anything) that takes three
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Proc`5">
+            <summary>Defines a delegate to a instance procedure (method that doesn't return anything) that takes four
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Proc`6">
+            <summary>Defines a delegate to a instance procedure (method that doesn't return anything) that takes five
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Proc`7">
+            <summary>Defines a delegate to a instance procedure (method that doesn't return anything) that takes six
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Proc`8">
+            <summary>Defines a delegate to a instance procedure (method that doesn't return anything) that takes seven
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Proc`9">
+            <summary>Defines a delegate to a instance procedure (method that doesn't return anything) that takes eight
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <param name="arg8">The eighth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Proc`10">
+            <summary>Defines a delegate to a instance procedure (method that doesn't return anything) that takes nine
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <param name="arg8">The eighth argument value</param>
+            <typeparam name="V9">The type of the ninth argument</typeparam>
+            <param name="arg9">The ninth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticProcParams`1">
+            <summary>Defines a delegate to a static procedure (method that doesn't return anything) with a params array of weak-typed
+            argument values.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <param name="parameters">The array of argument values (weak-typed)</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticProc`1">
+            <summary>Defines a delegate to a static procedure (method that doesn't return anything) that takes nine
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticProc`2">
+            <summary>Defines a delegate to a static procedure (method that doesn't return anything) that takes a single
+            strong-typed argument.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticProc`3">
+            <summary>Defines a delegate to a static procedure (method that doesn't return anything) that takes two
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticProc`4">
+            <summary>Defines a delegate to a static procedure (method that doesn't return anything) that takes three
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticProc`5">
+            <summary>Defines a delegate to a static procedure (method that doesn't return anything) that takes four
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticProc`6">
+            <summary>Defines a delegate to a static procedure (method that doesn't return anything) that takes five
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticProc`7">
+            <summary>Defines a delegate to a static procedure (method that doesn't return anything) that takes six
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticProc`8">
+            <summary>Defines a delegate to a static procedure (method that doesn't return anything) that takes seven
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticProc`9">
+            <summary>Defines a delegate to a static procedure (method that doesn't return anything) that takes eight
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <param name="arg8">The eighth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticProc`10">
+            <summary>Defines a delegate to a static procedure (method that doesn't return anything) that takes nine
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <param name="arg8">The eighth argument value</param>
+            <typeparam name="V9">The type of the ninth argument</typeparam>
+            <param name="arg9">The ninth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.FuncParams`2">
+            <summary>Defines a delegate to a instance function (method that return something) with a params array of weak-typed
+            argument values.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <param name="target">The target instance (this)</param>
+            <param name="parameters">The array of argument values (weak-typed)</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Func`2">
+            <summary>Defines a delegate to a instance function (method that returns a value) that takes no arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="TRet">The type of the return value</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Func`3">
+            <summary>Defines a delegate to a instance function (method that returns a value) that takes a single
+            strong-typed argument.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Func`4">
+            <summary>Defines a delegate to a instance function (method that returns a value) that takes two
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Func`5">
+            <summary>Defines a delegate to a instance function (method that returns a value) that takes three
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Func`6">
+            <summary>Defines a delegate to a instance function (method that returns a value) that takes four
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Func`7">
+            <summary>Defines a delegate to a instance function (method that returns a value) that takes five
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Func`8">
+            <summary>Defines a delegate to a instance function (method that returns a value) that takes six
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Func`9">
+            <summary>Defines a delegate to a instance function (method that returns a value) that takes seven
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Func`10">
+            <summary>Defines a delegate to a instance function (method that returns a value) that takes eight
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <param name="arg8">The eighth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Func`11">
+            <summary>Defines a delegate to a instance function (method that returns a value) that takes nine
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the instance method target</typeparam>
+            <param name="target">The target instance (this)</param>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <param name="arg8">The eighth argument value</param>
+            <typeparam name="V9">The type of the ninth argument</typeparam>
+            <param name="arg9">The ninth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticFuncParams`2">
+            <summary>Defines a delegate to a static function (method that return something) with a params array of weak-typed
+            argument values.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <param name="parameters">The array of argument values (weak-typed)</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticFunc`2">
+            <summary>Defines a delegate to a static function (method that returns a value) that takes no arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="TRet">The type of the return value</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticFunc`3">
+            <summary>Defines a delegate to a static function (method that returns a value) that takes a single
+            strong-typed argument.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticFunc`4">
+            <summary>Defines a delegate to a static function (method that returns a value) that takes two
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticFunc`5">
+            <summary>Defines a delegate to a static function (method that returns a value) that takes three
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticFunc`6">
+            <summary>Defines a delegate to a static function (method that returns a value) that takes four
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticFunc`7">
+            <summary>Defines a delegate to a static function (method that returns a value) that takes five
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticFunc`8">
+            <summary>Defines a delegate to a static function (method that returns a value) that takes six
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticFunc`9">
+            <summary>Defines a delegate to a static function (method that returns a value) that takes seven
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticFunc`10">
+            <summary>Defines a delegate to a static function (method that returns a value) that takes eight
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <param name="arg8">The eighth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.StaticFunc`11">
+            <summary>Defines a delegate to a static function (method that returns a value) that takes nine
+            strong-typed arguments.</summary>
+            <typeparam name="T">The type of the static method target</typeparam>
+            <typeparam name="TRet">The type of the return value</typeparam>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <param name="arg1">The first argument value</param>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <param name="arg2">The second argument value</param>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <param name="arg3">The third argument value</param>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <param name="arg4">The fourth argument value</param>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <param name="arg5">The fifth argument value</param>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <param name="arg6">The sixth argument value</param>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <param name="arg7">The seventh argument value</param>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <param name="arg8">The eighth argument value</param>
+            <typeparam name="V9">The type of the ninth argument</typeparam>
+            <param name="arg9">The ninth argument value</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.ParameterList">
+            <summary>This is a "marker" enum used to trigger the automatic matching of a delegate's argument list to the
+            reflected method's parameter list. It serves no other purpose other than to to disambiguate the possible overloads
+            of the CreateDelegate method.</summary>
+        </member>
+        <member name="F:Phydeaux.Utilities.ParameterList.Auto">
+            <summary>Just a marker value indicating we should build the parameter list based on the delegate signature.</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.ParameterCountMismatchException">
+            <summary>Exception thrown when the arguments passed to a delegate do not match the parameter count of the method being called</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.ParameterCountMismatchException.CheckAndThrow(System.Type,System.String,System.Int32,System.Int32)">
+            <summary>Checks the parameter counts and throws a ParameterCountMismatchException if they are not the same.</summary>
+            <param name="type">The Type the method is being called against</param>
+            <param name="methodName">The method name being called</param>
+            <param name="expectedParameterCount">The number of parameters that method expects</param>
+            <param name="actualArgumentCount">The number of arguments specified at call time (for Params-type delegates) or at
+            CreateDelegate time (for Explicit-type delegates)</param>
+        </member>
+        <member name="M:Phydeaux.Utilities.ParameterCountMismatchException.#ctor(System.Type,System.String,System.Int32,System.Int32)">
+            <summary>Constructs a ParameterCountMismatchException and fills in the error message based on the characteristics 
+            specified</summary>
+            <param name="type">The Type the method is being called against</param>
+            <param name="methodName">The method name being called</param>
+            <param name="expectedParameterCount">The number of parameters that method expects</param>
+            <param name="actualArgumentCount">The number of arguments specified at call time (for Params-type delegates) or at
+            CreateDelegate time (for Explicit-type delegates)</param>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1">
+            <summary>Dynamic method wrapper class</summary>
+            <typeparam name="T">The type implementing the method desired.</typeparam>
+            <remarks>
+            You can use any reference or value-type, including built-in primitive types
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Constructor">
+            <summary>Represents all instance constructors</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Constructor.Params">
+            <summary>Represents Late-bound argument list (e.g. params object[])</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Constructor">
+            <summary>Represents all instance constructors</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params">
+            <summary>Represents Late-bound argument list (e.g. params object[])</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1">
+            <summary>Über Base class for all Dynamic classes, this class holds all the code generation and is 
+            specialized and JITted against the delegate signature</summary>
+            <typeparam name="D">The delegate type that we call-through</typeparam>
+        </member>
+        <member name="F:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.StaticFlags">
+            <summary>BindingFlags for public and non-public static methods/fields/properties</summary>
+        </member>
+        <member name="F:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.InstanceFlags">
+            <summary>BindingFlags for public and non-public instance methods/fields/properties</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params">
+            <summary>Represents Late-bound argument list (e.g. params object[])</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Constructor">
+            <summary>Represents all instance constructors</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Constructor.CreateDelegate(System.Reflection.ConstructorInfo)">
+            <summary>Builds a delegate for a constructor</summary>
+            <param name="constructorInfo">The ConstructorInfo for the method to wrap</param>
+            <returns>A delegate that looks like ConstructorParms&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Constructor.CreateDelegate(System.RuntimeMethodHandle)">
+            <summary>Builds a delegate for a constructor</summary>
+            <param name="methodHandle">The RuntimeMethodHandle for the method to wrap</param>
+            <returns>A delegate that looks like ConstructorParms&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Constructor.CreateDelegate">
+            <summary>Builds a delegate for the default constructor</summary>
+            <returns>A delegate that looks like ConstructorParms&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Constructor.CreateDelegate(System.Type[])">
+            <summary>Builds a delegate for a constructor that takes several arguments of known types</summary>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like ConstructorParms&lt;T&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static">
+            <summary>Represents a static member.</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Field">
+            <summary>Represents a static field.</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Field.Getter`1">
+            <summary>Represents a static field get method</summary>
+            <typeparam name="TRet">The return type of the getter (the field type)</typeparam>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Field.Getter`1.CreateDelegate(System.Reflection.FieldInfo)">
+            <summary>Builds a delegate for a static field getter from a FieldInfo</summary>
+            <param name="fieldInfo">The FieldInfo for the field to wrap.</param>
+            <returns>A delegate that looks like StaticFuncParms&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Field.Getter`1.CreateDelegate(System.RuntimeFieldHandle)">
+            <summary>Builds a delegate for a static field getter from a RuntimeFieldHandle</summary>
+            <param name="fieldHandle">The RuntimeFieldHandle for the field to wrap.</param>
+            <returns>A delegate that looks like StaticFuncParms&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Field.Getter`1.CreateDelegate(System.String)">
+            <summary>Builds a delegate for a static field getter from a name</summary>
+            <param name="fieldName">The name of the field to wrap.</param>
+            <returns>A delegate that looks like StaticFuncParms&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Field.Setter">
+            <summary>Represents a static field setter method</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Field.Setter.CreateDelegate(System.Reflection.FieldInfo)">
+            <summary>Builds a delegate for a static field setter from a FieldInfo</summary>
+            <param name="fieldInfo">The FieldInfo of the field to wrap.</param>
+            <returns>A delegate that looks like StaticProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Field.Setter.CreateDelegate(System.RuntimeFieldHandle)">
+            <summary>Builds a delegate for a static field setter from a RuntimeFieldHandle</summary>
+            <param name="fieldHandle">The RuntimeFieldHandle of the field to wrap.</param>
+            <returns>A delegate that looks like StaticProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Field.Setter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for a static field setter from a name</summary>
+            <param name="fieldName">The name of the field to wrap.</param>
+            <returns>A delegate that looks like StaticProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Property">
+            <summary>Represents a static property.</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Property.Getter`1">
+            <summary>Represents static property-get (methods that return a value)</summary>
+            <typeparam name="TRet">The type of the return value (property type)</typeparam>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Property.Getter`1.CreateDelegate(System.Reflection.PropertyInfo)">
+            <summary>Builds a delegate for a static property getter from a PropertyInfo</summary>
+            <param name="propertyInfo">The PropertyInfo of the property to wrap.</param>
+            <returns>A delegate that looks like StaticFuncParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Property.Getter`1.CreateDelegate(System.String)">
+            <summary>Builds a delegate for a static property getter from a name</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <returns>A delegate that looks like StaticFuncParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Property.Getter`1.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for a static property getter from a name and set of parameter (indexer) types</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like StaticFuncParams&lt;T&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Property.Setter">
+            <summary>Represents static property-set (methods that return nothing)</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Property.Setter.CreateDelegate(System.Reflection.PropertyInfo)">
+            <summary>Builds a delegate for a static property setter from a PropertyInfo</summary>
+            <param name="propertyInfo">The PropertyInfo of the property to wrap.</param>
+            <returns>A delegate that looks like StaticProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Property.Setter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for a static property setter from a name</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <returns>A delegate that looks like StaticProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Property.Setter.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for a static property setter from a name and set of parameter (indexer) types</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like StaticProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Procedure">
+            <summary>Represents a static procedure (method that returns nothing).</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Procedure.CreateDelegate(System.Reflection.MethodInfo)">
+            <summary>Builds a delegate for a static procedure (method that returns nothing) from a MethodInfo.</summary>
+            <param name="methodInfo">The MethodInfo of the method to wrap.</param>
+            <returns>A delegate that looks like StaticProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Procedure.CreateDelegate(System.RuntimeMethodHandle)">
+            <summary>Builds a delegate for a static procedure (method that returns nothing) from a RuntimeMethodHandle.</summary>
+            <param name="methodHandle">The RuntimeMethodHandle of the method to wrap.</param>
+            <returns>A delegate that looks like StaticProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Procedure.CreateDelegate(System.String)">
+            <summary>Builds a delegate for a static procedure (method that returns nothing) from a name.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <returns>A delegate that looks like StaticProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Procedure.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for a static procedure (method that returns nothing) from a name
+            and set of parameter types.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like StaticProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Function`1">
+            <summary>Represents a static function (method that returns a value).</summary>
+            <typeparam name="TRet">The type of the return value</typeparam>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Function`1.CreateDelegate(System.Reflection.MethodInfo)">
+            <summary>Builds a delegate for a static function (method that returns a value) from a MethodInfo.</summary>
+            <param name="methodInfo">The MethodInfo of the method to wrap.</param>
+            <returns>A delegate that looks like StaticFuncParams&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Function`1.CreateDelegate(System.RuntimeMethodHandle)">
+            <summary>Builds a delegate for a static function (method that returns a value) from a RuntimeMethodHandle.</summary>
+            <param name="methodHandle">The RuntimeMethodHandle of the method to wrap.</param>
+            <returns>A delegate that looks like StaticFuncParams&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Function`1.CreateDelegate(System.String)">
+            <summary>Builds a delegate for a static function (method that returns a value) from a name.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <returns>A delegate that looks like StaticFuncParams&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Static.Function`1.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for a static function (method that returns a value) from a name
+            and set of parameter types.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like StaticFuncParams&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance">
+            <summary>Represents an instance member.</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Field`1">
+            <summary>Represents an instance field.</summary>
+            <typeparam name="VF">The type of the field</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Field`1.Getter">
+            <summary>Represents an instance field getter method</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Field`1.Getter.CreateDelegate(System.Reflection.FieldInfo)">
+            <summary>Builds a delegate for an instance field getter from a FieldInfo</summary>
+            <param name="fieldInfo">The FieldInfo for the field to wrap.</param>
+            <returns>A delegate that looks like Func&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Field`1.Getter.CreateDelegate(System.RuntimeFieldHandle)">
+            <summary>Builds a delegate for an instance field getter from a RuntimeFieldHandle</summary>
+            <param name="fieldHandle">The RuntimeFieldHandle for the field to wrap.</param>
+            <returns>A delegate that looks like Func&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Field`1.Getter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for an instance field getter from a name</summary>
+            <param name="fieldName">The FieldInfo for the field to wrap.</param>
+            <returns>A delegate that looks like Func&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Field`1.Setter">
+            <summary>Represents an instance field setter method</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Field`1.Setter.CreateDelegate(System.Reflection.FieldInfo)">
+            <summary>Builds a delegate for an instance field setter from a FieldInfo</summary>
+            <param name="fieldInfo">The FieldInfo of the field to wrap.</param>
+            <returns>A delegate that looks like ProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Field`1.Setter.CreateDelegate(System.RuntimeFieldHandle)">
+            <summary>Builds a delegate for an instance field setter from a RuntimeFieldHandle</summary>
+            <param name="fieldHandle">The RuntimeFieldHandle of the field to wrap.</param>
+            <returns>A delegate that looks like ProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Field`1.Setter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for an instance field setter from a name</summary>
+            <param name="fieldName">The name of the field to wrap.</param>
+            <returns>A delegate that looks like ProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Property`1">
+            <summary>Represents an instance property.</summary>
+            <typeparam name="VP">The type of the property</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Property`1.Getter">
+            <summary>Represents an instance property-get (methods that return a value)</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Property`1.Getter.CreateDelegate(System.Reflection.PropertyInfo)">
+            <summary>Builds a delegate for an instance property getter from a PropertyInfo</summary>
+            <param name="propertyInfo">The PropertyInfo of the property to wrap.</param>
+            <returns>A delegate that looks like FuncParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Property`1.Getter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for an instance property getter from a name</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <returns>A delegate that looks like FuncParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Property`1.Getter.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for an instance property getter from a name and set of parameter (indexer) types</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like FuncParams&lt;T&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Property`1.Setter">
+            <summary>Represents an instance property-set (methods that return nothing)</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Property`1.Setter.CreateDelegate(System.Reflection.PropertyInfo)">
+            <summary>Builds a delegate for an instance property setter from a PropertyInfo</summary>
+            <param name="propertyInfo">The PropertyInfo of the property to wrap.</param>
+            <returns>A delegate that looks like ProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Property`1.Setter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for an instance property setter from a name</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <returns>A delegate that looks like ProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Property`1.Setter.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for an instance property setter from a name and set of parameter (indexer) types</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like ProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Procedure">
+            <summary>Represents an instance procedure (method that returns nothing).</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Procedure.CreateDelegate(System.Reflection.MethodInfo)">
+            <summary>Builds a delegate for an instance procedure (method that returns nothing) from a MethodInfo.</summary>
+            <param name="methodInfo">The MethodInfo of the method to wrap.</param>
+            <returns>A delegate that looks like ProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Procedure.CreateDelegate(System.RuntimeMethodHandle)">
+            <summary>Builds a delegate for an instance procedure (method that returns nothing) from a RuntimeMethodHandle.</summary>
+            <param name="methodHandle">The RuntimeMethodHandle of the method to wrap.</param>
+            <returns>A delegate that looks like ProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Procedure.CreateDelegate(System.String)">
+            <summary>Builds a delegate for an instance procedure (method that returns nothing) from a name.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <returns>A delegate that looks like ProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Procedure.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for an instance procedure (method that returns nothing) from a name
+            and set of parameter types.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like ProcParams&lt;T&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Function`1">
+            <summary>Represents an instance function (method that returns a value).</summary>
+            <typeparam name="TRet">The type of the return value</typeparam>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Function`1.CreateDelegate(System.Reflection.MethodInfo)">
+            <summary>Builds a delegate for an instance function (method that returns a value) from a MethodInfo.</summary>
+            <param name="methodInfo">The MethodInfo of the method to wrap.</param>
+            <returns>A delegate that looks like FuncParams&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Function`1.CreateDelegate(System.RuntimeMethodHandle)">
+            <summary>Builds a delegate for an instance function (method that returns a value) from a RuntimeMethodHandle.</summary>
+            <param name="methodHandle">The RuntimeMethodHandle of the method to wrap.</param>
+            <returns>A delegate that looks like FuncParams&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Function`1.CreateDelegate(System.String)">
+            <summary>Builds a delegate for an instance function (method that returns a value) from a name.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <returns>A delegate that looks like FuncParams&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Params.Instance.Function`1.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for an instance function (method that returns a value) from a name
+            and set of parameter types.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like FuncParams&lt;T, TRet&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit">
+            <summary>Represents methods that take known-typed argument list</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Constructor">
+            <summary>Represents a constructor that takes known-typed argument list</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Constructor.CreateDelegate(System.Reflection.ConstructorInfo)">
+            <summary>Builds a delegate for a constructor</summary>
+            <param name="constructorInfo">The ConstructorInfo for the method to wrap</param>
+            <returns>A delegate that looks like Constructor&lt;T, V1 arg1, ...&gt; </returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Constructor.CreateDelegate(System.RuntimeMethodHandle)">
+            <summary>Builds a delegate for a constructor</summary>
+            <param name="methodHandle">The RuntimeMethodHandle for the method to wrap</param>
+            <returns>A delegate that looks like Constructor&lt;T, V1 arg1, ...&gt; </returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Constructor.CreateDelegate">
+            <summary>Builds a delegate for the default constructor</summary>
+            <returns>A delegate that looks like Constructor&lt;T&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Constructor.CreateDelegate(Phydeaux.Utilities.ParameterList)">
+            <summary>Builds a delegate for a constructor that takes several arguments of known types as dictated
+            by the expected delegate's parameter (indexer) types.</summary>
+            <param name="flag">A marker that indicated automatic matching against the expected delegate should be done.</param>
+            <returns>A delegate that looks like Constructor&lt;T, V1 arg1, ...&gt; </returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Constructor.CreateDelegate(System.Type[])">
+            <summary>Builds a delegate for a constructor that takes several arguments of known types</summary>
+            <param name="parameterTypes">A Type array giving the parameters types to match against</param>
+            <returns>A delegate that looks like Constructor&lt;T, V1 arg1, ...&gt; </returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static">
+            <summary>Represents a static member.</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Field`1">
+            <summary>Represents a static field.</summary>
+            <typeparam name="VF">The type of the field</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Field`1.Getter">
+            <summary>Represents a static field get method</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Field`1.Getter.CreateDelegate(System.Reflection.FieldInfo)">
+            <summary>Builds a delegate for a static field getter from a FieldInfo</summary>
+            <param name="fieldInfo">The FieldInfo for the field to wrap.</param>
+            <returns>A delegate that looks like StaticFunc&lt;T, VF&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Field`1.Getter.CreateDelegate(System.RuntimeFieldHandle)">
+            <summary>Builds a delegate for a static field getter from a RuntimeFieldHandle</summary>
+            <param name="fieldHandle">The RuntimeFieldHandle for the field to wrap.</param>
+            <returns>A delegate that looks like StaticFunc&lt;T, VF&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Field`1.Getter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for a static field getter from a name</summary>
+            <param name="fieldName">The name of the field to wrap.</param>
+            <returns>A delegate that looks like StaticFunc&lt;T, VF&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Field`1.Setter">
+            <summary>Represents a static field setter method</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Field`1.Setter.CreateDelegate(System.Reflection.FieldInfo)">
+            <summary>Builds a delegate for a static field setter from a FieldInfo</summary>
+            <param name="fieldInfo">The FieldInfo of the field to wrap.</param>
+            <returns>A delegate that looks like StaticProc&lt;T, VF&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Field`1.Setter.CreateDelegate(System.RuntimeFieldHandle)">
+            <summary>Builds a delegate for a static field setter from a RuntimeFieldHandle</summary>
+            <param name="fieldHandle">The RuntimeFieldHandle of the field to wrap.</param>
+            <returns>A delegate that looks like StaticProc&lt;T, VF&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Field`1.Setter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for a static field setter from a name</summary>
+            <param name="fieldName">The name of the field to wrap.</param>
+            <returns>A delegate that looks like StaticProc&lt;T, VF&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Property`1">
+            <summary>Represents a static property.</summary>
+            <typeparam name="VP">The type of the property</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Property`1.Getter">
+            <summary>Represents static property-get (methods that return a value)</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Property`1.Getter.CreateDelegate(System.Reflection.PropertyInfo)">
+            <summary>Builds a delegate for a static property getter from a PropertyInfo</summary>
+            <param name="propertyInfo">The PropertyInfo of the property to wrap.</param>
+            <returns>A delegate that looks like StaticFunc&lt;T, VP&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Property`1.Getter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for a static property getter from a name</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <returns>A delegate that looks like StaticFunc&lt;T, VP&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Property`1.Getter.CreateDelegate(System.String,Phydeaux.Utilities.ParameterList)">
+            <summary>Builds a delegate for a static property getter from a name that takes several arguments of 
+            known types as dictated by the expected delegate's parameter (indexer) types.</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <param name="flag">A marker that indicated automatic matching against the expected delegate should be done.</param>
+            <returns>A delegate that looks like StaticFunc&lt;T, VP, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Property`1.Getter.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for a static property getter from a name and set of parameter (indexer) types</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like StaticFunc&lt;T, VP, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Property`1.Setter">
+            <summary>Represents static property-set (methods that return nothing)</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Property`1.Setter.CreateDelegate(System.Reflection.PropertyInfo)">
+            <summary>Builds a delegate for a static property setter from a PropertyInfo</summary>
+            <param name="propertyInfo">The PropertyInfo of the property to wrap.</param>
+            <returns>A delegate that looks like StaticProc&lt;T, VP, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Property`1.Setter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for a static property setter from a name</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <returns>A delegate that looks like StaticProc&lt;T, VP, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Property`1.Setter.CreateDelegate(System.String,Phydeaux.Utilities.ParameterList)">
+            <summary>Builds a delegate for a static property setter from a name that takes several arguments of 
+            known types as dictated by the expected delegate's parameter (indexer) types.</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <param name="flag">A marker that indicated automatic matching against the expected delegate should be done.</param>
+            <returns>A delegate that looks like StaticProc&lt;T, VP, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Property`1.Setter.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for a static property setter from a name and set of parameter (indexer) types</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like StaticProc&lt;T, VP, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Procedure">
+            <summary>Represents a static procedure (method that returns nothing).</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Procedure.CreateDelegate(System.Reflection.MethodInfo)">
+            <summary>Builds a delegate for a static procedure (method that returns nothing) from a MethodInfo.</summary>
+            <param name="methodInfo">The MethodInfo of the method to wrap.</param>
+            <returns>A delegate that looks like StaticProc&lt;T, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Procedure.CreateDelegate(System.RuntimeMethodHandle)">
+            <summary>Builds a delegate for a static procedure (method that returns nothing) from a RuntimeMethodHandle.</summary>
+            <param name="methodHandle">The RuntimeMethodHandle of the method to wrap.</param>
+            <returns>A delegate that looks like StaticProc&lt;T, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Procedure.CreateDelegate(System.String)">
+            <summary>Builds a delegate for a static procedure (method that returns nothing) from a name.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <returns>A delegate that looks like StaticProc&lt;T, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Procedure.CreateDelegate(System.String,Phydeaux.Utilities.ParameterList)">
+            <summary>Builds a delegate for a static procedure (method that returns nothing) from a name
+            that takes several arguments of known types as dictated by the expected delegate's parameter types.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <param name="flag">A marker that indicated automatic matching against the expected delegate should be done.</param>
+            <returns>A delegate that looks like StaticProc&lt;T, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Procedure.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for a static procedure (method that returns nothing) from a name
+            and set of parameter types.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like StaticProc&lt;T, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Function`1">
+            <summary>Represents a static function (method that returns a value).</summary>
+            <typeparam name="TRet">The type of the return value</typeparam>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Function`1.CreateDelegate(System.Reflection.MethodInfo)">
+            <summary>Builds a delegate for a static function (method that returns a value) from a MethodInfo.</summary>
+            <param name="methodInfo">The MethodInfo of the method to wrap.</param>
+            <returns>A delegate that looks like StaticFunc&lt;T, TRet, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Function`1.CreateDelegate(System.RuntimeMethodHandle)">
+            <summary>Builds a delegate for a static function (method that returns a value) from a RuntimeMethodHandle.</summary>
+            <param name="methodHandle">The RuntimeMethodHandle of the method to wrap.</param>
+            <returns>A delegate that looks like StaticFunc&lt;T, TRet, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Function`1.CreateDelegate(System.String)">
+            <summary>Builds a delegate for a static function (method that returns a value) from a name.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <returns>A delegate that looks like StaticFunc&lt;T, TRet, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Function`1.CreateDelegate(System.String,Phydeaux.Utilities.ParameterList)">
+            <summary>Builds a delegate for a static function (method that returns a value) from a name 
+            that takes several arguments of known types as dictated by the expected delegate's parameter types.</summary>
+            <param name="methodName">The name of the property to wrap.</param>
+            <param name="flag">A marker that indicated automatic matching against the expected delegate should be done.</param>
+            <returns>A delegate that looks like StaticFunc&lt;T, TRet, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Static.Function`1.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for a static function (method that returns a value) from a name
+            and set of parameter types.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like StaticFunc&lt;T, TRet, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance">
+            <summary>Represents an instance member.</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Field`1">
+            <summary>Represents an instance field.</summary>
+            <typeparam name="VF">The type of the field</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Field`1.Getter">
+            <summary>Represents an instance field getter method</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Field`1.Getter.CreateDelegate(System.Reflection.FieldInfo)">
+            <summary>Builds a delegate for an instance field getter from a FieldInfo</summary>
+            <param name="fieldInfo">The FieldInfo for the field to wrap.</param>
+            <returns>A delegate that looks like Func&lt;T, VF&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Field`1.Getter.CreateDelegate(System.RuntimeFieldHandle)">
+            <summary>Builds a delegate for an instance field getter from a RuntimeFieldHandle</summary>
+            <param name="fieldHandle">The RuntimeFieldHandle for the field to wrap.</param>
+            <returns>A delegate that looks like Func&lt;T, VF&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Field`1.Getter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for an instance field getter from a name</summary>
+            <param name="fieldName">The name of the field to wrap.</param>
+            <returns>A delegate that looks like Func&lt;T, VF&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Field`1.Setter">
+            <summary>Represents an instance field setter method</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Field`1.Setter.CreateDelegate(System.Reflection.FieldInfo)">
+            <summary>Builds a delegate for an instance field setter from a FieldInfo</summary>
+            <param name="fieldInfo">The FieldInfo of the field to wrap.</param>
+            <returns>A delegate that looks like Proc&lt;T, VF&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Field`1.Setter.CreateDelegate(System.RuntimeFieldHandle)">
+            <summary>Builds a delegate for an instance field setter from a RuntimeFieldHandle</summary>
+            <param name="fieldHandle">The RuntimeFieldHandle of the field to wrap.</param>
+            <returns>A delegate that looks like Proc&lt;T, VF&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Field`1.Setter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for an instance field setter from a name</summary>
+            <param name="fieldName">The name of the field to wrap.</param>
+            <returns>A delegate that looks like Proc&lt;T, VF&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Property`1">
+            <summary>Represents an instance property.</summary>
+            <typeparam name="VP">The type of the property</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Property`1.Getter">
+            <summary>Represents an instance property-get (methods that return a value)</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Property`1.Getter.CreateDelegate(System.Reflection.PropertyInfo)">
+            <summary>Builds a delegate for an instance property getter from a PropertyInfo</summary>
+            <param name="propertyInfo">The PropertyInfo of the property to wrap.</param>
+            <returns>A delegate that looks like Func&lt;T, VP&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Property`1.Getter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for an instance property getter from a name</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <returns>A delegate that looks like Func&lt;T, VP&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Property`1.Getter.CreateDelegate(System.String,Phydeaux.Utilities.ParameterList)">
+            <summary>Builds a delegate for an instance property getter from a name that takes several arguments of 
+            known types as dictated by the expected delegate's parameter (indexer) types.</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <param name="flag">A marker that indicated automatic matching against the expected delegate should be done.</param>
+            <returns>A delegate that looks like Func&lt;T, VP, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Property`1.Getter.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for an instance property getter from a name and set of parameter (indexer) types</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like Func&lt;T, VP, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Property`1.Setter">
+            <summary>Represents an instance property-set (methods that return nothing)</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Property`1.Setter.CreateDelegate(System.Reflection.PropertyInfo)">
+            <summary>Builds a delegate for an instance property setter from a PropertyInfo</summary>
+            <param name="propertyInfo">The PropertyInfo of the property to wrap.</param>
+            <returns>A delegate that looks like Proc&lt;T, VP, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Property`1.Setter.CreateDelegate(System.String)">
+            <summary>Builds a delegate for an instance property setter from a name</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <returns>A delegate that looks like Proc&lt;T, VP, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Property`1.Setter.CreateDelegate(System.String,Phydeaux.Utilities.ParameterList)">
+            <summary>Builds a delegate for an instance property setter from a name that takes several arguments of 
+            known types as dictated by the expected delegate's parameter (indexer) types.</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <param name="flag">A marker that indicated automatic matching against the expected delegate should be done.</param>
+            <returns>A delegate that looks like Proc&lt;T, VP, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Property`1.Setter.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for an instance property setter from a name and set of parameter (indexer) types</summary>
+            <param name="propertyName">The name of the property to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like Proc&lt;T, VP, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Procedure">
+            <summary>Represents an instance procedure (method that returns nothing).</summary>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Procedure.CreateDelegate(System.Reflection.MethodInfo)">
+            <summary>Builds a delegate for an instance procedure (method that returns nothing) from a MethodInfo.</summary>
+            <param name="methodInfo">The MethodInfo of the method to wrap.</param>
+            <returns>A delegate that looks like Proc&lt;T, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Procedure.CreateDelegate(System.RuntimeMethodHandle)">
+            <summary>Builds a delegate for an instance procedure (method that returns nothing) from a RuntimeMethodHandle.</summary>
+            <param name="methodHandle">The RuntimeMethodHandle of the method to wrap.</param>
+            <returns>A delegate that looks like Proc&lt;T, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Procedure.CreateDelegate(System.String)">
+            <summary>Builds a delegate for an instance procedure (method that returns nothing) from a name.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <returns>A delegate that looks like Proc&lt;T, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Procedure.CreateDelegate(System.String,Phydeaux.Utilities.ParameterList)">
+            <summary>Builds a delegate for an instance procedure (method that returns nothing) from a name
+            that takes several arguments of known types as dictated by the expected delegate's parameter types.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <param name="flag">A marker that indicated automatic matching against the expected delegate should be done.</param>
+            <returns>A delegate that looks like Proc&lt;T, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Procedure.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for an instance procedure (method that returns nothing) from a name
+            and set of parameter types.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like Proc&lt;T, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Function`1">
+            <summary>Represents an instance function (method that returns a value).</summary>
+            <typeparam name="TRet">The type of the return value</typeparam>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Function`1.CreateDelegate(System.Reflection.MethodInfo)">
+            <summary>Builds a delegate for an instance function (method that returns a value) from a MethodInfo.</summary>
+            <param name="methodInfo">The MethodInfo of the method to wrap.</param>
+            <returns>A delegate that looks like Func&lt;T, TRet, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Function`1.CreateDelegate(System.RuntimeMethodHandle)">
+            <summary>Builds a delegate for an instance function (method that returns a value) from a RuntimeMethodHandle.</summary>
+            <param name="methodHandle">The RuntimeMethodHandle of the method to wrap.</param>
+            <returns>A delegate that looks like Func&lt;T, TRet, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Function`1.CreateDelegate(System.String)">
+            <summary>Builds a delegate for an instance function (method that returns a value) from a name.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <returns>A delegate that looks like Func&lt;T, TRet, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Function`1.CreateDelegate(System.String,Phydeaux.Utilities.ParameterList)">
+            <summary>Builds a delegate for an instance function (method that returns a value) from a name 
+            that takes several arguments of known types as dictated by the expected delegate's parameter types.</summary>
+            <param name="methodName">The name of the property to wrap.</param>
+            <param name="flag">A marker that indicated automatic matching against the expected delegate should be done.</param>
+            <returns>A delegate that looks like Func&lt;T, TRet, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="M:Phydeaux.Utilities.Dynamic`1.DynamicBase`1.Explicit.Instance.Function`1.CreateDelegate(System.String,System.Type[])">
+            <summary>Builds a delegate for an instance function (method that returns a value) from a name
+            and set of parameter types.</summary>
+            <param name="methodName">The name of the method to wrap.</param>
+            <param name="parameterTypes">A Type array giving the parameter types to match against</param>
+            <returns>A delegate that looks like Func&lt;T, TRet, V1 arg1, ...&gt;</returns>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Constructor.Explicit">
+            <summary>Represents a constructor that takes known-typed argument list (empty)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Constructor.Explicit`1">
+            <summary>Represents constructor that takes known-typed argument list (one argument)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Constructor.Explicit`2">
+            <summary>Represents constructor that takes known-typed argument list (two arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Constructor.Explicit`3">
+            <summary>Represents constructor that takes known-typed argument list (three arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Constructor.Explicit`4">
+            <summary>Represents constructor that takes known-typed argument list (four arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Constructor.Explicit`5">
+            <summary>Represents constructor that takes known-typed argument list (five arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Constructor.Explicit`6">
+            <summary>Represents constructor that takes known-typed argument list (six arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Constructor.Explicit`7">
+            <summary>Represents constructor that takes known-typed argument list (seven arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Constructor.Explicit`8">
+            <summary>Represents constructor that takes known-typed argument list (eight arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Constructor.Explicit`9">
+            <summary>Represents constructor that takes known-typed argument list (nine arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <typeparam name="V9">The type of the ninth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static">
+            <summary>Represents static methods (no "this" instance passed)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Field`1">
+            <summary>Represents the static fields (for Get and/or Set)</summary>
+            <typeparam name="VF">The type of the field</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Field`1.Getter">
+            <summary>Represents a field-getter.</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Field`1.Setter">
+            <summary>Represents a field-setter.</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1">
+            <summary>Represents the static properties (for Get and/or Set with/with-out indexers)</summary>
+            <typeparam name="VP">The type of the property</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Params">
+            <summary>Represents Late-bound argument list (e.g. params object[])</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Params.Getter">
+            <summary>Represents property-get (methods that return a value)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Params.Setter">
+            <summary>Represents property-set (methods that return nothing)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit">
+            <summary>Represents methods that take known-typed argument list (no indexer)</summary>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit.Getter">
+            <summary>Represents property-get (methods that return a value)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit.Setter">
+            <summary>property-set (methods that return nothing)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`1">
+            <summary>Represents methods that take known-typed argument list (one indexer argument)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`1.Getter">
+            <summary>Represents property-get (methods that return a value)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`1.Setter">
+            <summary>Represents property-set (methods that return nothing)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`2">
+            <summary>Represents methods that take known-typed argument list (two indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`2.Getter">
+            <summary>Represents property-get (methods that return a value)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`2.Setter">
+            <summary>Represents property-set (methods that return nothing)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`3">
+            <summary>Represents methods that take known-typed argument list (three indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <typeparam name="V3">The type of the third indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`3.Getter">
+            <summary>Represents property-get (methods that return a value)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`3.Setter">
+            <summary>Represents property-set (methods that return nothing)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`4">
+            <summary>Represents methods that take known-typed argument list (four indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <typeparam name="V3">The type of the third indexer argument</typeparam>
+            <typeparam name="V4">The type of the fourth indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`4.Getter">
+            <summary>Represents property-get (methods that return a value)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`4.Setter">
+            <summary>Represents property-set (methods that return nothing)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`5">
+            <summary>Represents methods that take known-typed argument list (five indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <typeparam name="V3">The type of the third indexer argument</typeparam>
+            <typeparam name="V4">The type of the fourth indexer argument</typeparam>
+            <typeparam name="V5">The type of the fifth indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`5.Getter">
+            <summary>Represents property-get (methods that return a value)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`5.Setter">
+            <summary>Represents property-set (methods that return nothing)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`6">
+            <summary>Represents methods that take known-typed argument list (six indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <typeparam name="V3">The type of the third indexer argument</typeparam>
+            <typeparam name="V4">The type of the fourth indexer argument</typeparam>
+            <typeparam name="V5">The type of the fifth indexer argument</typeparam>
+            <typeparam name="V6">The type of the sixth indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`6.Getter">
+            <summary>Represents property-get (methods that return a value)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`6.Setter">
+            <summary>Represents property-set (methods that return nothing)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`7">
+            <summary>Represents methods that take known-typed argument list (seven indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <typeparam name="V3">The type of the third indexer argument</typeparam>
+            <typeparam name="V4">The type of the fourth indexer argument</typeparam>
+            <typeparam name="V5">The type of the fifth indexer argument</typeparam>
+            <typeparam name="V6">The type of the sixth indexer argument</typeparam>
+            <typeparam name="V7">The type of the seventh indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`7.Getter">
+            <summary>Represents property-get (methods that return a value)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`7.Setter">
+            <summary>Represents property-set (methods that return nothing)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`8">
+            <summary>Represents methods that take known-typed argument list (eight indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <typeparam name="V3">The type of the third indexer argument</typeparam>
+            <typeparam name="V4">The type of the fourth indexer argument</typeparam>
+            <typeparam name="V5">The type of the fifth indexer argument</typeparam>
+            <typeparam name="V6">The type of the sixth indexer argument</typeparam>
+            <typeparam name="V7">The type of the seventh indexer argument</typeparam>
+            <typeparam name="V8">The type of the eighth indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`8.Getter">
+            <summary>Represents property-get (methods that return a value)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Property`1.Explicit`8.Setter">
+            <summary>Represents property-set (methods that return nothing)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Procedure">
+            <summary>Represents procedures (methods that return nothing)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Procedure.Params">
+            <summary>Represents Late-bound argument list (e.g. params object[])</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Procedure.Explicit">
+            <summary>Represents methods that take known-typed argument list (empty)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Procedure.Explicit`1">
+            <summary>Represents methods that take known-typed argument list (one argument)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Procedure.Explicit`2">
+            <summary>Represents methods that take known-typed argument list (two arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Procedure.Explicit`3">
+            <summary>Represents methods that take known-typed argument list (three arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Procedure.Explicit`4">
+            <summary>Represents methods that take known-typed argument list (four arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Procedure.Explicit`5">
+            <summary>Represents methods that take known-typed argument list (five arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Procedure.Explicit`6">
+            <summary>Represents methods that take known-typed argument list (six arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Procedure.Explicit`7">
+            <summary>Represents methods that take known-typed argument list (seven arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Procedure.Explicit`8">
+            <summary>Represents methods that take known-typed argument list (eight arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Procedure.Explicit`9">
+            <summary>Represents methods that take known-typed argument list (nine arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <typeparam name="V9">The type of the ninth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Function`1">
+            <summary>Represents functions (methods that return a value)</summary>
+            <typeparam name="TRet">The type of the return value</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Function`1.Params">
+            <summary>Represents Late-bound argument list (e.g. params object[])</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Function`1.Explicit">
+            <summary>Represents methods that take known-typed argument list (empty)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Function`1.Explicit`1">
+            <summary>Represents methods that take known-typed argument list (one argument)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Function`1.Explicit`2">
+            <summary>Represents methods that take known-typed argument list (two arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Function`1.Explicit`3">
+            <summary>Represents methods that take known-typed argument list (three arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Function`1.Explicit`4">
+            <summary>Represents methods that take known-typed argument list (four arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Function`1.Explicit`5">
+            <summary>Represents methods that take known-typed argument list (five arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Function`1.Explicit`6">
+            <summary>Represents methods that take known-typed argument list (six arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Function`1.Explicit`7">
+            <summary>Represents methods that take known-typed argument list (seven arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Function`1.Explicit`8">
+            <summary>Represents methods that take known-typed argument list (eight arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Static.Function`1.Explicit`9">
+            <summary>Represents methods that take known-typed argument list (nine arguments)</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <typeparam name="V9">The type of the ninth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance">
+            <summary>Represents instance methods (those that get a "this" argument)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Field`1">
+            <summary>Represents the instance fields (for Get and/or Set</summary>
+            <typeparam name="VF">The type of the field</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Field`1.Getter">
+            <summary>Represents a field-getter</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Field`1.Setter">
+            <summary>Represents a field-setter</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1">
+            <summary>Represents the static properties (for Get and/or Set with/with-out indexers</summary>
+            <typeparam name="VP">The type of the property</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Params">
+            <summary>Represents Late-bound argument list (e.g. params object[])</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Params.Getter">
+            <summary>Represents property-get (methods that return a value)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Params.Setter">
+            <summary>Represents property-set (methods that return nothing)</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit">
+            <summary>Represents methods that take known-typed argument list (no indexer)</summary>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit.Getter">
+            <summary>Represents property-get (methods that return a value</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit.Setter">
+            <summary>Represents property-set (methods that return nothing</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`1">
+            <summary>Represents methods that take known-typed argument list (one indexer argument)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`1.Getter">
+            <summary>Represents property-get (methods that return a value</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`1.Setter">
+            <summary>Represents property-set (methods that return nothing</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`2">
+            <summary>Represents methods that take known-typed argument list (two indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`2.Getter">
+            <summary>Represents property-get (methods that return a value</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`2.Setter">
+            <summary>Represents property-set (methods that return nothing</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`3">
+            <summary>Represents methods that take known-typed argument list (three indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <typeparam name="V3">The type of the third indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`3.Getter">
+            <summary>Represents property-get (methods that return a value</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`3.Setter">
+            <summary>Represents property-set (methods that return nothing</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`4">
+            <summary>Represents methods that take known-typed argument list (four indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <typeparam name="V3">The type of the third indexer argument</typeparam>
+            <typeparam name="V4">The type of the fourth indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`4.Getter">
+            <summary>Represents property-get (methods that return a value</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`4.Setter">
+            <summary>Represents property-set (methods that return nothing</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`5">
+            <summary>Represents methods that take known-typed argument list (five indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <typeparam name="V3">The type of the third indexer argument</typeparam>
+            <typeparam name="V4">The type of the fourth indexer argument</typeparam>
+            <typeparam name="V5">The type of the fifth indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`5.Getter">
+            <summary>Represents property-get (methods that return a value</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`5.Setter">
+            <summary>Represents property-set (methods that return nothing</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`6">
+            <summary>Represents methods that take known-typed argument list (six indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <typeparam name="V3">The type of the third indexer argument</typeparam>
+            <typeparam name="V4">The type of the fourth indexer argument</typeparam>
+            <typeparam name="V5">The type of the fifth indexer argument</typeparam>
+            <typeparam name="V6">The type of the sixth indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`6.Getter">
+            <summary>Represents property-get (methods that return a value</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`6.Setter">
+            <summary>Represents property-set (methods that return nothing</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`7">
+            <summary>Represents methods that take known-typed argument list (seven indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <typeparam name="V3">The type of the third indexer argument</typeparam>
+            <typeparam name="V4">The type of the fourth indexer argument</typeparam>
+            <typeparam name="V5">The type of the fifth indexer argument</typeparam>
+            <typeparam name="V6">The type of the sixth indexer argument</typeparam>
+            <typeparam name="V7">The type of the seventh indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`7.Getter">
+            <summary>Represents property-get (methods that return a value</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`7.Setter">
+            <summary>Represents property-set (methods that return nothing</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`8">
+            <summary>Represents methods that take known-typed argument list (eight indexer arguments)</summary>
+            <typeparam name="V1">The type of the first indexer argument</typeparam>
+            <typeparam name="V2">The type of the second indexer argument</typeparam>
+            <typeparam name="V3">The type of the third indexer argument</typeparam>
+            <typeparam name="V4">The type of the fourth indexer argument</typeparam>
+            <typeparam name="V5">The type of the fifth indexer argument</typeparam>
+            <typeparam name="V6">The type of the sixth indexer argument</typeparam>
+            <typeparam name="V7">The type of the seventh indexer argument</typeparam>
+            <typeparam name="V8">The type of the eighth indexer argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`8.Getter">
+            <summary>Represents property-get (methods that return a value</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Property`1.Explicit`8.Setter">
+            <summary>Represents property-set (methods that return nothing</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Procedure">
+            <summary>Represents procedures (methods that return nothing</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Procedure.Params">
+            <summary>Represents Late-bound argument list (e.g. params object[]</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Procedure.Explicit">
+            <summary>Represents methods that take known-typed argument list (empty</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Procedure.Explicit`1">
+            <summary>Represents methods that take known-typed argument list (one argument</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Procedure.Explicit`2">
+            <summary>Represents methods that take known-typed argument list (two arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Procedure.Explicit`3">
+            <summary>Represents methods that take known-typed argument list (three arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Procedure.Explicit`4">
+            <summary>Represents methods that take known-typed argument list (four arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Procedure.Explicit`5">
+            <summary>Represents methods that take known-typed argument list (five arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Procedure.Explicit`6">
+            <summary>Represents methods that take known-typed argument list (six arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Procedure.Explicit`7">
+            <summary>Represents methods that take known-typed argument list (seven arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Procedure.Explicit`8">
+            <summary>Represents methods that take known-typed argument list (eight arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Procedure.Explicit`9">
+            <summary>Represents methods that take known-typed argument list (nine arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <typeparam name="V9">The type of the ninth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Function`1">
+            <summary>Represents functions (methods that return a value</summary>
+            <typeparam name="TRet">The type of the return value</typeparam>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Function`1.Params">
+            <summary>Represents Late-bound argument list (e.g. params object[]</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Function`1.Explicit">
+            <summary>Represents methods with no argument</summary>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Function`1.Explicit`1">
+            <summary>Represents methods that take known-typed argument list (one argument</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Function`1.Explicit`2">
+            <summary>Represents methods that take known-typed argument list (two arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Function`1.Explicit`3">
+            <summary>Represents methods that take known-typed argument list (three arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Function`1.Explicit`4">
+            <summary>Represents methods that take known-typed argument list (four arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Function`1.Explicit`5">
+            <summary>Represents methods that take known-typed argument list (five arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Function`1.Explicit`6">
+            <summary>Represents methods that take known-typed argument list (six arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Function`1.Explicit`7">
+            <summary>Represents methods that take known-typed argument list (seven arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Function`1.Explicit`8">
+            <summary>Represents methods that take known-typed argument list (eight arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.Dynamic`1.Instance.Function`1.Explicit`9">
+            <summary>Represents methods that take known-typed argument list (nine arguments</summary>
+            <typeparam name="V1">The type of the first argument</typeparam>
+            <typeparam name="V2">The type of the second argument</typeparam>
+            <typeparam name="V3">The type of the third argument</typeparam>
+            <typeparam name="V4">The type of the fourth argument</typeparam>
+            <typeparam name="V5">The type of the fifth argument</typeparam>
+            <typeparam name="V6">The type of the sixth argument</typeparam>
+            <typeparam name="V7">The type of the seventh argument</typeparam>
+            <typeparam name="V8">The type of the eighth argument</typeparam>
+            <typeparam name="V9">The type of the ninth argument</typeparam>
+            <remarks>
+            Argument types must be compatible, but need not exactly match the actual
+            method. This means that if the method takes an argument of type object,
+            it is legal to define the dynamic delegate as something more type-specific
+            </remarks>
+        </member>
+        <member name="T:Phydeaux.Utilities.SortProperty">
+            <summary>
+            Internal struct to carry the sorting properties.
+            </summary>
+        </member>
+    </members>
+</doc>

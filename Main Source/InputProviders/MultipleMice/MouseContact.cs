@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Threading;
 using MultipleMice.Native;
@@ -23,7 +23,7 @@ namespace MultipleMice
 		public double X { get; private set; }
 		public double Y { get; private set; }
 
-		public MouseContact(DeviceState state)
+		public MouseContact(DeviceStatus state)
 		{
 			Handle = state.Handle;
 
@@ -39,14 +39,14 @@ namespace MultipleMice
 			State = ContactState.New;
 		}
 
-		internal void Update(DeviceState data)
+		internal void Update(DeviceStatus data)
 		{
 			X = data.X;
 			Y = data.Y;
 
-			if (data.ButtonState == MouseButtonState.None)
+			if (data.ButtonState == DeviceState.Move)
 				State = ContactState.Moved;
-			else if (data.ButtonState == MouseButtonState.LeftUp)
+			else if (data.ButtonState == DeviceState.Up)
 				State = ContactState.Removed;
 		}
 

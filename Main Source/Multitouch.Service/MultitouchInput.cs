@@ -26,10 +26,8 @@ namespace Multitouch.Service
 			if (currentProviderToken == null)
 				throw new MultitouchException(string.Format("Input provider '{0}' could not be found", provider));
 
-			
-			IProvider activatedProvider = currentProviderToken.Activate<IProvider>(AddInSecurityLevel.Host);
+			IProvider activatedProvider = currentProviderToken.Activate<IProvider>(AppDomain.CurrentDomain);
 			providerManager = new InputProviderManager(activatedProvider);
-
 		}
 
 		public void Stop()

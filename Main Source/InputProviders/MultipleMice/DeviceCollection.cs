@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 
 namespace MultipleMice
 {
-	class DeviceCollection : KeyedCollection<IntPtr, DeviceState>
+	class DeviceCollection : KeyedCollection<IntPtr, DeviceStatus>
 	{
-		protected override IntPtr GetKeyForItem(DeviceState item)
+		protected override IntPtr GetKeyForItem(DeviceStatus item)
 		{
 			return item.Handle;
 		}

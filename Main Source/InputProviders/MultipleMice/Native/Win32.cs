@@ -7,6 +7,38 @@ using System.Runtime.InteropServices;
 
 namespace MultipleMice.Native
 {
+	[Flags]
+	internal enum PenStatus : byte
+	{
+		PenTipDown = 0x01,
+		SideSwitchDown =0x02,
+		Inverted = 0x04,
+		EraserDown = 0x08,
+		Reserved = 0x18,
+		InRange = 0x20,
+		ControlData = 0x40,
+		Sync = 0x80
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	internal struct PEN_DATA
+	{
+		public byte ReportID;
+		public PenStatus Status;
+		public ushort X;
+		public ushort Y;
+		public ushort Pressure;
+		public byte XTilt;
+		public byte YTilt;
+		public ushort Firmware;
+
+		public override string ToString()
+		{
+			return string.Format("Report ID: {0}, Status: {1}, X-Y: {2}x{3}, Pressure: {4}, Tilt X-Y: {5}x{6}, Firmware: {7}",
+			                     ReportID, Status, X, Y, Pressure, XTilt, YTilt, Firmware);
+		}
+	}
+
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct RAWINPUTDEVICELIST
 	{

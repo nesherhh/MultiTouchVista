@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplication", "Framewor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Framework.WPF", "Framework\Multitouch.Framework.WPF\Multitouch.Framework.WPF.csproj", "{F3219531-A4B9-4B65-B7EA-27C43E98C21D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{9478A403-D0E0-42C0-B4FA-6CA769B02173}"
+	ProjectSection(SolutionItems) = preProject
+		Framework\Libraries\DynamicUtilities.dll = Framework\Libraries\DynamicUtilities.dll
+		Framework\Libraries\DynamicUtilities.pdb = Framework\Libraries\DynamicUtilities.pdb
+		Framework\Libraries\DynamicUtilities.xml = Framework\Libraries\DynamicUtilities.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 4
