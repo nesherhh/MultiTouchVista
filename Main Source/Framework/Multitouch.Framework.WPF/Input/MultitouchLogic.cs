@@ -14,9 +14,9 @@ namespace Multitouch.Framework.WPF.Input
 		static object lockCurrent = new object();
 
 		internal static readonly RoutedEvent PreviewRawInputEvent = EventManager.RegisterRoutedEvent("PreviewRawInput", RoutingStrategy.Tunnel,
-			typeof(RoutedEventHandler), typeof(MultitouchLogic));
+			typeof(RawMultitouchReportHandler), typeof(MultitouchLogic));
 		internal static readonly RoutedEvent RawInputEvent = EventManager.RegisterRoutedEvent("RawInput", RoutingStrategy.Bubble,
-			typeof(RoutedEventHandler), typeof(MultitouchLogic));
+			typeof(RawMultitouchReportHandler), typeof(MultitouchLogic));
 
 		InputManager inputManager;
 		int doubleTapDeltaTime;
@@ -206,7 +206,7 @@ namespace Multitouch.Framework.WPF.Input
 		{
 			RawMultitouchReport report = (RawMultitouchReport)e.StagingItem.Input;
 
-			RawMultitouchReport args = new RawMultitouchReport(report);
+			ContactEventArgs args = new ContactEventArgs(report.MultitouchDevice, report, report.Timestamp);
 			if(o == null && args.MultitouchDevice.Captured != null)
 			{
 				args.RoutedEvent = MultitouchScreen.ContactLeaveEvent;
@@ -232,6 +232,7 @@ namespace Multitouch.Framework.WPF.Input
 					inputManager.ProcessInput(args);
 				}
 			}
+			args.MultitouchDevice.Capture(o as IInputElement);
 		}
 	}
 }

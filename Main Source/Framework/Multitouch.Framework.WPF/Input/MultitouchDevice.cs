@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -55,10 +54,29 @@ namespace Multitouch.Framework.WPF.Input
 
 		public Point GetPosition(IInputElement relativeTo)
 		{
-			if (relativeTo != null)
-				throw new NotImplementedException();
+			if (relativeTo != null && !InputElement.IsValid(relativeTo))
+				throw new InvalidOperationException();
 
-			return source.RootVisual.PointFromScreen(rawPosition);
+			PresentationSource presentationSource = null;
+			if(relativeTo != null)
+			{
+				DependencyObject o = relativeTo as DependencyObject;
+				Visual containingVisual = InputElement.GetContainingVisual(o);
+				if (containingVisual != null)
+					presentationSource = PresentationSource.FromVisual(containingVisual);
+			}
+			else if(ActiveSource != null)
+				presentationSource = ActiveSource;
+			if (presentationSource == null || presentationSource.RootVisual == null)
+				return new Point(0.0, 0.0);
+
+			Point clientPoint = PointUtil.ScreenToClient(rawPosition, presentationSource);
+			bool success;
+			Point rootPoint = PointUtil.TryClientToRoot(clientPoint, presentationSource, false, out success);
+			if (!success)
+				return new Point(0.0, 0.0);
+
+			return InputElement.TranslatePoint(rootPoint, presentationSource.RootVisual, (DependencyObject)relativeTo);
 		}
 
 		internal void UpdateState(RawMultitouchReport rawReport)

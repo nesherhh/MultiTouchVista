@@ -5,6 +5,7 @@ using System.Windows;
 namespace Multitouch.Framework.WPF.Input
 {
 	public delegate void ContactEventHandler(object sender, ContactEventArgs e);
+	delegate void RawMultitouchReportHandler(object sender, RawMultitouchReport e);
 
 	public static class MultitouchScreen
 	{

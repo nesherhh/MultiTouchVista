@@ -1,0 +1,1553 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Physics2DDotNet</name>
+    </assembly>
+    <members>
+        <member name="T:Physics2DDotNet.Ignorers.GroupCollection">
+            <summary>
+            A collection that stores ints that represent groups
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Ignorers.GroupCollection.Add(System.Int32)">
+            <summary>
+            Trys to add a group.
+            </summary>
+            <param name="item">The group ID to add.</param>
+            <returns>false if the ignorer was already part of the group; otherwise false.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Ignorers.GroupCollection.AddRange(System.Int32[])">
+            <summary>
+            adds an array of group ids.
+            </summary>
+            <param name="array">The array of group IDs. (this will be sorted)</param>
+            <returns>the number of IDs that were not already part of the group.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Ignorers.GroupCollection.Contains(System.Int32)">
+            <summary>
+            returns true if the ignorer is part of the group.
+            </summary>
+            <param name="item">The group ID.</param>
+            <returns>true if the ignorer is part of the group; otherwise false.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Ignorers.GroupCollection.ContainsRange(System.Int32[])">
+            <summary>
+            returns the number of groups in the array it is part of.
+            </summary>
+            <param name="array">The array of group IDs. (this will be sorted)</param>
+            <returns>The number of groups in the array it is part of.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Ignorers.GroupCollection.Remove(System.Int32)">
+            <summary>
+            Trys to remove the ignorer from a group.
+            </summary>
+            <param name="item">The group ID.</param>
+            <returns>true if the ignore was part of the group; otherwise false.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Ignorers.GroupCollection.RemoveRange(System.Int32[])">
+            <summary>
+            Trys to remove the ignorer from a range of groups.
+            </summary>
+            <param name="array">The array of group IDs. (this will be sorted)</param>
+            <returns>the number of groups the ignore was removed from.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Ignorers.GroupCollection.System#Collections#Generic#ICollection{System#Int32}#Add(System.Int32)">
+            <summary>
+            returns if the 2 ignores are not part of the same group.
+            </summary>
+            <param name="other">the other CollisionGroupIgnorer</param>
+            <returns>true if they are not part of the same group; otherwiase false.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Ignorers.GroupCollection.Clear">
+            <summary>
+            removes the ignorer from all groups.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Ignorers.GroupCollection.Count">
+            <summary>
+            Gets the number of collison Groups the ignorer is part of.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.CollectionEventArgs`1">
+            <summary>
+            a generic EventArgs for read only collections.
+            </summary>
+            <typeparam name="T">The type of the items on the collection. </typeparam>
+        </member>
+        <member name="P:Physics2DDotNet.CollectionEventArgs`1.Collection">
+            <summary>
+            The readonly collection of items.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.ALVector2D">
+            <summary>
+            Class Used to store a Linear Value along with an Angular Value. Like Position and Orientation. 
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.ALVector2D.Zero">
+            <summary>
+            ALVector2D(0,Vector2D.Zero)
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.ALVector2D.Angular">
+            <summary>
+            This is the Angular value of this ALVector2D. 
+            </summary>
+            <remarks>Example: Angular would be Orientation and Linear would be Location Completly describing a Position.</remarks>
+        </member>
+        <member name="F:Physics2DDotNet.ALVector2D.Linear">
+            <summary>
+            This is the Linear value of this ALVector2D. 
+            </summary>
+            <remarks>Example: Angular would be Orientation and Linear would be Location Completly describing a Position.</remarks>
+        </member>
+        <member name="M:Physics2DDotNet.ALVector2D.#ctor(System.Double,AdvanceMath.Vector2D)">
+            <summary>
+            Creates a new ALVector2D instance on the stack.
+            </summary>
+            <param name="Angular">The Angular value.</param>
+            <param name="Linear">The Linear value.</param>
+        </member>
+        <member name="M:Physics2DDotNet.ALVector2D.op_Addition(Physics2DDotNet.ALVector2D,Physics2DDotNet.ALVector2D)">
+            <summary>
+            Does Addition of 2 ALVector2Ds.
+            </summary>
+            <param name="left">The left ALVector2D operand.</param>
+            <param name="right">The right ALVector2D operand.</param>
+            <returns>The Sum of the ALVector2Ds.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.ALVector2D.op_Subtraction(Physics2DDotNet.ALVector2D,Physics2DDotNet.ALVector2D)">
+            <summary>
+            Does Subtraction of 2 ALVector2Ds.
+            </summary>
+            <param name="left">The left ALVector2D operand.</param>
+            <param name="right">The right ALVector2D operand.</param>
+            <returns>The Difference of the ALVector2Ds.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.ALVector2D.op_Multiply(Physics2DDotNet.ALVector2D,System.Double)">
+            <summary>
+            Does Multiplication of 2 ALVector2Ds 
+            </summary>
+            <param name="source">The ALVector2D to be Multiplied.</param>
+            <param name="scalar">The Scalar multiplier.</param>
+            <returns>The Product of the ALVector2Ds.</returns>
+            <remarks>It does normal Multiplication of the Angular value but does Scalar Multiplication of the Linear value.</remarks>
+        </member>
+        <member name="M:Physics2DDotNet.ALVector2D.op_Multiply(System.Double,Physics2DDotNet.ALVector2D)">
+            <summary>
+            Does Multiplication of 2 ALVector2Ds 
+            </summary>
+            <param name="scalar">The Scalar multiplier.</param>
+            <param name="source">The ALVector2D to be Multiplied.</param>
+            <returns>The Product of the ALVector2Ds.</returns>
+            <remarks>It does normal Multiplication of the Angular value but does Scalar Multiplication of the Linear value.</remarks>
+        </member>
+        <member name="T:Physics2DDotNet.PhysicsLogics.GravityField">
+            <summary>
+            A Gravity Field that apply gravity pulling in one direction regardless of the Body's position with zero dropoff.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.PhysicsLogics.PhysicsLogic">
+            <summary>
+            A physics logic is a way for the engine to effect object within the Update call.
+            Gravity is a Example of a PhysicsLogic.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsLogics.PhysicsLogic.BeforeAddCheck(Physics2DDotNet.PhysicsEngine)">
+            <summary>
+            Before the item is allowed to be added to pending this method is called to 
+            throw any exceptions without corrupting the state of the Physics engine.
+            </summary>
+            <param name="engine">The engine the item is about to be added too.</param>
+        </member>
+        <member name="E:Physics2DDotNet.PhysicsLogics.PhysicsLogic.LifetimeChanged">
+            <summary>
+            Raised when the Lifetime property has been Changed.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.PhysicsLogics.PhysicsLogic.Added">
+            <summary>
+            Raised when the object is added to a Physics Engine.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.PhysicsLogics.PhysicsLogic.Pending">
+            <summary>
+            Raised when the object is Added to the engine but is not yet part of the update process.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.PhysicsLogics.PhysicsLogic.Removed">
+            <summary>
+            Raised when the object is Removed from a Physics Engine. 
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsLogics.PhysicsLogic.IsPending">
+            <summary>
+            Gets if it has been added the the Engine's PendingQueue, but not yet added to the engine.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsLogics.PhysicsLogic.IsAdded">
+            <summary>
+            Gets if the object has been added to the engine.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsLogics.PhysicsLogic.Engine">
+            <summary>
+            Gets The PhysicsEngine the object is currently in. Null if it is in none.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsLogics.PhysicsLogic.Tag">
+            <summary>
+            Gets and Sets a User defined object.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsLogics.PhysicsLogic.Lifetime">
+            <summary>
+            Gets and Sets the LifeTime of the object. The object will be removed from the engine when it is Expired.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsLogics.PhysicsLogic.Order">
+            <summary>
+            Get and Sets The order number of when it will be ran.
+            All Logics with a higher order will run after this one and all logics
+            with a lower order number will be ran before this one.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsLogics.GravityField.#ctor(AdvanceMath.Vector2D,Physics2DDotNet.Lifespan)">
+            <summary>
+            Creates a new GravityField Instance.
+            </summary>
+            <param name="gravity">The direction and magnitude of the gravity.</param>
+            <param name="lifeTime">A object Describing how long the object will be in the engine.</param>
+        </member>
+        <member name="T:Physics2DDotNet.PhysicsLogics.ExplosionLogic">
+            <summary>
+            Simulates a simple explosion.  
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsLogics.ExplosionLogic.#ctor(AdvanceMath.Vector2D,AdvanceMath.Vector2D,System.Double,System.Double,System.Double,Physics2DDotNet.Lifespan)">
+            <summary>
+            Creates a new instance of the ExplosionLogic
+            </summary>
+            <param name="location">ground zero</param>
+            <param name="velocity">the velocity of the explosion (this would be from the missile or bomb that spawns it).</param>
+            <param name="pressurePulseSpeed">the speed at which the explosion expands</param>
+            <param name="dragCoefficient">the drag Coefficient</param>
+            <param name="mass">the mass of the expanding cloud</param>
+            <param name="lifetime"></param>
+        </member>
+        <member name="T:Physics2DDotNet.PhysicsHelper">
+            <summary>
+            contains some methods to do physics calculations.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Ignorers.ObjectIgnorer">
+            <summary>
+            A collision ignorer that uses reference comparison. 
+            All Bodies with the same instance of this ignorer then they will not collide.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Ignorers.Ignorer">
+            <summary>
+            Base class for Collision Ignorers to impliment.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Ignorers.Ignorer.IsInverted">
+            <summary>
+            Get and sets if the result of this ignorer is inverted.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.PhysicsLogics.GravityPointMass">
+            <summary>
+            A PhysicsLogic to causes a Body to have a realistic pull of Gravity with a exponential drop-off. 
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsLogics.GravityPointMass.#ctor(Physics2DDotNet.Body,Physics2DDotNet.Lifespan)">
+            <summary>
+            Creates a new GravityPointMass Instance.
+            </summary>
+            <param name="body">The body that will be the source of gravity.</param>
+            <param name="lifetime">A object Describing how long the object will be in the engine.</param>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsLogics.GravityPointMass.#ctor(Physics2DDotNet.Body,System.Double,Physics2DDotNet.Lifespan)">
+            <summary>
+            Creates a new GravityPointMass Instance.
+            </summary>
+            <param name="body">The body that will be the source of gravity.</param>
+            <param name="metersPerDistanceUnit">The scale of of the universe.</param>
+            <param name="lifetime">A object Describing how long the object will be in the engine.</param>
+        </member>
+        <member name="T:Physics2DDotNet.Ignorers.GroupIgnorer">
+            <summary>
+            A collision ignorer that uses group numbers to do collision ignoring.
+            If 2 objects are members of the same group then they will not collide.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Joints.FixedAngleJoint">
+            <summary>
+            A Joint between 2 Bodies that will keep the Angles between the 2 bodies at a certain amount.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Joints.Joint">
+            <summary>
+            Describes a Connection between 2 objects. 
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Joints.Joint.BeforeAddCheck(Physics2DDotNet.PhysicsEngine)">
+            <summary>
+            Before the item is allowed to be added to pending this method is called to 
+            throw any exceptions without corrupting the state of the Physics engine.
+            </summary>
+            <param name="engine">The engine the item is about to be added too.</param>
+        </member>
+        <member name="E:Physics2DDotNet.Joints.Joint.LifetimeChanged">
+            <summary>
+            Raised when the Lifetime property has been Changed.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.Joints.Joint.Added">
+            <summary>
+            Raised when the object is added to a Physics Engine.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.Joints.Joint.Pending">
+            <summary>
+            Raised when the object is Added to the engine but is not yet part of the update process.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.Joints.Joint.Removed">
+            <summary>
+            Raised when the object is Removed from a Physics Engine. 
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Joints.Joint.IsPending">
+            <summary>
+            Gets if it has been added the the Engine's PendingQueue, but not yet added to the engine.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Joints.Joint.Tag">
+            <summary>
+            Gets and Sets a User defined object.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Joints.Joint.Lifetime">
+            <summary>
+            Gets and Sets the LifeTime of the object. The object will be removed from the engine when it is Expired.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Joints.Joint.Engine">
+            <summary>
+            Gets The PhysicsEngine the object is currently in. Null if it is in none.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Joints.Joint.IsAdded">
+            <summary>
+            Gets if the object has been added to the engine.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Joints.Joint.Bodies">
+            <summary>
+            Gets the bodies the Joint effects.
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.Matrices.ToWorld">
+            <summary>
+            The matrix that is multiplied against to transform a vertex from relative 
+            to the Body to the vertex relative to the World.
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.Matrices.ToBody">
+            <summary>
+            The matrix that is multiplied against to transform a vertex from relative 
+            to the World to the vertex relative to the Body.
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.Matrices.ToWorldNormal">
+            <summary>
+            The matrix that is multiplied against to transform a normal (unit vector) from relative 
+            to the Body to the normal relative to the World.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Physics2DDotNet.Matrices.ToBodyNormal" -->
+        <member name="T:Physics2DDotNet.PhysicsLogics.GlobalFluidLogic">
+            <summary>
+            Applys drag and buoyancy to all items in the engine.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Body">
+            <summary>
+            This is the Physical Body that collides in the engine.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Body.#ctor(Physics2DDotNet.PhysicsState,Physics2DDotNet.Shapes.Shape,System.Double,Physics2DDotNet.Coefficients,Physics2DDotNet.Lifespan)">
+            <summary>
+            Creates a new Body Instance.
+            </summary>
+            <param name="state">The State of the Body.</param>
+            <param name="shape">The Shape of the Body.</param>
+            <param name="mass">The mass of the Body The inertia will be aquired from the Shape.</param>
+            <param name="coefficients">A object containing coefficients.</param>
+            <param name="lifeTime">A object Describing how long the object will be in the engine.</param>
+        </member>
+        <member name="M:Physics2DDotNet.Body.#ctor(Physics2DDotNet.PhysicsState,Physics2DDotNet.Shapes.Shape,Physics2DDotNet.MassInfo,Physics2DDotNet.Coefficients,Physics2DDotNet.Lifespan)">
+            <summary>
+            Creates a new Body Instance.
+            </summary>
+            <param name="state">The State of the Body.</param>
+            <param name="shape">The Shape of the Body.</param>
+            <param name="massInfo">A object describing the mass and inertia of the Body.</param>
+            <param name="coefficients">A object containing coefficients.</param>
+            <param name="lifeTime">A object Describing how long the object will be in the engine.</param>
+        </member>
+        <member name="M:Physics2DDotNet.Body.ApplyProxy">
+            <summary>
+            This applys the proxy.
+            This will cause all other bodies in the proxy list to have their velocity set 
+            to this body’s. 
+            With the appropriate transformations applied. 
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Body.RemoveFromProxy">
+            <summary>
+            This will remove this body from any proxy list it is a part of.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Body.ApplyPosition">
+            <summary>
+            Updates all the values caluclated from the State.Position.
+            Re-calculates the Matrices property the re-calculates the Rectangle property
+            from that.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Body.ClearForces">
+            <summary>
+            Sets Acceleration and ForceAccumulator to Zero.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Body.ApplyForce(AdvanceMath.Vector2D)">
+            <summary>
+            Applys a Force
+            </summary>
+            <param name="force">The direction and magnitude of the force</param>
+        </member>
+        <member name="M:Physics2DDotNet.Body.ApplyForce(AdvanceMath.Vector2D@)">
+            <summary>
+            Applys a Force
+            </summary>
+            <param name="force">The direction and magnitude of the force</param>
+        </member>
+        <member name="M:Physics2DDotNet.Body.ApplyForce(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Applys a Force
+            </summary>
+            <param name="force">The direction and magnitude of the force</param>
+            <param name="position">The Location where the force will be applied (Offset: Body Rotation: World) </param>
+        </member>
+        <member name="M:Physics2DDotNet.Body.ApplyForce(AdvanceMath.Vector2D@,AdvanceMath.Vector2D@)">
+            <summary>
+            Applys a Force
+            </summary>
+            <param name="force">The direction and magnitude of the force</param>
+            <param name="position">The Location where the force will be applied (Offset: Body Rotation: World) </param>
+        </member>
+        <member name="M:Physics2DDotNet.Body.ApplyTorque(System.Double)">
+            <summary>
+            Applys Torque
+            </summary>
+            <param name="torque">The direction and magnitude of the torque</param>
+        </member>
+        <member name="M:Physics2DDotNet.Body.ApplyImpulse(AdvanceMath.Vector2D)">
+            <summary>
+            Applys Impulse
+            </summary>
+            <param name="impulse">The direction and magnitude of the impulse</param>
+        </member>
+        <member name="M:Physics2DDotNet.Body.ApplyImpulse(AdvanceMath.Vector2D@)">
+            <summary>
+            Applys Impulse
+            </summary>
+            <param name="impulse">The direction and magnitude of the impulse.</param>
+        </member>
+        <member name="M:Physics2DDotNet.Body.ApplyImpulse(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Applys Impulse
+            </summary>
+            <param name="impulse">The direction and magnitude of the impulse.</param>
+            <param name="position">The Location where the impulse will be applied (Offset: Body Rotation: World)</param>
+        </member>
+        <member name="M:Physics2DDotNet.Body.ApplyImpulse(AdvanceMath.Vector2D@,AdvanceMath.Vector2D@)">
+            <summary>
+            Applys Impulse
+            </summary>
+            <param name="impulse">The direction and magnitude of the impulse.</param>
+            <param name="position">The Location where the impulse will be applied (Offset: Body Rotation: World)</param>
+        </member>
+        <member name="E:Physics2DDotNet.Body.LifetimeChanged">
+            <summary>
+            Raised when the Lifetime property has been Changed.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.Body.ShapeChanged">
+            <summary>
+            Raised when the Shape of the Body has been Changed.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.Body.Added">
+            <summary>
+            Raised when the object is added to a Physics Engine.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.Body.Removed">
+            <summary>
+            Raised when the object is Removed from a Physics Engine. 
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.Body.Pending">
+            <summary>
+            Raised when the object is Added to the engine but is not yet part of the update process.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.Body.PositionChanged">
+            <summary>
+            Raised when the Position has been Changed.
+            Raised by either the Solver or a call to ApplyMatrix.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.Body.Updated">
+            <summary>
+            Raised when the Body has been updated to a change in time.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.Body.Collided">
+            <summary>
+            Raised when the Body collides with another.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.Rectangle">
+            <summary>
+            This is the Baunding rectangle It is calculated on the call to apply matrix.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.Matrices">
+            <summary>
+            The Matrices that are tranfroming this bodies Shape.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.LinearDamping">
+            <summary>
+            Gets and Sets The value represents how much Linear velocity is kept each time step. 
+            This Dampens the Body's Linear velocity a little per time step. Valid values are zero exclusive to one inclusive.  
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.AngularDamping">
+            <summary>
+            Gets and Sets The value represents how much Angular velocity is kept each time step. 
+            This Dampens the Body's Angular velocity a little per time step. Valid values are zero exclusive to one inclusive.  
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.Proxies">
+            <summary>
+            These are bodies that are mirrors of this body. 
+            It's useful for bodies that are being teleported.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.ProxiesCount">
+            <summary>
+            The number of proxies that this body has.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.ID">
+            <summary>
+            Unique ID of a PhysicsEntity in the PhysicsEngine
+            Assigned on being Added.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.Engine">
+            <summary>
+            Gets The PhysicsEngine the object is currently in. Null if it is in none.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.State">
+            <summary>
+            Gets The current State of the object IE Velocity 
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.Shape">
+            <summary>
+            Gets and Sets the Shape of the Body. 
+            If setting the shape to a shape another body has it will duplicate the shape.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.Mass">
+            <summary>
+            Gets The MassInfo of the body.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.CollisionIgnorer">
+            <summary>
+            Gets and Sets the Ignore object that decides what collisons to ignore.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.EventIgnorer">
+            <summary>
+            Gets and Sets the Ignore object that decides what collison events to ignore.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.Coefficients">
+            <summary>
+            Gets and Sets the Coefficients for the class.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.Lifetime">
+            <summary>
+            Gets and Sets the LifeTime of the object. The object will be removed from the engine when it is Expired.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.Tag">
+            <summary>
+            Gets and Sets a User defined object.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.SolverTag">
+            <summary>
+            Gets a Solver Defined object.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.DetectorTag">
+            <summary>
+            Gets a Detector Defined object.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.JointCount">
+            <summary>
+            the number of Joints attached to this body.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.IgnoresGravity">
+            <summary>
+            Gets and Sets if the Body will ignore Gravity.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.IgnoresCollisionResponse">
+            <summary>
+            Gets and Sets if the Object will ignore the collison Responce but still generate the Collision event.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.IsPending">
+            <summary>
+            Gets if it has been added the the Engine's PendingQueue, but not yet added to the engine.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.IsAdded">
+            <summary>
+            Gets if the object has been added to the engine.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.IsCollidable">
+            <summary>
+            gets and sets if the body will have any collision detection ran on it.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.KineticEnergy">
+            <summary>
+            Gets the Total Kinetic Energy of the Body.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Body.Transformation">
+            <summary>
+            Gets and Sets the Matrix2x3 that transforms the Shape belonging to the Body.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.IContactInfo">
+            <summary>
+            Describes a Contact in a collision.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.IContactInfo.Position">
+            <summary>
+            Gets The world coordinates of the contact.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.IContactInfo.Normal">
+            <summary>
+            Gets a Direction Vector Pointing away from the Edge.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.IContactInfo.Distance">
+            <summary>
+            Gets The distance the contact is inside the other object.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.IContactInfo.Body1">
+            <summary>
+            Gets The First Body that is part of the Contact.
+            (The Normal belongs to this Body.)
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.IContactInfo.Body2">
+            <summary>
+            Gets The Second Body that is part of the Contact.
+            (The Position of the Vertex belongs to this Body.)
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Shapes.CircleShape">
+            <summary>
+            A Circle
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Shapes.Shape">
+            <summary>
+            A abstract class used to define the Shape of a Body.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.Shape.TryGetIntersection(AdvanceMath.Vector2D,Physics2DDotNet.IntersectionInfo@)">
+            <summary>
+            
+            </summary>
+            <param name="point">(In Body Coordinates)</param>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.Shape.GetDistance(AdvanceMath.Vector2D@,System.Double@)">
+            <summary>
+            
+            </summary>
+            <param name="point">(In Body Coordinates)</param>
+            <param name="result"></param>
+        </member>
+        <member name="P:Physics2DDotNet.Shapes.Shape.Vertexes">
+            <summary>
+            Gets the original (body/local) Vertices with the origin being the center of the Body.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Shapes.Shape.Normals">
+            <summary>
+            These are the normals for the original vertexes.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Shapes.Shape.IgnoreVertexes">
+            <summary>
+            Gets and Sets if this shape's Vertexes will not be used in collision detection.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Shapes.Shape.BroadPhaseDetectionOnly">
+            <summary>
+            Gets if this detects collisions only with bounding boxes 
+            and if it does then only bodies colliding it will also generate collision events as well.
+            if this is true it can allow you to write your own collision Solver just for this Shape. 
+            Or you can use this to do clipping.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Shapes.Shape.MomentofInertiaMultiplier">
+            <summary>
+            Gets the Moment of Inertia Multiplier. Which is the ratio of inertia to mass of a Body.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.CircleShape.#ctor(System.Double,System.Int32)">
+            <summary>
+            Creates a new Circle Instance.
+            </summary>
+            <param name="radius">how large the circle is.</param>
+            <param name="vertexCount">
+            The number or vertex that will be generated along the perimeter of the circle. 
+            This is for collision detection.
+            </param>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.CircleShape.#ctor(System.Double,System.Int32,System.Double)">
+            <summary>
+            Creates a new Circle Instance.
+            </summary>
+            <param name="radius">how large the circle is.</param>
+            <param name="vertexCount">
+            The number or vertex that will be generated along the perimeter of the circle. 
+            This is for collision detection.
+            </param>
+            <param name="momentOfInertiaMultiplier">
+            How hard it is to turn the shape. Depending on the construtor in the 
+            Body this will be multiplied with the mass to determine the moment of inertia.
+            </param>
+        </member>
+        <member name="P:Physics2DDotNet.Shapes.CircleShape.Radius">
+            <summary>
+            the distance from the position where the circle ends.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.PhysicsLogics.LineFluidLogic">
+            <summary>
+            Applys drag and buoyancy to items on one side of a line;
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.PhysicsEngine">
+            <summary>
+            The Engine that will Apply Physics to object added to it.
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.PhysicsEngine.firstBodyID">
+            <summary>
+            This is the ID the first body added to the engine will get.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsEngine.AddBody(Physics2DDotNet.Body)">
+            <summary>
+            Adds a Body to the pending queue and will be truly added on a call to Update.
+            </summary>
+            <param name="item">The Body to be added.</param>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsEngine.AddBodyRange(System.Collections.Generic.ICollection{Physics2DDotNet.Body})">
+            <summary>
+            Adds a collection of Bodies to the pending queue and will be truly added on a call to Update.
+            </summary>
+            <param name="collection">The collection to be Added</param>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsEngine.AddJoint(Physics2DDotNet.Joints.Joint)">
+            <summary>
+            Adds a Joint to the pending queue and will be truly added on a call to Update.
+            </summary>
+            <param name="item">The Joint to be added.</param>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsEngine.AddJointRange(System.Collections.Generic.ICollection{Physics2DDotNet.Joints.Joint})">
+            <summary>
+            Adds a collection of Joints to the pending queue and will be truly added on a call to Update.
+            </summary>
+            <param name="collection">The collection to be Added</param>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsEngine.AddJointRange``1(System.Collections.Generic.ICollection{``0})">
+            <summary>
+            Adds a collection of Joints to the pending queue and will be truly added on a call to Update.
+            </summary>
+            <param name="collection">The collection to be Added</param>
+            <typeparam name="T">A Type inherited from Joint</typeparam>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsEngine.AddLogic(Physics2DDotNet.PhysicsLogics.PhysicsLogic)">
+            <summary>
+            Adds a PhysicsLogic to the pending queue and will be truly added on a call to Update.
+            </summary>
+            <param name="item">The PhysicsLogic to be added.</param>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsEngine.AddLogicRange(System.Collections.Generic.ICollection{Physics2DDotNet.PhysicsLogics.PhysicsLogic})">
+            <summary>
+            Adds a collection of PhysicsLogics to the pending queue and will be truly added on a call to Update.
+            </summary>
+            <param name="collection">The collection to be Added</param>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsEngine.AddLogicRange``1(System.Collections.Generic.ICollection{``0})">
+            <summary>
+            Adds a collection of PhysicsLogics to the pending queue and will be truly added on a call to Update.
+            </summary>
+            <param name="collection">The collection to be Added</param>
+            <typeparam name="T">A Type inherited from PhysicsLogic</typeparam>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsEngine.AddProxy(Physics2DDotNet.Body,Physics2DDotNet.Body,AdvanceMath.Matrix2x2)">
+            <summary>
+            Adds 2 bodies to the same proxy list. 
+            If they are both already part of their own proxy list then the lists will merge.
+            The transformations will be calcualted automatically. 
+            </summary>
+            <param name="body1">The first Body.</param>
+            <param name="body2">The second Body.</param>
+            <param name="transformation">How velocities will be transformed from body1 to body2.</param>
+            <remarks>
+            This will most likely be removed if i ever figure out how to make a joint like this.
+            </remarks>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsEngine.Update(System.Double)">
+            <summary>
+            Updates the Engine with a change in time. 
+            This call will block all access to the engine while it is running.
+            A complete call to this method is also known as a timestep.
+            </summary>
+            <param name="dt">The change in time since the last call to this method. (In Seconds)</param>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsEngine.Clear">
+            <summary>
+            Clears the Engine of all objects. Also clears the Detector and Solver.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.PhysicsEngine.BodiesAdded">
+            <summary>
+            Generated when Bodies are truly added to the Engine.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.PhysicsEngine.JointsAdded">
+            <summary>
+            Generated when Joints are truly added to the Engine.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.PhysicsEngine.LogicsAdded">
+            <summary>
+            Generated when PhysicsLogics are truly added to the Engine.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.PhysicsEngine.BodiesRemoved">
+            <summary>
+            Generated when a Bodies are removed to the Engine.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.PhysicsEngine.JointsRemoved">
+            <summary>
+            Generated when a Joints are removed to the Engine.
+            </summary>
+        </member>
+        <member name="E:Physics2DDotNet.PhysicsEngine.LogicsRemoved">
+            <summary>
+            Generated when a PhysicsLogics are removed to the Engine.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsEngine.Joints">
+            <summary>
+            Gets A threadSafe List of Joints (You wont get the "The collection has changed" Exception with this)
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsEngine.Bodies">
+            <summary>
+            Gets A threadSafe List of Bodies (You wont get the "The collection has changed" Exception with this)
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsEngine.Logics">
+            <summary>
+            Gets A threadSafe List of PhysicsLogics (You wont get the "The collection has changed" Exception with this)
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsEngine.BroadPhase">
+            <summary>
+            Gets and Sets The BroadPhase collision Detector. (This must be Set to a non-Null value before any calls to Update)
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsEngine.Solver">
+            <summary>
+            Gets and Sets the Collision Solver (This must be Set to a non-Null value before any calls to Update)
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Joints.FixedHingeJoint">
+            <summary>
+            A joint that makes a single Body Pivot around an Anchor.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Joints.FixedHingeJoint.DistanceTolerance">
+            <summary>
+            The distance the joint can stretch before breaking. 
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Detectors.SelectiveSweepDetector">
+            <summary>
+            Faster then sweep and prune and does not stutter like SingleSweep
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Detectors.SelectiveSweepDetector.Update">
+            <summary>
+            updates all the nodes to their new values and sorts the lists
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Detectors.SelectiveSweepDetector.ShouldDoX">
+            <summary>
+            Finds how many collisions there are on the x and y and returns if
+            the x axis has the least
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.MassInfo">
+            <summary>
+            This class Stores mass information and Moment of Inertia Together since they are very closly related.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.MassInfo.Infinite">
+            <summary>
+            A body with this mass will not be affected by forces or impulse.
+            </summary>
+            <remarks>
+            This is the mass of Chuck Norris.
+            </remarks>
+        </member>
+        <member name="T:Physics2DDotNet.Lifespan">
+            <summary>
+            A object that describes the time a object will remain in the Physics engine.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Lifespan.#ctor">
+            <summary>
+            Creates a new Lifespan Instance that is Immortal.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Lifespan.#ctor(System.Double)">
+            <summary>
+            Creates a new Lifespan Instance that is mortal.
+            </summary>
+            <param name="maxAge">How long the item will stay in the engine. (in seconds)</param>
+        </member>
+        <member name="M:Physics2DDotNet.Lifespan.#ctor(System.Double,System.Double)">
+            <summary>
+            Creates a new Lifespan Instance that is mortal and has already aged.
+            </summary>
+            <param name="age">How old the item is. (in seconds)</param>
+            <param name="maxAge">How long the item will stay in the engine. (in seconds)</param>
+        </member>
+        <member name="M:Physics2DDotNet.Lifespan.Update(Physics2DDotNet.TimeStep)">
+            <summary>
+            Increases the Age of object by a change in time.
+            </summary>
+            <param name="update">the update's number (It wont age more then once on a update)</param>
+            <param name="step">The TimeStep describing the change in time.</param>
+        </member>
+        <member name="P:Physics2DDotNet.Lifespan.IsExpired">
+            <summary>
+            Gets and Sets if it IsExpired and should be removed from the engine.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Lifespan.IsImmortal">
+            <summary>
+            Gets if the only way for the object to leave the engine is for it to be set to expired.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Lifespan.OverAged">
+            <summary>
+            Gets if it is expired becuase of old age.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Lifespan.MaxAge">
+            <summary>
+            Gets and Sets how long the object will stay in the engine.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Lifespan.TimeLeft">
+            <summary>
+            Gets how much time the object has left.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Lifespan.Age">
+            <summary>
+            Gets and Sets The current age of the object.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Joints.AngleJoint">
+            <summary>
+            A Joint between 2 Bodies that will keep the Angles between the 2 bodies at a certain amount.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Solvers.CollisionSolver.Engine">
+            <summary>
+            The engine this solver is in.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Shapes.RaySegment">
+            <summary>
+            A Ray Segment is a Ray that has a length. It can be used to represent 
+            lasers or very fast projectiles.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Shapes.RaySegmentIntersectionInfo">
+            <summary>
+            The information of an intersection with another shape. 
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Shapes.RaySegmentIntersectionInfo.Distances">
+            <summary>
+            An collection of distances away from the Ray Segments. 
+            The indexes match up with the Segments in the Ray Segments class. 
+            A negative value means there was no intersection. 
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Shapes.RaySegmentsShape">
+            <summary>
+            A shape that holds multiple Ray Segments and generates custom collision events 
+            for when they intersect something. The Sequential Impulses Solver does not 
+            handle collisions with this shape.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Shapes.ParticleShape">
+            <summary>
+            Represents a Single point.
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.Shapes.ParticleShape.Default">
+            <summary>
+            All particles are the same! so use this one!
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.ParticleShape.#ctor">
+            <summary>
+            Creates a new Particle Instance.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.ParticleShape.#ctor(System.Double)">
+            <summary>
+            Creates a new Particle Instance.
+            </summary>
+            <param name="momentOfInertiaMultiplier">
+            How hard it is to turn the shape. Depending on the construtor in the 
+            Body this will be multiplied with the mass to determine the moment of inertia.
+            </param>
+        </member>
+        <member name="T:Physics2DDotNet.DistanceGrid">
+            <summary>
+            A class used by some Shape Objects for Narrow Phased collision.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Coefficients">
+            <summary>
+            Describes the Coefficients of a surface.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Coefficients.Restitution">
+            <summary>
+            AKA Bounciness. This is how much energy is kept as kinetic energy after a collision.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Coefficients.StaticFriction">
+            <summary>
+            (NOT USED)
+            http://en.wikipedia.org/wiki/Friction
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.Coefficients.DynamicFriction">
+            <summary>
+            http://en.wikipedia.org/wiki/Friction
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.BodyProxy">
+            <summary>
+            This is a Proxy. That keeps 2 bodies velocities synchronized. 
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.BodyProxy.Body1">
+            <summary>
+            This is the other body to be Synchronized with.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.BodyProxy.Body2">
+            <summary>
+            This is the other body to be Synchronized with.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.BodyProxy.Transformation">
+            <summary>
+            This is how the Velocity will be transformed when syncronized.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.BodyProxy.InvertedTwin">
+            <summary>
+            This is the inverted twin of this velocity. It's matrix will be invert of this one's.
+            And its body will be the body that contains this.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.PhysicsLogics.RaySegmentsCollisionLogic">
+            <summary>
+            A class to manage a RaySegmentsShape collisions
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.PhysicsLogics.GravityPointField">
+            <summary>
+            A PhysicsLogic to causes a Gravity a a certain point with zero dropoff.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsLogics.GravityPointField.#ctor(AdvanceMath.Vector2D,System.Double,Physics2DDotNet.Lifespan)">
+            <summary>
+            Creates a new GravityPointField Instance.
+            </summary>
+            <param name="location">The location of the Gravity point.</param>
+            <param name="gravity"></param>
+            <param name="lifetime"></param>
+        </member>
+        <member name="T:Physics2DDotNet.Joints.HingeJoint">
+            <summary>
+            A Joint Between 2 Bodies that will pivot around an Anchor.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Joints.HingeJoint.#ctor(Physics2DDotNet.Body,Physics2DDotNet.Body,AdvanceMath.Vector2D,Physics2DDotNet.Lifespan)">
+            <summary>
+            Creates a new HingeJoint Instance.
+            </summary>
+            <param name="body1">One of the bodies to be Jointed.</param>
+            <param name="body2">One of the bodies to be Jointed.</param>
+            <param name="anchor">The location of the Hinge.</param>
+            <param name="lifeTime">A object Describing how long the object will be in the engine.</param>
+        </member>
+        <member name="P:Physics2DDotNet.Joints.HingeJoint.DistanceTolerance">
+            <summary>
+            The Distance the joint can stretch before breaking. 
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.TimeStep">
+            <summary>
+            Class that holds information about a change in time;
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.TimeStep.#ctor(System.Double,System.Int32)">
+            <summary>
+            Creates a new Timestep instance.
+            </summary>
+            <param name="dt">The current change in time. (seconds)</param>
+            <param name="updateCount">The number for the current update.</param>
+        </member>
+        <member name="P:Physics2DDotNet.TimeStep.Dt">
+            <summary>
+            The current change in time. (seconds)
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.TimeStep.DtInv">
+            <summary>
+            The inverse of the change in time. (0 if dt is 0)
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.TimeStep.UpdateCount">
+            <summary>
+            The number for the current update.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.TimerState">
+            <summary>
+            The State of a PhysicsTimer
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.TimerState.Paused">
+            <summary>
+            The PhysicsTimer is Paused.
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.TimerState.Normal">
+            <summary>
+            The PhysicsTimer's calls to the Callback are on time.
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.TimerState.Slow">
+            <summary>
+            The PhysicsTimer's calls to the Callback are behind schedule.
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.TimerState.Fast">
+            <summary>
+            The PhysicsTimer's calls to the Callback are delayed to be on time.
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.TimerState.Disposed">
+            <summary>
+            The PhysicsTimer is Disposed.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.PhysicsCallback">
+            <summary>
+            A Callback used by the PhysicsTimer
+            </summary>
+            <param name="dt">The change in time.</param>
+        </member>
+        <member name="T:Physics2DDotNet.PhysicsTimer">
+            <summary>
+            A class to update the PhysicsEngine at regular intervals.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsTimer.#ctor(Physics2DDotNet.PhysicsCallback,System.Double)">
+            <summary>
+            Creates a new PhysicsTimer Instance.
+            </summary>
+            <param name="callback">The callback to call.</param>
+            <param name="targetDt">The target change in time.</param>
+        </member>
+        <member name="M:Physics2DDotNet.PhysicsTimer.Dispose">
+            <summary>
+            Stops the Timer 
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsTimer.IsBackground">
+            <summary>
+            Gets or sets a value indicating whether or not the thread that runs the time is a background thread.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsTimer.IsRunning">
+            <summary>
+            Gets and Sets if the PhysicsTimer is currently calling the Callback.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsTimer.TargetInterval">
+            <summary>
+            Gets and Sets the desired Interval between Callback calls.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsTimer.State">
+            <summary>
+            Gets the current State of the PhysicsTimer.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.PhysicsTimer.Callback">
+            <summary>
+            Gets and Sets the current Callback that will be called.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Detectors.SweepAndPruneDetector">
+            <summary>
+            The Sweep and Prune detector should be O(nlogn), but can be O(n^2) if everything is colliding.  
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Detectors.FrameCoherentSAPDetector">
+            <summary>
+            Full name is Frame Coherent Sweep and Prune. 
+            This class is used to isolate the AABB pairs that are currently in a collision
+            state without having to check all pair combinations. It relies heavily on frame
+            coherence or the idea that objects will typically be near their last position
+            from frame to frame. The class caches the various state information and doesn't
+            update it unless an extent on an axis "swaps" positions with its neighbor.
+            Note: If your application has "teleporting" objects or objects that are 
+            extremely high-speed in relation to other objects, then this Sweep and Prune
+            method may breakdown. 
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.TestForCollisions(Physics2DDotNet.Body,Physics2DDotNet.Body)">
+            <summary>
+            Test AABB collisions between two geometries. Tests include checking if the
+            geometries are enabled, static, in the right collision categories, etc.
+            </summary>
+            <returns>Returns true if there is a collision, false otherwise</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.AddGeom(Physics2DDotNet.Body)">
+            <summary>
+            This method is used by the PhysicsSimulator to notify Sweep and Prune that 
+            new geometry is to be tracked.
+            </summary>
+            <param name="g">The geometry to be added</param>
+        </member>
+        <member name="M:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.UpdateExtentValues">
+            <summary>
+            Updates the values in the x and y extent lists by the changing aabb values.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.HandleCollisions">
+            <summary>
+            Iterates over the collision pairs and creates arbiters.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.Run">
+            <summary>
+            Just calls Update.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.Update">
+            <summary>
+            Incrementally updates the system. Assumes relatively good frame coherence.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.ForceNonIncrementalUpdate">
+            <summary>
+            This function can be used for times when frame-coherence is temporarily lost
+            or when it is simply more convenient to completely rebuild all the cached
+            data instead of incrementally updating it. Currently it is used after
+            removing disposed/removed geometries. If your application had an object
+            that teleported across the universe or some other situation where
+            frame-coherence was lost, you might consider this function.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.ExtentInfoList">
+            <summary>
+            This class keeps a list of information that relates extents to geometries.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.CollisionPairDictionary">
+            <summary>
+            This class is used to keep track of the pairs of geometry that need to be
+            passed on to the narrow phase. The keys stored in the dictionary are
+            the actual geometry pairs (the boolean value is currently unused).
+            NOTE: May eventually want to add OnEnterCollisionState / 
+            OnExitCollisionState callbacks which might be useful for debugging
+            or possibly in user applications.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.CollisionPair">
+            <summary>
+            Houses collision pairs as geom1 and geom2. The pairs are always ordered such
+            that the lower id geometry is first. This allows the CollisionPairDictionary
+            to have a consistent key / hash code for a pair of geometry.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.Extent">
+            <summary>
+            This class represents a single extent of an AABB on a single axis. It has a
+            reference to ExtentInfo which has information about the geometry it belongs
+            to.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.ExtentList">
+            <summary>
+            Represents a lists of extents for a given axis. This list will be kept
+            sorted incrementally.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.ExtentList.IncrementalSort">
+            <summary>
+            Incrementally sorts ExtentList. It is assumed that there is a high level
+            of frame coherence and that much of the list is already fairly well
+            sorted. This algorithm makes use of "insert sort" which is notoriously
+            slow - except for when a list is already almost sorted - which is the
+            case when there is high frame coherence.
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Detectors.FrameCoherentSAPDetector.ExtentInfo">
+            <summary>
+            This class contains represents additional extent info for a particular axis
+            It has a reference to the geometry whose extents are being tracked. It
+            also has a min and max extent reference into the ExtentList itself.
+            The class keeps track of overlaps with other geometries.
+            </summary>
+        </member>
+        <member name="P:Physics2DDotNet.DragInfo.DragCenter">
+            <summary>
+            (In Body Coordinates)
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.Shapes.RectangleShape">
+            <summary>
+            A shape whose BoundingRectangle is manualy Set and will not change, unless manualy changed.
+            It is meant for clipping and Area triggers. If you want a Rectangle Use Polygon.CreateRectangle
+            </summary>
+        </member>
+        <member name="T:Physics2DDotNet.PhysicsState">
+            <summary>
+            This class holds the variables usually changed mulitple times  each update like the postion of an object.
+            </summary>
+        </member>
+        <member name="F:Physics2DDotNet.PhysicsState.Position">
+            <summary>
+            This is Position and Orientation.
+            </summary>
+            <remarks>
+            <seealso href="http://en.wikipedia.org/wiki/Position"/>
+            </remarks>
+        </member>
+        <member name="F:Physics2DDotNet.PhysicsState.Velocity">
+            <summary>
+            Angular and Linear Velocity.
+            </summary>
+            <remarks>
+            <seealso href="http://en.wikipedia.org/wiki/Velocity"/>
+            </remarks>
+        </member>
+        <member name="F:Physics2DDotNet.PhysicsState.Acceleration">
+            <summary>
+            Angular and Linear Acceleration.
+            </summary>
+            <remarks>
+            <seealso href="http://en.wikipedia.org/wiki/Acceleration"/>
+            </remarks>
+        </member>
+        <member name="F:Physics2DDotNet.PhysicsState.ForceAccumulator">
+            <summary>
+            Torque and Force
+            </summary>
+            <remarks>
+            <seealso href="http://en.wikipedia.org/wiki/Torque"/>
+            <seealso href="http://en.wikipedia.org/wiki/Force"/>
+            </remarks>
+        </member>
+        <member name="T:Physics2DDotNet.Shapes.PolygonShape">
+            <summary>
+            Use this to Represent a Polygon in the engine
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.PolygonShape.CreateFromBitmap(System.Boolean[0:,0:])">
+            <summary>
+            Takes a 2D Boolean array with a true value representing a collidable pixel and converts 
+            it to an array of vertex that surrounds that bitmap. The bitmap should be a single piece 
+            if there are many pieces it will only return the geometry of the first piece it comes 
+            across. Make sure there are at least 3 pixels in a piece otherwise an exception will be 
+            thrown (it wont be a polygon). 
+            </summary>
+            <param name="bitmap">a bitmap to be converted. true means its collidable.</param>
+            <returns>A Vector2D[] representing the bitmap.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.PolygonShape.CreateRectangle(System.Double,System.Double)">
+            <summary>
+            creates vertexes that describe a Rectangle.
+            </summary>
+            <param name="height">The length of the Rectangle</param>
+            <param name="width"></param>
+            <returns>array of vectors the describe a rectangle</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.PolygonShape.Subdivide(AdvanceMath.Vector2D[],System.Double)">
+            <summary>
+            makes sure the distance between 2 vertexes is under the length passed, by adding vertexes between them.
+            </summary>
+            <param name="vertexes">the original vertexes.</param>
+            <param name="maxLength">the maximum distance allowed between 2 vertexes</param>
+            <returns>The new vertexes.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.PolygonShape.Subdivide(AdvanceMath.Vector2D[],System.Double,System.Boolean)">
+            <summary>
+            makes sure the distance between 2 vertexes is under the length passed, by adding vertexes between them.
+            </summary>
+            <param name="vertexes">the original vertexes.</param>
+            <param name="maxLength">the maximum distance allowed between 2 vertexes</param>
+            <param name="loop">if it should check the distance between the first and last vertex.</param>
+            <returns>The new vertexes.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.PolygonShape.Reduce(AdvanceMath.Vector2D[])">
+            <summary>
+            Reduces a Polygon's number of vertexes.
+            </summary>
+            <param name="vertexes">The Polygon to reduce.</param>
+            <returns>The reduced vertexes.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.PolygonShape.Reduce(AdvanceMath.Vector2D[],System.Double)">
+            <summary>
+            Reduces a Polygon's number of vertexes.
+            </summary>
+            <param name="vertexes">The Polygon to reduce.</param>
+            <param name="areaTolerance">
+            The amount the removal of a vertex is allowed to change the area of the polygon.
+            (Setting this value to 0 will reverse what the Subdivide method does) 
+            </param>
+            <returns>The reduced vertexes.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.PolygonShape.GetArea(AdvanceMath.Vector2D[])">
+            <summary>
+            Calculates the area of a polygon.
+            </summary>
+            <param name="vertices">The vertices of the polygon.</param>
+            <returns>The area.</returns>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.PolygonShape.GetCentroid(AdvanceMath.Vector2D[])">
+            <summary>
+            Calculates the Centroid of a polygon.
+            </summary>
+            <param name="vertices">The vertices of the polygon.</param>
+            <returns>The Centroid of a polygon.</returns>
+            <remarks>
+            This is Also known as Center of Gravity/Mass.
+            </remarks>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.PolygonShape.MakeCentroidOrigin(AdvanceMath.Vector2D[])">
+            <summary>
+            repositions the polygon so the Centroid is the origin.
+            </summary>
+            <param name="vertices">The vertices of the polygon.</param>
+            <returns>The vertices of the polygon with the Centroid as the Origin.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Physics2DDotNet.Shapes.PolygonShape.#ctor(AdvanceMath.Vector2D[],System.Double)" -->
+        <member name="M:Physics2DDotNet.Shapes.PolygonShape.#ctor(AdvanceMath.Vector2D[],System.Double,System.Double)">
+            <summary>
+            Creates a new Polygon Instance.
+            </summary>
+            <param name="vertexes">the vertexes that make up the shape of the Polygon</param>
+            <param name="gridSpacing">
+            How large a grid cell is. Usualy you will want at least 2 cells between major vertexes.
+            The smaller this is the better precision you get, but higher cost in memory. 
+            The larger the less precision and if it's to high collision detection may fail completely.
+            </param>
+            <param name="momentOfInertiaMultiplier">
+            How hard it is to turn the shape. Depending on the construtor in the 
+            Body this will be multiplied with the mass to determine the moment of inertia.
+            </param>
+        </member>
+        <member name="T:Physics2DDotNet.Shapes.MultiPolygonShape">
+            <summary>
+            A shape that contains multiple polygons.
+            </summary>
+        </member>
+        <member name="M:Physics2DDotNet.Shapes.MultiPolygonShape.InertiaOfMultipartPolygon(AdvanceMath.Vector2D[][])">
+            <summary>
+            Gets the Inertia of a MultiPartPolygon
+            </summary>
+            <param name="polygons"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Physics2DDotNet.Ignorers.AdvGroupIgnorer">
+            <summary>
+            A collision ignorer that uses group numbers to do collision ignoring.
+            If a object is member of a group that the other body is ignoring then they will not collide. 
+            </summary>
+        </member>
+    </members>
+</doc>
