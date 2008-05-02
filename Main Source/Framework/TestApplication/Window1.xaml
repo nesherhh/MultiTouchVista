@@ -2,12 +2,17 @@
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:mt="http://schemas.multitouch.com/Multitouch/2008/04"
+		xmlns:sys="clr-namespace:System;assembly=mscorlib"
 		Title="Window1" Height="400" Width="400">
     <Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="300"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
 		<ListBox Grid.Column="0"
 				 x:Name="list1"
 				 ItemsSource="{Binding Contacts1}"
@@ -21,5 +26,18 @@
 				 mt:MultitouchScreen.ContactMoved="list2_ContactMoved"
 				 mt:MultitouchScreen.ContactRemoved="list2_ContactRemoved"
 				 mt:MultitouchScreen.NewContact="list2_NewContact"/>
+		<ItemsControl x:Name="itemsControl"
+					  Grid.Row="1" Grid.ColumnSpan="2">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<mt:TouchablePanel/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.Resources>
+				<DataTemplate DataType="{x:Type sys:String}">
+					<Image Source="{Binding}" Width="640" Height="480"/>
+				</DataTemplate>
+			</ItemsControl.Resources>
+		</ItemsControl>
     </Grid>
 </mt:Window>

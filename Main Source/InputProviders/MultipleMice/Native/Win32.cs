@@ -31,11 +31,12 @@ namespace MultipleMice.Native
 		public byte XTilt;
 		public byte YTilt;
 		public ushort Firmware;
+		public int Data;
 
 		public override string ToString()
 		{
-			return string.Format("Report ID: {0}, Status: {1}, X-Y: {2}x{3}, Pressure: {4}, Tilt X-Y: {5}x{6}, Firmware: {7}",
-			                     ReportID, Status, X, Y, Pressure, XTilt, YTilt, Firmware);
+			return string.Format("Report ID: {0}, Status: {1}, X-Y: {2}x{3}, Pressure: {4}, Tilt X-Y: {5}x{6}, Firmware: {7}, Data: {8}",
+			                     ReportID, Status, X, Y, Pressure, XTilt, YTilt, Firmware, Data);
 		}
 	}
 

@@ -37,9 +37,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdvanceMath, Version=1.7.0.28714, Culture=neutral, PublicKeyToken=b860f1b8cf45f41c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\AdvanceMath.dll</HintPath>
+    </Reference>
     <Reference Include="DynamicUtilities, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\DynamicUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Physics2DDotNet, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b860f1b8cf45f41c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\Physics2DDotNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -73,6 +81,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Panels\PhysicsExtensions.cs" />
+    <Compile Include="Controls\Panels\RandomCanvas.cs" />
+    <Compile Include="Controls\Panels\TouchablePanel.cs" />
     <Compile Include="Input\Contact.cs" />
     <Compile Include="Input\Extensions.cs" />
     <Compile Include="Input\InputElement.cs" />
@@ -82,6 +93,7 @@
     <Compile Include="Input\MultitouchScreen.cs" />
     <Compile Include="Input\MultitouchDevice.cs" />
     <Compile Include="Input\NewContactEventArgs.cs" />
+    <Compile Include="Input\PointUtil.cs" />
     <Compile Include="Input\RawMultitouchReport.cs" />
     <Compile Include="Native\Win32.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -98,6 +110,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Controls\Window.cs" />
+    <Compile Include="Utility.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

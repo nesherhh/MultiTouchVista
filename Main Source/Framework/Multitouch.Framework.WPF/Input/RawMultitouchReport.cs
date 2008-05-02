@@ -27,5 +27,11 @@ namespace Multitouch.Framework.WPF.Input
 		{
 			Contact.SetElement(copy.Contact.Element);
 		}
+
+		protected override void InvokeEventHandler(Delegate genericHandler, object genericTarget)
+		{
+			RawMultitouchReportHandler handler = (RawMultitouchReportHandler)genericHandler;
+			handler(genericTarget, this);
+		}
 	}
 }

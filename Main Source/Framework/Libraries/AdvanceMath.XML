@@ -1,0 +1,2334 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AdvanceMath</name>
+    </assembly>
+    <members>
+        <member name="M:AdvanceMath.Geometry2D.BoundingRectangle.FromVectors(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Creates a new BoundingRectangle Instance from 2 Vector2Ds.
+            </summary>
+            <param name="first">the first Vector2D.</param>
+            <param name="second">the second Vector2D.</param>
+            <returns>a new BoundingRectangle</returns>
+            <remarks>The Max and Min values are automatically determined.</remarks>
+        </member>
+        <member name="M:AdvanceMath.Geometry2D.BoundingRectangle.FromVectors(AdvanceMath.Vector2D[])">
+            <summary>
+            Creates a new BoundingRectangle Instance from multiple Vector2Ds.
+            </summary>
+            <param name="vectors">the list of vectors</param>
+            <returns>a new BoundingRectangle</returns>
+            <remarks>The Max and Min values are automatically determined.</remarks>
+        </member>
+        <member name="M:AdvanceMath.Geometry2D.BoundingRectangle.FromUnion(AdvanceMath.Geometry2D.BoundingRectangle,AdvanceMath.Geometry2D.BoundingRectangle)">
+            <summary>
+            Makes a BoundingRectangle that can contain the 2 BoundingRectangles passed.
+            </summary>
+            <param name="first">The First BoundingRectangle.</param>
+            <param name="second">The Second BoundingRectangle.</param>
+            <returns>The BoundingRectangle that can contain the 2 BoundingRectangles passed.</returns>
+        </member>
+        <member name="M:AdvanceMath.Geometry2D.BoundingRectangle.FromIntersection(AdvanceMath.Geometry2D.BoundingRectangle,AdvanceMath.Geometry2D.BoundingRectangle)">
+            <summary>
+            Makes a BoundingRectangle that contains the area where the BoundingRectangles Intersect.
+            </summary>
+            <param name="first">The First BoundingRectangle.</param>
+            <param name="second">The Second BoundingRectangle.</param>
+            <returns>The BoundingRectangle that can contain the 2 BoundingRectangles passed.</returns>
+        </member>
+        <member name="M:AdvanceMath.Geometry2D.BoundingRectangle.#ctor(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Creates a new BoundingRectangle Instance.
+            </summary>
+            <param name="minX">The Lower Bound on the XAxis.</param>
+            <param name="minY">The Lower Bound on the YAxis.</param>
+            <param name="maxX">The Upper Bound on the XAxis.</param>
+            <param name="maxY">The Upper Bound on the YAxis.</param>
+        </member>
+        <member name="M:AdvanceMath.Geometry2D.BoundingRectangle.#ctor(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Creates a new BoundingRectangle Instance from 2 Vector2Ds.
+            </summary>
+            <param name="min">The Lower Vector2D.</param>
+            <param name="max">The Upper Vector2D.</param>
+        </member>
+        <member name="M:AdvanceMath.Design.InstanceConstructorAttribute.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="order">"CSV list"</param>
+        </member>
+        <member name="T:AdvanceMath.Point2D">
+            <summary>
+            This is the Vector Class.
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29"/></remarks>
+        </member>
+        <member name="F:AdvanceMath.Point2D.Count">
+            <summary>
+            The number of int values in the class.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Point2D.Size">
+            <summary>
+            The Size of the class in bytes;
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Point2D.Zero">
+            <summary>
+            Point(0,0)
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Point2D.Add(AdvanceMath.Point2D,AdvanceMath.Point2D)">
+            <summary>
+            Adds 2 Vectors2Ds.
+            </summary>
+            <param name="left">The left Point operand.</param>
+            <param name="right">The right Point operand.</param>
+            <returns>The Sum of the 2 Points.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Point2D.Subtract(AdvanceMath.Point2D,AdvanceMath.Point2D)">
+            <summary>
+            Subtracts 2 Points.
+            </summary>
+            <param name="left">The left Point operand.</param>
+            <param name="right">The right Point operand.</param>
+            <returns>The Difference of the 2 Points.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Point2D.Multiply(AdvanceMath.Point2D,System.Int32)">
+            <summary>
+            Does Scaler Multiplication on a Point.
+            </summary>
+            <param name="scalar">The scalar value that will multiply the Point.</param>
+            <param name="source">The Point to be multiplied.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#int_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Point2D.Negate(AdvanceMath.Point2D)">
+            <summary>
+            Negates a Point.
+            </summary>
+            <param name="source">The Point to be Negated.</param>
+            <returns>The Negated Point.</returns>
+        </member>
+        <member name="F:AdvanceMath.Point2D.X">
+            <summary>
+            This is the X value. (Usually represents a horizontal position or direction.)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Point2D.Y">
+            <summary>
+            This is the Y value. (Usually represents a vertical position or direction.)
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Point2D.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a New Point Instance on the Stack.
+            </summary>
+            <param name="X">The X value.</param>
+            <param name="Y">The Y value.</param>
+        </member>
+        <member name="M:AdvanceMath.Point2D.op_Addition(AdvanceMath.Point2D,AdvanceMath.Point2D)">
+            <summary>
+            Adds 2 Vectors2Ds.
+            </summary>
+            <param name="left">The left Point operand.</param>
+            <param name="right">The right Point operand.</param>
+            <returns>The Sum of the 2 Points.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Point2D.op_Subtraction(AdvanceMath.Point2D,AdvanceMath.Point2D)">
+            <summary>
+            Subtracts 2 Points.
+            </summary>
+            <param name="left">The left Point operand.</param>
+            <param name="right">The right Point operand.</param>
+            <returns>The Difference of the 2 Points.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Point2D.op_Multiply(AdvanceMath.Point2D,System.Int32)">
+            <summary>
+            Does Scaler Multiplication on a Point.
+            </summary>
+            <param name="source">The Point to be multiplied.</param>
+            <param name="scalar">The scalar value that will multiply the Point.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#int_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Point2D.op_Multiply(System.Int32,AdvanceMath.Point2D)">
+            <summary>
+            Does Scaler Multiplication on a Point.
+            </summary>
+            <param name="scalar">The scalar value that will multiply the Point.</param>
+            <param name="source">The Point to be multiplied.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#int_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Point2D.op_UnaryNegation(AdvanceMath.Point2D)">
+            <summary>
+            Negates a Point.
+            </summary>
+            <param name="source">The Point to be Negated.</param>
+            <returns>The Negated Point.</returns>
+        </member>
+        <member name="M:AdvanceMath.Point2D.op_Equality(AdvanceMath.Point2D,AdvanceMath.Point2D)">
+            <summary>
+            Specifies whether the Points contain the same coordinates.
+            </summary>
+            <param name="left">The left Point to test.</param>
+            <param name="right">The right Point to test.</param>
+            <returns>true if the Points have the same coordinates; otherwise false</returns>
+        </member>
+        <member name="M:AdvanceMath.Point2D.op_Inequality(AdvanceMath.Point2D,AdvanceMath.Point2D)">
+            <summary>
+            Specifies whether the Points do not contain the same coordinates.
+            </summary>
+            <param name="left">The left Point to test.</param>
+            <param name="right">The right Point to test.</param>
+            <returns>true if the Points do not have the same coordinates; otherwise false</returns>
+        </member>
+        <member name="M:AdvanceMath.Point2D.ToString(System.String)">
+            <summary>
+            Converts the numeric value of this instance to its equivalent string representation, using the specified format.
+            </summary>
+            <param name="format">the format for each scaler in this Vector</param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Point2D.GetHashCode">
+            <summary>
+            	Provides a unique hash code based on the member variables of this
+            	class.  This should be done because the equality operators (==, !=)
+            	have been overriden by this class.
+            	<p/>
+            	The standard implementation is a simple XOR operation between all local
+            	member variables.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Point2D.Equals(System.Object)">
+            <summary>
+            	Compares this Vector to another object.  This should be done because the 
+            	equality operators (==, !=) have been overriden by this class.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AdvanceMath.Clamped">
+            <summary>
+            A class that keeps a value clamped.
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Clamped.#ctor">
+            <summary>
+            Creates a new Clamped instance all values being zero.
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Clamped.#ctor(System.Double)">
+            <summary>
+            Creates a new Clamped instance with zero being either the max or min.
+            </summary>
+            <param name="value">The min or max and the current value.</param>
+        </member>
+        <member name="M:AdvanceMath.Clamped.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Creates a new Clamped instance.
+            </summary>
+            <param name="value">The current value.</param>
+            <param name="min">The minimum possible value.</param>
+            <param name="max">The maximum possible value.</param>
+        </member>
+        <member name="M:AdvanceMath.Clamped.Maximize">
+            <summary>
+            Sets it to its maximum value;
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Clamped.Minimize">
+            <summary>
+            Sets it to its minimum value;
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Clamped.Add(System.Double)">
+            <summary>
+            Adds a value to the clamped vaule and returns the overflow/underflow.
+            </summary>
+            <param name="value">The Value to add.</param>
+            <returns>The overflow/underflow.</returns>
+        </member>
+        <member name="M:AdvanceMath.Clamped.Add(System.Double@,System.Double@)">
+            <summary>
+            Adds a value to the clamped vaule and returns the overflow/underflow.
+            </summary>
+            <param name="value">The Value to add.</param>
+            <param name="result">The overflow/underflow.</param>
+        </member>
+        <member name="M:AdvanceMath.Clamped.SetValues(System.Double,System.Double,System.Double)">
+            <summary>
+            Sets all the values at once.
+            </summary>
+            <param name="value">The current value.</param>
+            <param name="min">The minimum possible value.</param>
+            <param name="max">The maximum possible value.</param>
+        </member>
+        <member name="P:AdvanceMath.Clamped.Value">
+            <summary>
+            Gets and Sets the current value.
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Clamped.Min">
+            <summary>
+            Gets and Sets the minimum value.
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Clamped.Max">
+            <summary>
+            Gets and Sets the maximum value.
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Clamped.Percent">
+            <summary>
+            Gets and Sets the percent with Min being 0 (0%) and Max being 1 (100%)
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Clamped.IsMax">
+            <summary>
+            Gets if the value is at its maximum value;
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Clamped.IsMin">
+            <summary>
+            Gets if the value is at its minimum value;
+            </summary>
+        </member>
+        <member name="T:AdvanceMath.PrimeNumberGenerator">
+            <summary>
+            Generates prime numbers. Just felt like writting one.
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.MathHelper.WrapClamp(System.Double,System.Double,System.Double)">
+            <summary>
+            Clamps a value between 2 values, but wraps the value around. So that one plus max would result in one plus min.
+            </summary>
+            <param name="value">the value to clamp</param>
+            <param name="min">the minimum value</param>
+            <param name="max">the maximum value</param>
+            <returns>the clamped result</returns>
+        </member>
+        <member name="M:AdvanceMath.MathHelper.WrapClamp(System.Double@,System.Double@,System.Double@,System.Double@)">
+            <summary>
+            Clamps a value between 2 values, but wraps the value around. So that one plus max would result in one plus min.
+            </summary>
+            <param name="value">the value to clamp</param>
+            <param name="min">the minimum value</param>
+            <param name="max">the maximum value</param>
+            <param name="result">the clamped result</param>
+        </member>
+        <member name="M:AdvanceMath.MathHelper.TrySolveQuadratic(System.Double,System.Double,System.Double,System.Double@,System.Double@)">
+            <summary>
+            Trys to Solve for x in the equation: (a * (x * x) + b * x + c == 0)
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <param name="c"></param>
+            <param name="plus">The result of (b + Math.Sqrt((b * b) - (4 * a * c))) / (2 * a)</param>
+            <param name="minus">The result of (b - Math.Sqrt((b * b) - (4 * a * c))) / (2 * a)</param>
+            <returns><see langword="false" /> if an error would have been thrown; otherwise <see langword="true" />.</returns>
+        </member>
+        <member name="M:AdvanceMath.MathHelper.ToRadians(System.Double)">
+            <summary>
+            	Converts degrees to radians.
+            </summary>
+            <param name="degrees"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.MathHelper.ToDegrees(System.Double)">
+            <summary>
+            	Converts radians to degrees.
+            </summary>
+            <param name="radians"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.IAdvanceValueType.ToArray">
+            <summary>
+            Copies the elements of the IAdvanceValueType to a new array of <see cref="T:System.Double"/> . 
+            </summary>
+            <returns>An array containing copies of the elements of the IAdvanceValueType.</returns>
+        </member>
+        <member name="M:AdvanceMath.IAdvanceValueType.CopyTo(System.Double[],System.Int32)">
+            <summary>
+            Copies all the elements of the IAdvanceValueType to the specified one-dimensional Array of <see cref="T:System.Double"/>. 
+            </summary>
+            <param name="array">The one-dimensional Array that is the destination of the elements copied from the IAdvanceValueType.</param>
+            <param name="index">A 32-bit integer that represents the index in array at which copying begins.</param>
+        </member>
+        <member name="M:AdvanceMath.IAdvanceValueType.CopyFrom(System.Double[],System.Int32)">
+            <summary>
+            Copies all the elements, up to the <see cref="!:Length"/> of the IAdvanceValueType, of the specified one-dimensional Array to the IAdvanceValueType. 
+            </summary>
+            <param name="array">The one-dimensional Array that is the source of the elements copied to the IAdvanceValueType.</param>
+            <param name="index">A 32-bit integer that represents the index in array at which copying begins.</param>
+        </member>
+        <member name="M:AdvanceMath.IAdvanceValueType.ToString(System.String)">
+            <summary>
+            turns the object into a string representation of itself with a special format for each Scaler in it.
+            </summary>
+            <param name="format">the format to be applied to each Scalar </param>
+            <returns>a string with every Scalar formated with the provided format.  </returns>
+        </member>
+        <member name="P:AdvanceMath.IAdvanceValueType.Count">
+            <summary>
+            Gets a 32-bit integer that represents the total number of elements in all the dimensions of IAdvanceValueType. 
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.IMatrix.ToMatrixArray">
+            <summary>
+            Copies the elements of the IMatrix to a new 2-dimensional array of <see cref="T:System.Double"/>s. 
+            </summary>
+            <returns>A 2-dimensional array containing copies of the elements of the IMatrix.</returns>
+        </member>
+        <member name="M:AdvanceMath.IMatrix.ToTransposedArray">
+            <returns></returns>
+            <summary>
+            Copies the elements, in a Transposed order, of the IMatrix to a new array of <see cref="T:System.Double"/>. 
+            </summary>
+            <returns>An array containing copies of the elements, in a Transposed order, of the IAdvanceValueType.</returns>
+            <remarks>
+            This is the Format Accepted by OpenGL.
+            </remarks>
+        </member>
+        <member name="M:AdvanceMath.IMatrix.CopyTransposedTo(System.Double[],System.Int32)">
+            <summary>
+            Copies all the elements, in a Transposed order, of the IAdvanceValueType to the specified one-dimensional Array of <see cref="T:System.Double"/>. 
+            </summary>
+            <param name="array">The one-dimensional Array that is the destination of the elements copied from the IAdvanceValueType.</param>
+            <param name="index">A 32-bit integer that represents the index in array at which copying begins.</param>
+        </member>
+        <member name="M:AdvanceMath.IMatrix.CopyTransposedFrom(System.Double[],System.Int32)">
+            <summary>
+            Copies all the elements, in a Transposed order, up to the <see cref="!:IAdvanceValueType.Length"/> of the IAdvanceValueType, of the specified one-dimensional Array to the IAdvanceValueType. 
+            </summary>
+            <param name="array">The one-dimensional Array that is the source of the elements copied to the IAdvanceValueType.</param>
+            <param name="index">A 32-bit integer that represents the index in array at which copying begins.</param>
+        </member>
+        <member name="P:AdvanceMath.IMatrix.RowCount">
+            <summary>
+            Gets a 32-bit integer that represents the total number of Rows in the IMatrix. 
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.IMatrix.ColumnCount">
+            <summary>
+            Gets a 32-bit integer that represents the total number of Columns in the IMatrix. 
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.IMatrix.Determinant">
+            <summary>
+            Gets the Determinant of the IMatrix
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Determinant"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.IMatrix`3.GetColumn(System.Int32)">
+            <summary>
+            Gets the <typeparamref name="V"/> at the specified Column.
+            </summary>
+            <param name="column">The zero-based index of the Column of the <typeparamref name="V"/> to get.</param>
+            <returns>The <typeparamref name="V"/> at the specified Column.</returns>
+        </member>
+        <member name="M:AdvanceMath.IMatrix`3.SetColumn(System.Int32,`1)">
+            <summary>
+            Sets the <typeparamref name="V"/>  at the specified Column.
+            </summary>
+            <param name="column">The zero-based index of the Column of the <typeparamref name="V"/> to set.</param>
+            <param name="value">The <typeparamref name="V"/> to set at the specified Column.</param>
+        </member>
+        <member name="M:AdvanceMath.IMatrix`3.GetRow(System.Int32)">
+            <summary>
+            Gets the <typeparamref name="V"/> at the specified Row.
+            </summary>
+            <param name="row">The zero-based index of the Row of the <typeparamref name="V"/> to get.</param>
+            <returns>The <typeparamref name="V"/> at the specified Row.</returns>
+        </member>
+        <member name="M:AdvanceMath.IMatrix`3.SetRow(System.Int32,`2)">
+            <summary>
+            Sets the <typeparamref name="V"/> at the specified Row.
+            </summary>
+            <param name="row">The zero-based index of the Row of the <typeparamref name="V"/> to set.</param>
+            <param name="value">The <typeparamref name="V"/> to set at the specified Row.</param>
+        </member>
+        <member name="P:AdvanceMath.IMatrix`3.Inverted">
+            <summary>
+            Gets the Inverse of the IMatrix
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Invertible_matrix"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.IMatrix`3.Transposed">
+            <summary>
+            Gets the Transpose of the IMatrix
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Transpose"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.IMatrix`3.Adjoint">
+            <summary>
+            Gets the Adjoint (Conjugate Transpose) of the IMatrix
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Conjugate_transpose"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.IMatrix`3.Cofactor">
+            <summary>
+            Gets the Cofactor (The Transpose of the Adjoint) of the IMatrix
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix4x4.RowCount">
+            <summary>
+            The number of rows.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix4x4.ColumnCount">
+            <summary>
+            The number of columns.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix4x4.Count">
+            <summary>
+            The number of Scalar values in the class.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix4x4.Size">
+            <summary>
+            The Size of the class in bytes;
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Matrix4x4.Determinant">
+            <summary>
+            Gets the determinant of this matrix.
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Matrix4x4.Transposed">
+            <summary>
+            Swap the rows of the matrix with the columns.
+            </summary>
+            <returns>A transposed Matrix.</returns>
+        </member>
+        <member name="P:AdvanceMath.Matrix4x4.Cofactor">
+            <summary>
+            Used to generate the Cofactor of this matrix.
+            </summary>
+            <returns>The Cofactor matrix of the current instance.</returns>
+        </member>
+        <member name="P:AdvanceMath.Matrix4x4.Adjoint">
+            <summary>
+            Used to generate the adjoint of this matrix..
+            </summary>
+            <returns>The adjoint matrix of the current instance.</returns>
+        </member>
+        <member name="P:AdvanceMath.Matrix4x4.Inverted">
+            <summary>
+            Returns an inverted 4d matrix.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:AdvanceMath.IVector`1.Magnitude">
+            <summary>
+            Gets or Sets the Magnitude (Length of a Vector).
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Length_of_a_vector"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.IVector`1.MagnitudeSq">
+            <summary>
+            Gets the Squared Magnitude (IE Magnitude*Magnitude).
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Length_of_a_vector"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.IVector`1.Normalized">
+            <summary>
+            Gets the Normalized Vector. (Unit Vector)
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Unit_vector"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Design.AdvBrowsableOrderAttribute.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="order">"CSV list"</param>
+        </member>
+        <member name="T:AdvanceMath.Vector2D">
+            <summary>
+            This is the Vector Class.
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29"/></remarks>
+        </member>
+        <member name="F:AdvanceMath.Vector2D.Count">
+            <summary>
+            The number of Scalar values in the class.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector2D.Size">
+            <summary>
+            The Size of the class in bytes;
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector2D.Zero">
+            <summary>
+            Vector2D(0,0)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector2D.XAxis">
+            <summary>
+            Vector2D(1,0)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector2D.YAxis">
+            <summary>
+            Vector2D(0,1)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector2D.XYAxis">
+            <summary>
+            Vector2D(0.707...,0.707...)
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Clamp(AdvanceMath.Vector2D,AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Binds a value to 
+            </summary>
+            <param name="value"></param>
+            <param name="lower"></param>
+            <param name="upper"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.FromLengthAndAngle(System.Double,System.Double)">
+            <summary>
+            Creates a Vector2D With the given length (<see cref="P:AdvanceMath.Vector2D.Magnitude"/>) and the given <see cref="P:AdvanceMath.Vector2D.Angle"/>.
+            </summary>
+            <param name="length">The length (<see cref="P:AdvanceMath.Vector2D.Magnitude"/>) of the Vector2D to be created</param>
+            <param name="radianAngle">The angle of the from the (<see cref="F:AdvanceMath.Vector2D.XAxis"/>) in Radians</param>
+            <returns>a Vector2D With the given length and angle.</returns>
+            <remarks>
+            <code>FromLengthAndAngle(1,Math.PI/2)</code>
+             would create a Vector2D equil to 
+             <code>new Vector2D(0,1)</code>. 
+             And <code>FromLengthAndAngle(1,0)</code>
+             would create a Vector2D equil to 
+             <code>new Vector2D(1,0)</code>.
+            </remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Rotate(System.Double,AdvanceMath.Vector2D)">
+            <summary>
+            Rotates a Vector2D.
+            </summary>
+            <param name="radianAngle">The <see cref="P:AdvanceMath.Vector2D.Angle"/> in radians of the amount it is to be rotated.</param>
+            <param name="source">The Vector2D to be Rotated.</param>
+            <returns>The Rotated Vector2D</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.SetAngle(AdvanceMath.Vector2D,System.Double)">
+            <summary>
+            Sets the <see cref="P:AdvanceMath.Vector2D.Angle"/> of a Vector2D without changing the <see cref="P:AdvanceMath.Vector2D.Magnitude"/>.
+            </summary>
+            <param name="source">The Vector2D to have its Angle set.</param>
+            <param name="radianAngle">The angle of the from the (<see cref="F:AdvanceMath.Vector2D.XAxis"/>) in Radians</param>
+            <returns>A Vector2D with a new Angle.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.GetAngle(AdvanceMath.Vector2D)">
+            <summary>
+            Determines the current <see cref="P:AdvanceMath.Vector2D.Angle"/> in radians of the Vector2D and Returns it.
+            </summary>
+            <param name="source">The Vector2D of whos angle is to be Determined.</param>
+            <returns>The <see cref="P:AdvanceMath.Vector2D.Angle"/> in radians of the Vector2D.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Add(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Adds 2 Vectors2Ds.
+            </summary>
+            <param name="left">The left Vector2D operand.</param>
+            <param name="right">The right Vector2D operand.</param>
+            <returns>The Sum of the 2 Vector2Ds.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Subtract(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Subtracts 2 Vector2Ds.
+            </summary>
+            <param name="left">The left Vector2D operand.</param>
+            <param name="right">The right Vector2D operand.</param>
+            <returns>The Difference of the 2 Vector2Ds.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Transform(AdvanceMath.Matrix3x3,AdvanceMath.Vector2D)">
+            <summary>
+            Uses a matrix multiplication to Transform the vector.
+            </summary>
+            <param name="matrix">The Transformation matrix</param>
+            <param name="source">The Vector to be transformed</param>
+            <returns>The transformed vector.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Transformation_matrix#Affine_transformations"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Transform(AdvanceMath.Matrix2x3,AdvanceMath.Vector2D)">
+            <summary>
+            Uses a matrix multiplication to Transform the vector.
+            </summary>
+            <param name="matrix">The Transformation matrix</param>
+            <param name="source">The Vector to be transformed</param>
+            <returns>The transformed vector.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Transformation_matrix#Affine_transformations"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Transform(AdvanceMath.Matrix2x2,AdvanceMath.Vector2D)">
+            <summary>
+            Uses a matrix multiplication to Transform the vector.
+            </summary>
+            <param name="matrix">The rotation matrix</param>
+            <param name="source">The Vector to be transformed</param>
+            <returns>The transformed vector.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Transformation_matrix#Rotation"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Multiply(AdvanceMath.Vector2D,System.Double)">
+            <summary>
+            Does Scaler Multiplication on a Vector2D.
+            </summary>
+            <param name="scalar">The scalar value that will multiply the Vector2D.</param>
+            <param name="source">The Vector2D to be multiplied.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Scalar_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Dot(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Does a Dot Operation Also know as an Inner Product.
+            </summary>
+            <param name="left">The left Vector2D operand.</param>
+            <param name="right">The right Vector2D operand.</param>
+            <returns>The Dot Product (Inner Product).</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Dot_product"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.ZCross(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Does a "2D" Cross Product also know as an Outer Product.
+            </summary>
+            <param name="left">The left Vector2D operand.</param>
+            <param name="right">The right Vector2D operand.</param>
+            <returns>The Z value of the resulting vector.</returns>
+            <remarks>
+            This 2D Cross Product is using a cheat. Since the Cross product (in 3D space) 
+            always generates a vector perpendicular (orthogonal) to the 2 vectors used as 
+            arguments. The cheat is that the only vector that can be perpendicular to two 
+            vectors in the XY Plane will parallel to the Z Axis. Since any vector that is 
+            parallel to the Z Axis will have zeros in both the X and Y Fields I can represent
+            the cross product of 2 vectors in the XY plane as single scalar: Z. Also the 
+            Cross Product of and Vector on the XY plan and that of one ont on the Z Axis 
+            will result in a vector on the XY Plane. So the ZCross Methods were well thought
+            out and can be trusted.
+            <seealso href="http://en.wikipedia.org/wiki/Cross_product"/>
+            </remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.ZCross(System.Double,AdvanceMath.Vector2D)">
+            <summary>
+            Does a "2D" Cross Product also know as an Outer Product.
+            </summary>
+            <param name="leftZ">The Z value of the left vector operand.</param>
+            <param name="right">The right Vector2D operand.</param>
+            <returns>The Vector2D that fully represents the resulting vector.</returns>
+            <remarks>
+            This 2D Cross Product is using a cheat. Since the Cross product (in 3D space) 
+            always generates a vector perpendicular (orthogonal) to the 2 vectors used as 
+            arguments. The cheat is that the only vector that can be perpendicular to two 
+            vectors in the XY Plane will parallel to the Z Axis. Since any vector that is 
+            parallel to the Z Axis will have zeros in both the X and Y Fields I can represent
+            the cross product of 2 vectors in the XY plane as single scalar: Z. Also the 
+            Cross Product of and Vector on the XY plan and that of one ont on the Z Axis 
+            will result in a vector on the XY Plane. So the ZCross Methods were well thought
+            out and can be trusted.
+            <seealso href="http://en.wikipedia.org/wiki/Cross_product"/>
+            </remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.ZCross(AdvanceMath.Vector2D,System.Double)">
+            <summary>
+            Does a "2D" Cross Product also know as an Outer Product.
+            </summary>
+            <param name="left">The left Vector2D operand.</param>
+            <param name="rightZ">The Z value of the right vector operand.</param>
+            <returns>The Vector2D that fully represents the resulting vector.</returns>
+            <remarks>
+            This 2D Cross Product is using a cheat. Since the Cross product (in 3D space) 
+            always generates a vector perpendicular (orthogonal) to the 2 vectors used as 
+            arguments. The cheat is that the only vector that can be perpendicular to two 
+            vectors in the XY Plane will parallel to the Z Axis. Since any vector that is 
+            parallel to the Z Axis will have zeros in both the X and Y Fields I can represent
+            the cross product of 2 vectors in the XY plane as single scalar: Z. Also the 
+            Cross Product of and Vector on the XY plan and that of one ont on the Z Axis 
+            will result in a vector on the XY Plane. So the ZCross Methods were well thought
+            out and can be trusted.
+            <seealso href="http://en.wikipedia.org/wiki/Cross_product"/>
+            </remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.GetMagnitudeSq(AdvanceMath.Vector2D)">
+            <summary>
+            Gets the Squared <see cref="P:AdvanceMath.Vector2D.Magnitude"/> of the Vector2D that is passed.
+            </summary>
+            <param name="source">The Vector2D whos Squared Magnitude is te be returned.</param>
+            <returns>The Squared Magnitude.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.GetMagnitude(AdvanceMath.Vector2D)">
+            <summary>
+            Gets the <see cref="P:AdvanceMath.Vector2D.Magnitude"/> of the Vector2D that is passed.
+            </summary>
+            <param name="source">The Vector2D whos Magnitude is te be returned.</param>
+            <returns>The Magnitude.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.SetMagnitude(AdvanceMath.Vector2D,System.Double)">
+            <summary>
+            Sets the <see cref="P:AdvanceMath.Vector2D.Magnitude"/> of a Vector2D without changing the  <see cref="P:AdvanceMath.Vector2D.Angle"/>.
+            </summary>
+            <param name="source">The Vector2D whose Magnitude is to be changed.</param>
+            <param name="magnitude">The Magnitude.</param>
+            <returns>A Vector2D with the new Magnitude</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Negate(AdvanceMath.Vector2D)">
+            <summary>
+            Negates a Vector2D.
+            </summary>
+            <param name="source">The Vector2D to be Negated.</param>
+            <returns>The Negated Vector2D.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Normalize(AdvanceMath.Vector2D)">
+            <summary>
+            This returns the Normalized Vector2D that is passed. This is also known as a Unit Vector.
+            </summary>
+            <param name="source">The Vector2D to be Normalized.</param>
+            <returns>The Normalized Vector2D. (Unit Vector)</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Unit_vector"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Normalize(AdvanceMath.Vector2D,System.Double@)">
+            <summary>
+            This returns the Normalized Vector2D that is passed. This is also known as a Unit Vector.
+            </summary>
+            <param name="source">The Vector2D to be Normalized.</param>
+            <param name="magnitude">the magitude of the Vector2D passed</param>
+            <returns>The Normalized Vector2D. (Unit Vector)</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Unit_vector"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Project(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Thie Projects the left Vector2D onto the Right Vector2D.
+            </summary>
+            <param name="left">The left Vector2D operand.</param>
+            <param name="right">The right Vector2D operand.</param>
+            <returns>The Projected Vector2D.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Projection_%28linear_algebra%29"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.GetRightHandNormal(AdvanceMath.Vector2D)">
+            <summary>
+            Gets a Vector2D that is perpendicular(orthogonal) to the passed Vector2D while staying on the XY Plane.
+            </summary>
+            <param name="source">The Vector2D whose perpendicular(orthogonal) is to be determined.</param>
+            <returns>An perpendicular(orthogonal) Vector2D using the Right Hand Rule</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Right-hand_rule"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.GetLeftHandNormal(AdvanceMath.Vector2D)">
+            <summary>
+            Gets a Vector2D that is perpendicular(orthogonal) to the passed Vector2D while staying on the XY Plane.
+            </summary>
+            <param name="source">The Vector2D whose perpendicular(orthogonal) is to be determined.</param>
+            <returns>An perpendicular(orthogonal) Vector2D using the Left Hand Rule (opposite of the Right hand Rule)</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Right-hand_rule#Left-hand_rule"/></remarks>
+        </member>
+        <member name="F:AdvanceMath.Vector2D.X">
+            <summary>
+            This is the X value. (Usually represents a horizontal position or direction.)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector2D.Y">
+            <summary>
+            This is the Y value. (Usually represents a vertical position or direction.)
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.#ctor(System.Double,System.Double)">
+            <summary>
+            Creates a New Vector2D Instance on the Stack.
+            </summary>
+            <param name="X">The X value.</param>
+            <param name="Y">The Y value.</param>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.op_Addition(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Adds 2 Vectors2Ds.
+            </summary>
+            <param name="left">The left Vector2D operand.</param>
+            <param name="right">The right Vector2D operand.</param>
+            <returns>The Sum of the 2 Vector2Ds.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.op_Subtraction(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Subtracts 2 Vector2Ds.
+            </summary>
+            <param name="left">The left Vector2D operand.</param>
+            <param name="right">The right Vector2D operand.</param>
+            <returns>The Difference of the 2 Vector2Ds.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.op_Multiply(AdvanceMath.Vector2D,System.Double)">
+            <summary>
+            Does Scaler Multiplication on a Vector2D.
+            </summary>
+            <param name="source">The Vector2D to be multiplied.</param>
+            <param name="scalar">The scalar value that will multiply the Vector2D.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Scalar_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.op_Multiply(System.Double,AdvanceMath.Vector2D)">
+            <summary>
+            Does Scaler Multiplication on a Vector2D.
+            </summary>
+            <param name="scalar">The scalar value that will multiply the Vector2D.</param>
+            <param name="source">The Vector2D to be multiplied.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Scalar_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.op_Multiply(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Does a Dot Operation Also know as an Inner Product.
+            </summary>
+            <param name="left">The left Vector2D operand.</param>
+            <param name="right">The right Vector2D operand.</param>
+            <returns>The Dot Product (Inner Product).</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Dot_product"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.op_UnaryNegation(AdvanceMath.Vector2D)">
+            <summary>
+            Negates a Vector2D.
+            </summary>
+            <param name="source">The Vector2D to be Negated.</param>
+            <returns>The Negated Vector2D.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.op_ExclusiveOr(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Does a "2D" Cross Product also know as an Outer Product.
+            </summary>
+            <param name="left">The left Vector2D operand.</param>
+            <param name="right">The right Vector2D operand.</param>
+            <returns>The Z value of the resulting vector.</returns>
+            <remarks>
+            This 2D Cross Product is using a cheat. Since the Cross product (in 3D space) 
+            always generates a vector perpendicular (orthogonal) to the 2 vectors used as 
+            arguments. The cheat is that the only vector that can be perpendicular to two 
+            vectors in the XY Plane will parallel to the Z Axis. Since any vector that is 
+            parallel to the Z Axis will have zeros in both the X and Y Fields I can represent
+            the cross product of 2 vectors in the XY plane as single scalar: Z. Also the 
+            Cross Product of and Vector on the XY plan and that of one ont on the Z Axis 
+            will result in a vector on the XY Plane. So the ZCross Methods were well thought
+            out and can be trusted.
+            <seealso href="http://en.wikipedia.org/wiki/Cross_product"/>
+            </remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.op_ExclusiveOr(System.Double,AdvanceMath.Vector2D)">
+            <summary>
+            Does a "2D" Cross Product also know as an Outer Product.
+            </summary>
+            <param name="leftZ">The Z value of the left vector operand.</param>
+            <param name="right">The right Vector2D operand.</param>
+            <returns>The Vector2D that fully represents the resulting vector.</returns>
+            <remarks>
+            This 2D Cross Product is using a cheat. Since the Cross product (in 3D space) 
+            always generates a vector perpendicular (orthogonal) to the 2 vectors used as 
+            arguments. The cheat is that the only vector that can be perpendicular to two 
+            vectors in the XY Plane will parallel to the Z Axis. Since any vector that is 
+            parallel to the Z Axis will have zeros in both the X and Y Fields I can represent
+            the cross product of 2 vectors in the XY plane as single scalar: Z. Also the 
+            Cross Product of and Vector on the XY plan and that of one ont on the Z Axis 
+            will result in a vector on the XY Plane. So the ZCross Methods were well thought
+            out and can be trusted.
+            <seealso href="http://en.wikipedia.org/wiki/Cross_product"/>
+            </remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.op_ExclusiveOr(AdvanceMath.Vector2D,System.Double)">
+            <summary>
+            Does a "2D" Cross Product also know as an Outer Product.
+            </summary>
+            <param name="left">The left Vector2D operand.</param>
+            <param name="rightZ">The Z value of the right vector operand.</param>
+            <returns>The Vector2D that fully represents the resulting vector.</returns>
+            <remarks>
+            This 2D Cross Product is using a cheat. Since the Cross product (in 3D space) 
+            always generates a vector perpendicular (orthogonal) to the 2 vectors used as 
+            arguments. The cheat is that the only vector that can be perpendicular to two 
+            vectors in the XY Plane will parallel to the Z Axis. Since any vector that is 
+            parallel to the Z Axis will have zeros in both the X and Y Fields I can represent
+            the cross product of 2 vectors in the XY plane as single scalar: Z. Also the 
+            Cross Product of and Vector on the XY plan and that of one ont on the Z Axis 
+            will result in a vector on the XY Plane. So the ZCross Methods were well thought
+            out and can be trusted.
+            <seealso href="http://en.wikipedia.org/wiki/Cross_product"/>
+            </remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.op_Equality(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Specifies whether the Vector2Ds contain the same coordinates.
+            </summary>
+            <param name="left">The left Vector2D to test.</param>
+            <param name="right">The right Vector2D to test.</param>
+            <returns>true if the Vector2Ds have the same coordinates; otherwise false</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.op_Inequality(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Specifies whether the Vector2Ds do not contain the same coordinates.
+            </summary>
+            <param name="left">The left Vector2D to test.</param>
+            <param name="right">The right Vector2D to test.</param>
+            <returns>true if the Vector2Ds do not have the same coordinates; otherwise false</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.ToString(System.String)">
+            <summary>
+            Converts the numeric value of this instance to its equivalent string representation, using the specified format.
+            </summary>
+            <param name="format">the format for each scaler in this Vector</param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.GetHashCode">
+            <summary>
+            	Provides a unique hash code based on the member variables of this
+            	class.  This should be done because the equality operators (==, !=)
+            	have been overriden by this class.
+            	<p/>
+            	The standard implementation is a simple XOR operation between all local
+            	member variables.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Vector2D.Equals(System.Object)">
+            <summary>
+            	Compares this Vector to another object.  This should be done because the 
+            	equality operators (==, !=) have been overriden by this class.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AdvanceMath.Vector2D.RightHandNormal">
+            <summary>
+            Gets A perpendicular(orthogonal) Vector2D using the Right Hand Rule.
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Right-hand_rule"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.Vector2D.LeftHandNormal">
+            <summary>
+            Gets A perpendicular(orthogonal) Vector2D using the Left Hand Rule.
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Right-hand_rule#Left-hand_rule"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.Vector2D.Magnitude">
+            <summary>
+            Gets or Sets the Magnitude (Length) of the Vector2D. 
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Length_of_a_vector"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.Vector2D.MagnitudeSq">
+            <summary>
+            Gets the Squared Magnitude of the Vector2D.
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Vector2D.Angle">
+            <summary>
+            Gets or Sets the Angle in radians of the Vector2D.
+            </summary>
+            <remarks>
+            If the Magnitude of the Vector is 1 then The 
+            Angles {0,Math.PI/2,Math.PI/2,3*Math.PI/2} would have the vectors {(1,0),(0,1),(-1,0),(0,-1)} respectively.
+            </remarks>
+        </member>
+        <member name="P:AdvanceMath.Vector2D.Normalized">
+            <summary>
+            Gets the Normalized Vector2D. (Unit Vector)
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Unit_vector"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.Vector2D.AdvanceMath#IAdvanceValueType#Count">
+            <summary>
+            The Number of Variables accesable though the indexer.
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Geometry2D.BoundingPolygon.GetCentroid(AdvanceMath.Vector2D[])">
+            <summary>
+            Calculates the Centroid of a polygon.
+            </summary>
+            <param name="vertices">The vertices of the polygon.</param>
+            <returns>The Centroid of a polygon.</returns>
+            <remarks>
+            This is Also known as Center of Gravity/Mass.
+            </remarks>
+        </member>
+        <member name="M:AdvanceMath.Geometry2D.BoundingPolygon.GetCentroid(AdvanceMath.Vector2D[],AdvanceMath.Vector2D@)">
+            <summary>
+            Calculates the Centroid of a polygon.
+            </summary>
+            <param name="vertices">The vertices of the polygon.</param>
+            <param name="centroid">The Centroid of a polygon.</param>
+            <remarks>
+            This is Also known as Center of Gravity/Mass.
+            </remarks>
+        </member>
+        <member name="M:AdvanceMath.Geometry2D.BoundingPolygon.GetArea(AdvanceMath.Vector2D[])">
+            <summary>
+            Calculates the area of a polygon.
+            </summary>
+            <param name="vertices">The vertices of the polygon.</param>
+            <returns>the area.</returns>
+        </member>
+        <member name="M:AdvanceMath.Geometry2D.BoundingPolygon.GetArea(AdvanceMath.Vector2D[],System.Double@)">
+            <summary>
+            Calculates the area of a polygon.
+            </summary>
+            <param name="vertices">The vertices of the polygon.</param>
+            <param name="result">the area.</param>
+        </member>
+        <member name="T:AdvanceMath.Vector3D">
+            <summary>
+            A Vector with 3 dimensions.
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29"/></remarks>
+        </member>
+        <member name="F:AdvanceMath.Vector3D.Count">
+            <summary>
+            The number of Scalar values in the class.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector3D.Size">
+            <summary>
+            The Size of the class in bytes;
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector3D.Origin">
+            <summary>
+            Vector3D(0,0,0)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector3D.Zero">
+            <summary>
+            Vector3D(0,0,0)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector3D.XAxis">
+            <summary>
+            Vector3D(1,0,0)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector3D.YAxis">
+            <summary>
+            Vector3D(0,1,0)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector3D.ZAxis">
+            <summary>
+            Vector3D(0,0,1)
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Add(AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Adds 2 Vectors2Ds.
+            </summary>
+            <param name="left">The left Vector3D operand.</param>
+            <param name="right">The right Vector3D operand.</param>
+            <returns>The Sum of the 2 Vector3Ds.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Subtract(AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Subtracts 2 Vector3Ds.
+            </summary>
+            <param name="left">The left Vector3D operand.</param>
+            <param name="right">The right Vector3D operand.</param>
+            <returns>The Difference of the 2 Vector3Ds.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Multiply(AdvanceMath.Vector3D,System.Double)">
+            <summary>
+            Does Scaler Multiplication on a Vector3D.
+            </summary>
+            <param name="source">The Vector3D to be multiplied.</param>
+            <param name="scalar">The scalar value that will multiply the Vector3D.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Scalar_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Multiply(System.Double,AdvanceMath.Vector3D)">
+            <summary>
+            Does Scaler Multiplication on a Vector3D.
+            </summary>
+            <param name="scalar">The scalar value that will multiply the Vector3D.</param>
+            <param name="source">The Vector3D to be multiplied.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Scalar_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Transform(AdvanceMath.Matrix3x3,AdvanceMath.Vector3D)">
+            <summary>
+            	matrix * vector [3x3 * 3x1 = 3x1]
+            </summary>
+            <param name="vector"></param>
+            <param name="matrix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Transform(AdvanceMath.Vector3D,AdvanceMath.Matrix3x3)">
+            <summary>
+            	vector * matrix [1x3 * 3x3 = 1x3]
+            </summary>
+            <param name="vector"></param>
+            <param name="matrix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Transform(AdvanceMath.Matrix4x4,AdvanceMath.Vector3D)">
+            <summary>
+            	Transforms the given 3-D vector by the matrix, projecting the 
+            	result back into <i>w</i> = 1.
+            	<p/>
+            	This means that the initial <i>w</i> is considered to be 1.0,
+            	and then all the tree elements of the resulting 3-D vector are
+            	divided by the resulting <i>w</i>.
+            </summary>
+            <param name="matrix">A Matrix4.</param>
+            <param name="vector">A Vector3D.</param>
+            <returns>A new vector.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Dot(AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Does a Dot Operation Also know as an Inner Product.
+            </summary>
+            <param name="left">The left Vector3D operand.</param>
+            <param name="right">The right Vector3D operand.</param>
+            <returns>The Dot Product (Inner Product).</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Dot_product"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Cross(AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Does a Cross Operation Also know as an Outer Product.
+            </summary>
+            <param name="left">The left Vector3D operand.</param>
+            <param name="right">The right Vector3D operand.</param>
+            <returns>The Cross Product.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Cross_product"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.GetMagnitudeSq(AdvanceMath.Vector3D)">
+            <summary>
+            Gets the Squared <see cref="P:AdvanceMath.Vector3D.Magnitude"/> of the Vector3D that is passed.
+            </summary>
+            <param name="source">The Vector3D whos Squared Magnitude is te be returned.</param>
+            <returns>The Squared Magnitude.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.GetMagnitude(AdvanceMath.Vector3D)">
+            <summary>
+            Gets the <see cref="P:AdvanceMath.Vector3D.Magnitude"/> of the Vector3D that is passed.
+            </summary>
+            <param name="source">The Vector3D whos Magnitude is te be returned.</param>
+            <returns>The Magnitude.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.SetMagnitude(AdvanceMath.Vector3D,System.Double)">
+            <summary>
+            Sets the <see cref="P:AdvanceMath.Vector3D.Magnitude"/> of a Vector3D.
+            </summary>
+            <param name="source">The Vector3D whose Magnitude is to be changed.</param>
+            <param name="magnitude">The Magnitude.</param>
+            <returns>A Vector3D with the new Magnitude</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Normalize(AdvanceMath.Vector3D)">
+            <summary>
+            This returns the Normalized Vector3D that is passed. This is also known as a Unit Vector.
+            </summary>
+            <param name="source">The Vector3D to be Normalized.</param>
+            <returns>The Normalized Vector3D. (Unit Vector)</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Unit_vector"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Negate(AdvanceMath.Vector3D)">
+            <summary>
+            Negates a Vector3D.
+            </summary>
+            <param name="source">The Vector3D to be Negated.</param>
+            <returns>The Negated Vector3D.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Project(AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Thie Projects the left Vector3D onto the Right Vector3D.
+            </summary>
+            <param name="left">The left Vector3D operand.</param>
+            <param name="right">The right Vector3D operand.</param>
+            <returns>The Projected Vector3D.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Projection_%28linear_algebra%29"/></remarks>
+        </member>
+        <member name="F:AdvanceMath.Vector3D.X">
+            <summary>
+            This is the X value.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector3D.Y">
+            <summary>
+            This is the Y value.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector3D.Z">
+            <summary>
+            This is the Z value. 
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Creates a New Vector3D Instance on the Stack.
+            </summary>
+            <param name="X">The X value.</param>
+            <param name="Y">The Y value.</param>
+            <param name="Z">The Z value.</param>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.op_Addition(AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Adds 2 Vectors2Ds.
+            </summary>
+            <param name="left">The left Vector3D operand.</param>
+            <param name="right">The right Vector3D operand.</param>
+            <returns>The Sum of the 2 Vector3Ds.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.op_Subtraction(AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Subtracts 2 Vector3Ds.
+            </summary>
+            <param name="left">The left Vector3D operand.</param>
+            <param name="right">The right Vector3D operand.</param>
+            <returns>The Difference of the 2 Vector3Ds.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.op_Multiply(AdvanceMath.Vector3D,System.Double)">
+            <summary>
+            Does Scaler Multiplication on a Vector3D.
+            </summary>
+            <param name="source">The Vector3D to be multiplied.</param>
+            <param name="scalar">The scalar value that will multiply the Vector3D.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Scalar_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.op_Multiply(System.Double,AdvanceMath.Vector3D)">
+            <summary>
+            Does Scaler Multiplication on a Vector3D.
+            </summary>
+            <param name="scalar">The scalar value that will multiply the Vector3D.</param>
+            <param name="source">The Vector3D to be multiplied.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Scalar_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.op_Multiply(AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Does a Dot Operation Also know as an Inner Product.
+            </summary>
+            <param name="left">The left Vector3D operand.</param>
+            <param name="right">The right Vector3D operand.</param>
+            <returns>The Dot Product (Inner Product).</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Dot_product"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.op_Multiply(AdvanceMath.Matrix4x4,AdvanceMath.Vector3D)">
+            <summary>
+            	Transforms the given 3-D vector by the matrix, projecting the 
+            	result back into <i>w</i> = 1.
+            	<p/>
+            	This means that the initial <i>w</i> is considered to be 1.0,
+            	and then all the tree elements of the resulting 3-D vector are
+            	divided by the resulting <i>w</i>.
+            </summary>
+            <param name="matrix">A Matrix4.</param>
+            <param name="vector">A Vector3D.</param>
+            <returns>A new vector.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.op_Multiply(AdvanceMath.Matrix3x3,AdvanceMath.Vector3D)">
+            <summary>
+            	matrix * vector [3x3 * 3x1 = 3x1]
+            </summary>
+            <param name="vector"></param>
+            <param name="matrix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.op_Multiply(AdvanceMath.Vector3D,AdvanceMath.Matrix3x3)">
+            <summary>
+            	vector * matrix [1x3 * 3x3 = 1x3]
+            </summary>
+            <param name="vector"></param>
+            <param name="matrix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.op_UnaryNegation(AdvanceMath.Vector3D)">
+            <summary>
+            Negates a Vector3D.
+            </summary>
+            <param name="source">The Vector3D to be Negated.</param>
+            <returns>The Negated Vector3D.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.op_ExclusiveOr(AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Does a "2D" Cross Product also know as an Outer Product.
+            </summary>
+            <param name="left">The left Vector3D operand.</param>
+            <param name="right">The right Vector3D operand.</param>
+            <returns>The Z value of the resulting vector.</returns>
+            <remarks>
+            <seealso href="http://en.wikipedia.org/wiki/Cross_product"/>
+            </remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.op_Equality(AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Specifies whether the Vector3Ds contain the same coordinates.
+            </summary>
+            <param name="left">The left Vector3D to test.</param>
+            <param name="right">The right Vector3D to test.</param>
+            <returns>true if the Vector3Ds have the same coordinates; otherwise false</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.op_Inequality(AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Specifies whether the Vector3Ds do not contain the same coordinates.
+            </summary>
+            <param name="left">The left Vector3D to test.</param>
+            <param name="right">The right Vector3D to test.</param>
+            <returns>true if the Vector3Ds do not have the same coordinates; otherwise false</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.GetHashCode">
+            <summary>
+            	Provides a unique hash code based on the member variables of this
+            	class.  This should be done because the equality operators (==, !=)
+            	have been overriden by this class.
+            	<p/>
+            	The standard implementation is a simple XOR operation between all local
+            	member variables.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Vector3D.Equals(System.Object)">
+            <summary>
+            	Compares this Vector to another object.  This should be done because the 
+            	equality operators (==, !=) have been overriden by this class.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AdvanceMath.Vector3D.Magnitude">
+            <summary>
+            Gets or Sets the Magnitude (Length) of the Vector3D. 
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Length_of_a_vector"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.Vector3D.MagnitudeSq">
+            <summary>
+            Gets the Squared Magnitude of the Vector3D.
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Vector3D.Normalized">
+            <summary>
+            Gets the Normalized Vector3D. (Unit Vector)
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Unit_vector"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.Vector3D.AdvanceMath#IAdvanceValueType#Count">
+            <summary>
+            The Number of Variables accesable though the indexer.
+            </summary>
+        </member>
+        <member name="T:AdvanceMath.Matrix3x3">
+            <summary>
+            A 3x3 matrix which can represent rotations around axes.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix3x3.RowCount">
+            <summary>
+            The number of rows.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix3x3.ColumnCount">
+            <summary>
+            The number of columns.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix3x3.Count">
+            <summary>
+            The number of Scalar values in the class.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix3x3.Size">
+            <summary>
+            The Size of the class in bytes;
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.Multiply(AdvanceMath.Matrix3x3,AdvanceMath.Matrix3x3)">
+            <summary>
+            Used to multiply (concatenate) two Matrix4x4s.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.Multiply(AdvanceMath.Matrix3x3,System.Double)">
+            <summary>
+            Used to multiply a Matrix3x3 object by a scalar value..
+            </summary>
+            <param name="left"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.Multiply(AdvanceMath.Matrix3x3,AdvanceMath.Matrix2x2)">
+            <summary>
+            Used to multiply (concatenate) a Matrix3x3 and a Matrix2x2.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.Multiply(AdvanceMath.Matrix2x2,AdvanceMath.Matrix3x3)">
+            <summary>
+            Used to multiply (concatenate) a Matrix3x3 and a Matrix2x2.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.Add(AdvanceMath.Matrix3x3,AdvanceMath.Matrix3x3)">
+            <summary>
+            Used to add two matrices together.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.Subtract(AdvanceMath.Matrix3x3,AdvanceMath.Matrix3x3)">
+            <summary>
+            Used to subtract two matrices.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.Negate(AdvanceMath.Matrix3x3)">
+            <summary>
+            Negates a Matrix3x3.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.FromEulerAnglesXYZ(System.Double,System.Double,System.Double)">
+            <summary>
+            Constructs this Matrix from 3 euler angles, in degrees.
+            </summary>
+            <param name="yaw"></param>
+            <param name="pitch"></param>
+            <param name="roll"></param>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.#ctor(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Creates a new Matrix3 with all the specified parameters.
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.#ctor(AdvanceMath.Vector3D,AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Create a new Matrix from 3 Vertex3 objects.
+            </summary>
+            <param name="xAxis"></param>
+            <param name="yAxis"></param>
+            <param name="zAxis"></param>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.op_Multiply(AdvanceMath.Matrix3x3,AdvanceMath.Matrix3x3)">
+            <summary>
+            Multiply (concatenate) two Matrix3 instances together.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.op_Multiply(AdvanceMath.Matrix2x2,AdvanceMath.Matrix3x3)">
+            <summary>
+            Multiply (concatenate) a Matrix3x3 and a Matrix2x2
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.op_Multiply(AdvanceMath.Matrix3x3,AdvanceMath.Matrix2x2)">
+            <summary>
+            Multiply (concatenate) a Matrix3x3 and a Matrix2x2
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.op_Multiply(AdvanceMath.Matrix3x3,System.Double)">
+            <summary>
+            Multiplies all the items in the Matrix3 by a scalar value.
+            </summary>
+            <param name="matrix"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.op_Multiply(System.Double,AdvanceMath.Matrix3x3)">
+            <summary>
+            Multiplies all the items in the Matrix3 by a scalar value.
+            </summary>
+            <param name="matrix"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.op_Addition(AdvanceMath.Matrix3x3,AdvanceMath.Matrix3x3)">
+            <summary>
+            Used to add two matrices together.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.op_Subtraction(AdvanceMath.Matrix3x3,AdvanceMath.Matrix3x3)">
+            <summary>
+            Used to subtract two matrices.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.op_UnaryNegation(AdvanceMath.Matrix3x3)">
+            <summary>
+            Negates all the items in the Matrix.
+            </summary>
+            <param name="matrix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix3x3.op_Equality(AdvanceMath.Matrix3x3,AdvanceMath.Matrix3x3)">
+            <summary>
+            Test two matrices for (value) equality
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AdvanceMath.Matrix3x3.Transposed">
+            <summary>
+            Swap the rows of the matrix with the columns.
+            </summary>
+            <returns>A transposed Matrix.</returns>
+        </member>
+        <member name="T:AdvanceMath.Vector4D">
+            <summary>
+            A Vector with 4 dimensions.
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29"/></remarks>
+        </member>
+        <member name="F:AdvanceMath.Vector4D.Count">
+            <summary>
+            The number of Scalar values in the class.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector4D.Size">
+            <summary>
+            The Size of the class in bytes;
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector4D.Origin">
+            <summary>
+            Vector4D(0,0,0,0)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector4D.Zero">
+            <summary>
+            Vector4D(0,0,0,0)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector4D.XAxis">
+            <summary>
+            Vector4D(1,0,0,0)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector4D.YAxis">
+            <summary>
+            Vector4D(0,1,0,0)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector4D.ZAxis">
+            <summary>
+            Vector4D(0,0,1,0)
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector4D.WAxis">
+            <summary>
+            Vector4D(0,0,0,1)
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.Add(AdvanceMath.Vector4D,AdvanceMath.Vector4D)">
+            <summary>
+            Adds 2 Vectors2Ds.
+            </summary>
+            <param name="left">The left Vector4D operand.</param>
+            <param name="right">The right Vector4D operand.</param>
+            <returns>The Sum of the 2 Vector4Ds.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.Subtract(AdvanceMath.Vector4D,AdvanceMath.Vector4D)">
+            <summary>
+            Subtracts 2 Vector4Ds.
+            </summary>
+            <param name="left">The left Vector4D operand.</param>
+            <param name="right">The right Vector4D operand.</param>
+            <returns>The Difference of the 2 Vector4Ds.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.Multiply(AdvanceMath.Vector4D,System.Double)">
+            <summary>
+            Does Scaler Multiplication on a Vector4D.
+            </summary>
+            <param name="source">The Vector4D to be multiplied.</param>
+            <param name="scalar">The scalar value that will multiply the Vector4D.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Scalar_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.Multiply(System.Double,AdvanceMath.Vector4D)">
+            <summary>
+            Does Scaler Multiplication on a Vector4D.
+            </summary>
+            <param name="scalar">The scalar value that will multiply the Vector4D.</param>
+            <param name="source">The Vector4D to be multiplied.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Scalar_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.Dot(AdvanceMath.Vector4D,AdvanceMath.Vector4D)">
+            <summary>
+            Does a Dot Operation Also know as an Inner Product.
+            </summary>
+            <param name="left">The left Vector4D operand.</param>
+            <param name="right">The right Vector4D operand.</param>
+            <returns>The Dot Product (Inner Product).</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Dot_product"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.GetMagnitudeSq(AdvanceMath.Vector4D)">
+            <summary>
+            Gets the Squared <see cref="P:AdvanceMath.Vector4D.Magnitude"/> of the Vector4D that is passed.
+            </summary>
+            <param name="source">The Vector4D whos Squared Magnitude is te be returned.</param>
+            <returns>The Squared Magnitude.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.GetMagnitude(AdvanceMath.Vector4D)">
+            <summary>
+            Gets the <see cref="P:AdvanceMath.Vector4D.Magnitude"/> of the Vector4D that is passed.
+            </summary>
+            <param name="source">The Vector4D whos Magnitude is te be returned.</param>
+            <returns>The Magnitude.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.SetMagnitude(AdvanceMath.Vector4D,System.Double)">
+            <summary>
+            Sets the <see cref="P:AdvanceMath.Vector4D.Magnitude"/> of a Vector4D.
+            </summary>
+            <param name="source">The Vector4D whose Magnitude is to be changed.</param>
+            <param name="magnitude">The Magnitude.</param>
+            <returns>A Vector4D with the new Magnitude</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.Negate(AdvanceMath.Vector4D)">
+            <summary>
+            Negates a Vector4D.
+            </summary>
+            <param name="source">The Vector4D to be Negated.</param>
+            <returns>The Negated Vector4D.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.Normalize(AdvanceMath.Vector4D)">
+            <summary>
+            This returns the Normalized Vector4D that is passed. This is also known as a Unit Vector.
+            </summary>
+            <param name="source">The Vector4D to be Normalized.</param>
+            <returns>The Normalized Vector4D. (Unit Vector)</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Unit_vector"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.Project(AdvanceMath.Vector4D,AdvanceMath.Vector4D)">
+            <summary>
+            Thie Projects the left Vector4D onto the Right Vector4D.
+            </summary>
+            <param name="left">The left Vector4D operand.</param>
+            <param name="right">The right Vector4D operand.</param>
+            <returns>The Projected Vector4D.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Projection_%28linear_algebra%29"/></remarks>
+        </member>
+        <member name="F:AdvanceMath.Vector4D.X">
+            <summary>
+            This is the X value. 
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector4D.Y">
+            <summary>
+            This is the Y value. 
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector4D.Z">
+            <summary>
+            This is the Z value. 
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Vector4D.W">
+            <summary>
+            This is the W value. 
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.#ctor(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Creates a New Vector4D Instance on the Stack.
+            </summary>
+            <param name="X">The X value.</param>
+            <param name="Y">The Y value.</param>
+            <param name="Z">The Z value.</param>
+            <param name="W">The W value.</param>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.op_Addition(AdvanceMath.Vector4D,AdvanceMath.Vector4D)">
+            <summary>
+            Adds 2 Vectors2Ds.
+            </summary>
+            <param name="left">The left Vector4D operand.</param>
+            <param name="right">The right Vector4D operand.</param>
+            <returns>The Sum of the 2 Vector4Ds.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.op_Subtraction(AdvanceMath.Vector4D,AdvanceMath.Vector4D)">
+            <summary>
+            Subtracts 2 Vector4Ds.
+            </summary>
+            <param name="left">The left Vector4D operand.</param>
+            <param name="right">The right Vector4D operand.</param>
+            <returns>The Difference of the 2 Vector4Ds.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Vector_addition_and_subtraction"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.op_Multiply(AdvanceMath.Vector4D,System.Double)">
+            <summary>
+            Does Scaler Multiplication on a Vector4D.
+            </summary>
+            <param name="source">The Vector4D to be multiplied.</param>
+            <param name="scalar">The scalar value that will multiply the Vector4D.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Scalar_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.op_Multiply(System.Double,AdvanceMath.Vector4D)">
+            <summary>
+            Does Scaler Multiplication on a Vector4D.
+            </summary>
+            <param name="scalar">The scalar value that will multiply the Vector4D.</param>
+            <param name="source">The Vector4D to be multiplied.</param>
+            <returns>The Product of the Scaler Multiplication.</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Scalar_multiplication"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.op_Multiply(AdvanceMath.Vector4D,AdvanceMath.Vector4D)">
+            <summary>
+            Does a Dot Operation Also know as an Inner Product.
+            </summary>
+            <param name="left">The left Vector4D operand.</param>
+            <param name="right">The right Vector4D operand.</param>
+            <returns>The Dot Product (Inner Product).</returns>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Dot_product"/></remarks>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.op_UnaryNegation(AdvanceMath.Vector4D)">
+            <summary>
+            Negates a Vector4D.
+            </summary>
+            <param name="source">The Vector4D to be Negated.</param>
+            <returns>The Negated Vector4D.</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.op_Equality(AdvanceMath.Vector4D,AdvanceMath.Vector4D)">
+            <summary>
+            Specifies whether the Vector4Ds contain the same coordinates.
+            </summary>
+            <param name="left">The left Vector4D to test.</param>
+            <param name="right">The right Vector4D to test.</param>
+            <returns>true if the Vector4Ds have the same coordinates; otherwise false</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.op_Inequality(AdvanceMath.Vector4D,AdvanceMath.Vector4D)">
+            <summary>
+            Specifies whether the Vector4Ds do not contain the same coordinates.
+            </summary>
+            <param name="left">The left Vector4D to test.</param>
+            <param name="right">The right Vector4D to test.</param>
+            <returns>true if the Vector4Ds do not have the same coordinates; otherwise false</returns>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.GetHashCode">
+            <summary>
+            	Provides a unique hash code based on the member variables of this
+            	class.  This should be done because the equality operators (==, !=)
+            	have been overriden by this class.
+            	<p/>
+            	The standard implementation is a simple XOR operation between all local
+            	member variables.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Vector4D.Equals(System.Object)">
+            <summary>
+            	Compares this Vector to another object.  This should be done because the 
+            	equality operators (==, !=) have been overriden by this class.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AdvanceMath.Vector4D.Magnitude">
+            <summary>
+            Gets or Sets the Magnitude (Length) of the Vector4D. 
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Length_of_a_vector"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.Vector4D.MagnitudeSq">
+            <summary>
+            Gets the Squared Magnitude of the Vector4D.
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Vector4D.Normalized">
+            <summary>
+            Gets the Normalized Vector4D. (Unit Vector)
+            </summary>
+            <remarks><seealso href="http://en.wikipedia.org/wiki/Vector_%28spatial%29#Unit_vector"/></remarks>
+        </member>
+        <member name="P:AdvanceMath.Vector4D.AdvanceMath#IAdvanceValueType#Count">
+            <summary>
+            The Number of Variables accesable though the indexer.
+            </summary>
+        </member>
+        <member name="T:AdvanceMath.Quaternion">
+            <summary>
+            	Summary description for Quaternion.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Quaternion.Identity">
+            <summary>
+               An Identity Quaternion.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Quaternion.Zero">
+            <summary>
+               A Quaternion With all elements set to 0;
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.Slerp(System.Double,AdvanceMath.Quaternion,AdvanceMath.Quaternion,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="time"></param>
+            <param name="quatA"></param>
+            <param name="quatB"></param>
+            <param name="useShortestPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.FromAngleAxis(System.Double,AdvanceMath.Vector3D)">
+            <summary>
+            Creates a Quaternion from a supplied angle and aXis.
+            </summary>
+            <param name="angle">Value of an angle in radians.</param>
+            <param name="aXis">ArbitrarY aXis vector.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.Squad(System.Double,AdvanceMath.Quaternion,AdvanceMath.Quaternion,AdvanceMath.Quaternion,AdvanceMath.Quaternion,System.Boolean)">
+            <summary>
+            	Performs spherical quadratic interpolation.
+            </summary>
+            <param name="t"></param>
+            <param name="p"></param>
+            <param name="a"></param>
+            <param name="b"></param>
+            <param name="q"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.#ctor(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            	Creates a new Quaternion.
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.FromEulerAngles(System.Double,System.Double,System.Double)">
+            <summary>
+            Combines the euler angles in the order Yaw, pitch, roll to create a rotation quaternion
+            </summary>
+            <param name="pitch"></param>
+            <param name="Yaw"></param>
+            <param name="roll"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.Dot(AdvanceMath.Quaternion)">
+            <summary>
+            Performs a Dot Product operation on 2 Quaternions.
+            </summary>
+            <param name="quat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.Normalize">
+            <summary>
+            	Normalizes elements of this quaterion to the range [0,1].
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.ToAngleAxis(System.Double@,AdvanceMath.Vector3D@)">
+            <summary>
+               
+            </summary>
+            <param name="angle"></param>
+            <param name="aXis"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.ToRotationMatrix">
+            <summary>
+            Gets a 3X3 rotation matriX from this Quaternion.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.Inverse">
+            <summary>
+            Computes the inverse of a Quaternion.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.ToAxis(AdvanceMath.Vector3D@,AdvanceMath.Vector3D@,AdvanceMath.Vector3D@)">
+            <summary>
+            
+            </summary>
+            <param name="XAxis"></param>
+            <param name="YAxis"></param>
+            <param name="ZAxis"></param>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.Log">
+            <summary>
+            	Calculates the logarithm of a Quaternion.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.Exp">
+            <summary>
+            	Calculates the Exponent of a Quaternion.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Quaternion.ToString">
+            <summary>
+            	Overrides the Object.ToString() method to provide a teXt representation of 
+            	a Quaternion.
+            </summary>
+            <returns>A string representation of a Quaternion.</returns>
+        </member>
+        <member name="P:AdvanceMath.Quaternion.Norm">
+            <summary>
+            	Squared 'length' of this quaternion.
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Quaternion.XAxis">
+            <summary>
+               Local X-aXis portion of this rotation.
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Quaternion.YAxis">
+            <summary>
+               Local Y-aXis portion of this rotation.
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Quaternion.ZAxis">
+            <summary>
+               Local Z-aXis portion of this rotation.
+            </summary>
+        </member>
+        <member name="T:AdvanceMath.Matrix2x3">
+            <summary>
+            A 2x3 matrix which can represent rotations around axes.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix2x3.RowCount">
+            <summary>
+            The number of rows.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix2x3.ColumnCount">
+            <summary>
+            The number of columns.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix2x3.Count">
+            <summary>
+            The number of Scalar values in the class.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix2x3.Size">
+            <summary>
+            The Size of the class in bytes;
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.Multiply(AdvanceMath.Matrix2x3,AdvanceMath.Matrix2x3)">
+            <summary>
+            Used to multiply (concatenate) two Matrix4x4s.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.Multiply(AdvanceMath.Matrix2x3,System.Double)">
+            <summary>
+            Used to multiply a Matrix2x3 object by a scalar value..
+            </summary>
+            <param name="left"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.Multiply(AdvanceMath.Matrix2x3,AdvanceMath.Matrix2x2)">
+            <summary>
+            Used to multiply (concatenate) a Matrix2x3 and a Matrix2x2.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.Multiply(AdvanceMath.Matrix2x2,AdvanceMath.Matrix2x3)">
+            <summary>
+            Used to multiply (concatenate) a Matrix2x3 and a Matrix2x2.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.Add(AdvanceMath.Matrix2x3,AdvanceMath.Matrix2x3)">
+            <summary>
+            Used to add two matrices together.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.Subtract(AdvanceMath.Matrix2x3,AdvanceMath.Matrix2x3)">
+            <summary>
+            Used to subtract two matrices.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.Negate(AdvanceMath.Matrix2x3)">
+            <summary>
+            Negates a Matrix2x3.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.#ctor(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Creates a new Matrix3 with all the specified parameters.
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.#ctor(AdvanceMath.Vector3D,AdvanceMath.Vector3D)">
+            <summary>
+            Create a new Matrix from 3 Vertex3 objects.
+            </summary>
+            <param name="xAxis"></param>
+            <param name="yAxis"></param>
+            <param name="zAxis"></param>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.op_Multiply(AdvanceMath.Matrix2x3,AdvanceMath.Matrix2x3)">
+            <summary>
+            Multiply (concatenate) two Matrix3 instances together.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.op_Multiply(AdvanceMath.Matrix2x2,AdvanceMath.Matrix2x3)">
+            <summary>
+            Multiply (concatenate) a Matrix2x3 and a Matrix2x2
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.op_Multiply(AdvanceMath.Matrix2x3,AdvanceMath.Matrix2x2)">
+            <summary>
+            Multiply (concatenate) a Matrix2x3 and a Matrix2x2
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.op_Multiply(AdvanceMath.Matrix2x3,System.Double)">
+            <summary>
+            Multiplies all the items in the Matrix3 by a scalar value.
+            </summary>
+            <param name="matrix"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.op_Multiply(System.Double,AdvanceMath.Matrix2x3)">
+            <summary>
+            Multiplies all the items in the Matrix3 by a scalar value.
+            </summary>
+            <param name="matrix"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.op_Addition(AdvanceMath.Matrix2x3,AdvanceMath.Matrix2x3)">
+            <summary>
+            Used to add two matrices together.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.op_Subtraction(AdvanceMath.Matrix2x3,AdvanceMath.Matrix2x3)">
+            <summary>
+            Used to subtract two matrices.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.op_UnaryNegation(AdvanceMath.Matrix2x3)">
+            <summary>
+            Negates all the items in the Matrix.
+            </summary>
+            <param name="matrix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x3.op_Equality(AdvanceMath.Matrix2x3,AdvanceMath.Matrix2x3)">
+            <summary>
+            Test two matrices for (value) equality
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AdvanceMath.Matrix2x3.Transposed">
+            <summary>
+            Swap the rows of the matrix with the columns.
+            </summary>
+            <returns>A transposed Matrix.</returns>
+        </member>
+        <member name="T:AdvanceMath.Matrix2x2">
+            <summary>
+            A 2x2 matrix which can represent rotations for 2D vectors.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix2x2.RowCount">
+            <summary>
+            The number of rows.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix2x2.ColumnCount">
+            <summary>
+            The number of columns.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix2x2.Count">
+            <summary>
+            The number of Scalar values in the class.
+            </summary>
+        </member>
+        <member name="F:AdvanceMath.Matrix2x2.Size">
+            <summary>
+            The Size of the class in bytes;
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.Multiply(AdvanceMath.Matrix2x2,AdvanceMath.Matrix2x2)">
+            <summary>
+            	Used to multiply (concatenate) two Matrix4x4s.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.Multiply(AdvanceMath.Matrix2x2,System.Double)">
+            <summary>
+            	Used to multiply a Matrix2x2 object by a scalar value..
+            </summary>
+            <param name="left"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.Add(AdvanceMath.Matrix2x2,AdvanceMath.Matrix2x2)">
+            <summary>
+            	Used to add two matrices together.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.Subtract(AdvanceMath.Matrix2x2,AdvanceMath.Matrix2x2)">
+            <summary>
+            	Used to subtract two matrices.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.Negate(AdvanceMath.Matrix2x2)">
+            <summary>
+            Negates a Matrix2x2.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.#ctor(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            	Creates a new Matrix3 with all the specified parameters.
+            </summary>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.#ctor(AdvanceMath.Vector2D,AdvanceMath.Vector2D)">
+            <summary>
+            Create a new Matrix from 3 Vertex3 objects.
+            </summary>
+            <param name="xAxis"></param>
+            <param name="yAxis"></param>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.op_Multiply(AdvanceMath.Matrix2x2,AdvanceMath.Matrix2x2)">
+            <summary>
+            Multiply (concatenate) two Matrix3 instances together.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.op_Addition(AdvanceMath.Matrix2x2,AdvanceMath.Matrix2x2)">
+            <summary>
+            	Used to add two matrices together.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.op_Subtraction(AdvanceMath.Matrix2x2,AdvanceMath.Matrix2x2)">
+            <summary>
+            	Used to subtract two matrices.
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.op_Multiply(AdvanceMath.Matrix2x2,System.Double)">
+            <summary>
+            Multiplies all the items in the Matrix3 by a scalar value.
+            </summary>
+            <param name="matrix"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.op_Multiply(System.Double,AdvanceMath.Matrix2x2)">
+            <summary>
+            Multiplies all the items in the Matrix3 by a scalar value.
+            </summary>
+            <param name="matrix"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.op_UnaryNegation(AdvanceMath.Matrix2x2)">
+            <summary>
+            Negates all the items in the Matrix.
+            </summary>
+            <param name="matrix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdvanceMath.Matrix2x2.op_Equality(AdvanceMath.Matrix2x2,AdvanceMath.Matrix2x2)">
+            <summary>
+            	Test two matrices for (value) equality
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AdvanceMath.Matrix2x2.Rx">
+            <summary>
+            The X Row or row zero.
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Matrix2x2.Ry">
+            <summary>
+            The Y Row or row one.
+            </summary>
+        </member>
+        <member name="P:AdvanceMath.Matrix2x2.Transposed">
+            <summary>
+            Swap the rows of the matrix with the columns.
+            </summary>
+            <returns>A transposed Matrix.</returns>
+        </member>
+    </members>
+</doc>

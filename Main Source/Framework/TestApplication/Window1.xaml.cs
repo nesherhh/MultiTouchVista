@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using Multitouch.Framework.WPF.Input;
@@ -21,6 +23,14 @@ namespace TestApplication
 			Contacts2 = new ObservableCollection<Contact>();
 			DataContext = this;
 			InitializeComponent();
+		}
+		protected override void OnInitialized(EventArgs e)
+		{
+			string picturesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+			string[] pictures = Directory.GetFiles(picturesPath, "*.jpg");
+			itemsControl.ItemsSource = pictures.Take(5);
+
+			base.OnInitialized(e);
 		}
 
 		private void list1_NewContact(object sender, ContactEventArgs e)
