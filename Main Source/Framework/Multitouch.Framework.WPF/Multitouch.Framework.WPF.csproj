@@ -87,6 +87,7 @@
     <Compile Include="Input\Contact.cs" />
     <Compile Include="Input\Extensions.cs" />
     <Compile Include="Input\InputElement.cs" />
+    <Compile Include="Input\MultitouchDeviceManager.cs" />
     <Compile Include="Input\MultitouchInputProvider.cs" />
     <Compile Include="Input\MultitouchLogic.cs" />
     <Compile Include="Input\ContactEventArgs.cs" />

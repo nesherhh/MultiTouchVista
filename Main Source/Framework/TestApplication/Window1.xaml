@@ -8,6 +8,7 @@
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
 			<ColumnDefinition/>
+			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="300"/>
@@ -26,8 +27,12 @@
 				 mt:MultitouchScreen.ContactMoved="list2_ContactMoved"
 				 mt:MultitouchScreen.ContactRemoved="list2_ContactRemoved"
 				 mt:MultitouchScreen.NewContact="list2_NewContact"/>
+		<UniformGrid Grid.Column="3" Columns="3" Rows="3">
+			<Button Content="click me" Click="Button_Click"/>
+		</UniformGrid>
 		<ItemsControl x:Name="itemsControl"
-					  Grid.Row="1" Grid.ColumnSpan="2">
+					  Grid.Row="1" Grid.ColumnSpan="3"
+					  ItemsSource="{Binding Pictures}">
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
 					<mt:TouchablePanel/>
@@ -35,7 +40,11 @@
 			</ItemsControl.ItemsPanel>
 			<ItemsControl.Resources>
 				<DataTemplate DataType="{x:Type sys:String}">
-					<Image Source="{Binding}" Width="640" Height="480"/>
+					<Border BorderBrush="Black" BorderThickness="1">
+						<Border BorderBrush="White" BorderThickness="10">
+							<Image Source="{Binding}" Width="480"/>
+						</Border>
+					</Border>
 				</DataTemplate>
 			</ItemsControl.Resources>
 		</ItemsControl>
