@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TouchLib</RootNamespace>
-    <AssemblyName>TouchLib</AssemblyName>
+    <AssemblyName>TouchLibProvider</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -35,10 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CsTI, Version=1.0.3031.24010, Culture=neutral, PublicKeyToken=00398046511f1e5f, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\MultiTouchLib\multitouch\dotNetMTF\CsTI\CsTI\Release\CsTI.dll</HintPath>
-    </Reference>
+    <Reference Include="CsTId, Version=1.0.3045.34902, Culture=neutral, processorArchitecture=x86" />
     <Reference Include="Multitouch.AddInView, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Output\AddInViews\Multitouch.AddInView.dll</HintPath>
@@ -51,6 +48,8 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -67,7 +66,7 @@
     <Compile Include="Source\TouchLibContactChangedEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="configapp.exe">
+    <None Include="configappd.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="cv100.dll">
@@ -86,6 +85,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="DSVL.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DSVLd.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="DSVL_config.xml">
@@ -109,6 +111,8 @@
     <None Include="libtiff3.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Lib\CsTId.dll" />
+    <Content Include="Lib\CsTId.pdb" />
     <None Include="ml100.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -121,10 +125,16 @@
     <None Include="msvcr90.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="touchlib.dll">
+    <None Include="touchlibd.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TouchlibWrapper.dll">
+    <None Include="touchlibd.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TouchlibWrapperd.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TouchlibWrapperd.pdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="VideoWrapper.dll">

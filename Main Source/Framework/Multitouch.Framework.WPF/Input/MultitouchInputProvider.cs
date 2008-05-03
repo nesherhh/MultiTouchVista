@@ -38,7 +38,8 @@ namespace Multitouch.Framework.WPF.Input
 
 		public void ProcessContactChange(int id, double x, double y, double width, double height, ContactState state)
 		{
-			RawMultitouchReport e = new RawMultitouchReport(multitouchLogic.CurrentDevice, source, id, x, y, width, height, state, Environment.TickCount);
+			MultitouchDevice device = multitouchLogic.DeviceManager.GetDevice(id, state);
+			RawMultitouchReport e = new RawMultitouchReport(device, source, id, x, y, width, height, state, Environment.TickCount);
 			lock (lockContactsQueue)
 			{
 				contactsQueue.Enqueue(e);

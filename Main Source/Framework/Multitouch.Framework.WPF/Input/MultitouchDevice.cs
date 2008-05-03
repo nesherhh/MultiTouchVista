@@ -44,7 +44,7 @@ namespace Multitouch.Framework.WPF.Input
 
 		public IDictionary<int, Contact> AllContacts { get; private set; }
 
-		public MultitouchDevice()
+		internal MultitouchDevice()
 		{
 			AllContacts = new Dictionary<int, Contact>();
 
@@ -190,6 +190,8 @@ namespace Multitouch.Framework.WPF.Input
 				touchCapture = element;
 				captureMode = mode;
 			}
+			if (element == null)
+				touchCapture = null;
 		}
 
 		public IDictionary<int, Contact> GetContacts(UIElement element, MatchCriteria criteria)

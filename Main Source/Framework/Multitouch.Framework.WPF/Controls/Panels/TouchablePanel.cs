@@ -38,7 +38,7 @@ namespace Multitouch.Framework.WPF.Controls
 			if (!DesignerProperties.GetIsInDesignMode(this))
 				timer.IsRunning = true;
 
-			AddHandler(MultitouchScreen.NewContactEvent, (ContactEventHandler)OnNewContact);
+			AddHandler(MultitouchScreen.NewContactEvent, (NewContactEventHandler)OnNewContact);
 			AddHandler(MultitouchScreen.ContactMovedEvent, (ContactEventHandler)OnContactMoved);
 			AddHandler(MultitouchScreen.ContactRemovedEvent, (ContactEventHandler)OnContactRemoved);
 			AddHandler(MultitouchScreen.ContactLeaveEvent, (ContactEventHandler)OnContactRemoved);
@@ -70,7 +70,7 @@ namespace Multitouch.Framework.WPF.Controls
 			}
 		}
 
-		void OnNewContact(object sender, ContactEventArgs e)
+		void OnNewContact(object sender, NewContactEventArgs e)
 		{
 			Point position = e.GetPosition(this);
 			HitTestResult hitTestResult = VisualTreeHelper.HitTest(this, position);

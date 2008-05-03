@@ -20,7 +20,7 @@ namespace Multitouch.Framework.WPF.Input
 
 		InputManager inputManager;
 		int doubleTapDeltaTime;
-		public MultitouchDevice CurrentDevice { get; private set; }
+		internal MultitouchDeviceManager DeviceManager { get; private set; }
 
 		public static MultitouchLogic Current
 		{
@@ -41,7 +41,8 @@ namespace Multitouch.Framework.WPF.Input
 		public MultitouchLogic(InputManager inputManager)
 		{
 			doubleTapDeltaTime = 800;
-			CurrentDevice = new MultitouchDevice();
+            
+			DeviceManager = new MultitouchDeviceManager();
 
 			this.inputManager = inputManager;
 			this.inputManager.PreProcessInput += inputManager_PreProcessInput;
@@ -113,7 +114,7 @@ namespace Multitouch.Framework.WPF.Input
 					else
 					{
 						multitouchDevice.TapCount = 1;
-						multitouchDevice.LastTapPoint = new Point(lastTapPoint.X, lastTapPoint.Y);
+						multitouchDevice.LastTapPoint = new Point(position.X, position.Y);
 						multitouchDevice.LastTapTime = newContact.Timestamp;
 					}
 				}
@@ -232,7 +233,6 @@ namespace Multitouch.Framework.WPF.Input
 					inputManager.ProcessInput(args);
 				}
 			}
-			args.MultitouchDevice.Capture(o as IInputElement);
 		}
 	}
 }

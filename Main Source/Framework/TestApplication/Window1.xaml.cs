@@ -17,23 +17,35 @@ namespace TestApplication
 		public ObservableCollection<Contact> Contacts1 { get; private set; }
 		public ObservableCollection<Contact> Contacts2 { get; private set; }
 
+		public static readonly DependencyPropertyKey PicturesPropertyKey = DependencyProperty.RegisterReadOnly("Pictures",
+			typeof(ObservableCollection<string>), typeof(Window1), new PropertyMetadata(null));
+		public static readonly DependencyProperty PicturesProperty = PicturesPropertyKey.DependencyProperty;
+
 		public Window1()
 		{
 			Contacts1 = new ObservableCollection<Contact>();
 			Contacts2 = new ObservableCollection<Contact>();
+			SetValue(PicturesPropertyKey, new ObservableCollection<string>());
 			DataContext = this;
 			InitializeComponent();
 		}
+
+		public ObservableCollection<string> Pictures
+		{
+			get { return (ObservableCollection<string>)GetValue(PicturesProperty); }
+		}
+
 		protected override void OnInitialized(EventArgs e)
 		{
 			string picturesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
 			string[] pictures = Directory.GetFiles(picturesPath, "*.jpg");
-			itemsControl.ItemsSource = pictures.Take(5);
+			foreach (string file in pictures.Take(5))
+				Pictures.Add(file);
 
 			base.OnInitialized(e);
 		}
 
-		private void list1_NewContact(object sender, ContactEventArgs e)
+		private void list1_NewContact(object sender, NewContactEventArgs e)
 		{
 			IDictionary<int, Contact> contacts = e.GetContacts(list1, MatchCriteria.LogicalParent);
 			foreach (KeyValuePair<int, Contact> pair in contacts)
@@ -70,11 +82,11 @@ namespace TestApplication
 				Contacts2.Remove(contact);
 		}
 
-		private void list2_NewContact(object sender, ContactEventArgs e)
+		private void list2_NewContact(object sender, NewContactEventArgs e)
 		{
 			IDictionary<int, Contact> contacts = e.GetContacts(list2, MatchCriteria.LogicalParent);
 			foreach (KeyValuePair<int, Contact> pair in contacts)
-					Contacts2.Add(pair.Value);
+				Contacts2.Add(pair.Value);
 		}
 
 		bool IsParent(UIElement element, UIElement parent)
@@ -83,6 +95,11 @@ namespace TestApplication
 			while (current != null && current != parent)
 				current = VisualTreeHelper.GetParent(current) as UIElement;
 			return current != null;
+		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("I was clicked");
 		}
 	}
 }

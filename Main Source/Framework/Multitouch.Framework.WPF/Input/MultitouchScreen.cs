@@ -5,19 +5,21 @@ using System.Windows;
 namespace Multitouch.Framework.WPF.Input
 {
 	public delegate void ContactEventHandler(object sender, ContactEventArgs e);
+	public delegate void NewContactEventHandler(object sender, NewContactEventArgs e);
+	
 	delegate void RawMultitouchReportHandler(object sender, RawMultitouchReport e);
 
 	public static class MultitouchScreen
 	{
 		public static readonly RoutedEvent PreviewNewContactEvent = EventManager.RegisterRoutedEvent("PreviewNewContact",
-			RoutingStrategy.Tunnel, typeof(ContactEventHandler), typeof(MultitouchScreen));
+			RoutingStrategy.Tunnel, typeof(NewContactEventHandler), typeof(MultitouchScreen));
 		public static readonly RoutedEvent PreviewContactRemovedEvent = EventManager.RegisterRoutedEvent("PreviewContactRemoved",
 			RoutingStrategy.Tunnel, typeof(ContactEventHandler), typeof(MultitouchScreen));
 		public static readonly RoutedEvent PreviewContactMovedEvent = EventManager.RegisterRoutedEvent("PreviewContactMoved",
 			RoutingStrategy.Tunnel, typeof(ContactEventHandler), typeof(MultitouchScreen));
 		
 		public static readonly RoutedEvent NewContactEvent = EventManager.RegisterRoutedEvent("NewContact", RoutingStrategy.Bubble,
-			typeof(ContactEventHandler), typeof(MultitouchScreen));
+			typeof(NewContactEventHandler), typeof(MultitouchScreen));
 		public static readonly RoutedEvent ContactRemovedEvent = EventManager.RegisterRoutedEvent("ContactRemoved", RoutingStrategy.Bubble,
 			typeof(ContactEventHandler), typeof(MultitouchScreen));
 		public static readonly RoutedEvent ContactMovedEvent = EventManager.RegisterRoutedEvent("ContactMoved", RoutingStrategy.Bubble,
@@ -40,12 +42,12 @@ namespace Multitouch.Framework.WPF.Input
 														new[] { typeof(DependencyObject), typeof(RoutedEvent), typeof(Delegate) }, null);
 		}
 
-		public static void AddNewContactHandler(DependencyObject element, ContactEventHandler handler)
+		public static void AddNewContactHandler(DependencyObject element, NewContactEventHandler handler)
 		{
 			addHandlerMethod.Invoke(null, new object[] { element, NewContactEvent, handler });
 		}
 
-		public static void RemoveNewContactHandler(DependencyObject element, ContactEventHandler handler)
+		public static void RemoveNewContactHandler(DependencyObject element, NewContactEventHandler handler)
 		{
 			removeHandlerMethod.Invoke(null, new object[] { element, NewContactEvent, handler });
 		}
