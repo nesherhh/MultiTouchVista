@@ -1,12 +1,12 @@
 using System;
-using System.Reflection;
 using System.Windows;
+using Phydeaux.Utilities;
 
 namespace Multitouch.Framework.WPF.Input
 {
 	public delegate void ContactEventHandler(object sender, ContactEventArgs e);
 	public delegate void NewContactEventHandler(object sender, NewContactEventArgs e);
-	
+
 	delegate void RawMultitouchReportHandler(object sender, RawMultitouchReport e);
 
 	public static class MultitouchScreen
@@ -17,7 +17,7 @@ namespace Multitouch.Framework.WPF.Input
 			RoutingStrategy.Tunnel, typeof(ContactEventHandler), typeof(MultitouchScreen));
 		public static readonly RoutedEvent PreviewContactMovedEvent = EventManager.RegisterRoutedEvent("PreviewContactMoved",
 			RoutingStrategy.Tunnel, typeof(ContactEventHandler), typeof(MultitouchScreen));
-		
+
 		public static readonly RoutedEvent NewContactEvent = EventManager.RegisterRoutedEvent("NewContact", RoutingStrategy.Bubble,
 			typeof(NewContactEventHandler), typeof(MultitouchScreen));
 		public static readonly RoutedEvent ContactRemovedEvent = EventManager.RegisterRoutedEvent("ContactRemoved", RoutingStrategy.Bubble,
@@ -30,46 +30,63 @@ namespace Multitouch.Framework.WPF.Input
 		public static readonly RoutedEvent ContactLeaveEvent = EventManager.RegisterRoutedEvent("ContactLeave", RoutingStrategy.Bubble,
 			typeof(ContactEventHandler), typeof(MultitouchScreen));
 
-		static MethodInfo addHandlerMethod;
-		static MethodInfo removeHandlerMethod;
+		static StaticProc<UIElement, DependencyObject, RoutedEvent, Delegate> addHandlerMethod;
+		static StaticProc<UIElement, DependencyObject, RoutedEvent, Delegate> removeHandlerMethod;
 
 		static MultitouchScreen()
 		{
-			Type uiElementType = typeof(UIElement);
-			addHandlerMethod = uiElementType.GetMethod("AddHandler", BindingFlags.NonPublic | BindingFlags.Static, null,
-														new[] { typeof(DependencyObject), typeof(RoutedEvent), typeof(Delegate) }, null);
-			removeHandlerMethod = uiElementType.GetMethod("RemoveHandler", BindingFlags.NonPublic | BindingFlags.Static, null,
-														new[] { typeof(DependencyObject), typeof(RoutedEvent), typeof(Delegate) }, null);
+			addHandlerMethod = Dynamic<UIElement>.Static.Procedure.Explicit<DependencyObject, RoutedEvent, Delegate>.CreateDelegate("AddHandler");
+			removeHandlerMethod = Dynamic<UIElement>.Static.Procedure.Explicit<DependencyObject, RoutedEvent, Delegate>.CreateDelegate("RemoveHandler");
 		}
 
 		public static void AddNewContactHandler(DependencyObject element, NewContactEventHandler handler)
 		{
-			addHandlerMethod.Invoke(null, new object[] { element, NewContactEvent, handler });
+			addHandlerMethod.Invoke(element, NewContactEvent, handler);
 		}
 
 		public static void RemoveNewContactHandler(DependencyObject element, NewContactEventHandler handler)
 		{
-			removeHandlerMethod.Invoke(null, new object[] { element, NewContactEvent, handler });
+			removeHandlerMethod.Invoke(element, NewContactEvent, handler);
 		}
 
 		public static void AddContactMovedHandler(DependencyObject element, ContactEventHandler handler)
 		{
-			addHandlerMethod.Invoke(null, new object[] { element, ContactMovedEvent, handler });
+			addHandlerMethod.Invoke(element, ContactMovedEvent, handler);
 		}
 
 		public static void RemoveContactMovedHandler(DependencyObject element, ContactEventHandler handler)
 		{
-			removeHandlerMethod.Invoke(null, new object[] { element, ContactMovedEvent, handler });
+			removeHandlerMethod.Invoke(element, ContactMovedEvent, handler);
 		}
 
 		public static void AddContactRemovedHandler(DependencyObject element, ContactEventHandler handler)
 		{
-			addHandlerMethod.Invoke(null, new object[] { element, ContactRemovedEvent, handler });
+			addHandlerMethod.Invoke(element, ContactRemovedEvent, handler);
 		}
 
 		public static void RemoveContactRemovedHandler(DependencyObject element, ContactEventHandler handler)
 		{
-			removeHandlerMethod.Invoke(null, new object[] { element, ContactRemovedEvent, handler });
+			removeHandlerMethod.Invoke(element, ContactRemovedEvent, handler);
+		}
+
+		public static void AddContactEnterHandler(DependencyObject element, ContactEventHandler handler)
+		{
+			addHandlerMethod.Invoke(element, ContactEnterEvent, handler);
+		}
+
+		public static void RemoveContactEnterHandler(DependencyObject element, ContactEventHandler handler)
+		{
+			removeHandlerMethod.Invoke(element, ContactEnterEvent, handler);
+		}
+
+		public static void AddContactLeaveHandler(DependencyObject element, ContactEventHandler handler)
+		{
+			addHandlerMethod.Invoke(element, ContactLeaveEvent, handler);
+		}
+
+		public static void RemoveContactLeaveHandler(DependencyObject element, ContactEventHandler handler)
+		{
+			removeHandlerMethod.Invoke(element, ContactLeaveEvent, handler);
 		}
 	}
 }

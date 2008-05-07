@@ -30,7 +30,7 @@ namespace Multitouch.Framework.WPF.Input
 				{
 					lock (lockCurrent)
 					{
-						if(current == null)
+						if (current == null)
 							current = new MultitouchLogic(InputManager.Current);
 					}
 				}
@@ -41,18 +41,20 @@ namespace Multitouch.Framework.WPF.Input
 		public MultitouchLogic(InputManager inputManager)
 		{
 			doubleTapDeltaTime = 800;
-            
-			DeviceManager = new MultitouchDeviceManager();
 
+			DeviceManager = new MultitouchDeviceManager();
+			
 			this.inputManager = inputManager;
 			this.inputManager.PreProcessInput += inputManager_PreProcessInput;
 			this.inputManager.PreNotifyInput += inputManager_PreNotifyInput;
 			this.inputManager.PostProcessInput += inputManager_PostProcessInput;
 		}
 
+
 		void inputManager_PreProcessInput(object sender, PreProcessInputEventArgs e)
 		{
-			if (e.StagingItem.Input.RoutedEvent == PreviewRawInputEvent)
+			RoutedEvent routedEvent = e.StagingItem.Input.RoutedEvent;
+			if (routedEvent == PreviewRawInputEvent)
 			{
 				RawMultitouchReport report = e.StagingItem.Input as RawMultitouchReport;
 				if (report != null && !report.Handled)
@@ -65,17 +67,23 @@ namespace Multitouch.Framework.WPF.Input
 						multitouchDevice.AllContacts.Remove(report.Contact.Id);
 
 					Point clientPoint = report.InputSource.RootVisual.PointFromScreen(new Point(report.Contact.X, report.Contact.Y));
-                    HitTestResult test = VisualTreeHelper.HitTest(report.InputSource.RootVisual, clientPoint);
+					HitTestResult test = VisualTreeHelper.HitTest(report.InputSource.RootVisual, clientPoint);
 					if (test != null)
 					{
 						IInputElement hitTest = test.VisualHit as IInputElement;
-						if (report.MultitouchDevice.Captured != hitTest)
-							UpdateCapture((DependencyObject)hitTest, e);
-						report.Contact.SetElement((UIElement)test.VisualHit);
+						report.Source = hitTest;
 					}
 				}
 			}
-			Debug.Assert(e.StagingItem.Input.RoutedEvent != null, "routed event null");
+			else if (!(routedEvent == RawInputEvent || routedEvent == MultitouchScreen.ContactEnterEvent ||
+				routedEvent == MultitouchScreen.ContactLeaveEvent ||
+				routedEvent == MultitouchScreen.ContactMovedEvent || routedEvent == MultitouchScreen.ContactRemovedEvent ||
+				routedEvent == MultitouchScreen.NewContactEvent || routedEvent == MultitouchScreen.PreviewContactMovedEvent ||
+				routedEvent == MultitouchScreen.PreviewContactRemovedEvent || routedEvent == MultitouchScreen.PreviewNewContactEvent))
+			{
+				e.Cancel();
+			}
+			Debug.Assert(routedEvent != null, "routed event null");
 		}
 
 		void inputManager_PreNotifyInput(object sender, NotifyInputEventArgs e)
@@ -90,7 +98,7 @@ namespace Multitouch.Framework.WPF.Input
 
 					Point position = multitouchDevice.GetPosition(null);
 					IInputElement target = multitouchDevice.FindTarget(multitouchDevice.ActiveSource, position);
-					multitouchDevice.ChangeOver(target);
+					multitouchDevice.ChangeOver(target, report);
 				}
 			}
 
@@ -107,7 +115,7 @@ namespace Multitouch.Framework.WPF.Input
 
 					Size doubleTapSize = new Size(25, 25);
 					bool isSameSpot = (Math.Abs(position.X - lastTapPoint.X) < doubleTapSize.Width) &&
-					                  (Math.Abs(position.Y - lastTapPoint.Y) < doubleTapSize.Height);
+									  (Math.Abs(position.Y - lastTapPoint.Y) < doubleTapSize.Height);
 
 					if (timeSpan < doubleTapDeltaTime && isSameSpot)
 						multitouchDevice.TapCount++;
@@ -146,7 +154,7 @@ namespace Multitouch.Framework.WPF.Input
 		void PromoteRawToPreview(RawMultitouchReport report, ProcessInputEventArgs e)
 		{
 			RoutedEvent routedEvent = GetPreviewEventFromRawMultitouchState(report.Contact.State);
-			if(routedEvent != null)
+			if (routedEvent != null)
 			{
 				ContactEventArgs args;
 				if (routedEvent == MultitouchScreen.PreviewNewContactEvent)
@@ -171,10 +179,10 @@ namespace Multitouch.Framework.WPF.Input
 
 		void PromotePreviewToMain(ProcessInputEventArgs e)
 		{
-			if(!e.StagingItem.Input.Handled)
+			if (!e.StagingItem.Input.Handled)
 			{
 				RoutedEvent mainEvent = GetMainEventFromPreviewEvent(e.StagingItem.Input.RoutedEvent);
-				if(mainEvent != null)
+				if (mainEvent != null)
 				{
 					ContactEventArgs previewArgs = (ContactEventArgs)e.StagingItem.Input;
 					MultitouchDevice multitouchDevice = previewArgs.MultitouchDevice;
@@ -201,38 +209,6 @@ namespace Multitouch.Framework.WPF.Input
 			if (routedEvent == MultitouchScreen.PreviewNewContactEvent)
 				return MultitouchScreen.NewContactEvent;
 			return null;
-		}
-
-		void UpdateCapture(DependencyObject o, PreProcessInputEventArgs e)
-		{
-			RawMultitouchReport report = (RawMultitouchReport)e.StagingItem.Input;
-
-			ContactEventArgs args = new ContactEventArgs(report.MultitouchDevice, report, report.Timestamp);
-			if(o == null && args.MultitouchDevice.Captured != null)
-			{
-				args.RoutedEvent = MultitouchScreen.ContactLeaveEvent;
-				args.Source = args.MultitouchDevice.Captured;
-				args.MultitouchDevice.Capture(null);
-				e.StagingItem.Input.Handled = true;
-				inputManager.ProcessInput(args);
-			}
-			if(o != null)
-			{
-				if(args.MultitouchDevice.Captured != null && args.MultitouchDevice.Captured != o)
-				{
-					args.RoutedEvent = MultitouchScreen.ContactLeaveEvent;
-					args.Source = args.MultitouchDevice.Captured;
-					args.MultitouchDevice.Capture(null);
-					inputManager.ProcessInput(args);
-				}
-				if(args.MultitouchDevice.Captured == null)
-				{
-					args.MultitouchDevice.Capture((IInputElement)o);
-					args.RoutedEvent = MultitouchScreen.ContactEnterEvent;
-					args.Source = args.MultitouchDevice.Captured;
-					inputManager.ProcessInput(args);
-				}
-			}
 		}
 	}
 }

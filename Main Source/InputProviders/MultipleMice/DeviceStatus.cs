@@ -16,7 +16,7 @@ namespace MultipleMice
 		public DeviceStatus(RawDevice device)
 		{
 			this.device = device;
-			//debugCursor = new DebugCursor();
+			debugCursor = new DebugCursor();
 			Win32.POINT position = Win32.GetCursorPosition();
 			X = position.x;
 			Y = position.y;

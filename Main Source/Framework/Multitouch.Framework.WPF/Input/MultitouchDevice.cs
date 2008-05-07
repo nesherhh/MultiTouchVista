@@ -19,8 +19,8 @@ namespace Multitouch.Framework.WPF.Input
 		Point rawPosition;
 		IInputElement target;
 		PresentationSource source;
-		CaptureMode captureMode;
-		IInputElement touchCapture;
+		CaptureMode _captureMode;
+		IInputElement _capture;
 		StaticFunc<MouseDevice, IInputElement, Point, PresentationSource> globalHitTest;
 
 		internal Point LastTapPoint { get; set; }
@@ -39,15 +39,16 @@ namespace Multitouch.Framework.WPF.Input
 
 		public IInputElement Captured
 		{
-			get { return touchCapture; }
+			get { return _capture; }
 		}
 
-		public IDictionary<int, Contact> AllContacts { get; private set; }
+		public IDictionary<int, Contact> AllContacts
+		{
+			get { return ContactsManager.Instance.AllContacts; }
+		}
 
 		internal MultitouchDevice()
 		{
-			AllContacts = new Dictionary<int, Contact>();
-
 			globalHitTest = Dynamic<MouseDevice>.Static.Function<IInputElement>.Explicit<Point, PresentationSource>.CreateDelegate(
 				"GlobalHitTest", new[] {typeof(Point), typeof(PresentationSource)});
 		}
@@ -88,7 +89,7 @@ namespace Multitouch.Framework.WPF.Input
 		internal IInputElement FindTarget(PresentationSource inputSource, Point position)
 		{
 			IInputElement touchOver = null;
-			switch (captureMode)
+			switch (_captureMode)
 			{
 				case CaptureMode.None:
 					{
@@ -98,11 +99,11 @@ namespace Multitouch.Framework.WPF.Input
 					}
 					break;
 				case CaptureMode.Element:
-					touchOver = touchCapture;
+					touchOver = _capture;
 					break;
 				case CaptureMode.SubTree:
 					{
-						IInputElement capture = InputElement.GetContainingInputElement(touchCapture as DependencyObject);
+						IInputElement capture = InputElement.GetContainingInputElement(_capture as DependencyObject);
 						if (capture != null && inputSource != null)
 							touchOver = GlobalHitTest(inputSource, position);
 
@@ -128,10 +129,10 @@ namespace Multitouch.Framework.WPF.Input
 							}
 
 							if (inputElementTest != capture)
-								touchOver = touchCapture;
+								touchOver = _capture;
 						}
 						else
-							touchOver = touchCapture;
+							touchOver = _capture;
 					}
 					break;
 			}
@@ -143,10 +144,28 @@ namespace Multitouch.Framework.WPF.Input
 			return globalHitTest.Invoke(position, inputSource);
 		}
 
-		internal void ChangeOver(IInputElement newTarget)
+		internal void ChangeOver(IInputElement newTarget, RawMultitouchReport report)
 		{
+			IInputElement oldTarget = target;
 			if (Target != newTarget)
+			{
 				target = newTarget;
+
+				if (oldTarget != null)
+				{
+					ContactEventArgs args = new ContactEventArgs(this, report, Environment.TickCount);
+					args.RoutedEvent = MultitouchScreen.ContactLeaveEvent;
+					args.Source = oldTarget;
+					oldTarget.RaiseEvent(args);
+				}
+				if (target != null)
+				{
+					ContactEventArgs args = new ContactEventArgs(this, report, Environment.TickCount);
+					args.RoutedEvent = MultitouchScreen.ContactEnterEvent;
+					args.Source = target;
+					target.RaiseEvent(args);
+				}
+			}
 		}
 
 		public void Capture(IInputElement element)
@@ -157,9 +176,9 @@ namespace Multitouch.Framework.WPF.Input
 		public void Capture(IInputElement element, CaptureMode mode)
 		{
 			if(element == null)
-				captureMode = CaptureMode.None;
+				_captureMode = CaptureMode.None;
 			if (mode == CaptureMode.None)
-				element = null;
+				_capture = null;
 			DependencyObject o = element as DependencyObject;
 			if (o != null && !InputElement.IsValid(element))
 				throw new InvalidOperationException("invalid input element");
@@ -187,11 +206,9 @@ namespace Multitouch.Framework.WPF.Input
 
 			if(success)
 			{
-				touchCapture = element;
-				captureMode = mode;
+				_capture = element;
+				_captureMode = mode;
 			}
-			if (element == null)
-				touchCapture = null;
 		}
 
 		public IDictionary<int, Contact> GetContacts(UIElement element, MatchCriteria criteria)
@@ -199,13 +216,13 @@ namespace Multitouch.Framework.WPF.Input
 			Dictionary<int, Contact> result;
 			if(criteria == MatchCriteria.Exact)
 			{
-				result = (from contact in AllContacts.Values
+				result = (from contact in ContactsManager.Instance.AllContacts.Values
 				          where element == contact.Element
 				          select contact).ToDictionary(contact => contact.Id);
 			}
 			else if(criteria == MatchCriteria.LogicalParent)
 			{
-				result = (from contact in AllContacts.Values
+				result = (from contact in ContactsManager.Instance.AllContacts.Values
 						  where IsParent(contact.Element, element)
 						  select contact).ToDictionary(contact => contact.Id);
 			}

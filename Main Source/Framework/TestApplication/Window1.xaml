@@ -29,6 +29,7 @@
 				 mt:MultitouchScreen.NewContact="list2_NewContact"/>
 		<UniformGrid Grid.Column="3" Columns="3" Rows="3">
 			<Button Content="click me" Click="Button_Click"/>
+			<ScrollBar Orientation="Horizontal"/>
 		</UniformGrid>
 		<ItemsControl x:Name="itemsControl"
 					  Grid.Row="1" Grid.ColumnSpan="3"
@@ -42,7 +43,7 @@
 				<DataTemplate DataType="{x:Type sys:String}">
 					<Border BorderBrush="Black" BorderThickness="1">
 						<Border BorderBrush="White" BorderThickness="10">
-							<Image Source="{Binding}" Width="480"/>
+							<Image Source="{Binding}" MaxWidth="480"/>
 						</Border>
 					</Border>
 				</DataTemplate>

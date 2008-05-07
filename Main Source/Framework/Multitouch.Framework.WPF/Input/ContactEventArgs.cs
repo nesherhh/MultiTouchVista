@@ -33,14 +33,29 @@ namespace Multitouch.Framework.WPF.Input
 			return MultitouchDevice.GetPosition(relativeTo);
 		}
 
+		public IInputElement Captured
+		{
+			get { return MultitouchDevice.Captured; }
+		}
+
 		public IDictionary<int, Contact> AllContacts
 		{
 			get { return new ReadOnlyDictionary<int, Contact>(MultitouchDevice.AllContacts); }
 		}
 
-		public IDictionary<int, Contact> GetContacts(UIElement overElement, MatchCriteria criteria)
+		public IDictionary<int, Contact> GetContacts(UIElement forElement, MatchCriteria criteria)
 		{
-			return new ReadOnlyDictionary<int, Contact>(MultitouchDevice.GetContacts(overElement, criteria));
+			return new ReadOnlyDictionary<int, Contact>(MultitouchDevice.GetContacts(forElement, criteria));
+		}
+
+		public IDictionary<int, Contact> GetContacts(UIElement forElement)
+		{
+			return GetContacts(forElement, MatchCriteria.Exact);
+		}
+
+		protected override void OnSetSource(object source)
+		{
+			Contact.SetElement((UIElement)source);
 		}
 	}
 }
