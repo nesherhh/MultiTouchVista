@@ -85,6 +85,7 @@
     <Compile Include="Controls\Panels\RandomCanvas.cs" />
     <Compile Include="Controls\Panels\TouchablePanel.cs" />
     <Compile Include="Input\Contact.cs" />
+    <Compile Include="Input\ContactsManager.cs" />
     <Compile Include="Input\Extensions.cs" />
     <Compile Include="Input\InputElement.cs" />
     <Compile Include="Input\MultitouchDeviceManager.cs" />
