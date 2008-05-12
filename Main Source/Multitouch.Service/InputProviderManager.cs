@@ -13,20 +13,20 @@ namespace Multitouch.Service
 
 		public InputProviderManager(IProvider inputProvider)
 		{
+			StartService();
+
 			this.inputProvider = inputProvider;
 			this.inputProvider.ContactChanged += inputProvider_ContactChanged;
 			this.inputProvider.Start();
-
-			StartService();
 		}
 
 		public void Dispose()
 		{
-			serviceHost.Close();
-
 			inputProvider.Stop();
 			inputProvider.ContactChanged -= inputProvider_ContactChanged;
 			inputProvider = null;
+
+			serviceHost.Close();
 		}
 
 		void inputProvider_ContactChanged(object sender, ContactChangedEventArgs e)

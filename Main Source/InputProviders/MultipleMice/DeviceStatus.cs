@@ -10,16 +10,22 @@ namespace MultipleMice
 	{
 		readonly RawDevice device;
 		DebugCursor debugCursor;
-		int x;
-		int y;
+		SynchronizationContext syncContext;
+		Point location;
 
 		public DeviceStatus(RawDevice device)
 		{
 			this.device = device;
+
+			syncContext = SynchronizationContext.Current;
+
+			if (syncContext == null)
+				syncContext = new SynchronizationContext();
+
 			debugCursor = new DebugCursor();
+			debugCursor.Name = "DebugCursor";
 			Win32.POINT position = Win32.GetCursorPosition();
-			X = position.x;
-			Y = position.y;
+			Location = new Point(position.x, position.y);
 
 			Thread t = new Thread(ThreadWorker);
 			t.Name = "Cursor for device: " + device.Handle;
@@ -30,9 +36,21 @@ namespace MultipleMice
 
 		void ThreadWorker()
 		{
-			if(debugCursor != null)
-				debugCursor.Show(new Point(X, Y));
-			Application.Run();
+			debugCursor.Show(Location);
+			Application.Run(debugCursor);
+		}
+
+		public Point Location
+		{
+			get { return location; }
+			set
+			{
+				if (location != value)
+				{
+					location = value;
+					UpdateLocation();
+				}
+			}
 		}
 
 		public IntPtr Handle
@@ -40,35 +58,15 @@ namespace MultipleMice
 			get { return device.Handle; }
 		}
 
-		public int X
-		{
-			get { return x; }
-			set
-			{
-				x = value;
-				UpdateLocation();
-			}
-		}
-
-		public int Y
-		{
-			get { return y; }
-			set
-			{
-				y = value;
-				UpdateLocation();
-			}
-		}
-
 		void UpdateLocation()
 		{
-			if (debugCursor != null)
-			{
-				if (debugCursor.InvokeRequired)
-					debugCursor.Invoke((Action)(() => debugCursor.Location = new Point(X, Y)));
-				else
-					debugCursor.Location = new Point(X, Y);
-			}
+			SynchronizationContext current = SynchronizationContext.Current;
+			current.Send(SyncUpdateLocation, null);
+		}
+
+		void SyncUpdateLocation(object state)
+		{
+			debugCursor.Location = Location;
 		}
 
 		public DeviceState ButtonState { get; set; }

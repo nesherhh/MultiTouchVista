@@ -38,7 +38,7 @@ namespace TestApplication
 		protected override void OnInitialized(EventArgs e)
 		{
 			string picturesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-			string[] pictures = Directory.GetFiles(picturesPath, "*.jpg");
+			string[] pictures = Directory.GetFiles(picturesPath + @"\Riga", "*.jpg");
 			foreach (string file in pictures.Take(5))
 				Pictures.Add(file);
 
@@ -100,6 +100,13 @@ namespace TestApplication
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("I was clicked");
+		}
+
+		int repeatButtonCount = 0;
+		private void RepeatButton_Click(object sender, RoutedEventArgs e)
+		{
+			repeatButtonCount++;
+			repeatButton.Content = repeatButtonCount;
 		}
 	}
 }

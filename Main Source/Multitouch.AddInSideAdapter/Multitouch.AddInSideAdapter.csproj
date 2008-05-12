@@ -63,14 +63,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Multitouch.AddInView\Multitouch.AddInView.csproj">
-      <Project>{E5BE9717-9B2B-4689-925C-4CA923A9CB23}</Project>
-      <Name>Multitouch.AddInView</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\Multitouch.Contracts\Multitouch.Contracts.csproj">
       <Project>{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}</Project>
       <Name>Multitouch.Contracts</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Multitouch.Views\Multitouch.Views.csproj">
+      <Project>{FAC1CAC5-B685-4854-A31D-B563CD419BB7}</Project>
+      <Name>Multitouch.Views</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

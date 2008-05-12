@@ -14,6 +14,8 @@ namespace Multitouch.Service
 
 		public void Start()
 		{
+			AddInToken.EnableDirectConnect = true;
+
 			string[] warnings = AddInStore.Update(PipelineStoreLocation.ApplicationBase);
 			Array.ForEach(warnings, w => Trace.TraceWarning(w));
 
@@ -26,8 +28,7 @@ namespace Multitouch.Service
 			if (currentProviderToken == null)
 				throw new MultitouchException(string.Format("Input provider '{0}' could not be found", provider));
 
-			AppDomain newDomain = AppDomain.CreateDomain("Multitouch Service");
-			IProvider activatedProvider = currentProviderToken.Activate<IProvider>(newDomain);
+			IProvider activatedProvider = currentProviderToken.Activate<IProvider>(AppDomain.CurrentDomain);
 			providerManager = new InputProviderManager(activatedProvider);
 		}
 
