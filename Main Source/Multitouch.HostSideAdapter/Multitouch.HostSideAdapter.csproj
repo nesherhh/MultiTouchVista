@@ -85,6 +85,12 @@
     <Compile Include="Generated Files\IContactContractToViewHostAdapter.g.cs" />
     <Compile Include="Generated Files\IContactHostAdapter.g.cs" />
     <Compile Include="Generated Files\IContactViewToContractHostAdapter.g.cs" />
+    <Compile Include="Generated Files\IInputPreviewHandlerContractToViewHostAdapter.g.cs" />
+    <Compile Include="Generated Files\IInputPreviewHandlerHostAdapter.g.cs" />
+    <Compile Include="Generated Files\IInputPreviewHandlerViewToContractHostAdapter.g.cs" />
+    <Compile Include="Generated Files\IPreviewResultContractToViewHostAdapter.g.cs" />
+    <Compile Include="Generated Files\IPreviewResultHostAdapter.g.cs" />
+    <Compile Include="Generated Files\IPreviewResultViewToContractHostAdapter.g.cs" />
     <Compile Include="Generated Files\IProviderContractToViewHostAdapter.g.cs" />
     <Compile Include="Generated Files\IProviderHostAdapter.g.cs" />
     <Compile Include="Generated Files\IProviderViewToContractHostAdapter.g.cs" />

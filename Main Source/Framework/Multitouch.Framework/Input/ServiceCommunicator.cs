@@ -15,7 +15,7 @@ namespace Multitouch.Framework.Input
 			this.logic = logic;
 		}
 
-		public void Connect()
+		public void Connect(IntPtr windowHandle)
 		{
 			Uri serviceAddress = new Uri("net.pipe://localhost/Multitouch.Service/ApplicationInterface");
 			EndpointAddress remoteAddress = new EndpointAddress(serviceAddress);
@@ -27,7 +27,7 @@ namespace Multitouch.Framework.Input
 
 			try
 			{
-				client.Subscribe();
+				client.Subscribe(windowHandle);
 				contactDispatcher = dispatcher;
 			}
 			catch (EndpointNotFoundException)

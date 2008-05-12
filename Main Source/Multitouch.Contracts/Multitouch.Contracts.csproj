@@ -60,6 +60,8 @@
     <Compile Include="IContactChangedEventArgsContract.cs" />
     <Compile Include="IContactChangedEventHandlerContract.cs" />
     <Compile Include="IContactContract.cs" />
+    <Compile Include="IInputPreviewHandlerContract.cs" />
+    <Compile Include="IPreviewResultContract.cs" />
     <Compile Include="IProviderContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

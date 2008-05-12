@@ -23,6 +23,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="95111b29-f594-438e-bd66-c891694aa19e" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ApplicationInterface/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="1b8f6d41-9579-442b-8a2a-f0f784c55adb" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ApplicationInterface/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="967ce5cf-3342-4ab9-9f00-f4e4f58f8a03" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ApplicationInterface/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="03c35981-cb25-4ae8-a8f7-e9c4f58b6fd2" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ApplicationInterface/mex" />
     <MetadataFile FileName="Multitouch.Contracts.xsd" MetadataType="Schema" ID="253aa8e8-7a22-4543-9725-7fe76ef3927e" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ApplicationInterface/mex" />
   </Metadata>
   <Extensions>

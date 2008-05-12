@@ -1,4 +1,8 @@
 ﻿using System;
+using System.AddIn.Hosting;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using Multitouch.Contracts;
@@ -10,10 +14,14 @@ namespace Multitouch.Service
 	{
 		IProvider inputProvider;
 		ServiceHost serviceHost;
+		List<IInputPreviewHandler> inputPreviewHandlers;
 
 		public InputProviderManager(IProvider inputProvider)
 		{
+			inputPreviewHandlers = new List<IInputPreviewHandler>();
 			StartService();
+
+			LoadPreviewHandlers();
 
 			this.inputProvider = inputProvider;
 			this.inputProvider.ContactChanged += inputProvider_ContactChanged;
@@ -29,9 +37,30 @@ namespace Multitouch.Service
 			serviceHost.Close();
 		}
 
+		void LoadPreviewHandlers()
+		{
+			AddInToken.EnableDirectConnect = true;
+			string[] warnings = AddInStore.Update(PipelineStoreLocation.ApplicationBase);
+			Array.ForEach(warnings, w => Trace.TraceWarning(w));
+
+			Collection<AddInToken> tokens = AddInStore.FindAddIns(typeof(IInputPreviewHandler), PipelineStoreLocation.ApplicationBase);
+			foreach (AddInToken token in tokens)
+				inputPreviewHandlers.Add(token.Activate<IInputPreviewHandler>(AppDomain.CurrentDomain));
+		}
+
 		void inputProvider_ContactChanged(object sender, ContactChangedEventArgs e)
 		{
-			ApplicationInterfaceService.ContactChanged(e);
+			IPreviewResult result = null;
+			foreach (IInputPreviewHandler handler in inputPreviewHandlers)
+			{
+				result = handler.Handle(e.Contact);
+				if(result.Handled)
+					break;
+			}
+			if (result != null)
+				ApplicationInterfaceService.ContactChanged(result.HWnd, new HandledContactChangedEventArgs(result.Contact));
+			else
+				ApplicationInterfaceService.ContactChanged(e);
 		}
 
 		void StartService()

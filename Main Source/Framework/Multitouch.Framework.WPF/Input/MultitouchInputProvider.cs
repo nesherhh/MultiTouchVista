@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Threading;
 using Multitouch.Framework.Input;
 
@@ -25,7 +26,7 @@ namespace Multitouch.Framework.WPF.Input
 
 			communicationLogic = CommunicationLogic.Instance;
 			communicationLogic.RegisterInputProvider(this);
-			communicationLogic.Connect();
+			communicationLogic.Connect(((HwndSource)source).Handle);
 			inputManager = InputManager.Current;
 			multitouchLogic = MultitouchLogic.Current;
 		}
