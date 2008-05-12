@@ -3,6 +3,7 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:mt="http://schemas.multitouch.com/Multitouch/2008/04"
 		xmlns:sys="clr-namespace:System;assembly=mscorlib"
+		xmlns:local="clr-namespace:TestApplication"
 		Title="Window1" Height="400" Width="400">
     <Grid>
 		<Grid.ColumnDefinitions>
@@ -31,6 +32,11 @@
 			<mt:Button Content="click me" Click="Button_Click"/>
 			<mt:RepeatButton x:Name="repeatButton" Content="0" Click="RepeatButton_Click"/>
 			<mt:ScrollBar Orientation="Horizontal"/>
+			<mt:Button Content="command" Command="{x:Static local:Window1.TestCommand}">
+				<mt:Button.CommandBindings>
+					<CommandBinding Command="{x:Static local:Window1.TestCommand}" Executed="CommandBinding_Executed"/>
+				</mt:Button.CommandBindings>
+			</mt:Button>
 		</UniformGrid>
 		<ItemsControl x:Name="itemsControl"
 					  Grid.Row="1" Grid.ColumnSpan="3"

@@ -3,15 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Service", "Multitouch.Service\Multitouch.Service.csproj", "{1720CC0B-4411-4FE5-A51C-D539BB19AC54}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AddIns", "AddIns", "{0D9521F7-3C05-400F-85C6-DCEB614083D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationSelector", "Multitouch.Service.AddIns\ApplicationSelector\ApplicationSelector.csproj", "{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Multitouch.Service\\Multitouch.Service.csproj
 		SccProjectName1 = Multitouch.Service
 		SccLocalPath1 = Multitouch.Service
+		SccProjectUniqueName2 = Multitouch.Service.AddIns\\ApplicationSelector\\ApplicationSelector.csproj
+		SccProjectTopLevelParentUniqueName2 = Multitouch.Service.sln
+		SccProjectName2 = Multitouch.Service.AddIns/ApplicationSelector
+		SccLocalPath2 = Multitouch.Service.AddIns\\ApplicationSelector
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,8 +30,15 @@ Global
 		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6} = {0D9521F7-3C05-400F-85C6-DCEB614083D1}
 	EndGlobalSection
 EndGlobal

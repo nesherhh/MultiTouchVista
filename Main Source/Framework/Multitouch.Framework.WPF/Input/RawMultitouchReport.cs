@@ -19,6 +19,9 @@ namespace Multitouch.Framework.WPF.Input
 			ContactState state, int timestamp)
 			: base(device, timestamp)
 		{
+			if (device == null)
+				throw new ArgumentNullException("device");
+
 			InputSource = source;
 			Contact = new Contact(id, x, y, width, height, state);
 			RoutedEvent = MultitouchLogic.PreviewRawInputEvent;
