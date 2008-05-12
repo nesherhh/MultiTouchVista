@@ -7,6 +7,8 @@ using PipelineHints;
 [assembly:SegmentAssemblyName(PipelineSegment.AddInView, "Multitouch.AddInView")]
 [assembly:SegmentAssemblyName(PipelineSegment.HostSideAdapter, "Multitouch.HostSideAdapter")]
 [assembly:SegmentAssemblyName(PipelineSegment.HostView, "Multitouch.HostView")]
+[assembly:SegmentAssemblyName(PipelineSegment.Views, "Multitouch.Views")]
+[assembly:ShareViews]
 
 namespace Multitouch.Contracts.Contracts
 {

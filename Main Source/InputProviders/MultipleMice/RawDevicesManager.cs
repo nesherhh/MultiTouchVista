@@ -133,8 +133,7 @@ namespace MultipleMice
 			int x = pen_DATA.X * virtualScreen.Width / PEN_X_MAX;
 			int y = pen_DATA.Y * virtualScreen.Height / PEN_Y_MAX;
 
-			state.X = x;
-			state.Y = y;
+			state.Location = new Point(x, y);
 
 			if((pen_DATA.Status & PenStatus.PenTipDown) == PenStatus.PenTipDown && state.ButtonState == DeviceState.None)
 				state.ButtonState = DeviceState.Down;
@@ -148,17 +147,20 @@ namespace MultipleMice
 
 		void UpdateMouse(MouseData mouseData, DeviceStatus state)
 		{
-			state.X += (int)(mouseData.X * mouseSpeed);
-			state.Y += (int)(mouseData.Y * mouseSpeed);
+			Point location = state.Location;
+			location.X += (int)(mouseData.X * mouseSpeed);
+			location.Y += (int)(mouseData.Y * mouseSpeed);
 
-			if (state.X <= 0)
-				state.X = 0;
-			if (state.Y <= 0)
-				state.Y = 0;
-			if (state.X >= screenWidth)
-				state.X = screenWidth;
-			if (state.Y >= screenHeight)
-				state.Y = screenHeight;
+			if (location.X <= 0)
+				location.X = 0;
+			if (location.Y <= 0)
+				location.Y = 0;
+			if (location.X >= screenWidth)
+				location.X = screenWidth;
+			if (location.Y >= screenHeight)
+				location.Y = screenHeight;
+
+			state.Location = location;
 
 			switch (mouseData.ButtonState)
 			{

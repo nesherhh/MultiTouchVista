@@ -11,7 +11,8 @@
     <RootNamespace>Multitouch.Service</RootNamespace>
     <AssemblyName>Multitouch.Service</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+		<ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+		<FileAlignment>512</FileAlignment>
     <StartupObject>Multitouch.Service.Program</StartupObject>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -37,7 +38,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Multitouch.HostView, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Multitouch.Views, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Output\AddInViews\Multitouch.Views.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.AddIn">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>

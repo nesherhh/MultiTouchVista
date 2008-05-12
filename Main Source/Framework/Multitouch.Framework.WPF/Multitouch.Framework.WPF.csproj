@@ -49,6 +49,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\Physics2DDotNet.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -81,9 +84,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\Panels\PhysicsExtensions.cs" />
     <Compile Include="Controls\Panels\RandomCanvas.cs" />
     <Compile Include="Controls\Panels\TouchablePanel.cs" />
+    <Compile Include="Controls\Primitives\RepeatButton.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\Primitives\ScrollBar.cs" />
+    <Compile Include="Controls\Primitives\Thumb.cs" />
     <Compile Include="Input\Contact.cs" />
     <Compile Include="Input\ContactsManager.cs" />
     <Compile Include="Input\Extensions.cs" />

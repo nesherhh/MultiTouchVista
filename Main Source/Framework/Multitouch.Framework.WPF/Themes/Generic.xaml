@@ -1,7 +1,9 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Multitouch.Framework.WPF.Controls">
+    xmlns:local="clr-namespace:Multitouch.Framework.WPF.Controls"
+    xmlns:primitives="clr-namespace:Multitouch.Framework.WPF.Controls.Primitives"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
 
     <Style TargetType="{x:Type local:Window}" BasedOn="{StaticResource {x:Type Window}}">
 		<Setter Property="WindowStyle" Value="None"/>
@@ -14,5 +16,240 @@
 				</RadialGradientBrush>
 			</Setter.Value>
 		</Setter>
+	</Style>
+
+	<Style x:Key="ScrollBarButton"
+           TargetType="{x:Type primitives:RepeatButton}">
+		<Setter Property="OverridesDefaultStyle"
+                Value="True"/>
+		<Setter Property="Focusable"
+                Value="False"/>
+		<Setter Property="IsTabStop"
+                Value="False"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type primitives:RepeatButton}">
+					<theme:ScrollChrome Name="Chrome"
+                                        ScrollGlyph="{TemplateBinding theme:ScrollChrome.ScrollGlyph}"
+                                        RenderMouseOver="True"
+                                        RenderPressed="{TemplateBinding IsPressed}"
+                                        SnapsToDevicePixels="True"/>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="HorizontalScrollBarPageButton"
+           TargetType="{x:Type primitives:RepeatButton}">
+		<Setter Property="OverridesDefaultStyle"
+                Value="true"/>
+		<Setter Property="Background"
+                Value="Transparent"/>
+		<Setter Property="Focusable"
+                Value="false"/>
+		<Setter Property="IsTabStop"
+                Value="false"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type primitives:RepeatButton}">
+					<Rectangle Fill="{TemplateBinding Background}"
+                               Width="{TemplateBinding Width}"
+                               Height="{TemplateBinding Height}"/>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="VerticalScrollBarPageButton"
+           TargetType="{x:Type primitives:RepeatButton}">
+		<Setter Property="OverridesDefaultStyle"
+                Value="true"/>
+		<Setter Property="Background"
+                Value="Transparent"/>
+		<Setter Property="Focusable"
+                Value="false"/>
+		<Setter Property="IsTabStop"
+                Value="false"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type primitives:RepeatButton}">
+					<Rectangle Fill="{TemplateBinding Background}"
+                               Width="{TemplateBinding Width}"
+                               Height="{TemplateBinding Height}"/>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<LinearGradientBrush x:Key="VerticalScrollBarBackground"
+                         StartPoint="0,0"
+                         EndPoint="1,0">
+		<LinearGradientBrush.GradientStops>
+			<GradientStop Color="#E1E1E1"
+                          Offset="0"/>
+			<GradientStop Color="#EDEDED"
+                          Offset="0.20"/>
+			<GradientStop Color="#EDEDED"
+                          Offset="0.80"/>
+			<GradientStop Color="#E3E3E3"
+                          Offset="1"/>
+		</LinearGradientBrush.GradientStops>
+	</LinearGradientBrush>
+
+	<LinearGradientBrush x:Key="HorizontalScrollBarBackground"
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+		<LinearGradientBrush.GradientStops>
+			<GradientStop Color="#E1E1E1"
+                          Offset="0"/>
+			<GradientStop Color="#EDEDED"
+                          Offset="0.20"/>
+			<GradientStop Color="#EDEDED"
+                          Offset="0.80"/>
+			<GradientStop Color="#E3E3E3"
+                          Offset="1"/>
+		</LinearGradientBrush.GradientStops>
+	</LinearGradientBrush>
+
+	<Style x:Key="ScrollBarThumb"
+           TargetType="{x:Type primitives:Thumb}">
+		<Setter Property="OverridesDefaultStyle"
+                Value="true"/>
+		<Setter Property="IsTabStop"
+                Value="false"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type primitives:Thumb}">
+					<theme:ScrollChrome x:Name="Chrome"
+                                        ScrollGlyph="{TemplateBinding theme:ScrollChrome.ScrollGlyph}"
+                                        RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                        RenderPressed="{TemplateBinding IsDragging}"
+                                        SnapsToDevicePixels="true"/>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<SolidColorBrush x:Key="ScrollBarDisabledBackground"
+                     Color="#F4F4F4"/>
+
+	<Style TargetType="{x:Type primitives:ScrollBar}">
+		<Setter Property="Background"
+                Value="{StaticResource VerticalScrollBarBackground}"/>
+		<Setter Property="Stylus.IsPressAndHoldEnabled"
+                Value="false"/>
+		<Setter Property="Stylus.IsFlicksEnabled"
+                Value="false"/>
+		<Setter Property="Foreground"
+                Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+		<Setter Property="Width"
+                Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
+		<Setter Property="MinWidth"
+                Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type primitives:ScrollBar}">
+					<Grid Name="Bg"
+                          Background="{TemplateBinding Background}"
+                          SnapsToDevicePixels="true">
+						<Grid.RowDefinitions>
+							<RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+							<RowDefinition Height="0.00001*"/>
+							<RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+						</Grid.RowDefinitions>
+						<primitives:RepeatButton Style="{StaticResource ScrollBarButton}"
+                                      Command="{x:Static ScrollBar.LineUpCommand}"
+                                      theme:ScrollChrome.ScrollGlyph="UpArrow"/>
+						<Track Grid.Row="1"
+                               Name="PART_Track"
+                               IsDirectionReversed="true">
+							<Track.DecreaseRepeatButton>
+								<primitives:RepeatButton Style="{StaticResource VerticalScrollBarPageButton}"
+                                              Command="{x:Static ScrollBar.PageUpCommand}"/>
+							</Track.DecreaseRepeatButton>
+							<Track.IncreaseRepeatButton>
+								<primitives:RepeatButton Style="{StaticResource VerticalScrollBarPageButton}"
+                                              Command="{x:Static ScrollBar.PageDownCommand}"/>
+							</Track.IncreaseRepeatButton>
+							<Track.Thumb>
+								<primitives:Thumb Style="{StaticResource ScrollBarThumb}"
+                                       theme:ScrollChrome.ScrollGlyph="VerticalGripper"/>
+							</Track.Thumb>
+						</Track>
+						<primitives:RepeatButton Style="{StaticResource ScrollBarButton}"
+                                      Grid.Row="2"
+                                      Command="{x:Static ScrollBar.LineDownCommand}"
+                                      theme:ScrollChrome.ScrollGlyph="DownArrow"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled"
+                                 Value="false">
+							<Setter TargetName="Bg"
+                                    Property="Background"
+                                    Value="{StaticResource ScrollBarDisabledBackground}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="Orientation"
+                     Value="Horizontal">
+				<Setter Property="Width"
+                        Value="Auto"/>
+				<Setter Property="MinWidth"
+                        Value="0"/>
+				<Setter Property="Height"
+                        Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
+				<Setter Property="MinHeight"
+                        Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
+				<Setter Property="Background"
+                        Value="{StaticResource HorizontalScrollBarBackground}"/>
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="{x:Type ScrollBar}">
+							<Grid Name="Bg"
+                                  Background="{TemplateBinding Background}"
+                                  SnapsToDevicePixels="true">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
+									<ColumnDefinition Width="0.00001*"/>
+									<ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
+								</Grid.ColumnDefinitions>
+								<primitives:RepeatButton Style="{StaticResource ScrollBarButton}"
+                                              Command="{x:Static ScrollBar.LineLeftCommand}"
+                                              theme:ScrollChrome.ScrollGlyph="LeftArrow"/>
+								<Track Grid.Column="1"
+                                       Name="PART_Track">
+									<Track.DecreaseRepeatButton>
+										<primitives:RepeatButton Style="{StaticResource HorizontalScrollBarPageButton}"
+                                                      Command="{x:Static ScrollBar.PageLeftCommand}"/>
+									</Track.DecreaseRepeatButton>
+									<Track.IncreaseRepeatButton>
+										<primitives:RepeatButton Style="{StaticResource HorizontalScrollBarPageButton}"
+                                                      Command="{x:Static ScrollBar.PageRightCommand}"/>
+									</Track.IncreaseRepeatButton>
+									<Track.Thumb>
+										<primitives:Thumb Style="{StaticResource ScrollBarThumb}"
+                                               theme:ScrollChrome.ScrollGlyph="HorizontalGripper"/>
+									</Track.Thumb>
+								</Track>
+								<primitives:RepeatButton Style="{StaticResource ScrollBarButton}"
+                                              Grid.Column="2"
+                                              Command="{x:Static ScrollBar.LineRightCommand}"
+                                              theme:ScrollChrome.ScrollGlyph="RightArrow"/>
+							</Grid>
+							<ControlTemplate.Triggers>
+								<Trigger Property="IsEnabled"
+                                         Value="false">
+									<Setter TargetName="Bg"
+                                            Property="Background"
+                                            Value="{StaticResource ScrollBarDisabledBackground}"/>
+								</Trigger>
+							</ControlTemplate.Triggers>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Trigger>
+		</Style.Triggers>
 	</Style>
 </ResourceDictionary>

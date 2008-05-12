@@ -274,6 +274,19 @@ namespace MultipleMice.Native
 		[DllImport("user32.dll")]
 		public static extern uint SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int nWidth, int nHeight, uint uFlags);
 
+		public const UInt32 SWP_NOSIZE = 0x0001;
+		public const UInt32 SWP_NOMOVE = 0x0002;
+		public const UInt32 SWP_NOZORDER = 0x0004;
+		public const UInt32 SWP_NOREDRAW = 0x0008;
+		public const UInt32 SWP_NOACTIVATE = 0x0010;
+		public const UInt32 SWP_FRAMECHANGED = 0x0020;  /* The frame changed: send WM_NCCALCSIZE */
+		public const UInt32 SWP_SHOWWINDOW = 0x0040;
+		public const UInt32 SWP_HIDEWINDOW = 0x0080;
+		public const UInt32 SWP_NOCOPYBITS = 0x0100;
+		public const UInt32 SWP_NOOWNERZORDER = 0x0200;  /* Don't do owner Z ordering */
+		public const UInt32 SWP_NOSENDCHANGING = 0x0400;  /* Don't send WM_WINDOWPOSCHANGING */
+
+
 		[return: MarshalAs(UnmanagedType.Bool)]
 		[DllImport("User32.dll")]
 		internal static extern bool SetCursorPos(int X, int Y);

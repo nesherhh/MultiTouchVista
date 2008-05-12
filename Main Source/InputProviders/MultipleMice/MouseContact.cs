@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Threading;
 using MultipleMice.Native;
 using Multitouch.Contracts;
@@ -33,16 +34,18 @@ namespace MultipleMice
 			Height = 10;
 			Width = 10;
 
-			X = state.X;
-			Y = state.Y;
+			Point location = state.Location;
+			X = location.X;
+			Y = location.Y;
 
 			State = ContactState.New;
 		}
 
 		internal void Update(DeviceStatus data)
 		{
-			X = data.X;
-			Y = data.Y;
+			Point location = data.Location;
+			X = location.X;
+			Y = location.Y;
 
 			if (data.ButtonState == DeviceState.Move)
 				State = ContactState.Moved;

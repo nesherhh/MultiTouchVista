@@ -36,9 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CsTId, Version=1.0.3045.34902, Culture=neutral, processorArchitecture=x86" />
-    <Reference Include="Multitouch.AddInView, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Multitouch.Views, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Output\AddInViews\Multitouch.AddInView.dll</HintPath>
+      <HintPath>..\..\Output\AddInViews\Multitouch.Views.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
