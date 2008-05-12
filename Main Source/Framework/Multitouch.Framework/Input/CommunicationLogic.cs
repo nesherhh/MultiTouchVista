@@ -32,10 +32,10 @@ namespace Multitouch.Framework.Input
 			}
 		}
 
-		public void Connect()
+		public void Connect(IntPtr windowHandle)
 		{
 			if(handlers.Count == 1)
-				serviceCommunicator.Connect();
+				serviceCommunicator.Connect(windowHandle);
 		}
 
 		public void Disconnect()

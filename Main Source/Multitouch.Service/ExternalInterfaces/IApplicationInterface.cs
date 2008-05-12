@@ -7,7 +7,7 @@ namespace Multitouch.Service.ExternalInterfaces
 	public interface IApplicationInterface
 	{
 		[OperationContract(IsOneWay = false, IsInitiating = true)]
-		void Subscribe();
+		void Subscribe(IntPtr windowHandle);
 		[OperationContract(IsOneWay = false, IsTerminating = true)]
 		void Unsubscribe();
 	}

@@ -31,7 +31,7 @@ namespace Multitouch.Framework.Input {
     public interface IApplicationInterface {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IApplicationInterface/Subscribe", ReplyAction="http://tempuri.org/IApplicationInterface/SubscribeResponse")]
-        void Subscribe();
+        void Subscribe(System.IntPtr windowHandle);
         
         [System.ServiceModel.OperationContractAttribute(IsTerminating=true, Action="http://tempuri.org/IApplicationInterface/Unsubscribe", ReplyAction="http://tempuri.org/IApplicationInterface/UnsubscribeResponse")]
         void Unsubscribe();
@@ -72,8 +72,8 @@ namespace Multitouch.Framework.Input {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void Subscribe() {
-            base.Channel.Subscribe();
+        public void Subscribe(System.IntPtr windowHandle) {
+            base.Channel.Subscribe(windowHandle);
         }
         
         public void Unsubscribe() {

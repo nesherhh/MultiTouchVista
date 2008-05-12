@@ -22,7 +22,11 @@ namespace Multitouch.Framework.WPF.Controls
 
 		protected override void OnClosing(CancelEventArgs e)
 		{
-			inputProvider.Dispose();
+			if (inputProvider != null)
+			{
+				inputProvider.Dispose();
+				inputProvider = null;
+			}
 			base.OnClosing(e);
 		}
 	}
