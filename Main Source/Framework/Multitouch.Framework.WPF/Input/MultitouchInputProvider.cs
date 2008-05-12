@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -40,12 +41,17 @@ namespace Multitouch.Framework.WPF.Input
 		public void ProcessContactChange(int id, double x, double y, double width, double height, ContactState state)
 		{
 			MultitouchDevice device = multitouchLogic.DeviceManager.GetDevice(id, state);
-			RawMultitouchReport e = new RawMultitouchReport(device, source, id, x, y, width, height, state, Environment.TickCount);
-			lock (lockContactsQueue)
+			if (device != null)
 			{
-				contactsQueue.Enqueue(e);
+				RawMultitouchReport e = new RawMultitouchReport(device, source, id, x, y, width, height, state, Environment.TickCount);
+				lock (lockContactsQueue)
+				{
+					contactsQueue.Enqueue(e);
+				}
+				Dispatcher.BeginInvoke(DispatcherPriority.Input, inputManagerProcessInput, null);
 			}
-			Dispatcher.BeginInvoke(DispatcherPriority.Input, inputManagerProcessInput, null);
+			else
+				Trace.TraceError(string.Format("Can't find MultitouchDevice for contact id: {0}, state: {1}", id, state));
 		}
 
 		object InputManagerProcessInput(object arg)

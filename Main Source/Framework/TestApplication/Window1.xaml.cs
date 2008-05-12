@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using Multitouch.Framework.WPF.Input;
 
@@ -20,6 +21,8 @@ namespace TestApplication
 		public static readonly DependencyPropertyKey PicturesPropertyKey = DependencyProperty.RegisterReadOnly("Pictures",
 			typeof(ObservableCollection<string>), typeof(Window1), new PropertyMetadata(null));
 		public static readonly DependencyProperty PicturesProperty = PicturesPropertyKey.DependencyProperty;
+
+		public static ICommand TestCommand = new RoutedUICommand("Command", "TestCommand", typeof(Window1));
 
 		public Window1()
 		{
@@ -107,6 +110,11 @@ namespace TestApplication
 		{
 			repeatButtonCount++;
 			repeatButton.Content = repeatButtonCount;
+		}
+
+		private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			MessageBox.Show("command executed");
 		}
 	}
 }
