@@ -1,11 +1,14 @@
 using System;
+using System.Linq;
 using System.Windows;
+using System.Windows.Ink;
 using Phydeaux.Utilities;
 
 namespace Multitouch.Framework.WPF.Input
 {
 	public delegate void ContactEventHandler(object sender, ContactEventArgs e);
 	public delegate void NewContactEventHandler(object sender, NewContactEventArgs e);
+	public delegate void GestureEventHandler(object sender, GestureEventArgs e);
 
 	delegate void RawMultitouchReportHandler(object sender, RawMultitouchReport e);
 
@@ -29,6 +32,11 @@ namespace Multitouch.Framework.WPF.Input
 			typeof(ContactEventHandler), typeof(MultitouchScreen));
 		public static readonly RoutedEvent ContactLeaveEvent = EventManager.RegisterRoutedEvent("ContactLeave", RoutingStrategy.Bubble,
 			typeof(ContactEventHandler), typeof(MultitouchScreen));
+
+		public static readonly RoutedEvent PreviewGestureEvent = EventManager.RegisterRoutedEvent("PreviewGesture", RoutingStrategy.Tunnel, typeof(GestureEventHandler),
+			typeof(MultitouchScreen));
+		public static readonly RoutedEvent GestureEvent = EventManager.RegisterRoutedEvent("Gesture", RoutingStrategy.Bubble, typeof(GestureEventHandler),
+			typeof(MultitouchScreen));
 
 		static StaticProc<UIElement, DependencyObject, RoutedEvent, Delegate> addHandlerMethod;
 		static StaticProc<UIElement, DependencyObject, RoutedEvent, Delegate> removeHandlerMethod;
@@ -87,6 +95,34 @@ namespace Multitouch.Framework.WPF.Input
 		public static void RemoveContactLeaveHandler(DependencyObject element, ContactEventHandler handler)
 		{
 			removeHandlerMethod.Invoke(element, ContactLeaveEvent, handler);
+		}
+
+		public static void AddPreviewGestureHandler(DependencyObject element, GestureEventHandler handler)
+		{
+			addHandlerMethod.Invoke(element, PreviewGestureEvent, handler);
+		}
+
+		public static void RemovePreviewGestureHandler(DependencyObject element, GestureEventHandler handler)
+		{
+			removeHandlerMethod.Invoke(element, PreviewGestureEvent, handler);
+		}
+
+		public static void AddGestureHandler(DependencyObject element, GestureEventHandler handler)
+		{
+			addHandlerMethod.Invoke(element, GestureEvent, handler);
+		}
+
+		public static void RemoveGestureHandler(DependencyObject element, GestureEventHandler handler)
+		{
+			removeHandlerMethod.Invoke(element, GestureEvent, handler);
+		}
+
+		public static bool IsGesturesEnabled { get; set; }
+
+		public static void EnableGestures(params ApplicationGesture[] gesture)
+		{
+			IsGesturesEnabled = !gesture.Contains(ApplicationGesture.NoGesture);
+			MultitouchLogic.Current.GestureManager.EnableGestures(gesture);
 		}
 	}
 }

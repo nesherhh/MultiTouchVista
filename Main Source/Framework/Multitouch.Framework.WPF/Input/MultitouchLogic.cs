@@ -20,6 +20,7 @@ namespace Multitouch.Framework.WPF.Input
 
 		InputManager inputManager;
 		int doubleTapDeltaTime;
+		internal GestureManager GestureManager { get; private set; }
 		internal MultitouchDeviceManager DeviceManager { get; private set; }
 
 		public static MultitouchLogic Current
@@ -43,6 +44,7 @@ namespace Multitouch.Framework.WPF.Input
 			doubleTapDeltaTime = 800;
 
 			DeviceManager = new MultitouchDeviceManager();
+			GestureManager = new GestureManager();
 			
 			this.inputManager = inputManager;
 			this.inputManager.PreProcessInput += inputManager_PreProcessInput;
@@ -66,6 +68,9 @@ namespace Multitouch.Framework.WPF.Input
 					else
 						multitouchDevice.AllContacts.Remove(report.Contact.Id);
 
+					if (GestureManager.IsGestureEnabled)
+						GestureManager.PreProcessInput(e);
+
 					Point clientPoint = report.InputSource.RootVisual.PointFromScreen(new Point(report.Contact.X, report.Contact.Y));
 					HitTestResult test = VisualTreeHelper.HitTest(report.InputSource.RootVisual, clientPoint);
 					if (test != null)
@@ -75,11 +80,13 @@ namespace Multitouch.Framework.WPF.Input
 					}
 				}
 			}
-			else if (!(routedEvent == RawInputEvent || routedEvent == MultitouchScreen.ContactEnterEvent ||
-				routedEvent == MultitouchScreen.ContactLeaveEvent ||
+			else if (!(routedEvent == RawInputEvent ||
+				routedEvent == MultitouchScreen.ContactEnterEvent || routedEvent == MultitouchScreen.ContactLeaveEvent ||
 				routedEvent == MultitouchScreen.ContactMovedEvent || routedEvent == MultitouchScreen.ContactRemovedEvent ||
 				routedEvent == MultitouchScreen.NewContactEvent || routedEvent == MultitouchScreen.PreviewContactMovedEvent ||
-				routedEvent == MultitouchScreen.PreviewContactRemovedEvent || routedEvent == MultitouchScreen.PreviewNewContactEvent))
+				routedEvent == MultitouchScreen.PreviewContactRemovedEvent || routedEvent == MultitouchScreen.PreviewNewContactEvent ||
+				routedEvent == GestureManager.RawGestureInputEvent || routedEvent == MultitouchScreen.PreviewGestureEvent ||
+				routedEvent == MultitouchScreen.GestureEvent))
 			{
 				e.Cancel();
 			}
@@ -148,6 +155,10 @@ namespace Multitouch.Framework.WPF.Input
 					e.PushInput(args, e.StagingItem);
 				}
 			}
+
+			if (GestureManager.IsGestureEnabled)
+				GestureManager.PostProcessInput(e);
+
 			PromotePreviewToMain(e);
 		}
 

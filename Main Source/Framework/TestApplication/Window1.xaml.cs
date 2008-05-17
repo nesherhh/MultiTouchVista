@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using Multitouch.Framework.WPF.Input;
@@ -31,6 +32,15 @@ namespace TestApplication
 			SetValue(PicturesPropertyKey, new ObservableCollection<string>());
 			DataContext = this;
 			InitializeComponent();
+
+			MultitouchScreen.EnableGestures(ApplicationGesture.Circle);
+			MultitouchScreen.AddGestureHandler(this, OnGesture);
+		}
+
+		void OnGesture(object sender, GestureEventArgs e)
+		{
+			if(e.Gesture != ApplicationGesture.NoGesture)
+				MessageBox.Show(string.Format("Contact: {0}, Gesture: {1}", e.Contact.Id, e.Gesture));
 		}
 
 		public ObservableCollection<string> Pictures
