@@ -1,7 +1,7 @@
 ﻿using System;
 using Multitouch.Contracts;
 
-namespace Multitouch.Service
+namespace Multitouch.Service.Logic
 {
 	class HandledContactChangedEventArgs : ContactChangedEventArgs
 	{

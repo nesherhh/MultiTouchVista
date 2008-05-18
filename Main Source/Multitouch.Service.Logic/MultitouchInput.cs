@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using Multitouch.Contracts;
-using Multitouch.Service.Properties;
+using Multitouch.Service.Logic.Properties;
 
-namespace Multitouch.Service
+namespace Multitouch.Service.Logic
 {
 	class MultitouchInput
 	{
@@ -23,8 +23,8 @@ namespace Multitouch.Service
 
 			string provider = Settings.Default.CurrentProvider;
 			AddInToken currentProviderToken = (from token in providerTokens
-											   where token.AddInFullName.Equals(provider)
-											   select token).FirstOrDefault();
+			                                   where token.AddInFullName.Equals(provider)
+			                                   select token).FirstOrDefault();
 			if (currentProviderToken == null)
 				throw new MultitouchException(string.Format("Input provider '{0}' could not be found", provider));
 

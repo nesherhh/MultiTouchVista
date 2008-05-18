@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using Multitouch.Service.Properties;
+using Multitouch.Service.Logic.Properties;
+using Multitouch.Service.Views;
 
-namespace Multitouch.Service.Views
+namespace Multitouch.Service.Logic.Views
 {
 	class Context : ApplicationContext
 	{

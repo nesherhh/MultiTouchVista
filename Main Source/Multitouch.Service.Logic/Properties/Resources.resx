@@ -121,10 +121,4 @@
   <data name="MultitouchIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MultitouchIcon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="nui_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\nui-white.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="nui_white_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\nui-white 16.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Windows.Forms;
-using Multitouch.Service.Views;
+using System;
+using Multitouch.Service.Logic;
 
-namespace Multitouch.Service
+namespace Multitouch.Service.Logic
 {
 	static class Program
 	{

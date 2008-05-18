@@ -6,14 +6,15 @@
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1720CC0B-4411-4FE5-A51C-D539BB19AC54}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Multitouch.Service</RootNamespace>
-    <AssemblyName>Multitouch.Service</AssemblyName>
+    <RootNamespace>Multitouch.Service.Logic</RootNamespace>
+    <AssemblyName>Multitouch.Service.Logic</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>Multitouch.Service.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -149,8 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\MultitouchIcon.ico" />
-    <Content Include="Resources\nui-white 16.ico" />
-    <Content Include="Resources\nui-white.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -160,4 +159,13 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{3D9AD99F-2412-4246-B90B-4EAA41C64699}">
+        <WcfProjectProperties>
+          <AutoStart>True</AutoStart>
+        </WcfProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

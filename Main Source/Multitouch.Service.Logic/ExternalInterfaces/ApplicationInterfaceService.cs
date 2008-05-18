@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ServiceModel;
 using Multitouch.Contracts;
 
-namespace Multitouch.Service.ExternalInterfaces
+namespace Multitouch.Service.Logic.ExternalInterfaces
 {
 	[ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
 	public class ApplicationInterfaceService : IApplicationInterface

@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.ServiceProcess;
+using Multitouch.Service.Logic;
 
-namespace Multitouch.Service
+namespace Multitouch.Service.Logic
 {
 	public partial class MultitouchService : ServiceBase
 	{
