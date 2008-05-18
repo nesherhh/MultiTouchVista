@@ -33,7 +33,7 @@
 			// 
 			// multitouchServiceProcessInstaller
 			// 
-			this.multitouchServiceProcessInstaller.Account = System.ServiceProcess.ServiceAccount.LocalService;
+			this.multitouchServiceProcessInstaller.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
 			this.multitouchServiceProcessInstaller.Password = null;
 			this.multitouchServiceProcessInstaller.Username = null;
 			// 
