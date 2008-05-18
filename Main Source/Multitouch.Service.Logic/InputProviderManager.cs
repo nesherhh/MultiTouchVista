@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.AddIn.Hosting;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,9 +6,10 @@ using System.Diagnostics;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using Multitouch.Contracts;
-using Multitouch.Service.ExternalInterfaces;
+using Multitouch.Service.Logic;
+using Multitouch.Service.Logic.ExternalInterfaces;
 
-namespace Multitouch.Service
+namespace Multitouch.Service.Logic
 {
 	class InputProviderManager : IDisposable
 	{

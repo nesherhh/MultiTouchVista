@@ -57,7 +57,7 @@ namespace MultipleMice
 
 		void InputWorker()
 		{
-			RawDevice.RegisterRawDevices(0x01, 0x02, InputMode.BackgroundMode | InputMode.SuppressMessages);
+			RawDevice.RegisterRawDevices(0x01, 0x02, InputMode.BackgroundMode);
 			RawDevice.RegisterRawDevices(HID_USAGE_PAGE_DIGITIZER, HID_USAGE_DIGITIZER_PEN, InputMode.BackgroundMode);
 			RawDevice.RawInput += RawDevice_RawInput;
 			Application.Run();

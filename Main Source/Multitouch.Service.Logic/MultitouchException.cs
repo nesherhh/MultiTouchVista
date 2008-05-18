@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Multitouch.Service
+namespace Multitouch.Service.Logic
 {
 	[Serializable]
 	public class MultitouchException : Exception

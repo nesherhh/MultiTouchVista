@@ -1,4 +1,4 @@
-﻿namespace Multitouch.Service
+namespace Multitouch.Service.Logic
 {
 	partial class ProjectInstaller
 	{
@@ -46,8 +46,8 @@
 			// ProjectInstaller
 			// 
 			this.Installers.AddRange(new System.Configuration.Install.Installer[] {
-            this.serviceProcessInstaller1,
-            this.serviceInstaller1});
+			                                                                      	this.serviceProcessInstaller1,
+			                                                                      	this.serviceInstaller1});
 
 		}
 

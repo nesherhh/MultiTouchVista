@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using Multitouch.Contracts;
 
-namespace Multitouch.Service.ExternalInterfaces
+namespace Multitouch.Service.Logic.ExternalInterfaces
 {
 	public interface IApplicationInterfaceCallback
 	{

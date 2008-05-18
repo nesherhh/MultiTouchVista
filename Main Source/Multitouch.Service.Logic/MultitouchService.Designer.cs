@@ -1,4 +1,4 @@
-﻿namespace Multitouch.Service
+namespace Multitouch.Service.Logic
 {
 	partial class MultitouchService
 	{

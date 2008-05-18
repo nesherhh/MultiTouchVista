@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 
-namespace Multitouch.Service.ExternalInterfaces
+namespace Multitouch.Service.Logic.ExternalInterfaces
 {
 	[ServiceContract(SessionMode = SessionMode.Required, CallbackContract = typeof(IApplicationInterfaceCallback))]
 	public interface IApplicationInterface
