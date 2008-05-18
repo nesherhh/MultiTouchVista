@@ -8,7 +8,7 @@ using Multitouch.Service.Logic.Properties;
 
 namespace Multitouch.Service.Logic
 {
-	class MultitouchInput
+	public class MultitouchInput
 	{
 		InputProviderManager providerManager;
 

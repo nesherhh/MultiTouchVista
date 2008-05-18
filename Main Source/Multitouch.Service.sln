@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationSelector", "Mult
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Service", "Multitouch.Service\Multitouch.Service.csproj", "{DA05C208-0357-4E76-B256-D55511BC48BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Service.Logic", "Multitouch.Service.Logic\Multitouch.Service.Logic.csproj", "{1720CC0B-4411-4FE5-A51C-D539BB19AC54}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
@@ -17,6 +19,12 @@ Global
 		SccProjectTopLevelParentUniqueName1 = Multitouch.Service.sln
 		SccProjectName1 = Multitouch.Service.AddIns/ApplicationSelector
 		SccLocalPath1 = Multitouch.Service.AddIns\\ApplicationSelector
+		SccProjectUniqueName2 = Multitouch.Service\\Multitouch.Service.csproj
+		SccProjectName2 = Multitouch.Service
+		SccLocalPath2 = Multitouch.Service
+		SccProjectUniqueName3 = Multitouch.Service.Logic\\Multitouch.Service.Logic.csproj
+		SccProjectName3 = Multitouch.Service.Logic
+		SccLocalPath3 = Multitouch.Service.Logic
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +39,10 @@ Global
 		{DA05C208-0357-4E76-B256-D55511BC48BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA05C208-0357-4E76-B256-D55511BC48BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA05C208-0357-4E76-B256-D55511BC48BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
