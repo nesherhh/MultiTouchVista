@@ -16,13 +16,15 @@ namespace Multitouch.Service.Logic
 		IProvider inputProvider;
 		ServiceHost serviceHost;
 		List<IInputPreviewHandler> inputPreviewHandlers;
+		List<IInputPostHandler> inputPostHandlers;
 
 		public InputProviderManager(IProvider inputProvider)
 		{
 			inputPreviewHandlers = new List<IInputPreviewHandler>();
+			inputPostHandlers = new List<IInputPostHandler>();
 			StartService();
 
-			LoadPreviewHandlers();
+			LoadInputHandlers();
 
 			this.inputProvider = inputProvider;
 			this.inputProvider.ContactChanged += inputProvider_ContactChanged;
@@ -38,15 +40,19 @@ namespace Multitouch.Service.Logic
 			serviceHost.Close();
 		}
 
-		void LoadPreviewHandlers()
+		void LoadInputHandlers()
 		{
 			AddInToken.EnableDirectConnect = true;
 			string[] warnings = AddInStore.Update(PipelineStoreLocation.ApplicationBase);
-			Array.ForEach(warnings, w => Trace.TraceWarning(w));
+			Array.ForEach(warnings, message => Trace.TraceWarning(message));
 
-			Collection<AddInToken> tokens = AddInStore.FindAddIns(typeof(IInputPreviewHandler), PipelineStoreLocation.ApplicationBase);
-			foreach (AddInToken token in tokens)
+			Collection<AddInToken> previewTokens = AddInStore.FindAddIns(typeof(IInputPreviewHandler), PipelineStoreLocation.ApplicationBase);
+			foreach (AddInToken token in previewTokens)
 				inputPreviewHandlers.Add(token.Activate<IInputPreviewHandler>(AppDomain.CurrentDomain));
+
+			Collection<AddInToken> postTokens = AddInStore.FindAddIns(typeof(IInputPostHandler), PipelineStoreLocation.ApplicationBase);
+			foreach (var token in postTokens)
+				inputPostHandlers.Add(token.Activate<IInputPostHandler>(AppDomain.CurrentDomain));
 		}
 
 		void inputProvider_ContactChanged(object sender, ContactChangedEventArgs e)
@@ -62,6 +68,9 @@ namespace Multitouch.Service.Logic
 				ApplicationInterfaceService.ContactChanged(result.HWnd, new HandledContactChangedEventArgs(result.Contact));
 			else
 				ApplicationInterfaceService.ContactChanged(e);
+
+			foreach (IInputPostHandler handler in inputPostHandlers)
+				handler.Handle(e.Contact);
 		}
 
 		void StartService()

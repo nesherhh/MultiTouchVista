@@ -60,6 +60,7 @@
     <Compile Include="IContactChangedEventArgsContract.cs" />
     <Compile Include="IContactChangedEventHandlerContract.cs" />
     <Compile Include="IContactContract.cs" />
+    <Compile Include="IInputPostHandlerContract.cs" />
     <Compile Include="IInputPreviewHandlerContract.cs" />
     <Compile Include="IPreviewResultContract.cs" />
     <Compile Include="IProviderContract.cs" />

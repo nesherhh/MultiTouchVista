@@ -61,6 +61,7 @@
     <Compile Include="Generated Files\ContactChangedEventArgs.g.cs" />
     <Compile Include="Generated Files\ContactState.g.cs" />
     <Compile Include="Generated Files\IContact.g.cs" />
+    <Compile Include="Generated Files\IInputPostHandler.g.cs" />
     <Compile Include="Generated Files\IInputPreviewHandler.g.cs" />
     <Compile Include="Generated Files\IPreviewResult.g.cs" />
     <Compile Include="Generated Files\IProvider.g.cs" />

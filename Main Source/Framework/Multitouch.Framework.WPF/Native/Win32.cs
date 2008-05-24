@@ -76,5 +76,8 @@ namespace Multitouch.Framework.WPF.Native
 
 		[DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
 		public static extern int GetSystemMetrics(int nIndex);
+
+		[DllImport("user32.dll")]
+		public static extern IntPtr GetMessageExtraInfo();
 	}
 }

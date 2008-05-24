@@ -11,9 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Service.Logic", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Service.Console", "Multitouch.Service.Console\Multitouch.Service.Console.csproj", "{094B04DC-3833-4CC1-8161-D9BD26616D57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSingleInput", "PostSingleInput\PostSingleInput.csproj", "{2E9E7465-48A0-4A18-BB4A-6792E67BA177}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
@@ -30,6 +32,10 @@ Global
 		SccProjectUniqueName4 = Multitouch.Service.Console\\Multitouch.Service.Console.csproj
 		SccProjectName4 = Multitouch.Service.Console
 		SccLocalPath4 = Multitouch.Service.Console
+		SccProjectUniqueName5 = PostSingleInput\\PostSingleInput.csproj
+		SccProjectTopLevelParentUniqueName5 = Multitouch.Service.sln
+		SccProjectName5 = PostSingleInput
+		SccLocalPath5 = PostSingleInput
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,11 +58,16 @@ Global
 		{094B04DC-3833-4CC1-8161-D9BD26616D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{094B04DC-3833-4CC1-8161-D9BD26616D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{094B04DC-3833-4CC1-8161-D9BD26616D57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6} = {0D9521F7-3C05-400F-85C6-DCEB614083D1}
+		{2E9E7465-48A0-4A18-BB4A-6792E67BA177} = {0D9521F7-3C05-400F-85C6-DCEB614083D1}
 	EndGlobalSection
 EndGlobal
