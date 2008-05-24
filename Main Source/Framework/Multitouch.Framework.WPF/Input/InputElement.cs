@@ -10,6 +10,7 @@ namespace Multitouch.Framework.WPF.Input
 	{
 		static MethodInfo getContainingInputElementMethod;
 		static MethodInfo getContainingVisualMethod;
+		static MethodInfo getContainingUIElementMethod;
 		static MethodInfo isValidMethod;
 		static MethodInfo translatePointMethod;
 
@@ -19,6 +20,8 @@ namespace Multitouch.Framework.WPF.Input
 			getContainingInputElementMethod = inputElementType.GetMethod("GetContainingInputElement", BindingFlags.NonPublic | BindingFlags.Static,
 				null, new[] { typeof(DependencyObject) }, null);
 			getContainingVisualMethod = inputElementType.GetMethod("GetContainingVisual", BindingFlags.NonPublic | BindingFlags.Static,
+				null, new[] { typeof(DependencyObject) }, null);
+			getContainingUIElementMethod = inputElementType.GetMethod("GetContainingUIElement", BindingFlags.NonPublic | BindingFlags.Static,
 				null, new[] { typeof(DependencyObject) }, null);
 			isValidMethod = inputElementType.GetMethod("IsValid", BindingFlags.NonPublic | BindingFlags.Static, null,
 				new[] { typeof(IInputElement) }, null);
@@ -44,6 +47,11 @@ namespace Multitouch.Framework.WPF.Input
 		public static Point TranslatePoint(Point point, DependencyObject from, DependencyObject to)
 		{
 			return (Point)translatePointMethod.Invoke(null, new object[] { point, from, to });
+		}
+
+		public static UIElement GetContainingUIElement(DependencyObject target)
+		{
+			return (UIElement)getContainingUIElementMethod.Invoke(null, new object[] { target });
 		}
 	}
 }

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -16,6 +17,8 @@ namespace TestApplication
 	/// </summary>
 	public partial class Window1
 	{
+		private InkAnalyzer inkAnalyzer;
+
 		public ObservableCollection<Contact> Contacts1 { get; private set; }
 		public ObservableCollection<Contact> Contacts2 { get; private set; }
 
@@ -27,6 +30,9 @@ namespace TestApplication
 
 		public Window1()
 		{
+			inkAnalyzer = new InkAnalyzer();
+			inkAnalyzer.ResultsUpdated += inkAnalyzer_ResultsUpdated;
+
 			Contacts1 = new ObservableCollection<Contact>();
 			Contacts2 = new ObservableCollection<Contact>();
 			SetValue(PicturesPropertyKey, new ObservableCollection<string>());
@@ -35,6 +41,7 @@ namespace TestApplication
 
 			MultitouchScreen.EnableGestures(ApplicationGesture.Circle);
 			MultitouchScreen.AddGestureHandler(this, OnGesture);
+			MultitouchScreen.IsGesturesEnabled = false;
 		}
 
 		void OnGesture(object sender, GestureEventArgs e)
@@ -80,28 +87,6 @@ namespace TestApplication
 				Contacts1.Remove(contact);
 		}
 
-		private void list2_ContactMoved(object sender, ContactEventArgs e)
-		{
-			Contacts2.Clear();
-			IDictionary<int, Contact> contacts = e.GetContacts(list2, MatchCriteria.LogicalParent);
-			foreach (KeyValuePair<int, Contact> pair in contacts)
-				Contacts2.Add(pair.Value);
-		}
-
-		private void list2_ContactRemoved(object sender, ContactEventArgs e)
-		{
-			Contact contact = e.Contact;
-			if (IsParent(contact.Element, list2))
-				Contacts2.Remove(contact);
-		}
-
-		private void list2_NewContact(object sender, NewContactEventArgs e)
-		{
-			IDictionary<int, Contact> contacts = e.GetContacts(list2, MatchCriteria.LogicalParent);
-			foreach (KeyValuePair<int, Contact> pair in contacts)
-				Contacts2.Add(pair.Value);
-		}
-
 		bool IsParent(UIElement element, UIElement parent)
 		{
 			UIElement current = element;
@@ -125,6 +110,21 @@ namespace TestApplication
 		private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			MessageBox.Show("command executed");
+		}
+
+		private void TouchCanvas_StrokeCollected(object sender, InkCanvasStrokeCollectedEventArgs e)
+		{
+			if (!inkAnalyzer.IsAnalyzing)
+			{
+				inkAnalyzer.AddStroke(e.Stroke);
+				inkAnalyzer.BackgroundAnalyze();
+			}
+		}
+
+		void inkAnalyzer_ResultsUpdated(object sender, ResultsUpdatedEventArgs e)
+		{
+			if (e.Status.Successful)
+				MessageBox.Show(inkAnalyzer.GetRecognizedString());
 		}
 	}
 }

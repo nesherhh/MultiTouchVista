@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Input.StylusPlugIns;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Multitouch.Framework.Input;
@@ -18,10 +20,69 @@ namespace Multitouch.Framework.WPF.Input
 		internal static readonly RoutedEvent RawInputEvent = EventManager.RegisterRoutedEvent("RawInput", RoutingStrategy.Bubble,
 			typeof(RawMultitouchReportHandler), typeof(MultitouchLogic));
 
+		object stylusLogic;
+		Type stylusLogicType;
+		MethodInfo getPenContextsFromHwndMethod;
+		PropertyInfo getMousePointDescriptionProperty;
+
+		Assembly presentationCoreAssembly;
+		Type rawStylusInputReportType;
+		Type rawStylusActionsType;
+		ConstructorInfo constructor;
+
+		Type penContextsType;
+		MethodInfo invokeStylusPluginCollectionForMouseMethod;
+
+
 		InputManager inputManager;
 		int doubleTapDeltaTime;
+		StylusPlugInCollection activeMousePluginCollection;
+		static StylusPointDescription mousePointerDescription;
+		object stylusActionDown;
+		object stylusActionMove;
+		object stylusActionUp;
+
+
 		internal GestureManager GestureManager { get; private set; }
 		internal MultitouchDeviceManager DeviceManager { get; private set; }
+
+		public MultitouchLogic(InputManager inputManager)
+		{
+			presentationCoreAssembly = typeof(InputManager).Assembly;
+			rawStylusInputReportType = presentationCoreAssembly.GetType("System.Windows.Input.RawStylusInputReport");
+			rawStylusActionsType = presentationCoreAssembly.GetType("System.Windows.Input.RawStylusActions");
+			penContextsType = presentationCoreAssembly.GetType("System.Windows.Input.PenContexts");
+			stylusLogicType = presentationCoreAssembly.GetType("System.Windows.Input.StylusLogic");
+			constructor = rawStylusInputReportType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null,
+			                                                      new[]
+			                                                      	{
+			                                                      		typeof(InputMode), typeof(int), typeof(PresentationSource),
+			                                                      		rawStylusActionsType, typeof(StylusPointDescription), typeof(int[])
+			                                                      	}, null);
+
+			FieldInfo field = rawStylusActionsType.GetField("Down");
+			stylusActionDown = field.GetValue(null);
+			field = rawStylusActionsType.GetField("Move");
+			stylusActionMove = field.GetValue(null);
+			field = rawStylusActionsType.GetField("Up");
+			stylusActionUp = field.GetValue(null);
+
+			invokeStylusPluginCollectionForMouseMethod = penContextsType.GetMethod("InvokeStylusPluginCollectionForMouse", BindingFlags.NonPublic | BindingFlags.Instance);
+			getPenContextsFromHwndMethod = stylusLogicType.GetMethod("GetPenContextsFromHwnd", BindingFlags.NonPublic | BindingFlags.Instance);
+			stylusLogic = typeof(InputManager).GetProperty("StylusLogic", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(InputManager.Current, null);
+			getMousePointDescriptionProperty = stylusLogicType.GetProperty("GetMousePointDescription", BindingFlags.Instance | BindingFlags.NonPublic);
+
+
+			doubleTapDeltaTime = 800;
+
+			DeviceManager = new MultitouchDeviceManager();
+			GestureManager = new GestureManager();
+
+			this.inputManager = inputManager;
+			this.inputManager.PreProcessInput += inputManager_PreProcessInput;
+			this.inputManager.PreNotifyInput += inputManager_PreNotifyInput;
+			this.inputManager.PostProcessInput += inputManager_PostProcessInput;
+		}
 
 		public static MultitouchLogic Current
 		{
@@ -37,19 +98,6 @@ namespace Multitouch.Framework.WPF.Input
 				}
 				return current;
 			}
-		}
-
-		public MultitouchLogic(InputManager inputManager)
-		{
-			doubleTapDeltaTime = 800;
-
-			DeviceManager = new MultitouchDeviceManager();
-			GestureManager = new GestureManager();
-			
-			this.inputManager = inputManager;
-			this.inputManager.PreProcessInput += inputManager_PreProcessInput;
-			this.inputManager.PreNotifyInput += inputManager_PreNotifyInput;
-			this.inputManager.PostProcessInput += inputManager_PostProcessInput;
 		}
 
 
@@ -88,6 +136,7 @@ namespace Multitouch.Framework.WPF.Input
 				routedEvent == GestureManager.RawGestureInputEvent || routedEvent == MultitouchScreen.PreviewGestureEvent ||
 				routedEvent == MultitouchScreen.GestureEvent))
 			{
+				e.StagingItem.Input.Handled = true;
 				e.Cancel();
 			}
 			Debug.Assert(routedEvent != null, "routed event null");
@@ -159,6 +208,8 @@ namespace Multitouch.Framework.WPF.Input
 			if (GestureManager.IsGestureEnabled)
 				GestureManager.PostProcessInput(e);
 
+			CallPlugInsForMultitouch(e);
+
 			PromotePreviewToMain(e);
 		}
 
@@ -220,6 +271,49 @@ namespace Multitouch.Framework.WPF.Input
 			if (routedEvent == MultitouchScreen.PreviewNewContactEvent)
 				return MultitouchScreen.NewContactEvent;
 			return null;
+		}
+
+		void CallPlugInsForMultitouch(ProcessInputEventArgs e)
+		{
+			ContactEventArgs args = e.StagingItem.Input as ContactEventArgs;
+			if (args != null)
+			{
+				object stylusActions = null;
+				if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewNewContactEvent)
+					stylusActions = stylusActionDown;
+				else if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewContactMovedEvent)
+					stylusActions = stylusActionMove;
+				else if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewContactRemovedEvent)
+					stylusActions = stylusActionUp;
+
+				PresentationSource source = PresentationSource.FromVisual((Visual)args.MultitouchDevice.Target);
+				Point ptClient = args.GetPosition(source.RootVisual as IInputElement);
+				ptClient = source.CompositionTarget.TransformToDevice.Transform(ptClient);
+				int[] data = new[] {(int)ptClient.X, (int)ptClient.Y, 1, 1};
+
+				object rawStylusInputReport = constructor.Invoke(new[]
+				                                                 	{
+				                                                 		InputMode.Foreground, args.Timestamp, source,
+				                                                 		stylusActions, GetMousePointerDescription, data
+				                                                 	});
+
+				using (Dispatcher.DisableProcessing())
+				{
+					object penContexts = getPenContextsFromHwndMethod.Invoke(stylusLogic, new object[] {source});
+					activeMousePluginCollection = (StylusPlugInCollection)invokeStylusPluginCollectionForMouseMethod.Invoke(penContexts,
+						new[] {rawStylusInputReport, args.MultitouchDevice.Target, activeMousePluginCollection});
+				}
+			}
+		}
+
+		internal StylusPointDescription GetMousePointerDescription
+		{
+			get
+			{
+				if(mousePointerDescription == null)
+					mousePointerDescription = (StylusPointDescription)getMousePointDescriptionProperty.GetValue(stylusLogic, null);
+				return mousePointerDescription;
+			}
 		}
 	}
 }

@@ -22,12 +22,7 @@
 				 mt:MultitouchScreen.ContactMoved="list1_ContactMoved"
 				 mt:MultitouchScreen.ContactRemoved="list1_ContactRemoved"
 				 />
-		<ListBox Grid.Column="1"
-				 x:Name="list2"
-				 ItemsSource="{Binding Contacts2}"
-				 mt:MultitouchScreen.ContactMoved="list2_ContactMoved"
-				 mt:MultitouchScreen.ContactRemoved="list2_ContactRemoved"
-				 mt:MultitouchScreen.NewContact="list2_NewContact"/>
+		<mt:TouchCanvas Grid.Column="1" StrokeCollected="TouchCanvas_StrokeCollected"/>
 		<UniformGrid Grid.Column="3" Columns="3" Rows="3">
 			<mt:Button Content="click me" Click="Button_Click"/>
 			<mt:RepeatButton x:Name="repeatButton" Content="0" Click="RepeatButton_Click"/>

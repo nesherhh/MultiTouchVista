@@ -1,0 +1,65 @@
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Ink;
+using System.Windows.Input;
+using Multitouch.Framework.WPF.Input;
+using Phydeaux.Utilities;
+
+namespace Multitouch.Framework.WPF.Controls
+{
+	public class TouchCanvas : InkCanvas
+	{
+		IDictionary<int, StylusPointCollection> points;
+		Proc<InkCanvas, InkCanvasStrokeCollectedEventArgs, bool> raiseGestureOrStrokeCollectedMethod;
+
+		public TouchCanvas()
+		{
+			points = new Dictionary<int, StylusPointCollection>();
+			raiseGestureOrStrokeCollectedMethod = Dynamic<InkCanvas>.Instance.Procedure.Explicit<InkCanvasStrokeCollectedEventArgs, bool>.CreateDelegate("RaiseGestureOrStrokeCollected");
+
+			AddHandler(MultitouchScreen.NewContactEvent, (NewContactEventHandler)OnNewContact);
+			AddHandler(MultitouchScreen.ContactMovedEvent, (ContactEventHandler)OnContactMoved);
+			AddHandler(MultitouchScreen.ContactRemovedEvent, (ContactEventHandler)OnContactRemoved);
+
+			EditingMode = InkCanvasEditingMode.InkAndGesture;
+			SetEnabledGestures(new[]{ApplicationGesture.ScratchOut});
+			Gesture += TouchCanvas_Gesture;
+		}
+
+		void TouchCanvas_Gesture(object sender, InkCanvasGestureEventArgs e)
+		{
+			GestureRecognitionResult recognitionResult = e.GetGestureRecognitionResults().FirstOrDefault();
+			if (recognitionResult != null && recognitionResult.RecognitionConfidence == RecognitionConfidence.Strong && recognitionResult.ApplicationGesture == ApplicationGesture.ScratchOut)
+				Strokes.Clear();
+		}
+
+		protected virtual void OnNewContact(object sender, NewContactEventArgs e)
+		{
+			StylusPointCollection pointCollection = new StylusPointCollection();
+			points.Add(e.Contact.Id, pointCollection);
+
+			Point position = e.GetPosition(this);
+			pointCollection.Add(new StylusPoint(position.X, position.Y));
+		}
+
+		protected virtual void OnContactMoved(object sender, ContactEventArgs e)
+		{
+			Point position = e.GetPosition(this);
+			points[e.Contact.Id].Add(new StylusPoint(position.X, position.Y));
+		}
+
+		protected virtual void OnContactRemoved(object sender, ContactEventArgs e)
+		{
+			Point position = e.GetPosition(this);
+			StylusPointCollection pointCollection = points[e.Contact.Id];
+			pointCollection.Add(new StylusPoint(position.X, position.Y));
+			points.Remove(e.Contact.Id);
+
+			Stroke stroke = new Stroke(pointCollection);
+            raiseGestureOrStrokeCollectedMethod(this, new InkCanvasStrokeCollectedEventArgs(stroke), true);
+		}
+	}
+}
