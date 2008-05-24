@@ -32,6 +32,7 @@
 					<CommandBinding Command="{x:Static local:Window1.TestCommand}" Executed="CommandBinding_Executed"/>
 				</mt:Button.CommandBindings>
 			</mt:Button>
+			<Button Click="Button_Click">wpf button</Button>
 		</UniformGrid>
 		<ItemsControl x:Name="itemsControl"
 					  Grid.Row="1" Grid.ColumnSpan="3"

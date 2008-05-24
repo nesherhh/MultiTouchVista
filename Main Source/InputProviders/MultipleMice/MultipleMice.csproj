@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ManagedWinapi, Version=0.2.0.0, Culture=neutral, PublicKeyToken=b860f1b8cf45f41c, processorArchitecture=MSIL" />
     <Reference Include="Multitouch.Views, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Output\AddInViews\Multitouch.Views.dll</HintPath>
@@ -90,6 +91,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\GlassDiscImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Lib\ManagedWinapi.dll" />
+    <Content Include="Lib\ManagedWinapi.pdb" />
+    <Content Include="Lib\ManagedWinapi.xml" />
+    <Content Include="Lib\ManagedWinapiNativeHelper.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
