@@ -11,11 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Service.Logic", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Service.Console", "Multitouch.Service.Console\Multitouch.Service.Console.csproj", "{094B04DC-3833-4CC1-8161-D9BD26616D57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSingleInput", "PostSingleInput\PostSingleInput.csproj", "{2E9E7465-48A0-4A18-BB4A-6792E67BA177}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSingleInput", "Multitouch.Service.AddIns\PostSingleInput\PostSingleInput.csproj", "{2E9E7465-48A0-4A18-BB4A-6792E67BA177}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWMaxxAddIn", "Multitouch.Service.AddIns\DWMaxxAddIn\DWMaxxAddIn.csproj", "{40E6272E-A704-467B-AE3F-956D00BB49E8}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
@@ -32,10 +34,14 @@ Global
 		SccProjectUniqueName4 = Multitouch.Service.Console\\Multitouch.Service.Console.csproj
 		SccProjectName4 = Multitouch.Service.Console
 		SccLocalPath4 = Multitouch.Service.Console
-		SccProjectUniqueName5 = PostSingleInput\\PostSingleInput.csproj
+		SccProjectUniqueName5 = Multitouch.Service.AddIns\\PostSingleInput\\PostSingleInput.csproj
 		SccProjectTopLevelParentUniqueName5 = Multitouch.Service.sln
-		SccProjectName5 = PostSingleInput
-		SccLocalPath5 = PostSingleInput
+		SccProjectName5 = Multitouch.Service.AddIns/PostSingleInput
+		SccLocalPath5 = Multitouch.Service.AddIns\\PostSingleInput
+		SccProjectUniqueName6 = Multitouch.Service.AddIns\\DWMaxxAddIn\\DWMaxxAddIn.csproj
+		SccProjectTopLevelParentUniqueName6 = Multitouch.Service.sln
+		SccProjectName6 = Multitouch.Service.AddIns/DWMaxxAddIn
+		SccLocalPath6 = Multitouch.Service.AddIns\\DWMaxxAddIn
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +68,10 @@ Global
 		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +79,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6} = {0D9521F7-3C05-400F-85C6-DCEB614083D1}
 		{2E9E7465-48A0-4A18-BB4A-6792E67BA177} = {0D9521F7-3C05-400F-85C6-DCEB614083D1}
+		{40E6272E-A704-467B-AE3F-956D00BB49E8} = {0D9521F7-3C05-400F-85C6-DCEB614083D1}
 	EndGlobalSection
 EndGlobal

@@ -18,6 +18,21 @@ namespace Multitouch.Contracts.HostSideAdapters
         {
             _view = view;
         }
+        public int Order
+        {
+            get
+            {
+                return _view.Order;
+            }
+        }
+        public virtual void Start()
+        {
+            _view.Start();
+        }
+        public virtual void Stop()
+        {
+            _view.Stop();
+        }
         public virtual Multitouch.Contracts.IPreviewResultContract Handle(Multitouch.Contracts.Contracts.IContactContract contact)
         {
             return Multitouch.HostSideAdapters.IPreviewResultHostAdapter.ViewToContractAdapter(_view.Handle(Multitouch.Contracts.HostSideAdapters.IContactHostAdapter.ContractToViewAdapter(contact)));

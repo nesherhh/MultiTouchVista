@@ -16,5 +16,16 @@ namespace ApplicationSelector
 			IntPtr hWnd = Win32.WindowFromPoint(new Win32.POINT((int)contact.X, (int)contact.Y));
 			return new Result(hWnd, contact);
 		}
+
+		public void Start()
+		{}
+
+		public void Stop()
+		{}
+
+		public int Order
+		{
+			get { return 0; }
+		}
 	}
 }

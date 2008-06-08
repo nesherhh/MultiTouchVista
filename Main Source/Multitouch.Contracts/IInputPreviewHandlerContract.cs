@@ -7,6 +7,9 @@ namespace Multitouch.Contracts.Contracts
 	[AddInContract]
 	public interface IInputPreviewHandlerContract : IContract
 	{
+		void Start();
+		void Stop();
 		IPreviewResultContract Handle(IContactContract contact);
+		int Order { get; }
 	}
 }

@@ -66,7 +66,7 @@ namespace MultipleMice
 
 		void SyncUpdateLocation(object state)
 		{
-			debugCursor.Location = Location;
+			debugCursor.Location = new Point(Location.X - debugCursor.Width / 2, Location.Y - debugCursor.Height / 2);
 		}
 
 		public DeviceState ButtonState { get; set; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Speech.Synthesis;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;
@@ -17,7 +18,9 @@ namespace TestApplication
 	/// </summary>
 	public partial class Window1
 	{
-		private InkAnalyzer inkAnalyzer;
+		InkAnalyzer inkAnalyzer;
+		int repeatButtonCount;
+		SpeechSynthesizer synthesizer;
 
 		public ObservableCollection<Contact> Contacts1 { get; private set; }
 		public ObservableCollection<Contact> Contacts2 { get; private set; }
@@ -30,6 +33,8 @@ namespace TestApplication
 
 		public Window1()
 		{
+			synthesizer = new SpeechSynthesizer();
+
 			inkAnalyzer = new InkAnalyzer();
 			inkAnalyzer.ResultsUpdated += inkAnalyzer_ResultsUpdated;
 
@@ -100,7 +105,6 @@ namespace TestApplication
 			MessageBox.Show("I was clicked");
 		}
 
-		int repeatButtonCount = 0;
 		private void RepeatButton_Click(object sender, RoutedEventArgs e)
 		{
 			repeatButtonCount++;
@@ -124,7 +128,11 @@ namespace TestApplication
 		void inkAnalyzer_ResultsUpdated(object sender, ResultsUpdatedEventArgs e)
 		{
 			if (e.Status.Successful)
-				MessageBox.Show(inkAnalyzer.GetRecognizedString());
+			{
+				string text = inkAnalyzer.GetRecognizedString();
+				synthesizer.SpeakAsync(text);
+				MessageBox.Show(text);
+			}
 		}
 	}
 }

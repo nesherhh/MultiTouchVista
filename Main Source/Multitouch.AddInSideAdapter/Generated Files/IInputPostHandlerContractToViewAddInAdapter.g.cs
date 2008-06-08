@@ -23,9 +23,24 @@ namespace Multitouch.Contracts.AddInSideAdapters
             _contract = contract;
             _handle = new System.AddIn.Pipeline.ContractHandle(contract);
         }
-        public void Handle(IContact contact)
+        public int Order
         {
-            _contract.Handle(Multitouch.Contracts.AddInSideAdapters.IContactAddInAdapter.ViewToContractAdapter(contact));
+            get
+            {
+                return _contract.Order;
+            }
+        }
+        public void Start()
+        {
+            _contract.Start();
+        }
+        public void Stop()
+        {
+            _contract.Stop();
+        }
+        public void Handle(System.IntPtr windowHandle, IContact contact)
+        {
+            _contract.Handle(windowHandle, Multitouch.Contracts.AddInSideAdapters.IContactAddInAdapter.ViewToContractAdapter(contact));
         }
         internal Multitouch.Contracts.Contracts.IInputPostHandlerContract GetSourceContract()
         {

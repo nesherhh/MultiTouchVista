@@ -27,28 +27,18 @@ namespace MultipleMice
 			backgroundImage = Resources.GlassDiscImage;
 			actionImage = null;
 			feedbackImage = new Bitmap(backgroundImage.Width, backgroundImage.Height);
-			Width = feedbackImage.Width;
-			Height = feedbackImage.Height;
-			xCenter = Width / 2;
-			yCenter = Height / 2;
 
-			Cursor cursor = Cursors.Default;
-			Bitmap defaultImage = new Bitmap(Cursors.Default.Size.Width, cursor.Size.Height);
+			Bitmap defaultImage = new Bitmap(10, 10);
 
 			Graphics g = Graphics.FromImage(defaultImage);
-			cursor.Draw(g, new Rectangle(0, 0, defaultImage.Width, defaultImage.Height));
-
-			for (int y = 0; y < defaultImage.Height; y++)
-			{
-				for (int x = 0; x < defaultImage.Width; x++)
-				{
-					Color pixel = defaultImage.GetPixel(x, y);
-					if (pixel.GetBrightness() < 0.01)
-						defaultImage.SetPixel(x, y, Color.Red);
-				}
-			}
+			g.FillEllipse(Brushes.Red, 0, 0, 10, 10);
 
 			ActionImage = defaultImage;
+            
+			Width = actionImage.Width;
+			Height = actionImage.Height;
+			xCenter = Width / 2;
+			yCenter = Height / 2;
 		}
 
 		private void Render(Graphics g)
