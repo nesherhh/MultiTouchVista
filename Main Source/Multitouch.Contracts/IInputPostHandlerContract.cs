@@ -8,6 +8,9 @@ namespace Multitouch.Contracts.Contracts
 	[AddInContract]
 	public interface IInputPostHandlerContract : IContract
 	{
-		void Handle(IContactContract contact);
+		void Start();
+		void Stop();
+		void Handle(IntPtr windowHandle, IContactContract contact);
+		int Order { get; }
 	}
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.AddIn.Hosting;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,9 +34,14 @@ namespace Multitouch.Service.Logic
 
 		public void Dispose()
 		{
-			inputProvider.Stop();
+            inputProvider.Stop();
 			inputProvider.ContactChanged -= inputProvider_ContactChanged;
 			inputProvider = null;
+
+			foreach (IInputPostHandler postHandler in inputPostHandlers)
+				postHandler.Stop();
+			foreach (IInputPreviewHandler previewHandler in inputPreviewHandlers)
+				previewHandler.Stop();
 
 			serviceHost.Close();
 		}
@@ -48,11 +54,21 @@ namespace Multitouch.Service.Logic
 
 			Collection<AddInToken> previewTokens = AddInStore.FindAddIns(typeof(IInputPreviewHandler), PipelineStoreLocation.ApplicationBase);
 			foreach (AddInToken token in previewTokens)
-				inputPreviewHandlers.Add(token.Activate<IInputPreviewHandler>(AppDomain.CurrentDomain));
+			{
+				IInputPreviewHandler previewHandler = token.Activate<IInputPreviewHandler>(AppDomain.CurrentDomain);
+				previewHandler.Start();
+				inputPreviewHandlers.Add(previewHandler);
+			}
+			inputPreviewHandlers.OrderBy(h => h.Order);
 
 			Collection<AddInToken> postTokens = AddInStore.FindAddIns(typeof(IInputPostHandler), PipelineStoreLocation.ApplicationBase);
-			foreach (var token in postTokens)
-				inputPostHandlers.Add(token.Activate<IInputPostHandler>(AppDomain.CurrentDomain));
+			foreach (AddInToken token in postTokens)
+			{
+				IInputPostHandler postHandler = token.Activate<IInputPostHandler>(AppDomain.CurrentDomain);
+				postHandler.Start();
+				inputPostHandlers.Add(postHandler);
+			}
+			inputPostHandlers.OrderBy(h => h.Order);
 		}
 
 		void inputProvider_ContactChanged(object sender, ContactChangedEventArgs e)
@@ -70,7 +86,12 @@ namespace Multitouch.Service.Logic
 				ApplicationInterfaceService.ContactChanged(e);
 
 			foreach (IInputPostHandler handler in inputPostHandlers)
-				handler.Handle(e.Contact);
+			{
+				if (result != null)
+					handler.Handle(result.HWnd, result.Contact);
+				else
+					handler.Handle(IntPtr.Zero, e.Contact);
+			}
 		}
 
 		void StartService()

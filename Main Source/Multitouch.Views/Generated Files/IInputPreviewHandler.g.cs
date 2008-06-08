@@ -14,6 +14,12 @@ namespace Multitouch.Contracts
     [System.AddIn.Pipeline.AddInBaseAttribute()]
     public interface IInputPreviewHandler
     {
+        int Order
+        {
+            get;
+        }
+        void Start();
+        void Stop();
         Multitouch.IPreviewResult Handle(IContact contact);
     }
 }

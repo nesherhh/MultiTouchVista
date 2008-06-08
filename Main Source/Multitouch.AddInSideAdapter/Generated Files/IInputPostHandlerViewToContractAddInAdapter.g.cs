@@ -19,9 +19,24 @@ namespace Multitouch.Contracts.AddInSideAdapters
         {
             _view = view;
         }
-        public virtual void Handle(Multitouch.Contracts.Contracts.IContactContract contact)
+        public int Order
         {
-            _view.Handle(Multitouch.Contracts.AddInSideAdapters.IContactAddInAdapter.ContractToViewAdapter(contact));
+            get
+            {
+                return _view.Order;
+            }
+        }
+        public virtual void Start()
+        {
+            _view.Start();
+        }
+        public virtual void Stop()
+        {
+            _view.Stop();
+        }
+        public virtual void Handle(System.IntPtr windowHandle, Multitouch.Contracts.Contracts.IContactContract contact)
+        {
+            _view.Handle(windowHandle, Multitouch.Contracts.AddInSideAdapters.IContactAddInAdapter.ContractToViewAdapter(contact));
         }
         internal Multitouch.Contracts.IInputPostHandler GetSourceView()
         {

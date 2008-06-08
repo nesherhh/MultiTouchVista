@@ -24,9 +24,24 @@ namespace Multitouch.Contracts.HostSideAdapters
             _contract = contract;
             _handle = new System.AddIn.Pipeline.ContractHandle(contract);
         }
-        public void Handle(IContact contact)
+        public int Order
         {
-            _contract.Handle(Multitouch.Contracts.HostSideAdapters.IContactHostAdapter.ViewToContractAdapter(contact));
+            get
+            {
+                return _contract.Order;
+            }
+        }
+        public void Start()
+        {
+            _contract.Start();
+        }
+        public void Stop()
+        {
+            _contract.Stop();
+        }
+        public void Handle(System.IntPtr windowHandle, IContact contact)
+        {
+            _contract.Handle(windowHandle, Multitouch.Contracts.HostSideAdapters.IContactHostAdapter.ViewToContractAdapter(contact));
         }
         internal Multitouch.Contracts.Contracts.IInputPostHandlerContract GetSourceContract()
         {
