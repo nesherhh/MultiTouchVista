@@ -27,7 +27,7 @@ namespace DWMaxxAddIn
 			get
 			{
 				Rectangle rectangle = Rectangle;
-				Point center = new Point((rectangle.Width + SystemInformation.FrameBorderSize.Width) / 2.0, (rectangle.Height + (SystemInformation.CaptionHeight * 2) + SystemInformation.FrameBorderSize.Height) / 2.0);
+				Point center = new Point((rectangle.Width + SystemInformation.FrameBorderSize.Width) / 2.0, (rectangle.Height + SystemInformation.CaptionHeight + SystemInformation.MenuHeight + SystemInformation.FrameBorderSize.Height) / 2.0);
 
 				Matrix result = new Matrix();
 				result.Translate(-center.X, -center.Y);
@@ -41,7 +41,7 @@ namespace DWMaxxAddIn
 		public Matrix GetMatrix(SystemWindow window)
 		{
 			Rectangle rectangle = window.Rectangle;
-			Point center = new Point((rectangle.Width - SystemInformation.FrameBorderSize.Width) / 2.0, (rectangle.Height - (SystemInformation.CaptionHeight * 2) - SystemInformation.FrameBorderSize.Height) / 2.0);
+			Point center = new Point((rectangle.Width - SystemInformation.FrameBorderSize.Width) / 2.0, (rectangle.Height - SystemInformation.CaptionHeight - SystemInformation.MenuHeight - SystemInformation.FrameBorderSize.Height) / 2.0);
 
 			Matrix result = new Matrix();
 			result.Translate(-center.X, -center.Y);
