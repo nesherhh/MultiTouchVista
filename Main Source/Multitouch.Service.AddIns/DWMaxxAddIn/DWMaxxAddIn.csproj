@@ -36,10 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdvanceMath, Version=1.7.0.28714, Culture=neutral, PublicKeyToken=b860f1b8cf45f41c, processorArchitecture=MSIL" />
-    <Reference Include="ManagedWinapi, Version=0.2.0.0, Culture=neutral, PublicKeyToken=b860f1b8cf45f41c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\My Projects\Multitouch\Danilins.Multitouch.WPF\ManagedWinapi\bin\Debug\ManagedWinapi.dll</HintPath>
-    </Reference>
+    <Reference Include="ManagedWinapi, Version=0.2.0.0, Culture=neutral, PublicKeyToken=b860f1b8cf45f41c, processorArchitecture=MSIL" />
     <Reference Include="Multitouch.Views, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Output\AddInViews\Multitouch.Views.dll</HintPath>
@@ -97,6 +94,16 @@
     <None Include="Lib\Physics2DDotNet.dll" />
     <None Include="Lib\Physics2DDotNet.pdb" />
     <None Include="Lib\Physics2DDotNet.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Lib\dwmaxx.dll" />
+    <None Include="Lib\dwmaxxPS.dll" />
+    <None Include="Lib\ManagedWinapi.dll" />
+    <None Include="Lib\ManagedWinapi.pdb" />
+    <None Include="Lib\ManagedWinapi.XML" />
+    <None Include="ManagedWinapiNativeHelper.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
