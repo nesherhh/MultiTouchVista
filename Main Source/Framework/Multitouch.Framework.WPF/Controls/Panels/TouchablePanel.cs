@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,9 +18,21 @@ namespace Multitouch.Framework.WPF.Controls
 {
 	public class TouchablePanel : RandomCanvas
 	{
+		class ScaleState
+		{
+			public double Scale { get; set; }
+			public Point Center { get; set; }
+
+			public ScaleState()
+			{
+				Scale = 1;
+			}
+		}
+
 		PhysicsEngine engine;
 		PhysicsTimer timer;
 		Dictionary<FrameworkElement, Body> elementToBody;
+		Dictionary<FrameworkElement, ScaleState> elementToScale;
 		List<FrameworkElement> shouldCreateBody;
 		List<FrameworkElement> shouldRemoveBody;
 		Dictionary<int, FixedHingeJoint> contactJoints;
@@ -30,6 +43,7 @@ namespace Multitouch.Framework.WPF.Controls
 			shouldCreateBody = new List<FrameworkElement>();
 			shouldRemoveBody = new List<FrameworkElement>();
 			contactJoints = new Dictionary<int, FixedHingeJoint>();
+			elementToScale = new Dictionary<FrameworkElement, ScaleState>();
 
 			engine = new PhysicsEngine();
 			engine.BroadPhase = new SweepAndPruneDetector();
@@ -61,11 +75,59 @@ namespace Multitouch.Framework.WPF.Controls
 			if(hitTestResult != null)
 			{
 				FrameworkElement element = hitTestResult.VisualHit as FrameworkElement;
-				if(element != null)
+				if (element != null)
 				{
 					FixedHingeJoint joint;
 					if (contactJoints.TryGetValue(e.Contact.Id, out joint))
+					{
 						joint.Anchor = position.ToVector2D();
+
+
+						// scale
+						Body body = joint.Bodies.First();
+						FrameworkElement frameworkElement = body.Tag as FrameworkElement;
+						if (frameworkElement != null)
+						{
+
+							ScaleState state;
+							if (elementToScale.TryGetValue(frameworkElement, out state))
+							{
+								IDictionary<int, Contact> contacts = e.GetContacts(element);
+								double previousDistance = 0;
+								double currentDistance = 0;
+								int divisor = 0;
+								Point center = new Point(frameworkElement.ActualWidth / 2, frameworkElement.ActualHeight / 2);
+								Contact[] contactsArray = contacts.Values.ToArray();
+								for (int i = 0; i < contactsArray.Length; i++)
+								{
+									for (int j = i + 1; j < contactsArray.Length; j++)
+									{
+										Vector vector = frameworkElement.PointFromScreen(contactsArray[j].Position) - frameworkElement.PointFromScreen(contactsArray[i].Position);
+										currentDistance += vector.Length;
+										center += vector;
+
+										Vector previousVector = frameworkElement.PointFromScreen(contactsArray[j].PreviousPosition) - frameworkElement.PointFromScreen(contactsArray[i].PreviousPosition);
+										previousDistance += previousVector.Length;
+										divisor++;
+									}
+								}
+								if (divisor == 0)
+									divisor = 1;
+
+								previousDistance /= divisor;
+								currentDistance /= divisor;
+								center.X /= divisor;
+								center.Y /= divisor;
+
+								double delta = currentDistance / previousDistance;
+								if (double.IsNaN(delta))
+									delta = 1;
+								state.Scale *= delta;
+								state.Center = center;
+								body.Transformation *= Matrix2x3.FromScale(new Vector2D(delta, delta));
+							}
+						}
+					}
 				}
 			}
 		}
@@ -171,16 +233,26 @@ namespace Multitouch.Framework.WPF.Controls
 
 				double offsetX = child.ActualWidth / 2;
 				double offsetY = child.ActualHeight / 2;
-				RotateTransform transform = child.RenderTransform as RotateTransform;
-				if(transform != null)
+				TransformGroup transform = child.RenderTransform as TransformGroup;
+				if (transform != null)
 				{
+					RotateTransform rotateTransform = (RotateTransform)transform.Children[1];
 					double angleInDegrees = MathHelper.ToDegrees(body.State.Position.Angular);
-					if(transform.Angle != angleInDegrees)
-						transform.Angle = angleInDegrees;
-					if(transform.CenterX != offsetX)
-						transform.CenterX = offsetX;
-					if (transform.CenterY != offsetY)
-						transform.CenterY = offsetY;
+					if (rotateTransform.Angle != angleInDegrees)
+						rotateTransform.Angle = angleInDegrees;
+					if (rotateTransform.CenterX != offsetX)
+						rotateTransform.CenterX = offsetX;
+					if (rotateTransform.CenterY != offsetY)
+						rotateTransform.CenterY = offsetY;
+
+					ScaleState state;
+					if (elementToScale.TryGetValue(child, out state))
+					{
+						ScaleTransform scaleTransform = (ScaleTransform)transform.Children[0];
+						scaleTransform.ScaleX = scaleTransform.ScaleY = state.Scale;
+						scaleTransform.CenterX = state.Center.X;
+						scaleTransform.CenterY = state.Center.Y;
+					}
 				}
 			}
 		}
@@ -202,9 +274,12 @@ namespace Multitouch.Framework.WPF.Controls
 			body.Tag = frameworkElement;
 			engine.AddBody(body);
 			elementToBody.Add(frameworkElement, body);
+			elementToScale.Add(frameworkElement, new ScaleState());
 
-			if (frameworkElement.RenderTransform == null || !(frameworkElement.RenderTransform is RotateTransform))
-				frameworkElement.RenderTransform = new RotateTransform();
+			TransformGroup transform = new TransformGroup();
+			transform.Children.Add(new ScaleTransform());
+			transform.Children.Add(new RotateTransform());
+			frameworkElement.RenderTransform = transform;
 		}
 
 		void RemoveBody(FrameworkElement frameworkElement)
@@ -214,6 +289,7 @@ namespace Multitouch.Framework.WPF.Controls
 			{
 				body.Lifetime.IsExpired = true;
 				elementToBody.Remove(frameworkElement);
+				elementToScale.Remove(frameworkElement);
 			}
 		}
 	}

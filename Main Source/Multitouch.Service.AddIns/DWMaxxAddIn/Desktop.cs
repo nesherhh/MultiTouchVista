@@ -17,6 +17,7 @@ using Physics2DDotNet.Detectors;
 using Physics2DDotNet.Joints;
 using Physics2DDotNet.Shapes;
 using Physics2DDotNet.Solvers;
+using Point=System.Drawing.Point;
 
 namespace DWMaxxAddIn
 {
@@ -64,7 +65,7 @@ namespace DWMaxxAddIn
 
 		void MouseHook(int msg, POINT pt, int mouseData, int flags, int time, IntPtr dwExtraInfo, ref bool handled)
 		{
-			if(flags != -1)
+			if (flags != -1)
 				handled = true;
 		}
 
@@ -156,7 +157,6 @@ namespace DWMaxxAddIn
 					if (rectangle.Left != left && rectangle.Top != top)
 						window.Position = new Rectangle(new Point(left, top), rectangle.Size);
 
-
 					double degrees = MathHelper.ToDegrees(body.State.Position.Angular);
 					if (window.Angle != degrees)
 					{
@@ -234,18 +234,15 @@ namespace DWMaxxAddIn
 			Window window = GetWindow(windowHandle);
 			if (window != null)
 			{
-				if (window.Movable && window.ContactsCount > 1)
-				{
-					FixedHingeJoint joint;
-					if (contactJoints.TryGetValue(contact.Id, out joint))
-						joint.Anchor = new Vector2D(contact.X, contact.Y);
-				}
+				FixedHingeJoint joint;
+				if (contactJoints.TryGetValue(contact.Id, out joint))
+					joint.Anchor = new Vector2D(contact.X, contact.Y);
 			}
 		}
 
 		public void Dispose()
 		{
-			if(hook != null)
+			if (hook != null)
 				hook.Unhook();
 			if (windowManager != null)
 				windowManager = null;
@@ -263,7 +260,7 @@ namespace DWMaxxAddIn
 				Point windowCoordinates = NativeMethods.ScreenToClient(currentWindow, screenCoordinates);
 				System.Windows.Point transformedPoint = matrix.Transform(windowCoordinates.ToPoint());
 				transformedScreenCoordinates = NativeMethods.ClientToScreen(currentWindow, transformedPoint.ToPoint());
-				
+
 				SystemWindow windowAtPoint = SystemWindow.FromPointEx(transformedScreenCoordinates.X, transformedScreenCoordinates.Y, true, true);
 				if (windowAtPoint != null && windowAtPoint.HWnd.Equals(currentWindow.HWnd))
 				{

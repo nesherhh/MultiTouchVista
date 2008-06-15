@@ -22,6 +22,7 @@ namespace Multitouch.Framework.WPF.Input
 		CaptureMode _captureMode;
 		IInputElement _capture;
 		StaticFunc<MouseDevice, IInputElement, Point, PresentationSource> globalHitTest;
+		List<Point> positionHistory;
 
 		internal Point LastTapPoint { get; set; }
 		internal int TapCount { get; set; }
@@ -51,6 +52,7 @@ namespace Multitouch.Framework.WPF.Input
 		{
 			globalHitTest = Dynamic<MouseDevice>.Static.Function<IInputElement>.Explicit<Point, PresentationSource>.CreateDelegate(
 				"GlobalHitTest", new[] {typeof(Point), typeof(PresentationSource)});
+			positionHistory = new List<Point>();
 		}
 
 		public Point GetPosition(IInputElement relativeTo)
@@ -84,6 +86,7 @@ namespace Multitouch.Framework.WPF.Input
 		{
 			source = rawReport.InputSource;
 			rawPosition = rawReport.Contact.Position;
+			positionHistory.Add(rawPosition);
 		}
 
 		internal IInputElement FindTarget(PresentationSource inputSource, Point position)
@@ -237,6 +240,14 @@ namespace Multitouch.Framework.WPF.Input
 			while (current != null && current != parent)
 				current = VisualTreeHelper.GetParent(current) as UIElement;
 			return current != null;
+		}
+
+		/// <summary>
+		/// Returns all coordinates history of this contact
+		/// </summary>
+		public IList<Point> ContactHistory
+		{
+			get { return positionHistory.AsReadOnly(); }
 		}
 	}
 }
