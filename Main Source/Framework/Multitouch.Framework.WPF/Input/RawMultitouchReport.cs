@@ -23,7 +23,7 @@ namespace Multitouch.Framework.WPF.Input
 				throw new ArgumentNullException("device");
 
 			InputSource = source;
-			Contact = new Contact(id, x, y, width, height, state);
+			Contact = new Contact(device, id, x, y, width, height, state);
 			RoutedEvent = MultitouchLogic.PreviewRawInputEvent;
 		}
 

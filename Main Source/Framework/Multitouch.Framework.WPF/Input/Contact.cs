@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using Multitouch.Framework.Input;
 
@@ -6,17 +8,44 @@ namespace Multitouch.Framework.WPF.Input
 {
 	public class Contact : IEquatable<Contact>
 	{
+		readonly MultitouchDevice device;
+
+		/// <summary>
+		/// Contact Id
+		/// </summary>
 		public int Id { get; private set; }
+		/// <summary>
+		/// Center X coordinate
+		/// </summary>
 		public double X { get; private set; }
+		/// <summary>
+		/// Center Y coordinate
+		/// </summary>
 		public double Y { get; private set; }
+		/// <summary>
+		/// Center coordinates
+		/// </summary>
 		public Point Position { get; private set; }
+		/// <summary>
+		/// Width of contact
+		/// </summary>
 		public double Width { get; private set; }
+		/// <summary>
+		/// Height of contact
+		/// </summary>
 		public double Height { get; private set; }
+		/// <summary>
+		/// Contacts state
+		/// </summary>
 		public ContactState State { get; private set; }
+		/// <summary>
+		/// Element under contact
+		/// </summary>
 		public UIElement Element { get; private set; }
 
-		internal Contact(int id, double x, double y, double width, double height, ContactState state)
+		internal Contact(MultitouchDevice device, int id, double x, double y, double width, double height, ContactState state)
 		{
+			this.device = device;
 			Id = id;
 			X = x;
 			Y = y;
@@ -27,7 +56,7 @@ namespace Multitouch.Framework.WPF.Input
 		}
 
 		internal Contact(RawMultitouchReport report)
-			: this(report.Contact.Id, report.Contact.X, report.Contact.Y, report.Contact.Width, report.Contact.Height, report.Contact.State)
+			: this(report.MultitouchDevice, report.Contact.Id, report.Contact.X, report.Contact.Y, report.Contact.Width, report.Contact.Height, report.Contact.State)
 		{ }
 
 		public override bool Equals(object obj)
@@ -56,6 +85,27 @@ namespace Multitouch.Framework.WPF.Input
 		public override string ToString()
 		{
 			return string.Format("Id: {0}, X,Y: {1},{2}, W,H: {3},{4}, State: {5}", Id, X, Y, Width, Height, State);
+		}
+
+		/// <summary>
+		/// Returns all coordinates history of this contact
+		/// </summary>
+		public IList<Point> ContactHistory
+		{
+			get { return device.ContactHistory; }
+		}
+
+		/// <summary>
+		/// Returns previous coordinates of contact
+		/// </summary>
+		public Point PreviousPosition
+		{
+			get
+			{
+				if (device.ContactHistory.Count > 2)
+					return device.ContactHistory[device.ContactHistory.Count - 2];
+				return device.ContactHistory.Last();
+			}
 		}
 	}
 }

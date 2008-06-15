@@ -48,6 +48,11 @@ namespace Multitouch.Framework.WPF.Input
 			return new ReadOnlyDictionary<int, Contact>(MultitouchDevice.GetContacts(forElement, criteria));
 		}
 
+		/// <summary>
+		/// Returns all contacts that are over specified element
+		/// </summary>
+		/// <param name="forElement"></param>
+		/// <returns></returns>
 		public IDictionary<int, Contact> GetContacts(UIElement forElement)
 		{
 			return GetContacts(forElement, MatchCriteria.Exact);

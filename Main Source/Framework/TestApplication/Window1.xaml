@@ -4,6 +4,7 @@
 		xmlns:mt="http://schemas.multitouch.com/Multitouch/2008/04"
 		xmlns:sys="clr-namespace:System;assembly=mscorlib"
 		xmlns:local="clr-namespace:TestApplication"
+		xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
 		Title="Window1" Height="400" Width="400">
     <Grid>
 		<Grid.ColumnDefinitions>
@@ -44,11 +45,13 @@
 			</ItemsControl.ItemsPanel>
 			<ItemsControl.Resources>
 				<DataTemplate DataType="{x:Type sys:String}">
-					<Border BorderBrush="Black" BorderThickness="1">
-						<Border BorderBrush="White" BorderThickness="10">
-							<Image Source="{Binding}" MaxWidth="480"/>
+					<themes:SystemDropShadowChrome>
+						<Border BorderBrush="Black" BorderThickness="1">
+							<Border BorderBrush="White" BorderThickness="10">
+								<Image Source="{Binding}" MaxWidth="480"/>
+							</Border>
 						</Border>
-					</Border>
+					</themes:SystemDropShadowChrome>
 				</DataTemplate>
 			</ItemsControl.Resources>
 		</ItemsControl>

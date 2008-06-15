@@ -26,5 +26,10 @@ namespace Multitouch.Framework.WPF.Input
 		{
 			return (DependencyObject)contentElement_GetUIParentMethod.Invoke(item, new object[] { continuePastVisualTree });
 		}
+
+		public static bool IsEmpty(this Point point)
+		{
+			return point.X == 0 && point.Y == 0;
+		}
 	}
 }
