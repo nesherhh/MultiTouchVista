@@ -81,6 +81,8 @@
     <Compile Include="TransformedContact.cs" />
     <Compile Include="Window.cs" />
     <Compile Include="WindowCollection.cs" />
+    <Compile Include="WindowContact.cs" />
+    <Compile Include="WindowContacts.cs" />
     <Compile Include="WindowManager.cs" />
   </ItemGroup>
   <ItemGroup>
