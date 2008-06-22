@@ -14,7 +14,8 @@ namespace DWMaxxAddIn
 	{
 		public double Angle { get; set; }
 		public double Scale { get; set; }
-		public int ContactsCount { get; set; }
+		public Point ScaleCenter { get; set; }
+		internal WindowContacts Contacts { get; private set; }
 
 		bool hasMenu;
 		AutomationElement automationElement;
@@ -25,6 +26,8 @@ namespace DWMaxxAddIn
 			Angle = 0;
 			Scale = 1;
 			hasMenu = false;
+
+			Contacts = new WindowContacts(this);
 
 			automationElement = AutomationElement.FromHandle(hWnd);
 			PropertyCondition condition = new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.MenuBar);
@@ -38,40 +41,39 @@ namespace DWMaxxAddIn
 			get
 			{
 				Rectangle rectangle = Rectangle;
-				Point center;
-				if(hasMenu)
-					center = new Point((rectangle.Width + SystemInformation.FrameBorderSize.Width) / 2.0, (rectangle.Height + SystemInformation.CaptionHeight + SystemInformation.MenuHeight + SystemInformation.FrameBorderSize.Height) / 2.0);
+				Point rotationCenter;
+				if (hasMenu)
+					rotationCenter = new Point((rectangle.Width + SystemInformation.FrameBorderSize.Width) / 2.0, (rectangle.Height + SystemInformation.CaptionHeight + SystemInformation.MenuHeight + SystemInformation.FrameBorderSize.Height) / 2.0);
 				else
-					center = new Point((rectangle.Width + SystemInformation.FrameBorderSize.Width) / 2.0, (rectangle.Height + SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height) / 2.0);
+					rotationCenter = new Point((rectangle.Width + SystemInformation.FrameBorderSize.Width) / 2.0, (rectangle.Height + SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height) / 2.0);
 
 				Matrix result = new Matrix();
-				result.Translate(-center.X, -center.Y);
+				result.Translate(-rotationCenter.X, -rotationCenter.Y);
 				result.Rotate(Angle);
-				result.Translate(center.X, center.Y);
+				result.Translate(rotationCenter.X, rotationCenter.Y);
+				result.Translate(-ScaleCenter.X, -ScaleCenter.Y);
 				result.Scale(Scale, Scale);
+				result.Translate(ScaleCenter.X, ScaleCenter.Y);
 				return result;
 			}
-		}
-
-		public AutomationElement.AutomationElementInformation Automation
-		{
-			get { return automationElement.Current; }
 		}
 
 		public Matrix GetMatrix(Window window)
 		{
 			Rectangle rectangle = window.Rectangle;
-			Point center;
-			if(window.hasMenu)
-				center = new Point((rectangle.Width - SystemInformation.FrameBorderSize.Width) / 2.0, (rectangle.Height - SystemInformation.CaptionHeight - SystemInformation.MenuHeight - SystemInformation.FrameBorderSize.Height) / 2.0);
+			Point rotationCenter;
+			if (window.hasMenu)
+				rotationCenter = new Point((rectangle.Width - SystemInformation.FrameBorderSize.Width) / 2.0, (rectangle.Height - SystemInformation.CaptionHeight - SystemInformation.MenuHeight - SystemInformation.FrameBorderSize.Height) / 2.0);
 			else
-				center = new Point((rectangle.Width - SystemInformation.FrameBorderSize.Width) / 2.0, (rectangle.Height - SystemInformation.CaptionHeight - SystemInformation.FrameBorderSize.Height) / 2.0);
+				rotationCenter = new Point((rectangle.Width - SystemInformation.FrameBorderSize.Width) / 2.0, (rectangle.Height - SystemInformation.CaptionHeight - SystemInformation.FrameBorderSize.Height) / 2.0);
 
 			Matrix result = new Matrix();
-			result.Translate(-center.X, -center.Y);
+			result.Translate(-rotationCenter.X, -rotationCenter.Y);
 			result.Rotate(Angle);
-			result.Translate(center.X, center.Y);
+			result.Translate(rotationCenter.X, rotationCenter.Y);
+			result.Translate(-ScaleCenter.X, -ScaleCenter.Y);
 			result.Scale(Scale, Scale);
+			result.Translate(ScaleCenter.X, ScaleCenter.Y);
 			return result;
 		}
 	}

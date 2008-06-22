@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
 using AdvanceMath;
@@ -179,12 +180,17 @@ namespace DWMaxxAddIn
 			}
 		}
 
+		Window GetWindow(IntPtr windowHandle)
+		{
+			return windowToBody.Keys.Where(w => w.HWnd.Equals(windowHandle)).SingleOrDefault();
+		}
+
 		public void OnNewContact(IntPtr windowHandle, IContact contact)
 		{
 			Window window = GetWindow(windowHandle);
 			if (window != null)
 			{
-				window.ContactsCount++;
+				window.Contacts.Add(new WindowContact(contact));
 
 				Body body;
 				if (windowToBody.TryGetValue(window, out body))
@@ -208,17 +214,16 @@ namespace DWMaxxAddIn
 			}
 		}
 
-		Window GetWindow(IntPtr windowHandle)
-		{
-			return windowToBody.Keys.Where(w => w.HWnd.Equals(windowHandle)).SingleOrDefault();
-		}
-
 		public void OnContactRemoved(IntPtr windowHandle, IContact contact)
 		{
 			Window window = GetWindow(windowHandle);
 			if (window != null)
 			{
-				window.ContactsCount--;
+				WindowContact winContact;
+				if(window.Contacts.TryGetValue(contact.Id, out winContact))
+					winContact.Update(contact);
+
+				window.Contacts.Remove(contact.Id);
 
 				FixedHingeJoint joint;
 				if (contactJoints.TryGetValue(contact.Id, out joint))
@@ -231,13 +236,65 @@ namespace DWMaxxAddIn
 
 		public void OnContactMoved(IntPtr windowHandle, IContact contact)
 		{
+			var w = (from win in windowToBody.Keys
+					where win.Contacts.Contains(contact.Id)
+					select win).SingleOrDefault();
+			WindowContact winContact = null;
+			if (w != null)
+			{
+				if (w.Contacts.TryGetValue(contact.Id, out winContact))
+					winContact.Update(contact);
+			}
 			Window window = GetWindow(windowHandle);
 			if (window != null)
 			{
 				FixedHingeJoint joint;
 				if (contactJoints.TryGetValue(contact.Id, out joint))
+				{
 					joint.Anchor = new Vector2D(contact.X, contact.Y);
+
+					// scale
+					Body body = joint.Bodies.First();
+					WindowContacts contacts = window.Contacts;
+					double previousDistance = 0;
+					double currentDistance = 0;
+					int divisor = 0;
+					RECT windowRect = window.Rectangle;
+					System.Windows.Point center = new System.Windows.Point(windowRect.Width / 2.0, windowRect.Height / 2.0);
+					WindowContact[] contactsArray = contacts.ToArray();
+					for (int i = 0; i < contactsArray.Length; i++)
+					{
+						for (int j = i + 1; j < contactsArray.Length; j++)
+						{
+							Vector vector = NativeMethods.ScreenToClient(window, contactsArray[j].Position.ToPoint()).ToPoint() -
+							                NativeMethods.ScreenToClient(window, contactsArray[i].Position.ToPoint()).ToPoint();
+							currentDistance += vector.Length;
+							center += vector;
+
+							Vector previousVector = NativeMethods.ScreenToClient(window, contactsArray[j].PreviousPosition.ToPoint()).ToPoint() -
+							                        NativeMethods.ScreenToClient(window, contactsArray[i].PreviousPosition.ToPoint()).ToPoint();
+							previousDistance += previousVector.Length;
+							divisor++;
+						}
+					}
+					if (divisor == 0)
+						divisor = 1;
+
+					previousDistance /= divisor;
+					currentDistance /= divisor;
+					center.X /= divisor;
+					center.Y /= divisor;
+
+					double delta = currentDistance / previousDistance;
+					if (double.IsNaN(delta))
+						delta = 1;
+					window.Scale *= delta;
+					window.ScaleCenter = center;
+					body.Transformation *= Matrix2x3.FromScale(new Vector2D(delta, delta));
+				}
 			}
+			else if (w != null && winContact != null)
+				w.Contacts.Remove(contact.Id);
 		}
 
 		public void Dispose()
