@@ -6,16 +6,7 @@
 		xmlns:local="clr-namespace:TestApplication"
 		xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
 		Title="Window1" Height="400" Width="400">
-    <Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition/>
-			<ColumnDefinition/>
-			<ColumnDefinition/>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="300"/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
+    <UniformGrid Columns="3" Rows="3">
 		<ListBox Grid.Column="0"
 				 x:Name="list1"
 				 ItemsSource="{Binding Contacts1}"
@@ -35,6 +26,9 @@
 			</mt:Button>
 			<Button Click="Button_Click">wpf button</Button>
 		</UniformGrid>
+		<mt:ScrollViewer>
+			<Image Source="{Binding Pictures[0]}"/>
+		</mt:ScrollViewer>
 		<ItemsControl x:Name="itemsControl"
 					  Grid.Row="1" Grid.ColumnSpan="3"
 					  ItemsSource="{Binding Pictures}">
@@ -55,5 +49,5 @@
 				</DataTemplate>
 			</ItemsControl.Resources>
 		</ItemsControl>
-    </Grid>
+    </UniformGrid>
 </mt:Window>
