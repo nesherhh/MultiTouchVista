@@ -34,6 +34,11 @@ namespace Multitouch.Framework.WPF.Input
 			Contact = copy.Contact;
 		}
 
+		public Point GetPosition(IInputElement relativeTo)
+		{
+			return MultitouchDevice.GetPosition(relativeTo);
+		}
+
 		protected override void InvokeEventHandler(Delegate genericHandler, object genericTarget)
 		{
 			RawMultitouchReportHandler handler = (RawMultitouchReportHandler)genericHandler;

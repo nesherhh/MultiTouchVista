@@ -32,7 +32,7 @@ namespace Multitouch.Framework.WPF.Input
 
 		Type penContextsType;
 		MethodInfo invokeStylusPluginCollectionForMouseMethod;
-
+		MethodInfo verifyStylusPlugInCollectionTargetMethod;
 
 		InputManager inputManager;
 		int doubleTapDeltaTime;
@@ -71,6 +71,7 @@ namespace Multitouch.Framework.WPF.Input
 			getPenContextsFromHwndMethod = stylusLogicType.GetMethod("GetPenContextsFromHwnd", BindingFlags.NonPublic | BindingFlags.Instance);
 			stylusLogic = typeof(InputManager).GetProperty("StylusLogic", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(InputManager.Current, null);
 			getMousePointDescriptionProperty = stylusLogicType.GetProperty("GetMousePointDescription", BindingFlags.Instance | BindingFlags.NonPublic);
+			verifyStylusPlugInCollectionTargetMethod = stylusLogicType.GetMethod("VerifyStylusPlugInCollectionTarget", BindingFlags.Instance | BindingFlags.NonPublic);
 
 
 			doubleTapDeltaTime = 800;
@@ -155,6 +156,17 @@ namespace Multitouch.Framework.WPF.Input
 					Point position = multitouchDevice.GetPosition(null);
 					IInputElement target = multitouchDevice.FindTarget(multitouchDevice.ActiveSource, position);
 					multitouchDevice.ChangeOver(target, report);
+
+					Visual visual = (Visual)report.MultitouchDevice.Target;
+					if (visual != null)
+					{
+						PresentationSource source = PresentationSource.FromVisual(visual);
+						if (source != null)
+						{
+							object rawStylusInputReport = CreateRawStylusInputReport(e, report, source);
+							verifyStylusPlugInCollectionTargetMethod.Invoke(stylusLogic, new[] {rawStylusInputReport});
+						}
+					}
 				}
 			}
 
@@ -276,41 +288,53 @@ namespace Multitouch.Framework.WPF.Input
 		void CallPlugInsForMultitouch(ProcessInputEventArgs e)
 		{
 			ContactEventArgs args = e.StagingItem.Input as ContactEventArgs;
-			if (args != null)
+			if (args != null && args.MultitouchDevice.Target != null)
 			{
-				object stylusActions = null;
-				if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewNewContactEvent)
-					stylusActions = stylusActionDown;
-				else if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewContactMovedEvent)
-					stylusActions = stylusActionMove;
-				else if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewContactRemovedEvent)
-					stylusActions = stylusActionUp;
-
-				if (args.MultitouchDevice.Target != null)
+				PresentationSource source = PresentationSource.FromVisual((Visual)args.MultitouchDevice.Target);
+				if (source != null)
 				{
-					PresentationSource source = PresentationSource.FromVisual((Visual)args.MultitouchDevice.Target);
-					if (source != null)
+					object rawStylusInputReport = CreateRawStylusInputReport(e, args, source);
+
+					using (Dispatcher.DisableProcessing())
 					{
-						Point ptClient = args.GetPosition(source.RootVisual as IInputElement);
-						ptClient = source.CompositionTarget.TransformToDevice.Transform(ptClient);
-						int[] data = new[] {(int)ptClient.X, (int)ptClient.Y, 1, 1};
-
-						object rawStylusInputReport = constructor.Invoke(new[]
-						                                                 	{
-						                                                 		InputMode.Foreground, args.Timestamp, source,
-						                                                 		stylusActions, GetMousePointerDescription, data
-						                                                 	});
-
-						using (Dispatcher.DisableProcessing())
-						{
-							object penContexts = getPenContextsFromHwndMethod.Invoke(stylusLogic, new object[] {source});
-							activeMousePluginCollection = (StylusPlugInCollection)invokeStylusPluginCollectionForMouseMethod.Invoke(
-							                                                      	penContexts,
-							                                                      	new[] {rawStylusInputReport, args.MultitouchDevice.Target, activeMousePluginCollection});
-						}
+						object penContexts = getPenContextsFromHwndMethod.Invoke(stylusLogic, new object[] {source});
+						activeMousePluginCollection = (StylusPlugInCollection)invokeStylusPluginCollectionForMouseMethod.Invoke(
+						                                                      	penContexts,
+						                                                      	new[] {rawStylusInputReport, args.MultitouchDevice.Target, activeMousePluginCollection});
 					}
 				}
 			}
+		}
+
+		object CreateRawStylusInputReport(NotifyInputEventArgs e, ContactEventArgs args, PresentationSource source)
+		{
+			return CreateRawStylusInputReport(e, element => args.GetPosition(element), args.Timestamp, source);
+		}
+
+		object CreateRawStylusInputReport(NotifyInputEventArgs e, RawMultitouchReport report, PresentationSource source)
+		{
+			return CreateRawStylusInputReport(e, element => report.GetPosition(element), report.Timestamp, source);
+		}
+
+		object CreateRawStylusInputReport(NotifyInputEventArgs e, Func<IInputElement, Point> getPosition, int timestamp, PresentationSource source)
+		{
+			object stylusActions = null;
+			if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewNewContactEvent)
+				stylusActions = stylusActionDown;
+			else if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewContactMovedEvent)
+				stylusActions = stylusActionMove;
+			else if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewContactRemovedEvent)
+				stylusActions = stylusActionUp;
+
+			Point ptClient = getPosition(source.RootVisual as IInputElement);
+			ptClient = source.CompositionTarget.TransformToDevice.Transform(ptClient);
+			int[] data = new[] {(int)ptClient.X, (int)ptClient.Y, 1, 1};
+
+			return constructor.Invoke(new[]
+			                          	{
+			                          		InputMode.Foreground, timestamp, source,
+			                          		stylusActions, GetMousePointerDescription, data
+			                          	});
 		}
 
 		internal StylusPointDescription GetMousePointerDescription
