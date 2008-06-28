@@ -149,7 +149,7 @@ namespace Multitouch.Framework.WPF.Controls
 					if(elementToBody.TryGetValue(element, out body))
 					{
 						Vector2D contactPoint = position.ToVector2D();
-						if(!body.Shape.BroadPhaseDetectionOnly && body.Shape.CanGetIntersection)
+						if(body.Shape.CanGetIntersection)
 						{
 							Vector2D temp = body.Matrices.ToBody * contactPoint;
 							IntersectionInfo intersectionInfo;
@@ -194,9 +194,9 @@ namespace Multitouch.Framework.WPF.Controls
 			base.OnVisualChildrenChanged(visualAdded, visualRemoved);
 		}
 
-		void PhysicsTimerCallback(double dt)
+		void PhysicsTimerCallback(double dt, double trueDt)
 		{
-			engine.Update(dt);
+			engine.Update(dt, trueDt);
 			Dispatcher.Invoke(DispatcherPriority.Normal, (Action)UpdateChildren);
 		}
 
@@ -265,7 +265,7 @@ namespace Multitouch.Framework.WPF.Controls
 				angle = rotateTransform.Angle;
 			PhysicsState state = new PhysicsState(new ALVector2D(angle, GetLeft(frameworkElement) + (frameworkElement.ActualWidth / 2),
 			                                                     GetTop(frameworkElement) + (frameworkElement.ActualHeight / 2)));
-			Shape shape = new PolygonShape(PolygonShape.CreateRectangle(frameworkElement.ActualHeight, frameworkElement.ActualWidth), 2);
+			IShape shape = new PolygonShape(VertexHelper.CreateRectangle(frameworkElement.ActualHeight, frameworkElement.ActualWidth), 2);
 			MassInfo mass = MassInfo.FromPolygon(shape.Vertexes, 1);
 			Body body = new Body(state, shape, mass, new Coefficients(0, 1), new Lifespan());
 			body.LinearDamping = 0.95;

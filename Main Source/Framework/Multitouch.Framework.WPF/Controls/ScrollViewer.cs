@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using AdvanceMath;
 using Multitouch.Framework.WPF.Input;
+using Multitouch.Framework.WPF.Physics;
 using Physics2DDotNet;
 using Physics2DDotNet.Detectors;
 using Physics2DDotNet.Joints;
@@ -14,20 +16,36 @@ namespace Multitouch.Framework.WPF.Controls
 {
 	public class ScrollViewer : System.Windows.Controls.ScrollViewer
 	{
-		const int BORDER = 1;
+		internal Body Body { get; private set; }
 		Point startPoint;
 		Point startOffset;
 		PhysicsEngine engine;
 		PhysicsTimer timer;
-		Body body;
-		FixedHingeJoint joint;
+		FixedHingeJoint scrollJoint;
 		int? firstContactId;
 
-		public static readonly DependencyProperty LinearDumpingProperty = DependencyProperty.Register("LinearDumping", typeof(double),
-			typeof(ScrollViewer), new UIPropertyMetadata(0.98d));
+		FixedSlidingHingeJoint verticalJoint;
+		FixedSlidingHingeJoint horizontalJoint;
+		ContentDecorator decorator;
+
+		public static readonly DependencyProperty LinearDumpingProperty = DependencyProperty.Register("LinearDumping", typeof(double), typeof(ScrollViewer),
+			new UIPropertyMetadata(0.98d));
+
+        static ScrollViewer()
+		{
+			PropertyMetadata baseMetadata = ContentProperty.GetMetadata(typeof(System.Windows.Controls.ScrollViewer));
+			ContentProperty.OverrideMetadata(typeof(ScrollViewer), new FrameworkPropertyMetadata(null, baseMetadata.PropertyChangedCallback, OnCoerceContentChanged));
+		}
+
+		static object OnCoerceContentChanged(DependencyObject d, object baseValue)
+		{
+			return ((ScrollViewer)d).OnCoerceContentChanged(baseValue);
+		}
 
 		public ScrollViewer()
 		{
+			BorderSoftness = 7;
+
 			AddHandler(MultitouchScreen.NewContactEvent, (NewContactEventHandler)OnNewContact);
 			AddHandler(MultitouchScreen.ContactMovedEvent, (ContactEventHandler)OnContactMoved);
 			AddHandler(MultitouchScreen.ContactRemovedEvent, (ContactEventHandler)OnContactRemoved);
@@ -36,13 +54,25 @@ namespace Multitouch.Framework.WPF.Controls
 			engine = new PhysicsEngine();
 			engine.BroadPhase = new SweepAndPruneDetector();
 			engine.Solver = new SequentialImpulsesSolver();
+			engine.AddLogic(new BoundsConstrainLogic(this));
 			timer = new PhysicsTimer(PhysicsTimerCallback, 0.01);
+
+			Loaded += ScrollViewer_Loaded;
 		}
 
 		public double LinearDumping
 		{
 			get { return (double)GetValue(LinearDumpingProperty); }
 			set { SetValue(LinearDumpingProperty, value); }
+		}
+
+		public double BorderSoftness { get; set; }
+		
+		object OnCoerceContentChanged(object baseValue)
+		{
+			decorator = new ContentDecorator(this);
+			decorator.Child = (UIElement)baseValue;
+			return decorator;
 		}
 
 		void OnNewContact(object sender, NewContactEventArgs e)
@@ -56,8 +86,8 @@ namespace Multitouch.Framework.WPF.Controls
 				startOffset.Y = VerticalOffset;
 
 				Vector2D contactPoint = startPoint.ToVector2D();
-				joint = new FixedHingeJoint(body, contactPoint, new Lifespan());
-				engine.AddJoint(joint);
+				scrollJoint = new FixedHingeJoint(Body, contactPoint, new Lifespan());
+				engine.AddJoint(scrollJoint);
 			}
 		}
 
@@ -66,10 +96,7 @@ namespace Multitouch.Framework.WPF.Controls
 			if (e.Contact.Id == firstContactId)
 			{
 				Point currentPoint = e.GetPosition(this);
-
-				Vector2D currentPosition = -body.State.Position.Linear;
-				if (-BORDER <= currentPosition.X && currentPosition.X <= ScrollableWidth + BORDER || -BORDER <= currentPosition.Y && currentPosition.Y <= ScrollableHeight + BORDER)
-					joint.Anchor = currentPoint.ToVector2D();
+                scrollJoint.Anchor = currentPoint.ToVector2D();
 			}
 		}
 
@@ -77,72 +104,108 @@ namespace Multitouch.Framework.WPF.Controls
 		{
 			if (e.Contact.Id == firstContactId)
 			{
-				joint.Lifetime.IsExpired = true;
-				joint = null;
+				scrollJoint.Lifetime.IsExpired = true;
+				scrollJoint = null;
 				firstContactId = null;
 			}
 		}
 
-		void PhysicsTimerCallback(double dt)
+		void PhysicsTimerCallback(double dt, double trueDt)
 		{
-			engine.Update(dt);
+			engine.Update(dt, trueDt);
 
-			if (body != null)
+			if (Body != null)
 			{
 
-				Vector2D position = -body.State.Position.Linear;
+				Vector2D position = -Body.State.Position.Linear;
 				Dispatcher.Invoke(DispatcherPriority.Input, (Action)(() =>
 				                                                     {
 				                                                     	ScrollToHorizontalOffset(position.X);
 				                                                     	ScrollToVerticalOffset(position.Y);
 				                                                     }));
-				if (position.X < -BORDER)
+				if (position.X < ContentDecorator.BORDER)
 				{
-					body.State.Position.Linear.X = BORDER;
-					body.State.Velocity.Linear.X = 0;
-					body.ApplyImpulse(new Vector2D(-10, 0));
+					if (horizontalJoint == null)
+					{
+						Body.State.Position.Linear = new Vector2D(-ContentDecorator.BORDER, -position.Y);
+						horizontalJoint = CreateBorderJoint(Orientation.Horizontal);
+					}
 				}
-				if (position.X > ScrollableWidth + BORDER)
+				else if (position.X > ScrollableWidth - ContentDecorator.BORDER)
 				{
-					body.State.Position.Linear.X = -(ScrollableWidth + BORDER);
-					body.State.Velocity.Linear.X = 0;
-					body.ApplyImpulse(new Vector2D(10, 0));
+					if (horizontalJoint == null)
+					{
+						Body.State.Position.Linear = new Vector2D(-ScrollableWidth + ContentDecorator.BORDER, -position.Y);
+						horizontalJoint = CreateBorderJoint(Orientation.Horizontal);
+					}
 				}
-				if (position.Y < -BORDER)
+				else if (firstContactId.HasValue && horizontalJoint != null)
 				{
-					body.State.Position.Linear.Y = BORDER;
-					body.State.Velocity.Linear.Y = 0;
-					body.ApplyImpulse(new Vector2D(0, -10));
+					horizontalJoint.Lifetime.IsExpired = true;
+					horizontalJoint = null;
 				}
-				if (position.Y > ScrollableHeight + BORDER)
+
+				if (position.Y < ContentDecorator.BORDER)
 				{
-					body.State.Position.Linear.Y = -(ScrollableHeight + BORDER);
-					body.State.Velocity.Linear.Y = 0;
-					body.ApplyImpulse(new Vector2D(0, 10));
+					if (verticalJoint == null)
+					{
+						Body.State.Position.Linear = new Vector2D(-position.X, -ContentDecorator.BORDER);
+						verticalJoint = CreateBorderJoint(Orientation.Vertical);
+					}
+				}
+				else if (position.Y > ScrollableHeight - ContentDecorator.BORDER)
+				{
+					if (verticalJoint == null)
+					{
+						Body.State.Position.Linear = new Vector2D(-position.X, -ScrollableHeight + ContentDecorator.BORDER);
+						verticalJoint = CreateBorderJoint(Orientation.Vertical);
+					}
+				}
+				else if (firstContactId.HasValue && verticalJoint != null)
+				{
+					verticalJoint.Lifetime.IsExpired = true;
+					verticalJoint = null;
 				}
 			}
+		}
+
+		FixedSlidingHingeJoint CreateBorderJoint(Orientation orientation)
+		{
+			FixedSlidingHingeJoint joint = new FixedSlidingHingeJoint(Body, new Vector2D(0, 0), new Lifespan(), orientation);
+			joint.Softness = BorderSoftness;
+			engine.AddJoint(joint);
+			return joint;
 		}
 
 		protected override void OnContentChanged(object oldContent, object newContent)
 		{
 			timer.IsRunning = false;
 
-			if (body != null)
-				body.Lifetime.IsExpired = true;
+			if (Body != null)
+				Body.Lifetime.IsExpired = true;
 
 			base.OnContentChanged(oldContent, newContent);
 
 			PhysicsState state = new PhysicsState(new ALVector2D(0, 0, 0));
-			Shape shape = new PolygonShape(PolygonShape.CreateRectangle(5, 5), BORDER);
-			MassInfo mass = MassInfo.FromPolygon(shape.Vertexes, BORDER);
-			body = new Body(state, shape, mass, new Coefficients(0, BORDER), new Lifespan());
-			body.LinearDamping = LinearDumping;
-			body.Mass.MomentOfInertia = double.PositiveInfinity;
-			body.Tag = newContent;
-			engine.AddBody(body);
+			IShape shape = new PolygonShape(VertexHelper.CreateRectangle(5, 5), 1);
+			MassInfo mass = MassInfo.FromPolygon(shape.Vertexes, 1);
+			Body = new Body(state, shape, mass, new Coefficients(0, 1), new Lifespan());
+			Body.LinearDamping = LinearDumping;
+			Body.Mass.MomentOfInertia = double.PositiveInfinity;
+			Body.Tag = newContent;
+			engine.AddBody(Body);
 
 			if (!DesignerProperties.GetIsInDesignMode(this))
 				timer.IsRunning = true;
+		}
+
+		void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
+		{
+			if (decorator != null)
+				decorator.InvalidateMeasure();
+
+			ScrollToHorizontalOffset(ContentDecorator.BORDER);
+			ScrollToVerticalOffset(ContentDecorator.BORDER);
 		}
 	}
 }
