@@ -84,6 +84,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ContentDecorator.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\Panels\PhysicsExtensions.cs" />
     <Compile Include="Controls\Panels\RandomCanvas.cs" />
@@ -112,6 +113,8 @@
     <Compile Include="Input\RawMultitouchGestureReport.cs" />
     <Compile Include="Input\RawMultitouchReport.cs" />
     <Compile Include="Native\Win32.cs" />
+    <Compile Include="Physics\BoundsConstrainLogic.cs" />
+    <Compile Include="Physics\FixedSlidingHingeJoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
