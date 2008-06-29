@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="3isSEozHPz+mDTRlLVfK0py//as=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="T+QcjG1weHZf+JZAspyntmpgLE4=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netNamedPipeBinding" name="NetNamedPipeBinding_IConfigurationInterface">
       <properties>
@@ -76,7 +76,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetNamedPipeBinding_IConfigurationInterface" contract="Configuration.IConfigurationInterface" bindingType="netNamedPipeBinding" address="net.pipe://localhost/Multitouch.Service/ConfigurationInterface" bindingConfiguration="NetNamedPipeBinding_IConfigurationInterface">
+    <endpoint name="NetNamedPipeBinding_IConfigurationInterface" contract="Service.IConfigurationInterface" bindingType="netNamedPipeBinding" address="net.pipe://localhost/Multitouch.Service/ConfigurationInterface" bindingConfiguration="NetNamedPipeBinding_IConfigurationInterface">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>net.pipe://localhost/Multitouch.Service/ConfigurationInterface</serializedValue>
@@ -91,7 +91,7 @@
           <serializedValue>NetNamedPipeBinding_IConfigurationInterface</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>Configuration.IConfigurationInterface</serializedValue>
+          <serializedValue>Service.IConfigurationInterface</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>

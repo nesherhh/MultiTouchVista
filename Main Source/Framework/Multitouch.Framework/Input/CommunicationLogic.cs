@@ -9,7 +9,7 @@ namespace Multitouch.Framework.Input
 		static object lockInstance = new object();
 		ServiceCommunicator serviceCommunicator;
 		List<IContactHandler> handlers;
-		
+
 		CommunicationLogic()
 		{
 			serviceCommunicator = new ServiceCommunicator(this);
@@ -34,13 +34,13 @@ namespace Multitouch.Framework.Input
 
 		public void Connect(IntPtr windowHandle)
 		{
-			if(handlers.Count == 1)
+			if (handlers.Count == 1)
 				serviceCommunicator.Connect(windowHandle);
 		}
 
 		public void Disconnect()
 		{
-			if(handlers.Count == 0)
+			if (handlers.Count == 0)
 				serviceCommunicator.Disconnect();
 		}
 
@@ -54,10 +54,26 @@ namespace Multitouch.Framework.Input
 			handlers.Remove(contactHandler);
 		}
 
-		internal void ProcessChangedContact(int id, double x, double y, double width, double height, ContactState state)
+		internal void ProcessChangedContact(int id, double x, double y, double width, double height, Service.ContactState state)
 		{
+			ContactState contactState;
+			switch (state)
+			{
+				case Service.ContactState.New:
+					contactState = ContactState.New;
+					break;
+				case Service.ContactState.Removed:
+					contactState = ContactState.Removed;
+					break;
+				case Service.ContactState.Moved:
+					contactState = ContactState.Moved;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("state");
+			}
+
 			foreach (IContactHandler handler in handlers)
-				handler.ProcessContactChange(id, x, y, width, height, state);
+				handler.ProcessContactChange(id, x, y, width, height, contactState);
 		}
 	}
 }
