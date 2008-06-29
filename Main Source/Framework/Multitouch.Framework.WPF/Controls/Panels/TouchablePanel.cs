@@ -49,13 +49,19 @@ namespace Multitouch.Framework.WPF.Controls
 			engine.BroadPhase = new SweepAndPruneDetector();
 			engine.Solver = new SequentialImpulsesSolver();
 			timer = new PhysicsTimer(PhysicsTimerCallback, 0.01);
-			if (!DesignerProperties.GetIsInDesignMode(this))
-				timer.IsRunning = true;
 
 			AddHandler(MultitouchScreen.NewContactEvent, (NewContactEventHandler)OnNewContact);
 			AddHandler(MultitouchScreen.ContactMovedEvent, (ContactEventHandler)OnContactMoved);
 			AddHandler(MultitouchScreen.ContactRemovedEvent, (ContactEventHandler)OnContactRemoved);
 			AddHandler(MultitouchScreen.ContactLeaveEvent, (ContactEventHandler)OnContactRemoved);
+
+			Loaded += TouchablePanel_Loaded;
+		}
+
+		void TouchablePanel_Loaded(object sender, RoutedEventArgs e)
+		{
+			if (!DesignerProperties.GetIsInDesignMode(this))
+				timer.IsRunning = true;
 		}
 
 		void OnContactRemoved(object sender, ContactEventArgs e)
