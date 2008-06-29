@@ -59,12 +59,5 @@ namespace Multitouch.Service.Logic.Properties {
                 resourceCulture = value;
             }
         }
-        
-        internal static System.Drawing.Icon MultitouchIcon {
-            get {
-                object obj = ResourceManager.GetObject("MultitouchIcon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
     }
 }

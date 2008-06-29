@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using Multitouch.Contracts;
-using Multitouch.Service.Logic;
 using Multitouch.Service.Logic.ExternalInterfaces;
 
 namespace Multitouch.Service.Logic

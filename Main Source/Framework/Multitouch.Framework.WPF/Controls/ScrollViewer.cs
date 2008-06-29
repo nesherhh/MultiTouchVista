@@ -118,11 +118,12 @@ namespace Multitouch.Framework.WPF.Controls
 			{
 
 				Vector2D position = -Body.State.Position.Linear;
-				Dispatcher.Invoke(DispatcherPriority.Input, (Action)(() =>
-				                                                     {
-				                                                     	ScrollToHorizontalOffset(position.X);
-				                                                     	ScrollToVerticalOffset(position.Y);
-				                                                     }));
+				Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
+				{
+					ScrollToHorizontalOffset(position.X);
+					ScrollToVerticalOffset(position.Y);
+				}));
+
 				if (position.X < ContentDecorator.BORDER)
 				{
 					if (horizontalJoint == null)
