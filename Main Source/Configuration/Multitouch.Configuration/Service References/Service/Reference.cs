@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Multitouch.Framework.Configuration {
+namespace Multitouch.Configuration.Service {
     using System.Runtime.Serialization;
     using System;
     
@@ -18,7 +18,7 @@ namespace Multitouch.Framework.Configuration {
     [System.Runtime.Serialization.DataContractAttribute(Name="InputProviderToken", Namespace="http://schemas.datacontract.org/2004/07/Multitouch.Service.Logic.ExternalInterfac" +
         "es")]
     [System.SerializableAttribute()]
-    public partial class InputProviderToken : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    internal partial class InputProviderToken : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -46,7 +46,7 @@ namespace Multitouch.Framework.Configuration {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string AddInFullName {
+        internal string AddInFullName {
             get {
                 return this.AddInFullNameField;
             }
@@ -59,7 +59,7 @@ namespace Multitouch.Framework.Configuration {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string AssemblyName {
+        internal string AssemblyName {
             get {
                 return this.AssemblyNameField;
             }
@@ -72,7 +72,7 @@ namespace Multitouch.Framework.Configuration {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string Description {
+        internal string Description {
             get {
                 return this.DescriptionField;
             }
@@ -85,7 +85,7 @@ namespace Multitouch.Framework.Configuration {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string Name {
+        internal string Name {
             get {
                 return this.NameField;
             }
@@ -98,7 +98,7 @@ namespace Multitouch.Framework.Configuration {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string Publisher {
+        internal string Publisher {
             get {
                 return this.PublisherField;
             }
@@ -111,7 +111,7 @@ namespace Multitouch.Framework.Configuration {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string Version {
+        internal string Version {
             get {
                 return this.VersionField;
             }
@@ -134,29 +134,29 @@ namespace Multitouch.Framework.Configuration {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Configuration.IConfigurationInterface")]
-    public interface IConfigurationInterface {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Service.IConfigurationInterface")]
+    internal interface IConfigurationInterface {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConfigurationInterface/GetAvailableInputProviders", ReplyAction="http://tempuri.org/IConfigurationInterface/GetAvailableInputProvidersResponse")]
-        Multitouch.Framework.Configuration.InputProviderToken[] GetAvailableInputProviders();
+        Multitouch.Configuration.Service.InputProviderToken[] GetAvailableInputProviders();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConfigurationInterface/SetCurrentInputProvider", ReplyAction="http://tempuri.org/IConfigurationInterface/SetCurrentInputProviderResponse")]
-        void SetCurrentInputProvider(Multitouch.Framework.Configuration.InputProviderToken value);
+        void SetCurrentInputProvider(Multitouch.Configuration.Service.InputProviderToken value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConfigurationInterface/GetCurrentInputProvider", ReplyAction="http://tempuri.org/IConfigurationInterface/GetCurrentInputProviderResponse")]
-        Multitouch.Framework.Configuration.InputProviderToken GetCurrentInputProvider();
+        Multitouch.Configuration.Service.InputProviderToken GetCurrentInputProvider();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IConfigurationInterface/RestartService", ReplyAction="http://tempuri.org/IConfigurationInterface/RestartServiceResponse")]
         void RestartService();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public interface IConfigurationInterfaceChannel : Multitouch.Framework.Configuration.IConfigurationInterface, System.ServiceModel.IClientChannel {
+    internal interface IConfigurationInterfaceChannel : Multitouch.Configuration.Service.IConfigurationInterface, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class ConfigurationInterfaceClient : System.ServiceModel.ClientBase<Multitouch.Framework.Configuration.IConfigurationInterface>, Multitouch.Framework.Configuration.IConfigurationInterface {
+    internal partial class ConfigurationInterfaceClient : System.ServiceModel.ClientBase<Multitouch.Configuration.Service.IConfigurationInterface>, Multitouch.Configuration.Service.IConfigurationInterface {
         
         public ConfigurationInterfaceClient() {
         }
@@ -177,15 +177,15 @@ namespace Multitouch.Framework.Configuration {
                 base(binding, remoteAddress) {
         }
         
-        public Multitouch.Framework.Configuration.InputProviderToken[] GetAvailableInputProviders() {
+        public Multitouch.Configuration.Service.InputProviderToken[] GetAvailableInputProviders() {
             return base.Channel.GetAvailableInputProviders();
         }
         
-        public void SetCurrentInputProvider(Multitouch.Framework.Configuration.InputProviderToken value) {
+        public void SetCurrentInputProvider(Multitouch.Configuration.Service.InputProviderToken value) {
             base.Channel.SetCurrentInputProvider(value);
         }
         
-        public Multitouch.Framework.Configuration.InputProviderToken GetCurrentInputProvider() {
+        public Multitouch.Configuration.Service.InputProviderToken GetCurrentInputProvider() {
             return base.Channel.GetCurrentInputProvider();
         }
         

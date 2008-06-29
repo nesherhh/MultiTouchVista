@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="2c824cb8-ffbc-4593-bc25-ec8ffb0b1a09" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>true</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.pipe://localhost/Multitouch.Service/ConfigurationInterface/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="dae584e4-9dca-4bf5-b92b-835d1d3437c9" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ConfigurationInterface/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="4529a6e3-a615-4f12-8cc9-bc16954713a8" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ConfigurationInterface/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="43428cf4-09f2-4782-96e1-d5e830cea29b" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ConfigurationInterface/mex" />
+    <MetadataFile FileName="Multitouch.Service.Logic.ExternalInterfaces.xsd" MetadataType="Schema" ID="b691cc1b-f72e-426e-97c8-d934b1307464" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ConfigurationInterface/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

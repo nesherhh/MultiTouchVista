@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.ServiceModel;
+using Multitouch.Framework.Input.Service;
 
 namespace Multitouch.Framework.Input
 {
@@ -8,7 +9,7 @@ namespace Multitouch.Framework.Input
 	{
 		CommunicationLogic logic;
 		ApplicationInterfaceClient client;
-        IApplicationInterfaceCallback contactDispatcher;
+		IApplicationInterfaceCallback contactDispatcher;
 
 		public ServiceCommunicator(CommunicationLogic logic)
 		{
@@ -39,10 +40,10 @@ namespace Multitouch.Framework.Input
 
 		public void Disconnect()
 		{
-			if(contactDispatcher != null)
+			if (contactDispatcher != null)
 			{
 				client.Unsubscribe();
-                client.Close();
+				client.Close();
 				contactDispatcher = null;
 				client = null;
 			}

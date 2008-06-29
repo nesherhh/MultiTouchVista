@@ -15,8 +15,7 @@ namespace Multitouch.Framework.WPF.Input
 			get { return (MultitouchDevice)Device; }
 		}
 
-		public RawMultitouchReport(MultitouchDevice device, PresentationSource source, int id, double x, double y, double width, double height,
-			ContactState state, int timestamp)
+		public RawMultitouchReport(MultitouchDevice device, PresentationSource source, int id, double x, double y, double width, double height, ContactState state, int timestamp)
 			: base(device, timestamp)
 		{
 			if (device == null)

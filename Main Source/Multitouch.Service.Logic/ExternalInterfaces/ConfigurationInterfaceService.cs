@@ -20,6 +20,7 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 		public void SetCurrentInputProvider(InputProviderToken value)
 		{
 			Settings.Default.CurrentProvider = value.AddInFullName;
+			Settings.Default.Save();
 		}
 
 		public InputProviderToken GetCurrentInputProvider()
