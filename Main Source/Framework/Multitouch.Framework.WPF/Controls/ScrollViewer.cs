@@ -27,11 +27,25 @@ namespace Multitouch.Framework.WPF.Controls
 		FixedSlidingHingeJoint verticalJoint;
 		FixedSlidingHingeJoint horizontalJoint;
 		ContentDecorator decorator;
+		double borderSoftness;
 
 		public static readonly DependencyProperty LinearDumpingProperty = DependencyProperty.Register("LinearDumping", typeof(double), typeof(ScrollViewer),
-			new UIPropertyMetadata(0.98d));
+			new UIPropertyMetadata(0.98d, OnLinearDumpingChanged));
 
-        static ScrollViewer()
+		public static readonly DependencyProperty BorderSoftnessProperty = DependencyProperty.Register("BorderSoftness", typeof(double), typeof(ScrollViewer),
+			new UIPropertyMetadata(7d, OnBorderSoftnessChanged));
+
+		static void OnBorderSoftnessChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			((ScrollViewer)d).OnBorderSoftnessChanged(e);
+		}
+
+		static void OnLinearDumpingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			((ScrollViewer)d).OnLinearDumpingChanged(e);
+		}
+
+		static ScrollViewer()
 		{
 			PropertyMetadata baseMetadata = ContentProperty.GetMetadata(typeof(System.Windows.Controls.ScrollViewer));
 			ContentProperty.OverrideMetadata(typeof(ScrollViewer), new FrameworkPropertyMetadata(null, baseMetadata.PropertyChangedCallback, OnCoerceContentChanged));
@@ -44,7 +58,7 @@ namespace Multitouch.Framework.WPF.Controls
 
 		public ScrollViewer()
 		{
-			BorderSoftness = 7;
+			borderSoftness = BorderSoftness;
 
 			AddHandler(MultitouchScreen.NewContactEvent, (NewContactEventHandler)OnNewContact);
 			AddHandler(MultitouchScreen.ContactMovedEvent, (ContactEventHandler)OnContactMoved);
@@ -66,8 +80,12 @@ namespace Multitouch.Framework.WPF.Controls
 			set { SetValue(LinearDumpingProperty, value); }
 		}
 
-		public double BorderSoftness { get; set; }
-		
+		public double BorderSoftness
+		{
+			get { return (double)GetValue(BorderSoftnessProperty); }
+			set { SetValue(BorderSoftnessProperty, value); }
+		}
+	
 		object OnCoerceContentChanged(object baseValue)
 		{
 			decorator = new ContentDecorator(this);
@@ -173,7 +191,7 @@ namespace Multitouch.Framework.WPF.Controls
 		FixedSlidingHingeJoint CreateBorderJoint(Orientation orientation)
 		{
 			FixedSlidingHingeJoint joint = new FixedSlidingHingeJoint(Body, new Vector2D(0, 0), new Lifespan(), orientation);
-			joint.Softness = BorderSoftness;
+			joint.Softness = borderSoftness;
 			engine.AddJoint(joint);
 			return joint;
 		}
@@ -207,6 +225,16 @@ namespace Multitouch.Framework.WPF.Controls
 
 			ScrollToHorizontalOffset(ContentDecorator.BORDER);
 			ScrollToVerticalOffset(ContentDecorator.BORDER);
+		}
+
+		void OnLinearDumpingChanged(DependencyPropertyChangedEventArgs e)
+		{
+			Body.LinearDamping = (double)e.NewValue;
+		}
+
+		void OnBorderSoftnessChanged(DependencyPropertyChangedEventArgs e)
+		{
+			borderSoftness = (double)e.NewValue;
 		}
 	}
 }
