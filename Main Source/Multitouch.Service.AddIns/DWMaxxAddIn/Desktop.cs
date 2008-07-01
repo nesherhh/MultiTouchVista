@@ -12,7 +12,6 @@ using DWMaxxAddIn.Native;
 using dwmaxxLib;
 using ManagedWinapi.Hooks;
 using ManagedWinapi.Windows;
-using Multitouch.Contracts;
 using Physics2DDotNet;
 using Physics2DDotNet.Detectors;
 using Physics2DDotNet.Joints;
@@ -102,7 +101,7 @@ namespace DWMaxxAddIn
 				if (position.Width > 0 && position.Height > 0)
 				{
 					PhysicsState state = new PhysicsState(new ALVector2D(angle, position.Left + position.Width / 2, position.Top + position.Height / 2));
-					Shape shape = new PolygonShape(PolygonShape.CreateRectangle(position.Height, position.Width), 2);
+					IShape shape = new PolygonShape(VertexHelper.CreateRectangle(position.Height, position.Width), 2);
 					MassInfo mass = MassInfo.FromPolygon(shape.Vertexes, 1);
 					Body body = new Body(state, shape, mass, new Coefficients(0, 1), new Lifespan());
 					body.LinearDamping = 0.95;
@@ -135,11 +134,11 @@ namespace DWMaxxAddIn
 			Environment.Exit(1);
 		}
 
-		void PhysicsTimerCallback(double dt)
+		void PhysicsTimerCallback(double dt, double trueDt)
 		{
 			lock (lockPhysicsLoop)
 			{
-				engine.Update(dt);
+				engine.Update(dt, trueDt);
 				UpdateWindows();
 			}
 		}
@@ -185,7 +184,7 @@ namespace DWMaxxAddIn
 			return windowToBody.Keys.Where(w => w.HWnd.Equals(windowHandle)).SingleOrDefault();
 		}
 
-		public void OnNewContact(IntPtr windowHandle, IContact contact)
+		public void OnNewContact(IntPtr windowHandle, Multitouch.Contracts.IContact contact)
 		{
 			Window window = GetWindow(windowHandle);
 			if (window != null)
@@ -199,7 +198,7 @@ namespace DWMaxxAddIn
 
 					Vector2D contactPoint = point.ToVector2D();
 
-					if (!body.Shape.BroadPhaseDetectionOnly && body.Shape.CanGetIntersection)
+					if (body.Shape.CanGetIntersection)
 					{
 						Vector2D temp = body.Matrices.ToBody * contactPoint;
 						IntersectionInfo intersectionInfo;
@@ -214,7 +213,7 @@ namespace DWMaxxAddIn
 			}
 		}
 
-		public void OnContactRemoved(IntPtr windowHandle, IContact contact)
+		public void OnContactRemoved(IntPtr windowHandle, Multitouch.Contracts.IContact contact)
 		{
 			Window window = GetWindow(windowHandle);
 			if (window != null)
@@ -234,7 +233,7 @@ namespace DWMaxxAddIn
 			}
 		}
 
-		public void OnContactMoved(IntPtr windowHandle, IContact contact)
+		public void OnContactMoved(IntPtr windowHandle, Multitouch.Contracts.IContact contact)
 		{
 			var w = (from win in windowToBody.Keys
 					where win.Contacts.Contains(contact.Id)
