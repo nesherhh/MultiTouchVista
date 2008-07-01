@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using DWMaxxAddIn.Native;
@@ -89,7 +90,7 @@ namespace DWMaxxAddIn
 		{
 			if (WindowCreated != null)
 			{
-				foreach (Window window in windows.Values)
+				foreach (Window window in windows.Values.ToArray())
 					WindowCreated(window);
 			}
 		}

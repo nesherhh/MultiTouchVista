@@ -25,7 +25,7 @@ namespace Multitouch.Service.Logic.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("MultipleMice.InputProvider")]
+        [global::System.Configuration.DefaultSettingValueAttribute("TuioProvider.InputProvider")]
         public string CurrentProvider {
             get {
                 return ((string)(this["CurrentProvider"]));
