@@ -5,12 +5,18 @@ using Multitouch.Framework.WPF.Input;
 
 namespace Multitouch.Framework.WPF.Controls.Primitives
 {
+	/// <summary>
+	/// Extends <see cref="System.Windows.Controls.Primitives.Thumb"/> to receive Multitouch events.
+	/// </summary>
 	public class Thumb : System.Windows.Controls.Primitives.Thumb
 	{
 		Point originThumbPoint;
 		Point previousScrennCoordPosition;
 		Point originScreenCoordPosition;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Thumb"/> class.
+		/// </summary>
 		public Thumb()
 		{
 			AddHandler(MultitouchScreen.NewContactEvent, (NewContactEventHandler)OnNewContact);

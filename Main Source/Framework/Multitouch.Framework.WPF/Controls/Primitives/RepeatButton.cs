@@ -5,11 +5,17 @@ using Phydeaux.Utilities;
 
 namespace Multitouch.Framework.WPF.Controls.Primitives
 {
+	/// <summary>
+	/// Extends <see cref="System.Windows.Controls.Primitives.RepeatButton"/> to support Multitouch events.
+	/// </summary>
 	public class RepeatButton : System.Windows.Controls.Primitives.RepeatButton
 	{
 		Proc<System.Windows.Controls.Primitives.RepeatButton> startTimerMethod;
 		Proc<System.Windows.Controls.Primitives.RepeatButton> stopTimerMethod;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="RepeatButton"/> class.
+		/// </summary>
 		public RepeatButton()
 		{
 			startTimerMethod = Dynamic<System.Windows.Controls.Primitives.RepeatButton>.Instance.Procedure.Explicit.CreateDelegate("StartTimer");

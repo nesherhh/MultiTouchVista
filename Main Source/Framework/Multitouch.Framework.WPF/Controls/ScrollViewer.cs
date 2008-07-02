@@ -14,6 +14,9 @@ using Physics2DDotNet.Solvers;
 
 namespace Multitouch.Framework.WPF.Controls
 {
+	/// <summary>
+	/// Extends <see cref="System.Windows.Controls.ScrollViewer"/> to respond to Multitouch events. It also has similar scrolling behavior like iPhone.
+	/// </summary>
 	public class ScrollViewer : System.Windows.Controls.ScrollViewer
 	{
 		internal Body Body { get; private set; }
@@ -29,9 +32,15 @@ namespace Multitouch.Framework.WPF.Controls
 		ContentDecorator decorator;
 		double borderSoftness;
 
+		/// <summary>
+		/// Identifies <see cref="LinearDumpingProperty"/> dependency property.
+		/// </summary>
 		public static readonly DependencyProperty LinearDumpingProperty = DependencyProperty.Register("LinearDumping", typeof(double), typeof(ScrollViewer),
 			new UIPropertyMetadata(0.98d, OnLinearDumpingChanged));
 
+		/// <summary>
+		/// Identifies <see cref="BorderSoftnessProperty"/> dependency property.
+		/// </summary>
 		public static readonly DependencyProperty BorderSoftnessProperty = DependencyProperty.Register("BorderSoftness", typeof(double), typeof(ScrollViewer),
 			new UIPropertyMetadata(7d, OnBorderSoftnessChanged));
 
@@ -56,6 +65,9 @@ namespace Multitouch.Framework.WPF.Controls
 			return ((ScrollViewer)d).OnCoerceContentChanged(baseValue);
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ScrollViewer"/> class.
+		/// </summary>
 		public ScrollViewer()
 		{
 			borderSoftness = BorderSoftness;
@@ -74,12 +86,20 @@ namespace Multitouch.Framework.WPF.Controls
 			Loaded += ScrollViewer_Loaded;
 		}
 
+		/// <summary>
+		/// Gets or sets the linear dumping. Controls the friction of scrolling
+		/// </summary>
+		/// <value>The linear dumping.</value>
 		public double LinearDumping
 		{
 			get { return (double)GetValue(LinearDumpingProperty); }
 			set { SetValue(LinearDumpingProperty, value); }
 		}
 
+		/// <summary>
+		/// Gets or sets the border softness. Controls the force that is used to bump the content of borders.
+		/// </summary>
+		/// <value>The border softness.</value>
 		public double BorderSoftness
 		{
 			get { return (double)GetValue(BorderSoftnessProperty); }
@@ -196,6 +216,11 @@ namespace Multitouch.Framework.WPF.Controls
 			return joint;
 		}
 
+		/// <summary>
+		/// Called when the <see cref="P:System.Windows.Controls.ContentControl.Content"/> property changes.
+		/// </summary>
+		/// <param name="oldContent">The old value of the <see cref="P:System.Windows.Controls.ContentControl.Content"/> property.</param>
+		/// <param name="newContent">The new value of the <see cref="P:System.Windows.Controls.ContentControl.Content"/> property.</param>
 		protected override void OnContentChanged(object oldContent, object newContent)
 		{
 			timer.IsRunning = false;

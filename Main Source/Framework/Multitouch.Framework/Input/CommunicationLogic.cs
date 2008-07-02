@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Multitouch.Framework.Input
 {
+	/// <summary>
+	/// Logic that communicates with Multitouch service.
+	/// </summary>
 	public class CommunicationLogic
 	{
 		static CommunicationLogic instance;
@@ -16,6 +19,10 @@ namespace Multitouch.Framework.Input
 			handlers = new List<IContactHandler>();
 		}
 
+		/// <summary>
+		/// Gets the default instance of logic (Singleton implementation).
+		/// </summary>
+		/// <value>The instance.</value>
 		public static CommunicationLogic Instance
 		{
 			get
@@ -32,24 +39,39 @@ namespace Multitouch.Framework.Input
 			}
 		}
 
+		/// <summary>
+		/// Makes a connection to Multitouch service.
+		/// </summary>
+		/// <param name="windowHandle">The Handle of a window of your application. This handle used to send multitouch events to this window.</param>
 		public void Connect(IntPtr windowHandle)
 		{
 			if (handlers.Count == 1)
 				serviceCommunicator.Connect(windowHandle);
 		}
 
+		/// <summary>
+		/// Disconnects from Multitouch service. You should run this method before closing your application.
+		/// </summary>
 		public void Disconnect()
 		{
 			if (handlers.Count == 0)
 				serviceCommunicator.Disconnect();
 		}
 
-		public void RegisterInputProvider(IContactHandler contactHandler)
+		/// <summary>
+		/// Registers the contact handler. All contacts received from service will be send to this handler for processing in your application.
+		/// </summary>
+		/// <param name="contactHandler">Instance of an object that implementats <see cref="IContactHandler"/> interface.</param>
+		public void RegisterContactHandler(IContactHandler contactHandler)
 		{
 			handlers.Add(contactHandler);
 		}
 
-		public void UnRegisterInputProvider(IContactHandler contactHandler)
+		/// <summary>
+		/// Unregisters contact handler.
+		/// </summary>
+		/// <param name="contactHandler">Instance of an object that implementats <see cref="IContactHandler"/> interface.</param>
+		public void UnregisterContactHandler(IContactHandler contactHandler)
 		{
 			handlers.Remove(contactHandler);
 		}

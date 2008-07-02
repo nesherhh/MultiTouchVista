@@ -30,6 +30,13 @@ namespace Multitouch.Framework.WPF.Physics
 		Scalar distanceTolerance;
 
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="FixedSlidingHingeJoint"/> class.
+		/// </summary>
+		/// <param name="body">The body.</param>
+		/// <param name="anchor">The anchor.</param>
+		/// <param name="lifetime">The lifetime.</param>
+		/// <param name="orientation">The orientation.</param>
 		public FixedSlidingHingeJoint(Body body, Vector2D anchor, Lifespan lifetime, Orientation orientation)
 			: base(lifetime)
 		{
@@ -46,17 +53,29 @@ namespace Multitouch.Framework.WPF.Physics
 
 		Orientation Orientation { get; set; }
 
+		/// <summary>
+		/// Gets or sets the anchor.
+		/// </summary>
+		/// <value>The anchor.</value>
 		public Vector2D Anchor
 		{
 			get { return anchor; }
 			set { anchor = value; }
 		}
 
+		/// <summary>
+		/// Gets or sets the bias factor.
+		/// </summary>
+		/// <value>The bias factor.</value>
 		public Scalar BiasFactor
 		{
 			get { return biasFactor; }
 			set { biasFactor = value; }
 		}
+		/// <summary>
+		/// Gets or sets the softness.
+		/// </summary>
+		/// <value>The softness.</value>
 		public Scalar Softness
 		{
 			get { return softness; }
@@ -74,10 +93,18 @@ namespace Multitouch.Framework.WPF.Physics
 				distanceTolerance = value;
 			}
 		}
+		/// <summary>
+		/// Gets the bodies the Joint effects.
+		/// </summary>
+		/// <value></value>
 		public override ReadOnlyCollection<Body> Bodies
 		{
 			get { return new ReadOnlyCollection<Body>(new[] { body }); }
 		}
+		/// <summary>
+		/// Raises the <see cref="E:Added"/> event.
+		/// </summary>
+		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected override void OnAdded(EventArgs e)
 		{
 			solver = (SequentialImpulsesSolver)Engine.Solver;

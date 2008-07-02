@@ -11,11 +11,17 @@ using Phydeaux.Utilities;
 
 namespace Multitouch.Framework.WPF.Controls
 {
+	/// <summary>
+	/// Extends <see cref="InkCanvas"/> to respond to Multitouch events.
+	/// </summary>
 	public class TouchCanvas : InkCanvas
 	{
 		IDictionary<int, StylusPointCollection> points;
 		Proc<InkCanvas, InkCanvasStrokeCollectedEventArgs, bool> raiseGestureOrStrokeCollectedMethod;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TouchCanvas"/> class.
+		/// </summary>
 		public TouchCanvas()
 		{
 			points = new Dictionary<int, StylusPointCollection>();
@@ -32,7 +38,7 @@ namespace Multitouch.Framework.WPF.Controls
 			Gesture += TouchCanvas_Gesture;
 		}
 
-		public class TestPlugin : StylusPlugIn
+		class TestPlugin : StylusPlugIn
 		{
 			protected override void OnStylusDown(RawStylusInput rawStylusInput)
 			{
@@ -72,6 +78,11 @@ namespace Multitouch.Framework.WPF.Controls
 				Strokes.Clear();
 		}
 
+		/// <summary>
+		/// Called on new contact.
+		/// </summary>
+		/// <param name="sender">The sender.</param>
+		/// <param name="e">The <see cref="Multitouch.Framework.WPF.Input.NewContactEventArgs"/> instance containing the event data.</param>
 		protected virtual void OnNewContact(object sender, NewContactEventArgs e)
 		{
 			StylusPointCollection pointCollection = new StylusPointCollection();
@@ -81,6 +92,11 @@ namespace Multitouch.Framework.WPF.Controls
 			pointCollection.Add(new StylusPoint(position.X, position.Y));
 		}
 
+		/// <summary>
+		/// Called when contact is moved.
+		/// </summary>
+		/// <param name="sender">The sender.</param>
+		/// <param name="e">The <see cref="Multitouch.Framework.WPF.Input.ContactEventArgs"/> instance containing the event data.</param>
 		protected virtual void OnContactMoved(object sender, ContactEventArgs e)
 		{
 			Point position = e.GetPosition(this);
@@ -88,6 +104,11 @@ namespace Multitouch.Framework.WPF.Controls
 				points[e.Contact.Id].Add(new StylusPoint(position.X, position.Y));
 		}
 
+		/// <summary>
+		/// Called when is removed.
+		/// </summary>
+		/// <param name="sender">The sender.</param>
+		/// <param name="e">The <see cref="Multitouch.Framework.WPF.Input.ContactEventArgs"/> instance containing the event data.</param>
 		protected virtual void OnContactRemoved(object sender, ContactEventArgs e)
 		{
 			Point position = e.GetPosition(this);
