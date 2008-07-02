@@ -16,6 +16,9 @@ using Multitouch.Framework.WPF.Input;
 
 namespace Multitouch.Framework.WPF.Controls
 {
+	/// <summary>
+	/// A Panel that can Move, Rotate and Scale it's child items and respons to Multitouch events.
+	/// </summary>
 	public class TouchablePanel : RandomCanvas
 	{
 		class ScaleState
@@ -37,6 +40,9 @@ namespace Multitouch.Framework.WPF.Controls
 		List<FrameworkElement> shouldRemoveBody;
 		Dictionary<int, FixedHingeJoint> contactJoints;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TouchablePanel"/> class.
+		/// </summary>
 		public TouchablePanel()
 		{
 			elementToBody = new Dictionary<FrameworkElement, Body>();
@@ -188,6 +194,11 @@ namespace Multitouch.Framework.WPF.Controls
 			SetZIndex(element, zIndex);
 		}
 
+		/// <summary>
+		/// Invoked when the <see cref="T:System.Windows.Media.VisualCollection"/> of a visual object is modified.
+		/// </summary>
+		/// <param name="visualAdded">The <see cref="T:System.Windows.Media.Visual"/> that was added to the collection.</param>
+		/// <param name="visualRemoved">The <see cref="T:System.Windows.Media.Visual"/> that was removed from the collection.</param>
 		protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved)
 		{
 			FrameworkElement added = visualAdded as FrameworkElement;
@@ -206,6 +217,13 @@ namespace Multitouch.Framework.WPF.Controls
 			Dispatcher.Invoke(DispatcherPriority.Normal, (Action)UpdateChildren);
 		}
 
+		/// <summary>
+		/// Arranges the content of a <see cref="T:System.Windows.Controls.Canvas"/> element.
+		/// </summary>
+		/// <param name="arrangeSize">The size that this <see cref="T:System.Windows.Controls.Canvas"/> element should use to arrange its child elements.</param>
+		/// <returns>
+		/// A <see cref="T:System.Windows.Size"/> that represents the arranged size of this <see cref="T:System.Windows.Controls.Canvas"/> element and its descendants.
+		/// </returns>
 		protected override Size ArrangeOverride(Size arrangeSize)
 		{
 			Size arrangeOverride = base.ArrangeOverride(arrangeSize);
@@ -221,6 +239,9 @@ namespace Multitouch.Framework.WPF.Controls
 			return arrangeOverride;
 		}
 
+		/// <summary>
+		/// Updates the child positions.
+		/// </summary>
 		protected virtual void UpdateChildren()
 		{
 			foreach (Body body in engine.Bodies)

@@ -26,7 +26,7 @@ namespace Multitouch.Framework.WPF.Input
 			inputManagerProcessInput = InputManagerProcessInput;
 
 			communicationLogic = CommunicationLogic.Instance;
-			communicationLogic.RegisterInputProvider(this);
+			communicationLogic.RegisterContactHandler(this);
 			communicationLogic.Connect(((HwndSource)source).Handle);
 			inputManager = InputManager.Current;
 			multitouchLogic = MultitouchLogic.Current;
@@ -35,7 +35,7 @@ namespace Multitouch.Framework.WPF.Input
 		public void Dispose()
 		{
 			communicationLogic.Disconnect();
-			communicationLogic.UnRegisterInputProvider(this);
+			communicationLogic.UnregisterContactHandler(this);
 		}
 
 		public void ProcessContactChange(int id, double x, double y, double width, double height, ContactState state)

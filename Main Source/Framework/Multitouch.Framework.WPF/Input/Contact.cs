@@ -6,6 +6,9 @@ using Multitouch.Framework.Input;
 
 namespace Multitouch.Framework.WPF.Input
 {
+	/// <summary>
+	/// Represents a contact.
+	/// </summary>
 	public class Contact : IEquatable<Contact>
 	{
 		readonly MultitouchDevice device;
@@ -59,12 +62,27 @@ namespace Multitouch.Framework.WPF.Input
 			: this(report.MultitouchDevice, report.Contact.Id, report.Contact.X, report.Contact.Y, report.Contact.Width, report.Contact.Height, report.Contact.State)
 		{ }
 
+		/// <summary>
+		/// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+		/// </summary>
+		/// <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:System.Object"/>.</param>
+		/// <returns>
+		/// true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>; otherwise, false.
+		/// </returns>
+		/// <exception cref="T:System.NullReferenceException">The <paramref name="obj"/> parameter is null.</exception>
 		public override bool Equals(object obj)
 		{
 			Contact other = obj as Contact;
 			return Equals(other);
 		}
 
+		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
+		/// <returns>
+		/// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+		/// </returns>
 		public bool Equals(Contact other)
 		{
 			if (other == null)
@@ -72,6 +90,12 @@ namespace Multitouch.Framework.WPF.Input
 			return Id.Equals(other.Id);
 		}
 
+		/// <summary>
+		/// Serves as a hash function for a particular type.
+		/// </summary>
+		/// <returns>
+		/// A hash code for the current <see cref="T:System.Object"/>.
+		/// </returns>
 		public override int GetHashCode()
 		{
 			return Id.GetHashCode();
@@ -82,6 +106,12 @@ namespace Multitouch.Framework.WPF.Input
 			Element = element;
 		}
 
+		/// <summary>
+		/// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+		/// </summary>
+		/// <returns>
+		/// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+		/// </returns>
 		public override string ToString()
 		{
 			return string.Format("Id: {0}, X,Y: {1},{2}, W,H: {3},{4}, State: {5}", Id, X, Y, Width, Height, State);

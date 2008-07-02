@@ -5,12 +5,18 @@ using System.Windows.Media;
 
 namespace Multitouch.Framework.WPF.Controls
 {
+	/// <summary>
+	/// Places child elements at random position.
+	/// </summary>
 	public class RandomCanvas : Canvas
 	{
 		bool isArranging;
 
-		public static readonly DependencyProperty RandomizePositionsProperty =
-			DependencyProperty.Register("RandomizePositions", typeof(bool), typeof(RandomCanvas), new UIPropertyMetadata(true));
+		/// <summary>
+		/// Identifies <see cref="RandomizePositionsProperty"/> dependency property.
+		/// </summary>
+		public static readonly DependencyProperty RandomizePositionsProperty = DependencyProperty.Register("RandomizePositions", typeof(bool),
+			typeof(RandomCanvas), new UIPropertyMetadata(true));
 
 		static RandomCanvas()
 		{
@@ -20,6 +26,10 @@ namespace Multitouch.Framework.WPF.Controls
 			BottomProperty.OverrideMetadata(typeof(RandomCanvas), new FrameworkPropertyMetadata(double.NaN, OnPositioningChanged));
 		}
 
+		/// <summary>
+		/// Gets or sets a value indicating whether items position will be randomized.
+		/// </summary>
+		/// <value><c>true</c> if items position will be randomized; otherwise, <c>false</c>.</value>
 		public bool RandomizePositions
 		{
 			get { return (bool)GetValue(RandomizePositionsProperty); }
@@ -37,6 +47,13 @@ namespace Multitouch.Framework.WPF.Controls
 			}
 		}
 
+		/// <summary>
+		/// Arranges the content of a <see cref="T:System.Windows.Controls.Canvas"/> element.
+		/// </summary>
+		/// <param name="arrangeSize">The size that this <see cref="T:System.Windows.Controls.Canvas"/> element should use to arrange its child elements.</param>
+		/// <returns>
+		/// A <see cref="T:System.Windows.Size"/> that represents the arranged size of this <see cref="T:System.Windows.Controls.Canvas"/> element and its descendants.
+		/// </returns>
 		protected override Size ArrangeOverride(Size arrangeSize)
 		{
 			isArranging = true;
