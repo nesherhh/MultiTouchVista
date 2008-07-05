@@ -87,6 +87,7 @@ namespace Multitouch.Framework.WPF.Input
 		{
 			addHandlerMethod = Dynamic<UIElement>.Static.Procedure.Explicit<DependencyObject, RoutedEvent, Delegate>.CreateDelegate("AddHandler");
 			removeHandlerMethod = Dynamic<UIElement>.Static.Procedure.Explicit<DependencyObject, RoutedEvent, Delegate>.CreateDelegate("RemoveHandler");
+			AllowMouseEvents = true;
 		}
 
 		/// <summary>
@@ -246,5 +247,11 @@ namespace Multitouch.Framework.WPF.Input
 			IsGesturesEnabled = !gesture.Contains(ApplicationGesture.NoGesture);
 			MultitouchLogic.Current.GestureManager.EnableGestures(gesture);
 		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether mouse events are allowed.
+		/// </summary>
+		/// <value><c>false</c> - all mouse events will be canceled in MultitouchLogic at PreProcessInput stage.</value>
+		public static bool AllowMouseEvents { get; set; }
 	}
 }
