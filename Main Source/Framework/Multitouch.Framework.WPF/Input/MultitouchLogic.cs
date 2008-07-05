@@ -129,16 +129,19 @@ namespace Multitouch.Framework.WPF.Input
 					}
 				}
 			}
-			else if (!(routedEvent == RawInputEvent ||
-				routedEvent == MultitouchScreen.ContactEnterEvent || routedEvent == MultitouchScreen.ContactLeaveEvent ||
-				routedEvent == MultitouchScreen.ContactMovedEvent || routedEvent == MultitouchScreen.ContactRemovedEvent ||
-				routedEvent == MultitouchScreen.NewContactEvent || routedEvent == MultitouchScreen.PreviewContactMovedEvent ||
-				routedEvent == MultitouchScreen.PreviewContactRemovedEvent || routedEvent == MultitouchScreen.PreviewNewContactEvent ||
-				routedEvent == GestureManager.RawGestureInputEvent || routedEvent == MultitouchScreen.PreviewGestureEvent ||
-				routedEvent == MultitouchScreen.GestureEvent))
+			else if (!MultitouchScreen.AllowMouseEvents)
 			{
-				e.StagingItem.Input.Handled = true;
-				e.Cancel();
+				if (!(routedEvent == RawInputEvent ||
+				      routedEvent == MultitouchScreen.ContactEnterEvent || routedEvent == MultitouchScreen.ContactLeaveEvent ||
+				      routedEvent == MultitouchScreen.ContactMovedEvent || routedEvent == MultitouchScreen.ContactRemovedEvent ||
+				      routedEvent == MultitouchScreen.NewContactEvent || routedEvent == MultitouchScreen.PreviewContactMovedEvent ||
+				      routedEvent == MultitouchScreen.PreviewContactRemovedEvent || routedEvent == MultitouchScreen.PreviewNewContactEvent ||
+				      routedEvent == GestureManager.RawGestureInputEvent || routedEvent == MultitouchScreen.PreviewGestureEvent ||
+				      routedEvent == MultitouchScreen.GestureEvent))
+				{
+					e.StagingItem.Input.Handled = true;
+					e.Cancel();
+				}
 			}
 			Debug.Assert(routedEvent != null, "routed event null");
 		}
