@@ -108,6 +108,7 @@
     <None Include="Lib\Physics2DDotNet.XML" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Lib\DWMaxx custom source.rar" />
     <None Include="Lib\dwmaxx.dll" />
     <None Include="Lib\dwmaxxPS.dll" />
     <None Include="Lib\ManagedWinapi.dll" />
