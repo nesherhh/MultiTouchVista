@@ -44,32 +44,44 @@ Global
 		SccLocalPath6 = Multitouch.Service.AddIns\\DWMaxxAddIn
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug with DWMaxx|Any CPU = Debug with DWMaxx|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Debug with DWMaxx|Any CPU.ActiveCfg = Debug|Any CPU
+		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Debug with DWMaxx|Any CPU.Build.0 = Debug|Any CPU
 		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA05C208-0357-4E76-B256-D55511BC48BC}.Debug with DWMaxx|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA05C208-0357-4E76-B256-D55511BC48BC}.Debug with DWMaxx|Any CPU.Build.0 = Debug|Any CPU
 		{DA05C208-0357-4E76-B256-D55511BC48BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DA05C208-0357-4E76-B256-D55511BC48BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA05C208-0357-4E76-B256-D55511BC48BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA05C208-0357-4E76-B256-D55511BC48BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Debug with DWMaxx|Any CPU.ActiveCfg = Debug|Any CPU
+		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Debug with DWMaxx|Any CPU.Build.0 = Debug|Any CPU
 		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{094B04DC-3833-4CC1-8161-D9BD26616D57}.Debug with DWMaxx|Any CPU.ActiveCfg = Debug|Any CPU
+		{094B04DC-3833-4CC1-8161-D9BD26616D57}.Debug with DWMaxx|Any CPU.Build.0 = Debug|Any CPU
 		{094B04DC-3833-4CC1-8161-D9BD26616D57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{094B04DC-3833-4CC1-8161-D9BD26616D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{094B04DC-3833-4CC1-8161-D9BD26616D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{094B04DC-3833-4CC1-8161-D9BD26616D57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Debug with DWMaxx|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Debug with DWMaxx|Any CPU.Build.0 = Debug|Any CPU
 		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Debug with DWMaxx|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Debug with DWMaxx|Any CPU.Build.0 = Debug|Any CPU
 		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
