@@ -14,7 +14,7 @@
 				 mt:MultitouchScreen.ContactMoved="list1_ContactMoved"
 				 mt:MultitouchScreen.ContactRemoved="list1_ContactRemoved"
 				 />
-		<mt:TouchCanvas Grid.Column="1" StrokeCollected="TouchCanvas_StrokeCollected"/>
+		<!--<mt:TouchCanvas Grid.Column="1" StrokeCollected="TouchCanvas_StrokeCollected"/>-->
 		<UniformGrid Grid.Column="3" Columns="3" Rows="3">
 			<mt:Button Content="click me" Click="Button_Click"/>
 			<mt:RepeatButton x:Name="repeatButton" Content="0" Click="RepeatButton_Click"/>
