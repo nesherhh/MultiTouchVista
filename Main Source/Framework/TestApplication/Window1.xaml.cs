@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Speech.Synthesis;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using Multitouch.Framework.WPF.Input;
@@ -18,9 +15,7 @@ namespace TestApplication
 	/// </summary>
 	public partial class Window1
 	{
-		InkAnalyzer inkAnalyzer;
 		int repeatButtonCount;
-		SpeechSynthesizer synthesizer;
 
 		public ObservableCollection<Contact> Contacts1 { get; private set; }
 		public ObservableCollection<Contact> Contacts2 { get; private set; }
@@ -33,26 +28,11 @@ namespace TestApplication
 
 		public Window1()
 		{
-			synthesizer = new SpeechSynthesizer();
-
-			inkAnalyzer = new InkAnalyzer();
-			inkAnalyzer.ResultsUpdated += inkAnalyzer_ResultsUpdated;
-
 			Contacts1 = new ObservableCollection<Contact>();
 			Contacts2 = new ObservableCollection<Contact>();
 			SetValue(PicturesPropertyKey, new ObservableCollection<string>());
 			DataContext = this;
 			InitializeComponent();
-
-			MultitouchScreen.EnableGestures(ApplicationGesture.Circle);
-			MultitouchScreen.AddGestureHandler(this, OnGesture);
-			MultitouchScreen.IsGesturesEnabled = false;
-		}
-
-		void OnGesture(object sender, GestureEventArgs e)
-		{
-			if(e.Gesture != ApplicationGesture.NoGesture)
-				MessageBox.Show(string.Format("Contact: {0}, Gesture: {1}", e.Contact.Id, e.Gesture));
 		}
 
 		public ObservableCollection<string> Pictures
@@ -63,7 +43,7 @@ namespace TestApplication
 		protected override void OnInitialized(EventArgs e)
 		{
 			string picturesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-			string[] pictures = Directory.GetFiles(picturesPath + @"\Riga", "*.jpg");
+			string[] pictures = Directory.GetFiles(picturesPath, "*.jpg");
 			foreach (string file in pictures.Take(5))
 				Pictures.Add(file);
 
@@ -114,25 +94,6 @@ namespace TestApplication
 		private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			MessageBox.Show("command executed");
-		}
-
-		private void TouchCanvas_StrokeCollected(object sender, InkCanvasStrokeCollectedEventArgs e)
-		{
-			if (!inkAnalyzer.IsAnalyzing)
-			{
-				inkAnalyzer.AddStroke(e.Stroke);
-				inkAnalyzer.BackgroundAnalyze();
-			}
-		}
-
-		void inkAnalyzer_ResultsUpdated(object sender, ResultsUpdatedEventArgs e)
-		{
-			if (e.Status.Successful)
-			{
-				string text = inkAnalyzer.GetRecognizedString();
-				synthesizer.SpeakAsync(text);
-				MessageBox.Show(text);
-			}
 		}
 	}
 }
