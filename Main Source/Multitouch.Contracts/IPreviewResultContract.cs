@@ -1,8 +1,7 @@
 ﻿using System;
 using System.AddIn.Contract;
-using Multitouch.Contracts.Contracts;
 
-namespace Multitouch.Contracts
+namespace Multitouch.Contracts.Contracts
 {
 	public interface IPreviewResultContract : IContract
 	{

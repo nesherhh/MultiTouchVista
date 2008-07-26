@@ -21,6 +21,9 @@ namespace Multitouch.Framework.WPF.Controls
 	/// </summary>
 	public class TouchablePanel : RandomCanvas
 	{
+		const int ROTATE_TRANSFORM_INDEX_IN_GROUP = 1;
+		const int SCALE_TRANSFORM_INDEX_IN_GROUP = 0;
+
 		class ScaleState
 		{
 			public double Scale { get; set; }
@@ -68,16 +71,6 @@ namespace Multitouch.Framework.WPF.Controls
 		{
 			if (!DesignerProperties.GetIsInDesignMode(this))
 				timer.IsRunning = true;
-		}
-
-		void OnContactRemoved(object sender, ContactEventArgs e)
-		{
-			FixedHingeJoint joint;
-			if(contactJoints.TryGetValue(e.Contact.Id, out joint))
-			{
-				joint.Lifetime.IsExpired = true;
-				contactJoints.Remove(e.Contact.Id);
-			}
 		}
 
 		void OnContactMoved(object sender, ContactEventArgs e)
@@ -179,6 +172,16 @@ namespace Multitouch.Framework.WPF.Controls
 			}
 		}
 
+		void OnContactRemoved(object sender, ContactEventArgs e)
+		{
+			FixedHingeJoint removedJoint;
+			if (contactJoints.TryGetValue(e.Contact.Id, out removedJoint))
+			{
+				removedJoint.Lifetime.IsExpired = true;
+				contactJoints.Remove(e.Contact.Id);
+			}
+		}
+
 		void SetZTop(UIElement element)
 		{
 			int zIndex = 0;
@@ -263,7 +266,7 @@ namespace Multitouch.Framework.WPF.Controls
 				TransformGroup transform = child.RenderTransform as TransformGroup;
 				if (transform != null)
 				{
-					RotateTransform rotateTransform = (RotateTransform)transform.Children[1];
+					RotateTransform rotateTransform = (RotateTransform)transform.Children[ROTATE_TRANSFORM_INDEX_IN_GROUP];
 					double angleInDegrees = MathHelper.ToDegrees(body.State.Position.Angular);
 					if (rotateTransform.Angle != angleInDegrees)
 						rotateTransform.Angle = angleInDegrees;
@@ -275,7 +278,7 @@ namespace Multitouch.Framework.WPF.Controls
 					ScaleState state;
 					if (elementToScale.TryGetValue(child, out state))
 					{
-						ScaleTransform scaleTransform = (ScaleTransform)transform.Children[0];
+						ScaleTransform scaleTransform = (ScaleTransform)transform.Children[SCALE_TRANSFORM_INDEX_IN_GROUP];
 						scaleTransform.ScaleX = scaleTransform.ScaleY = state.Scale;
 						scaleTransform.CenterX = state.Center.X;
 						scaleTransform.CenterY = state.Center.Y;
@@ -287,12 +290,15 @@ namespace Multitouch.Framework.WPF.Controls
 		void CreateBody(FrameworkElement frameworkElement)
 		{
 			double angle = 0;
+
+			//if an element already has rotatetransform, get it's angle.
 			RotateTransform rotateTransform = frameworkElement.RenderTransform as RotateTransform;
 			if(rotateTransform != null)
 				angle = rotateTransform.Angle;
+
 			PhysicsState state = new PhysicsState(new ALVector2D(angle, GetLeft(frameworkElement) + (frameworkElement.ActualWidth / 2),
 			                                                     GetTop(frameworkElement) + (frameworkElement.ActualHeight / 2)));
-			IShape shape = new PolygonShape(VertexHelper.CreateRectangle(frameworkElement.ActualHeight, frameworkElement.ActualWidth), 2);
+			IShape shape = new PolygonShape(VertexHelper.CreateRectangle(frameworkElement.ActualWidth, frameworkElement.ActualHeight), 2);
 			MassInfo mass = MassInfo.FromPolygon(shape.Vertexes, 1);
 			Body body = new Body(state, shape, mass, new Coefficients(0, 1), new Lifespan());
 			body.LinearDamping = 0.95;

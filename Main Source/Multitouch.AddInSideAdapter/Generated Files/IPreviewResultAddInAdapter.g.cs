@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Multitouch.AddInSideAdapters
+namespace Multitouch.Contracts.AddInSideAdapters
 {
     
     public class IPreviewResultAddInAdapter
     {
-        internal static Multitouch.IPreviewResult ContractToViewAdapter(Multitouch.Contracts.IPreviewResultContract contract)
+        internal static Multitouch.Contracts.IPreviewResult ContractToViewAdapter(Multitouch.Contracts.Contracts.IPreviewResultContract contract)
         {
             if (((System.Runtime.Remoting.RemotingServices.IsObjectOutOfAppDomain(contract) != true) 
                         && contract.GetType().Equals(typeof(IPreviewResultViewToContractAddInAdapter))))
@@ -25,7 +25,7 @@ namespace Multitouch.AddInSideAdapters
                 return new IPreviewResultContractToViewAddInAdapter(contract);
             }
         }
-        internal static Multitouch.Contracts.IPreviewResultContract ViewToContractAdapter(Multitouch.IPreviewResult view)
+        internal static Multitouch.Contracts.Contracts.IPreviewResultContract ViewToContractAdapter(Multitouch.Contracts.IPreviewResult view)
         {
             if (view.GetType().Equals(typeof(IPreviewResultContractToViewAddInAdapter)))
             {
