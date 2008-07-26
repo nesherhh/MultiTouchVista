@@ -8,17 +8,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Multitouch.HostSideAdapters
+namespace Multitouch.Contracts.HostSideAdapters
 {
     
-    public class IPreviewResultContractToViewHostAdapter : Multitouch.IPreviewResult
+    public class IPreviewResultContractToViewHostAdapter : Multitouch.Contracts.IPreviewResult
     {
-        private Multitouch.Contracts.IPreviewResultContract _contract;
+        private Multitouch.Contracts.Contracts.IPreviewResultContract _contract;
         private System.AddIn.Pipeline.ContractHandle _handle;
         static IPreviewResultContractToViewHostAdapter()
         {
         }
-        public IPreviewResultContractToViewHostAdapter(Multitouch.Contracts.IPreviewResultContract contract)
+        public IPreviewResultContractToViewHostAdapter(Multitouch.Contracts.Contracts.IPreviewResultContract contract)
         {
             _contract = contract;
             _handle = new System.AddIn.Pipeline.ContractHandle(contract);
@@ -44,7 +44,7 @@ namespace Multitouch.HostSideAdapters
                 return _contract.Handled;
             }
         }
-        internal Multitouch.Contracts.IPreviewResultContract GetSourceContract()
+        internal Multitouch.Contracts.Contracts.IPreviewResultContract GetSourceContract()
         {
             return _contract;
         }

@@ -8,13 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Multitouch.HostSideAdapters
+namespace Multitouch.Contracts.HostSideAdapters
 {
     
-    public class IPreviewResultViewToContractHostAdapter : System.AddIn.Pipeline.ContractBase, Multitouch.Contracts.IPreviewResultContract
+    public class IPreviewResultViewToContractHostAdapter : System.AddIn.Pipeline.ContractBase, Multitouch.Contracts.Contracts.IPreviewResultContract
     {
-        private Multitouch.IPreviewResult _view;
-        public IPreviewResultViewToContractHostAdapter(Multitouch.IPreviewResult view)
+        private Multitouch.Contracts.IPreviewResult _view;
+        public IPreviewResultViewToContractHostAdapter(Multitouch.Contracts.IPreviewResult view)
         {
             _view = view;
         }
@@ -39,7 +39,7 @@ namespace Multitouch.HostSideAdapters
                 return _view.Handled;
             }
         }
-        internal Multitouch.IPreviewResult GetSourceView()
+        internal Multitouch.Contracts.IPreviewResult GetSourceView()
         {
             return _view;
         }

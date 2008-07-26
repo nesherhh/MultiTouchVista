@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Multitouch
+namespace Multitouch.Contracts
 {
     
     public interface IPreviewResult
     {
-        Multitouch.Contracts.IContact Contact
+        IContact Contact
         {
             get;
         }

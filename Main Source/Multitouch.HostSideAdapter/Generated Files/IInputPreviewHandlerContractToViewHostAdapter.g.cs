@@ -39,9 +39,9 @@ namespace Multitouch.Contracts.HostSideAdapters
         {
             _contract.Stop();
         }
-        public Multitouch.IPreviewResult Handle(IContact contact)
+        public IPreviewResult Handle(IContact contact)
         {
-            return Multitouch.HostSideAdapters.IPreviewResultHostAdapter.ContractToViewAdapter(_contract.Handle(Multitouch.Contracts.HostSideAdapters.IContactHostAdapter.ViewToContractAdapter(contact)));
+            return Multitouch.Contracts.HostSideAdapters.IPreviewResultHostAdapter.ContractToViewAdapter(_contract.Handle(Multitouch.Contracts.HostSideAdapters.IContactHostAdapter.ViewToContractAdapter(contact)));
         }
         internal Multitouch.Contracts.Contracts.IInputPreviewHandlerContract GetSourceContract()
         {

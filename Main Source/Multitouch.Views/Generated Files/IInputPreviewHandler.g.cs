@@ -20,7 +20,7 @@ namespace Multitouch.Contracts
         }
         void Start();
         void Stop();
-        Multitouch.IPreviewResult Handle(IContact contact);
+        IPreviewResult Handle(IContact contact);
     }
 }
 
