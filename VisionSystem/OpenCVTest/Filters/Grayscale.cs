@@ -7,8 +7,7 @@ namespace OpenCVTest.Filters
 	{
 		public Grayscale(FilterContext context)
 			: base(context)
-		{
-		}
+		{ }
 
 		public override IplImage Apply(IplImage image)
 		{

@@ -23,29 +23,7 @@ namespace OpenCVFilterLib
 			void* p = ptr.ToPointer();
 			IplImage* img = (IplImage*)p;
 
-			//int hdims = 32;
-			//float hranges_arr[] = {0, 255};
-			//float* hranges = hranges_arr;
-
-			//IplImage* backproject = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
-			//CvHistogram* hist = cvCreateHist(1, &hdims, CV_HIST_ARRAY, &hranges, 1);
-
-			//cvCalcHist(&img, hist, 0);
-			//float min = 0.0f;
-			//float max = 0.0f;
-			//cvGetMinMaxHistValue(hist, &min, &max, 0, 0);
-
 			cvEqualizeHist(img, img);
-
-			//cvNormalizeHist(hist, 1024);
-
-			//cvCalcBackProject(&img, backproject, hist);
-			//cvCopy(backproject, img);
-
-			//cvShowImage("Normalization", backproject);
-
-			//cvReleaseImage(&backproject);
-			//cvReleaseHist(&hist);
 
 			return frame;
 		}

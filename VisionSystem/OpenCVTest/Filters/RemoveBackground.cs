@@ -5,12 +5,10 @@ namespace OpenCVTest.Filters
 {
 	class RemoveBackground : Filter
 	{
-		IplImage mask;
-
 		public RemoveBackground(FilterContext context)
 			: base(context)
 		{
-			Threshold = 17;
+			Threshold = 60;
 		}
 
 		public int Threshold { get; set; }
@@ -18,16 +16,12 @@ namespace OpenCVTest.Filters
 		public override IplImage Apply(IplImage image)
 		{
 			if (Context.Background.ptr == IntPtr.Zero)
-			{
 				Context.Background = cvlib.CvCloneImage(ref image);
-				mask = cvlib.CvCreateImage(cvlib.CvGetSize(ref image), (int)cvlib.IPL_DEPTH_8U, 1);
-			}
 
 			unsafe
 			{
 				byte* imagePtr = (byte*)image.imageData;
 				byte* backgroundPtr = (byte*)Context.Background.imageData;
-				byte* maskPtr = (byte*)mask.imageData;
 
 				for (int y = 0; y < image.height; y++)
 				{
