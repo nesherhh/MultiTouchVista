@@ -21,13 +21,13 @@ namespace OpenCVTest
 
 			context = new FilterContext();
 			filterPipline = new FilterPipline();
-			filterPipline.Add(new GrayscaleVisualization(context));
-			filterPipline.Add(new BlurVisualization(context));
-			filterPipline.Add(new ResizeVisualizer(context));
+			filterPipline.Add(new FilterVisualization(new Grayscale(context), context));
+			filterPipline.Add(new FilterVisualization(new Blur(context), context));
+			filterPipline.Add(new FilterVisualization(new Resize(context), context));
 			filterPipline.Add(new RemoveBackgroundVisualization(context));
 			filterPipline.Add(new FilterVisualization(new NormalizationFilter(), context));
 			filterPipline.Add(new FilterVisualization(new ClosingFilter(), context));
-			filterPipline.Add(new FilterVisualization(new BlobsFilter(), context));
+			filterPipline.Add(new BlobsVisualization(context));
 		
 			foreach (IFilter filter in filterPipline)
 			{
@@ -81,8 +81,8 @@ namespace OpenCVTest
 
 		void CreateCapture()
 		{
-			capture = cvlib.CvCreateFileCapture("d:\\reference 2.avi");
-			//capture = cvlib.CvCreateCameraCapture(0);
+			//capture = cvlib.CvCreateFileCapture("d:\\reference 3.avi");
+			capture = cvlib.CvCreateCameraCapture(0);
 			if (capture.ptr == IntPtr.Zero)
 				throw new Exception("could not create capture");
 

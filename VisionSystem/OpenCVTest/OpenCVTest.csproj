@@ -71,23 +71,17 @@
   <ItemGroup>
     <Compile Include="FilterContext.cs" />
     <Compile Include="FilterPipline.cs" />
-    <Compile Include="Filters\Blur.cs" />
-    <Compile Include="Filters\BlurVisualization.cs">
+    <Compile Include="Filters\BlobsVisualization.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Filters\BlurVisualization.Designer.cs">
-      <DependentUpon>BlurVisualization.cs</DependentUpon>
+    <Compile Include="Filters\BlobsVisualization.Designer.cs">
+      <DependentUpon>BlobsVisualization.cs</DependentUpon>
     </Compile>
+    <Compile Include="Filters\Blur.cs" />
     <Compile Include="Filters\Filter.cs" />
     <Compile Include="Filters\Grayscale.cs" />
     <Compile Include="Filters\RemoveBackground.cs" />
     <Compile Include="Filters\Resize.cs" />
-    <Compile Include="Filters\ResizeVisualizer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Filters\ResizeVisualizer.Designer.cs">
-      <DependentUpon>ResizeVisualizer.cs</DependentUpon>
-    </Compile>
     <Compile Include="FilterVisualization.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,14 +94,11 @@
     <Compile Include="FormOpenCV.Designer.cs">
       <DependentUpon>FormOpenCV.cs</DependentUpon>
     </Compile>
-    <Compile Include="Filters\GrayscaleVisualization.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Filters\GrayscaleVisualization.Designer.cs">
-      <DependentUpon>GrayscaleVisualization.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Filters\BlobsVisualization.resx">
+      <DependentUpon>BlobsVisualization.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Filters\RemoveBackgroundVisualization.resx">
       <DependentUpon>RemoveBackgroundVisualization.cs</DependentUpon>
     </EmbeddedResource>

@@ -4,6 +4,8 @@
 #include "blobresult.h"
 
 using namespace System;
+using namespace System::Collections::Generic;
+using namespace OpenCVCommon;
 using namespace OpenCVCommon::Filters;
 
 namespace OpenCVFilterLib
@@ -11,15 +13,20 @@ namespace OpenCVFilterLib
 
 	public ref class BlobsFilter : IFilter
 	{
+	private:
+		IList<BlobEllipse>^ blobEllipses;
+
 	public:
 
 		BlobsFilter(void)
 		{
-			cvNamedWindow("Blobs");
+			blobEllipses = gcnew List<BlobEllipse>();
 		}
 
 		virtual openCV::IplImage Apply(openCV::IplImage frame)
 		{
+			blobEllipses->Clear();
+
 			IntPtr ptr = frame.ptr;
 			void* p = ptr.ToPointer();
 			IplImage* img = (IplImage*)p;
@@ -28,23 +35,32 @@ namespace OpenCVFilterLib
 
 			blobs = CBlobResult(img, NULL, 100, true);
 
-			IplImage *outputImage = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 3);
-			cvMerge(img, img, img, NULL, outputImage);
-
-			blobs.Filter(blobs, B_EXCLUDE, CBlobGetArea(), B_GREATER, 5000);
-			blobs.Filter(blobs, B_EXCLUDE, CBlobGetArea(), B_LESS, 10);
+			blobs.Filter(blobs, B_EXCLUDE, CBlobGetArea(), B_GREATER, MaxBlob);
+			blobs.Filter(blobs, B_EXCLUDE, CBlobGetArea(), B_LESS, MinBlob);
 
 			int blobsCount = blobs.GetNumBlobs();
 			for(int i = 0; i < blobsCount; i++)
 			{
 				CBlob blob = blobs.GetBlob(i);
-				int label = blob.Label();
-				blob.FillBlob(outputImage, CV_RGB(255,0,0));
+				CvBox2D box = blob.GetEllipse();
+
+				Point^ center = gcnew Point(box.center.x, box.center.y);
+				Size^ size = gcnew Size(box.size.height, box.size.width);
+				BlobEllipse^ blobEllipse = gcnew BlobEllipse(*center, *size, box.angle, blob.Label());
+				blobEllipses->Add(*blobEllipse);
 			}
-
-			cvShowImage("Blobs", outputImage);
-
 			return frame;
+		}
+
+		property double MinBlob;
+		property double MaxBlob;
+
+		property IList<BlobEllipse>^ Blobs
+		{
+			IList<BlobEllipse>^ get()
+			{
+				return blobEllipses;
+			}
 		}
 	};
 }

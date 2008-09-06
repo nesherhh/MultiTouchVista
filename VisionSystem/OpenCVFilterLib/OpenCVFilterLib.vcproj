@@ -46,7 +46,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;D:\Projects\My Projects\VisionSystem\cvBlobsLib&quot;"
+				AdditionalIncludeDirectories="D:\Projects\CodePlex\TFS06\VisionSystem\cvBlobsLib"
 				PreprocessorDefinitions="WIN32;_DEBUG"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
@@ -66,7 +66,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="cv.lib cxcore.lib highgui.lib cvblobslib.lib $(NOINHERIT)"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;C:\Program Files\OpenCV\lib&quot;;&quot;D:\Projects\My Projects\VisionSystem\cvBlobsLib\lib&quot;"
+				AdditionalLibraryDirectories="&quot;C:\Program Files\OpenCV\lib&quot;;D:\Projects\CodePlex\TFS06\VisionSystem\cvBlobsLib\lib"
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				TargetMachine="1"

@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCVCommon", "OpenCVCommon\OpenCVCommon.csproj", "{17EC13CD-54D8-4D61-98AE-8092F13673F0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenCVFilterLib", "OpenCVFilterLib\OpenCVFilterLib.vcproj", "{9A5D0832-88D9-493B-9AD0-789319E3ADB5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{42E880A3-A70F-47D1-900E-21292714D16D} = {42E880A3-A70F-47D1-900E-21292714D16D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cvblobslib", "cvBlobsLib\cvblobslib.vcproj", "{42E880A3-A70F-47D1-900E-21292714D16D}"
 EndProject
