@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="TestApplication.TestUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 x:Name="window">
+    <StackPanel DataContext="{Binding ElementName=window}" >
+		<Image Source="{Binding Source}" MaxWidth="480"/>
+		<TextBlock Text="{Binding Filename}"/>
+    </StackPanel>
+</UserControl>

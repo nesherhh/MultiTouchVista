@@ -27,7 +27,7 @@
 			<Button Click="Button_Click">wpf button</Button>
 		</UniformGrid>
 		<mt:ScrollViewer>
-			<Image Source="{Binding Pictures[0]}"/>
+			<!--<Image Source="{Binding Pictures[0]}"/>-->
 		</mt:ScrollViewer>
 		<ItemsControl x:Name="itemsControl"
 					  Grid.Row="1" Grid.ColumnSpan="3"
@@ -39,13 +39,14 @@
 			</ItemsControl.ItemsPanel>
 			<ItemsControl.Resources>
 				<DataTemplate DataType="{x:Type sys:String}">
-					<themes:SystemDropShadowChrome>
+					<local:TestUserControl Filename="{Binding}" MinWidth="100" MinHeight="100"/>
+					<!--<themes:SystemDropShadowChrome>
 						<Border BorderBrush="Black" BorderThickness="1">
 							<Border BorderBrush="White" BorderThickness="10">
 								<Image Source="{Binding}" MaxWidth="480"/>
 							</Border>
 						</Border>
-					</themes:SystemDropShadowChrome>
+					</themes:SystemDropShadowChrome>-->
 				</DataTemplate>
 			</ItemsControl.Resources>
 		</ItemsControl>

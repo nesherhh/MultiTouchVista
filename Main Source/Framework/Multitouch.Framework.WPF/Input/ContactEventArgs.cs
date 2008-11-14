@@ -86,7 +86,7 @@ namespace Multitouch.Framework.WPF.Input
 		/// <returns></returns>
 		public IDictionary<int, Contact> GetContacts(UIElement forElement)
 		{
-			return GetContacts(forElement, MatchCriteria.Exact);
+			return GetContacts(forElement, MatchCriteria.LogicalParent);  // CHANGED: Roberto Sonnino 09/11/2008
 		}
 
 		/// <summary>
