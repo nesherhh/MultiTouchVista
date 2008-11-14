@@ -82,6 +82,13 @@ namespace Multitouch.Framework.WPF.Controls
 				FrameworkElement element = hitTestResult.VisualHit as FrameworkElement;
 				if (element != null)
 				{
+					FrameworkElement parent = element.Parent as FrameworkElement;
+					while (parent != null && !parent.Equals(sender))
+					{
+						element = parent;
+						parent = element.Parent as FrameworkElement;
+					}
+
 					FixedHingeJoint joint;
 					if (contactJoints.TryGetValue(e.Contact.Id, out joint))
 					{
@@ -109,7 +116,6 @@ namespace Multitouch.Framework.WPF.Controls
 									{
 										Vector vector = frameworkElement.PointFromScreen(contactsArray[j].Position) - frameworkElement.PointFromScreen(contactsArray[i].Position);
 										currentDistance += vector.Length;
-										center += vector;
 
 										Vector previousVector = frameworkElement.PointFromScreen(contactsArray[j].PreviousPosition) - frameworkElement.PointFromScreen(contactsArray[i].PreviousPosition);
 										previousDistance += previousVector.Length;
@@ -121,8 +127,6 @@ namespace Multitouch.Framework.WPF.Controls
 
 								previousDistance /= divisor;
 								currentDistance /= divisor;
-								center.X /= divisor;
-								center.Y /= divisor;
 
 								double delta = currentDistance / previousDistance;
 								if (double.IsNaN(delta))
