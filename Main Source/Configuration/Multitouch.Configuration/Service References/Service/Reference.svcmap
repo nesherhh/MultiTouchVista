@@ -24,6 +24,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="4529a6e3-a615-4f12-8cc9-bc16954713a8" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ConfigurationInterface/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="43428cf4-09f2-4782-96e1-d5e830cea29b" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ConfigurationInterface/mex" />
     <MetadataFile FileName="Multitouch.Service.Logic.ExternalInterfaces.xsd" MetadataType="Schema" ID="b691cc1b-f72e-426e-97c8-d934b1307464" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ConfigurationInterface/mex" />
+    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="1fe94315-ce8e-42b7-94f9-0a2d518a7905" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ConfigurationInterface/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

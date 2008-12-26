@@ -6,7 +6,7 @@ using namespace Multitouch::Contracts;
 
 namespace TouchLibProvider
 {
-	ref class TouchLibContact : IContact
+	ref class TouchLibContact : IContactData
 	{
 	public:
 		TouchLibContact(TouchData data, ContactState state)
@@ -17,6 +17,8 @@ namespace TouchLibProvider
 			width = data.width;
 			height = data.height;
 			this->state = state;
+			angle = data.angle;
+			bounds = Rect(data.X, data.Y, data.width, data.height);
 		}
 
 		property int Id
@@ -59,6 +61,22 @@ namespace TouchLibProvider
 			}
 		}
 
+		property double Angle
+		{
+			virtual double get(void)
+			{
+				return angle;
+			}
+		}
+
+		property Rect Bounds
+		{
+			virtual Rect get(void)
+			{
+				return bounds;
+			}
+		}
+
 		property ContactState State
 		{
 			virtual ContactState get(void)
@@ -73,6 +91,8 @@ namespace TouchLibProvider
 		double y;
 		double width;
 		double height;
+		double angle;
+		Rect bounds;
 		ContactState state;
 	};
 }

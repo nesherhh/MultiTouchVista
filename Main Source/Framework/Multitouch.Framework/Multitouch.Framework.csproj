@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30428</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F78A290F-5D34-4D20-9EAA-D4963BCA09AA}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -57,7 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\ReadOnlyDictionary.cs" />
+    <Compile Include="Input\FrameEventArgs.cs" />
     <Compile Include="Input\IContactHandler.cs" />
+    <Compile Include="Input\ImageData.cs" />
+    <Compile Include="Input\ImageType.cs" />
     <Compile Include="Input\MultitouchServiceContactDispatcher.cs" />
     <Compile Include="Input\CommunicationLogic.cs" />
     <Compile Include="Input\ServiceCommunicator.cs" />
@@ -96,6 +99,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\Input.Service\configuration91.svcinfo" />
+    <None Include="Service References\Input.Service\Multitouch.Service.Logic.ExternalInterfaces.xsd" />
+    <None Include="Service References\Input.Service\System.Windows.xsd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -87,7 +87,7 @@ namespace Multitouch.Framework.WPF.Input
 		{
 			addHandlerMethod = Dynamic<UIElement>.Static.Procedure.Explicit<DependencyObject, RoutedEvent, Delegate>.CreateDelegate("AddHandler");
 			removeHandlerMethod = Dynamic<UIElement>.Static.Procedure.Explicit<DependencyObject, RoutedEvent, Delegate>.CreateDelegate("RemoveHandler");
-			AllowMouseEvents = true;
+			//AllowMouseEvents = true;
 		}
 
 		/// <summary>

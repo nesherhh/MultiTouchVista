@@ -123,6 +123,10 @@
       <Project>{F3219531-A4B9-4B65-B7EA-27C43E98C21D}</Project>
       <Name>Multitouch.Framework.WPF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Multitouch.Framework\Multitouch.Framework.csproj">
+      <Project>{F78A290F-5D34-4D20-9EAA-D4963BCA09AA}</Project>
+      <Name>Multitouch.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

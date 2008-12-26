@@ -20,9 +20,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 		Framework\Libraries\Physics2DDotNet.XML = Framework\Libraries\Physics2DDotNet.XML
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApplication", "Framework\TestConsoleApplication\TestConsoleApplication.csproj", "{2A0BB11F-EF10-499F-A314-BE4D75B447BB}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
@@ -35,6 +37,9 @@ Global
 		SccProjectUniqueName3 = Framework\\TestApplication\\TestApplication.csproj
 		SccProjectName3 = Framework/TestApplication
 		SccLocalPath3 = Framework\\TestApplication
+		SccProjectUniqueName4 = Framework\\TestConsoleApplication\\TestConsoleApplication.csproj
+		SccProjectName4 = Framework/TestConsoleApplication
+		SccLocalPath4 = Framework\\TestConsoleApplication
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +58,10 @@ Global
 		{F3219531-A4B9-4B65-B7EA-27C43E98C21D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3219531-A4B9-4B65-B7EA-27C43E98C21D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3219531-A4B9-4B65-B7EA-27C43E98C21D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A0BB11F-EF10-499F-A314-BE4D75B447BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A0BB11F-EF10-499F-A314-BE4D75B447BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A0BB11F-EF10-499F-A314-BE4D75B447BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A0BB11F-EF10-499F-A314-BE4D75B447BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

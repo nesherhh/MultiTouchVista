@@ -14,17 +14,17 @@ namespace TouchLibProvider
 
 	void InputProvider::FingerDown(TouchData data)
 	{
-		ContactChanged(this, gcnew TouchLibContactChangedEventArgs(data, ContactState::New));
+		Input(this, gcnew TouchLibContactChangedEventArgs(data, ContactState::New));
 	}
 
 	void InputProvider::FingerUp(TouchData data)
 	{
-		ContactChanged(this, gcnew TouchLibContactChangedEventArgs(data, ContactState::Removed));
+		Input(this, gcnew TouchLibContactChangedEventArgs(data, ContactState::Removed));
 	}
 
 	void InputProvider::FingerUpdate(TouchData data)
 	{
-		ContactChanged(this, gcnew TouchLibContactChangedEventArgs(data, ContactState::Moved));
+		Input(this, gcnew TouchLibContactChangedEventArgs(data, ContactState::Moved));
 	}
 
 	bool InputProvider::IsRunning::get(void)

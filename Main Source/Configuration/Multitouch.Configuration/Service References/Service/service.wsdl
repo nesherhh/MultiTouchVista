@@ -19,6 +19,7 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Multitouch.Service.Logic.ExternalInterfaces" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IConfigurationInterface_GetAvailableInputProviders_InputMessage">
@@ -45,6 +46,18 @@
   <wsdl:message name="IConfigurationInterface_RestartService_OutputMessage">
     <wsdl:part name="parameters" element="tns:RestartServiceResponse" />
   </wsdl:message>
+  <wsdl:message name="IConfigurationInterface_ShowConfiguration_InputMessage">
+    <wsdl:part name="parameters" element="tns:ShowConfiguration" />
+  </wsdl:message>
+  <wsdl:message name="IConfigurationInterface_ShowConfiguration_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ShowConfigurationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IConfigurationInterface_HasConfiguration_InputMessage">
+    <wsdl:part name="parameters" element="tns:HasConfiguration" />
+  </wsdl:message>
+  <wsdl:message name="IConfigurationInterface_HasConfiguration_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HasConfigurationResponse" />
+  </wsdl:message>
   <wsdl:portType name="IConfigurationInterface">
     <wsdl:operation name="GetAvailableInputProviders">
       <wsdl:input wsam:Action="http://tempuri.org/IConfigurationInterface/GetAvailableInputProviders" message="tns:IConfigurationInterface_GetAvailableInputProviders_InputMessage" />
@@ -61,6 +74,14 @@
     <wsdl:operation name="RestartService">
       <wsdl:input wsam:Action="http://tempuri.org/IConfigurationInterface/RestartService" message="tns:IConfigurationInterface_RestartService_InputMessage" />
       <wsdl:output wsam:Action="http://tempuri.org/IConfigurationInterface/RestartServiceResponse" message="tns:IConfigurationInterface_RestartService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShowConfiguration">
+      <wsdl:input wsam:Action="http://tempuri.org/IConfigurationInterface/ShowConfiguration" message="tns:IConfigurationInterface_ShowConfiguration_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IConfigurationInterface/ShowConfigurationResponse" message="tns:IConfigurationInterface_ShowConfiguration_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HasConfiguration">
+      <wsdl:input wsam:Action="http://tempuri.org/IConfigurationInterface/HasConfiguration" message="tns:IConfigurationInterface_HasConfiguration_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IConfigurationInterface/HasConfigurationResponse" message="tns:IConfigurationInterface_HasConfiguration_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetNamedPipeBinding_IConfigurationInterface" type="tns:IConfigurationInterface">
@@ -96,6 +117,24 @@
     </wsdl:operation>
     <wsdl:operation name="RestartService">
       <soap12:operation soapAction="http://tempuri.org/IConfigurationInterface/RestartService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShowConfiguration">
+      <soap12:operation soapAction="http://tempuri.org/IConfigurationInterface/ShowConfiguration" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasConfiguration">
+      <soap12:operation soapAction="http://tempuri.org/IConfigurationInterface/HasConfiguration" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

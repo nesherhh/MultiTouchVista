@@ -10,10 +10,24 @@ namespace Multitouch.Framework.Input
 		CommunicationLogic logic;
 		ApplicationInterfaceClient client;
 		IApplicationInterfaceCallback contactDispatcher;
+		bool enableFrameEvent;
 
 		public ServiceCommunicator(CommunicationLogic logic)
 		{
 			this.logic = logic;
+		}
+
+		public bool EnableFrameEvent
+		{
+			get { return enableFrameEvent; }
+			set
+			{
+				if (client == null)
+					throw new MultitouchException("Not connected");
+
+				enableFrameEvent = value;
+				client.ReceiveFrames(value);
+			}
 		}
 
 		public void Connect(IntPtr windowHandle)
@@ -21,6 +35,9 @@ namespace Multitouch.Framework.Input
 			Uri serviceAddress = new Uri("net.pipe://localhost/Multitouch.Service/ApplicationInterface");
 			EndpointAddress remoteAddress = new EndpointAddress(serviceAddress);
 			NetNamedPipeBinding namedPipeBinding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
+			namedPipeBinding.MaxReceivedMessageSize = int.MaxValue;
+			namedPipeBinding.MaxBufferSize = int.MaxValue;
+			namedPipeBinding.ReaderQuotas.MaxArrayLength = int.MaxValue;
 
 			IApplicationInterfaceCallback dispatcher = new MultitouchServiceContactDispatcher(logic);
 			InstanceContext instanceContext = new InstanceContext(dispatcher);
@@ -47,6 +64,14 @@ namespace Multitouch.Framework.Input
 				contactDispatcher = null;
 				client = null;
 			}
+		}
+
+		public bool ShouldReceiveImage(Service.ImageType imageType, bool value)
+		{
+			if (client == null)
+				throw new MultitouchException("Not connected");
+
+			return client.SendImageType(imageType, value);
 		}
 	}
 }

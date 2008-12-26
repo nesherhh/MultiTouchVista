@@ -96,7 +96,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\..\Output\AddIns\TouchLibProvider"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -120,6 +120,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="D:\MultiTouchLib\multitouch\TouchLib\include"
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -137,8 +138,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="$(NoInherit)"
+				AdditionalDependencies="touchlib.lib cv.lib cxcore.lib highgui.lib $(NOINHERIT)"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="d:\MultiTouchLib\multitouch\TouchLib\lib;&quot;c:\Program Files\OpenCV\lib&quot;"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -201,6 +203,21 @@
 			RelativePath="System.AddIn.dll"
 			AssemblyName="System.AddIn, Version=3.5.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
 			MinFrameworkVersion="196613"
+		/>
+		<AssemblyReference
+			RelativePath="PresentationCore.dll"
+			AssemblyName="PresentationCore, Version=3.0.0.0, PublicKeyToken=31bf3856ad364e35, processorArchitecture=IA64"
+			MinFrameworkVersion="196608"
+		/>
+		<AssemblyReference
+			RelativePath="PresentationFramework.dll"
+			AssemblyName="PresentationFramework, Version=3.0.0.0, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
+			MinFrameworkVersion="196608"
+		/>
+		<AssemblyReference
+			RelativePath="WindowsBase.dll"
+			AssemblyName="WindowsBase, Version=3.0.0.0, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
+			MinFrameworkVersion="196608"
 		/>
 	</References>
 	<Files>

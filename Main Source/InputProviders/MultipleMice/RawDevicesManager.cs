@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -20,8 +19,10 @@ namespace MultipleMice
 		double mouseSpeed;
 		Rectangle virtualScreen;
 
-		const ushort PEN_X_MAX = 9650;
-		const ushort PEN_Y_MAX = 7188;
+		//const ushort PEN_X_MAX = 9650;
+		//const ushort PEN_Y_MAX = 7188;
+		const ushort PEN_X_MAX = 24500;
+		const ushort PEN_Y_MAX = 18500;
 
 		public RawDevicesManager(InputProvider inputProvider)
 		{
@@ -111,10 +112,7 @@ namespace MultipleMice
 					contact.Update(state);
 				}
 				if (contact != null)
-				{
-					MouseContactChangedEventArgs args = new MouseContactChangedEventArgs(contact);
-					inputProvider.OnContactChanged(args);
-				}
+					inputProvider.RaiseInput(contact);
 				if (state.ButtonState == DeviceState.Up)
 				{
 					//Debug.WriteLine("Up: " + contact);

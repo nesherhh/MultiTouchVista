@@ -3,18 +3,23 @@ using Multitouch.Contracts;
 
 namespace MultipleMice
 {
-	class MouseContactChangedEventArgs : ContactChangedEventArgs
+	class MouseContactChangedEventArgs : InputDataEventArgs
 	{
-		IContact contact;
+		object data;
 
 		public MouseContactChangedEventArgs(MouseContact contact)
 		{
-			this.contact = contact;
+			data = contact;
 		}
 
-		public override IContact Contact
+		public override InputType Type
 		{
-			get { return contact; }
+			get { return InputType.Contact; }
+		}
+
+		public override object Data
+		{
+			get { return data; }
 		}
 	}
 }

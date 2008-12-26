@@ -11,12 +11,22 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 	{
 		IApplicationInterfaceCallback callback;
 		IntPtr hWnd;
-		EventHandler<ContactChangedEventArgs> contactChangedHandler;
-		static Dictionary<IntPtr, EventHandler<ContactChangedEventArgs>> receivers;
+		Action<IContactData> contactChangedHandler;
+		Action<IFrameData> frameHandler;
+
+		static Dictionary<IntPtr, Receiver> receivers;
+		Dictionary<ImageType, int> imagesToSend;
 
 		static ApplicationInterfaceService()
 		{
-			receivers = new Dictionary<IntPtr, EventHandler<ContactChangedEventArgs>>();
+			receivers = new Dictionary<IntPtr, Receiver>();
+		}
+
+		public ApplicationInterfaceService()
+		{
+			imagesToSend = new Dictionary<ImageType, int>();
+			foreach (ImageType value in Enum.GetValues(typeof(ImageType)))
+				imagesToSend.Add(value, 0);
 		}
 
 		public void Subscribe(IntPtr windowHandle)
@@ -24,7 +34,9 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 			hWnd = windowHandle;
 			callback = OperationContext.Current.GetCallbackChannel<IApplicationInterfaceCallback>();
 			contactChangedHandler = OnContactChanged;
-			receivers.Add(hWnd, contactChangedHandler);
+			frameHandler = OnFrame;
+
+			receivers.Add(hWnd, new Receiver(contactChangedHandler));
 		}
 
 		public void Unsubscribe()
@@ -32,25 +44,94 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 			receivers.Remove(hWnd);
 		}
 
-		void OnContactChanged(object sender, ContactChangedEventArgs e)
+		public void ReceiveFrames(bool value)
 		{
-			IContact contact = e.Contact;
-			callback.ContactChanged(contact.Id, contact.X, contact.Y, contact.Width, contact.Height, contact.State);
+			Receiver receiver;
+			receivers.TryGetValue(hWnd, out receiver);
+
+			if (receiver != null)
+			{
+				if (value)
+					receiver.FrameHandler = frameHandler;
+				else
+					receiver.FrameHandler = null;
+			}
 		}
 
-		/// <summary>
-		/// Sends contact information to specified window.
-		/// </summary>
-		/// <param name="hWnd">Window handle</param>
-		/// <param name="e">Contact information</param>
-		public static void ContactChanged(IntPtr hWnd, ContactChangedEventArgs e)
+		public bool SendImageType(ImageType imageType, bool value)
 		{
-			EventHandler<ContactChangedEventArgs> handler;
-			if (receivers.TryGetValue(hWnd, out handler))
+			if(value)
+				imagesToSend[imageType]++;
+			else
+				imagesToSend[imageType]--;
+
+			if (imagesToSend[imageType] > 0)
+				InputProviderManager.Instance.Provider.SendImageType(imageType, true);
+			else
+				InputProviderManager.Instance.Provider.SendImageType(imageType, false);
+			
+			return true;
+		}
+
+		void OnContactChanged(IContactData contact)
+		{
+			callback.ContactChanged(contact.Id, contact.X, contact.Y, contact.Width, contact.Height, contact.Angle, contact.Bounds, contact.State);
+		}
+
+		void OnFrame(IFrameData frame)
+		{
+			FrameData data = new FrameData();
+			data.SetImages(frame.Image.Where(i => imagesToSend[i.Type] > 0));
+			callback.Frame(data);
+		}
+
+		public static void DispatchInput(InputDataEventArgs e)
+		{
+			switch (e.Type)
+			{
+				case InputType.Contact:
+					HandleContact((IContactData)e.Data);
+					break;
+				case InputType.Frame:
+					HandleFrame((IFrameData)e.Data);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
+
+		static void HandleFrame(IFrameData frame)
+		{
+			foreach (KeyValuePair<IntPtr, Receiver> keyValuePair in receivers.Where(pair => pair.Value.FrameHandler != null).ToList())
 			{
 				try
 				{
-					handler(null, e);
+					keyValuePair.Value.FrameHandler(frame);
+				}
+				catch (Exception)
+				{
+					receivers.Remove(keyValuePair.Key);
+				}
+			}
+		}
+
+		static void HandleContact(IContactData contact)
+		{
+			IntPtr hWnd = NativeMethods.WindowFromPoint(new NativeMethods.POINT((int)contact.X, (int)contact.Y));
+			if (hWnd == IntPtr.Zero)
+				DeliverContact(contact);
+			else
+				DeliverContact(hWnd, contact);
+		}
+
+		static void DeliverContact(IntPtr hWnd, IContactData contact)
+		{
+			Receiver receiver;
+			if (receivers.TryGetValue(hWnd, out receiver))
+			{
+				try
+				{
+					receiver.ContactHandler(contact);
 				}
 				catch (Exception)
 				{
@@ -59,22 +140,18 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 			}
 		}
 
-		/// <summary>
-		/// Sends contact information to all subscribers
-		/// </summary>
-		/// <param name="e">Contact information</param>
-		public static void ContactChanged(ContactChangedEventArgs e)
+		static void DeliverContact(IContactData contact)
 		{
-			List<KeyValuePair<IntPtr, EventHandler<ContactChangedEventArgs>>> handlers = receivers.ToList();
-			foreach (KeyValuePair<IntPtr, EventHandler<ContactChangedEventArgs>> keyValuePair in handlers)
+			List<KeyValuePair<IntPtr, Receiver>> handlers = receivers.ToList();
+			foreach (KeyValuePair<IntPtr, Receiver> pair in handlers)
 			{
 				try
 				{
-					keyValuePair.Value(null, e);
+					pair.Value.ContactHandler(contact);
 				}
-				catch(Exception)
+				catch (Exception)
 				{
-					receivers.Remove(keyValuePair.Key);
+					receivers.Remove(pair.Key);
 				}
 			}
 		}

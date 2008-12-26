@@ -33,5 +33,18 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 		/// </summary>
 		[OperationContract]
 		void RestartService();
+
+		/// <summary>
+		/// Shows configuration window
+		/// </summary>
+		/// <param name="parent">Parent window handle</param>
+		[OperationContract]
+		void ShowConfiguration(IntPtr parent);
+
+		/// <summary>
+		/// <c>True</c> if input provider is configurable.
+		/// </summary>
+		[OperationContract]
+		bool HasConfiguration();
 	}
 }
