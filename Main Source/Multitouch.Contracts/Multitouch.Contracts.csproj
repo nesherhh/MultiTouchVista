@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -36,6 +36,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PipelineHints, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3546f02f48709321, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.AddIn">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -54,15 +60,19 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContactState.cs" />
-    <Compile Include="IContactChangedEventArgsContract.cs" />
-    <Compile Include="IContactChangedEventHandlerContract.cs" />
-    <Compile Include="IContactContract.cs" />
-    <Compile Include="IInputPostHandlerContract.cs" />
-    <Compile Include="IInputPreviewHandlerContract.cs" />
-    <Compile Include="IPreviewResultContract.cs" />
+    <Compile Include="IContactDataContract.cs" />
+    <Compile Include="IFrameDataContract.cs" />
+    <Compile Include="IInputDataEventArgsContract.cs" />
+    <Compile Include="IInputEventHandlerContract.cs" />
+    <Compile Include="IImageDataContract.cs" />
+    <Compile Include="ImageType.cs" />
+    <Compile Include="InputType.cs" />
     <Compile Include="IProviderContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -5,6 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.Threading;
+using System.Windows;
+using System.Windows.Interop;
 using Multitouch.Contracts;
 using Multitouch.Service.Logic.ExternalInterfaces;
 using Multitouch.Service.Logic.Properties;
@@ -17,6 +20,11 @@ namespace Multitouch.Service.Logic
 		ServiceHost serviceHost;
 
 		internal static MultitouchInput Instance { get; private set; }
+
+		public bool HasConfiguration
+		{
+			get { return providerManager.Provider.HasConfiguration; }
+		}
 
 		public MultitouchInput()
 		{
@@ -67,6 +75,8 @@ namespace Multitouch.Service.Logic
 			Uri baseAddress = new Uri("net.pipe://localhost/Multitouch.Service/ConfigurationInterface");
 			serviceHost = new ServiceHost(typeof(ConfigurationInterfaceService), baseAddress);
 			NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
+			binding.MaxBufferSize = int.MaxValue;
+			binding.MaxReceivedMessageSize = int.MaxValue;
 			serviceHost.AddServiceEndpoint(typeof(IConfigurationInterface), binding, string.Empty);
 
 			ServiceMetadataBehavior serviceMetadataBehavior = serviceHost.Description.Behaviors.Find<ServiceMetadataBehavior>();
@@ -77,6 +87,29 @@ namespace Multitouch.Service.Logic
 
 			serviceHost.AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexNamedPipeBinding(), "mex");
 			serviceHost.Open();
+		}
+
+		public void ShowConfiguration(IntPtr parent)
+		{
+			Thread t = new Thread(() =>
+								  {
+
+									  UIElement configuration = providerManager.Provider.GetConfiguration();
+									  Window window = configuration as Window;
+									  if (window == null)
+									  {
+										  window = new Window();
+										  window.Content = configuration;
+									  }
+									  else
+									  {
+										  WindowInteropHelper helper = new WindowInteropHelper(window);
+										  helper.Owner = parent;
+										  window.ShowDialog();
+									  }
+								  });
+			t.SetApartmentState(ApartmentState.STA);
+			t.Start();
 		}
 	}
 }

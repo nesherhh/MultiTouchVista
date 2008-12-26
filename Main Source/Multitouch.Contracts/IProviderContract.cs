@@ -1,6 +1,7 @@
 ﻿using System;
 using System.AddIn.Contract;
 using System.AddIn.Pipeline;
+using System.Windows;
 using PipelineHints;
 
 [assembly:SegmentAssemblyName(PipelineSegment.AddInSideAdapter, "Multitouch.AddInSideAdapter")]
@@ -15,33 +16,46 @@ namespace Multitouch.Contracts.Contracts
 	[AddInContract]
 	public interface IProviderContract : IContract
 	{
-		[Comment(
-		"/// <summary>"+
-		"/// Starts provider and sending events."+
-		"/// </summary>"
-		)]
+		/// <summary>
+		/// Starts provider and sending events.
+		/// </summary>
 		void Start();
-		[Comment(
-		"/// <summary>"+
-		"/// Stops provider and sending events."+
-		"/// </summary>"
-		)]
+
+		/// <summary>
+		/// Stops provider and sending events.
+		/// </summary>
 		void Stop();
-		[Comment(
-		"/// <summary>"+
-		"/// Returns <c>True</c> if provider is running, else <c>False</c>."+
-		"/// </summary>"
-		)]
+
+		/// <summary>
+		/// Returns <c>True</c> if provider is running, else <c>False</c>.
+		/// </summary>
 		bool IsRunning { get; }
 
-		[Comment(
-		"/// <summary>"+
-		"/// Raised when contact changes."+
-		"/// </summary>"
-		)]
-		[EventAdd("ContactChanged")]
-		void ContactChangedAdd(IContactChangedEventHandlerContract handler);
-		[EventRemove("ContactChanged")]
-		void ContactChangedRemove(IContactChangedEventHandlerContract handler);
+		/// <summary>
+		/// Returns <c>True</c> if input provider has configuration
+		/// </summary>
+		bool HasConfiguration { get; }
+
+		/// <summary>
+		/// Returns UIElement representing configuration dialog
+		/// </summary>
+		UIElement GetConfiguration();
+
+		/// <summary>
+		/// Sets kind of image you want to receive.
+		/// </summary>
+		/// <param name="imageType">Kind of image</param>
+		/// <param name="value">if set to <c>true</c> [value].</param>
+		/// <returns></returns>
+		bool SendImageType(ImageType imageType, bool value);
+
+		/// <summary>
+		/// Raised on any input from device.
+		/// </summary>
+		/// <param name="handler"></param>
+		[EventAdd("Input")]
+		void InputAdd(IInputEventHandlerContract handler);
+		[EventRemove("Input")]
+		void InputRemove(IInputEventHandlerContract handler);
 	}
 }

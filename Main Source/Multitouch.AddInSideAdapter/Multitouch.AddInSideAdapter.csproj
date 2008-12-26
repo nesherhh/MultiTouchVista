@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30428</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{46F2513E-B206-4C52-9B90-80FDE26E597E}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -75,25 +75,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Generated Files\ContactChangedEventArgsAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\ContactChangedEventArgsContractToViewAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\ContactChangedEventArgsViewToContractAddInAdapter.g.cs" />
     <Compile Include="Generated Files\ContactStateAddInAdapter.g.cs" />
     <Compile Include="Generated Files\ContactStateArrayAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IContactAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IContactChangedEventHandlerContractToViewAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IContactChangedEventHandlerViewToContractAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IContactContractToViewAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IContactViewToContractAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IInputPostHandlerAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IInputPostHandlerContractToViewAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IInputPostHandlerViewToContractAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IInputPreviewHandlerAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IInputPreviewHandlerContractToViewAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IInputPreviewHandlerViewToContractAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IPreviewResultAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IPreviewResultContractToViewAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IPreviewResultViewToContractAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\IContactDataAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\IContactDataContractToViewAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\IContactDataViewToContractAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\IFrameDataAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\IFrameDataContractToViewAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\IFrameDataViewToContractAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\IImageDataAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\IImageDataContractToViewAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\IImageDataViewToContractAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\IInputEventHandlerContractToViewAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\IInputEventHandlerViewToContractAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\ImageTypeAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\ImageTypeArrayAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\InputDataEventArgsAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\InputDataEventArgsContractToViewAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\InputDataEventArgsViewToContractAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\InputTypeAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\InputTypeArrayAddInAdapter.g.cs" />
     <Compile Include="Generated Files\IProviderAddInAdapter.g.cs" />
     <Compile Include="Generated Files\IProviderContractToViewAddInAdapter.g.cs" />
     <Compile Include="Generated Files\IProviderViewToContractAddInAdapter.g.cs" />

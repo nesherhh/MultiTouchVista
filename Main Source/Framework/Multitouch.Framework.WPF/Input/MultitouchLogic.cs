@@ -48,7 +48,9 @@ namespace Multitouch.Framework.WPF.Input
 
 		public MultitouchLogic(InputManager inputManager)
 		{
-			presentationCoreAssembly = typeof(InputManager).Assembly;
+			Mouse.OverrideCursor = Cursors.None;
+
+            presentationCoreAssembly = typeof(InputManager).Assembly;
 			rawStylusInputReportType = presentationCoreAssembly.GetType("System.Windows.Input.RawStylusInputReport");
 			rawStylusActionsType = presentationCoreAssembly.GetType("System.Windows.Input.RawStylusActions");
 			penContextsType = presentationCoreAssembly.GetType("System.Windows.Input.PenContexts");

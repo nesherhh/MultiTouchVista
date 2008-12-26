@@ -6,6 +6,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Multitouch.Framework.Input;
 using Multitouch.Framework.WPF.Input;
 
 namespace TestApplication
@@ -26,6 +28,15 @@ namespace TestApplication
 
 		public static ICommand TestCommand = new RoutedUICommand("Command", "TestCommand", typeof(Window1));
 
+		public static readonly DependencyProperty CameraImageProperty =
+			DependencyProperty.Register("CameraImage", typeof(ImageSource), typeof(Window1), new UIPropertyMetadata(null));
+
+		public ImageSource CameraImage
+		{
+			get { return (ImageSource)GetValue(CameraImageProperty); }
+			set { SetValue(CameraImageProperty, value); }
+		}
+
 		public Window1()
 		{
 			Contacts1 = new ObservableCollection<Contact>();
@@ -33,6 +44,38 @@ namespace TestApplication
 			SetValue(PicturesPropertyKey, new ObservableCollection<string>());
 			DataContext = this;
 			InitializeComponent();
+
+			Loaded += Window1_Loaded;
+		}
+
+		void Window1_Loaded(object sender, RoutedEventArgs e)
+		{
+			if (CommunicationLogic.Instance.ShouldReceiveImage(ImageType.Normalized, true))
+			{
+				CommunicationLogic.Instance.Frame += Instance_Frame;
+				CommunicationLogic.Instance.EnableFrameEvent = true;
+			}
+		}
+
+		protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+		{
+			CommunicationLogic.Instance.EnableFrameEvent = false;
+			base.OnClosing(e);
+		}
+
+		void Instance_Frame(object sender, FrameEventArgs e)
+		{
+			ImageData imageData;
+			if (e.TryGetImage(ImageType.Normalized, 0, 0, 320, 240, out imageData))
+			{
+				WriteableBitmap bitmap = CameraImage as WriteableBitmap;
+				if (bitmap == null)
+				{
+					bitmap = new WriteableBitmap(imageData.Width, imageData.Height, 96, 96, PixelFormats.Gray8, BitmapPalettes.Gray256);
+					CameraImage = bitmap;
+				}
+				bitmap.WritePixels(new Int32Rect(0, 0, imageData.Width, imageData.Height), imageData.Data, imageData.Stride, 0);
+			}
 		}
 
 		public ObservableCollection<string> Pictures

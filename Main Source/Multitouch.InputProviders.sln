@@ -3,30 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleMice", "InputProviders\MultipleMice\MultipleMice.csproj", "{9744E608-DF4D-4DE7-AAC1-3A53EF9D41FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchLib", "InputProviders\TouchLib\TouchLib.csproj", "{A3B55852-4050-41D5-BBBC-451D0C27E2F6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuioProvider", "InputProviders\TuioProvider\TuioProvider.csproj", "{CA2F4CDB-9DB6-4901-9ECB-B81516DB313A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TouchLibProvider", "InputProviders\TouchLibProvider\TouchLibProvider.vcproj", "{26F3FE35-0609-4732-9C90-EA19ACCEF139}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = InputProviders\\MultipleMice\\MultipleMice.csproj
 		SccProjectName1 = InputProviders/MultipleMice
 		SccLocalPath1 = InputProviders\\MultipleMice
-		SccProjectUniqueName2 = InputProviders\\TouchLib\\TouchLib.csproj
-		SccProjectName2 = InputProviders/TouchLib
-		SccLocalPath2 = InputProviders\\TouchLib
-		SccProjectUniqueName3 = InputProviders\\TuioProvider\\TuioProvider.csproj
-		SccProjectName3 = InputProviders/TuioProvider
-		SccLocalPath3 = InputProviders\\TuioProvider
-		SccProjectUniqueName4 = InputProviders\\TouchLibProvider\\TouchLibProvider.vcproj
-		SccProjectName4 = InputProviders/TouchLibProvider
-		SccLocalPath4 = InputProviders\\TouchLibProvider
+		SccProjectUniqueName2 = InputProviders\\TuioProvider\\TuioProvider.csproj
+		SccProjectName2 = InputProviders/TuioProvider
+		SccLocalPath2 = InputProviders\\TuioProvider
+		SccProjectUniqueName3 = InputProviders\\TouchLibProvider\\TouchLibProvider.vcproj
+		SccProjectName3 = InputProviders/TouchLibProvider
+		SccLocalPath3 = InputProviders\\TouchLibProvider
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,15 +42,6 @@ Global
 		{9744E608-DF4D-4DE7-AAC1-3A53EF9D41FB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9744E608-DF4D-4DE7-AAC1-3A53EF9D41FB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9744E608-DF4D-4DE7-AAC1-3A53EF9D41FB}.Release|Win32.ActiveCfg = Release|Any CPU
-		{A3B55852-4050-41D5-BBBC-451D0C27E2F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3B55852-4050-41D5-BBBC-451D0C27E2F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3B55852-4050-41D5-BBBC-451D0C27E2F6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A3B55852-4050-41D5-BBBC-451D0C27E2F6}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{A3B55852-4050-41D5-BBBC-451D0C27E2F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3B55852-4050-41D5-BBBC-451D0C27E2F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3B55852-4050-41D5-BBBC-451D0C27E2F6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{A3B55852-4050-41D5-BBBC-451D0C27E2F6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{A3B55852-4050-41D5-BBBC-451D0C27E2F6}.Release|Win32.ActiveCfg = Release|Any CPU
 		{CA2F4CDB-9DB6-4901-9ECB-B81516DB313A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CA2F4CDB-9DB6-4901-9ECB-B81516DB313A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA2F4CDB-9DB6-4901-9ECB-B81516DB313A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

@@ -20,6 +20,8 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Multitouch.Contracts" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Windows" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Multitouch.Service.Logic.ExternalInterfaces" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IApplicationInterface_Subscribe_InputMessage">
@@ -34,8 +36,20 @@
   <wsdl:message name="IApplicationInterface_Unsubscribe_OutputMessage">
     <wsdl:part name="parameters" element="tns:UnsubscribeResponse" />
   </wsdl:message>
+  <wsdl:message name="IApplicationInterface_ReceiveFrames_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveFrames" />
+  </wsdl:message>
+  <wsdl:message name="IApplicationInterface_SendImageType_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendImageType" />
+  </wsdl:message>
+  <wsdl:message name="IApplicationInterface_SendImageType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendImageTypeResponse" />
+  </wsdl:message>
   <wsdl:message name="IApplicationInterface_ContactChanged_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ContactChanged" />
+  </wsdl:message>
+  <wsdl:message name="IApplicationInterface_Frame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:Frame" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IApplicationInterface">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Subscribe">
@@ -46,8 +60,18 @@
       <wsdl:input wsam:Action="http://tempuri.org/IApplicationInterface/Unsubscribe" message="tns:IApplicationInterface_Unsubscribe_InputMessage" />
       <wsdl:output wsam:Action="http://tempuri.org/IApplicationInterface/UnsubscribeResponse" message="tns:IApplicationInterface_Unsubscribe_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReceiveFrames">
+      <wsdl:input wsam:Action="http://tempuri.org/IApplicationInterface/ReceiveFrames" message="tns:IApplicationInterface_ReceiveFrames_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendImageType">
+      <wsdl:input wsam:Action="http://tempuri.org/IApplicationInterface/SendImageType" message="tns:IApplicationInterface_SendImageType_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IApplicationInterface/SendImageTypeResponse" message="tns:IApplicationInterface_SendImageType_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ContactChanged">
       <wsdl:output wsam:Action="http://tempuri.org/IApplicationInterface/ContactChanged" message="tns:IApplicationInterface_ContactChanged_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Frame">
+      <wsdl:output wsam:Action="http://tempuri.org/IApplicationInterface/Frame" message="tns:IApplicationInterface_Frame_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetNamedPipeBinding_IApplicationInterface" type="tns:IApplicationInterface">
@@ -72,8 +96,29 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ReceiveFrames">
+      <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/ReceiveFrames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SendImageType">
+      <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/SendImageType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ContactChanged">
       <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/ContactChanged" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Frame">
+      <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/Frame" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

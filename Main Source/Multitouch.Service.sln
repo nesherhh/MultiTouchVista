@@ -1,47 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AddIns", "AddIns", "{0D9521F7-3C05-400F-85C6-DCEB614083D1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationSelector", "Multitouch.Service.AddIns\ApplicationSelector\ApplicationSelector.csproj", "{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Service", "Multitouch.Service\Multitouch.Service.csproj", "{DA05C208-0357-4E76-B256-D55511BC48BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Service.Logic", "Multitouch.Service.Logic\Multitouch.Service.Logic.csproj", "{1720CC0B-4411-4FE5-A51C-D539BB19AC54}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Service.Console", "Multitouch.Service.Console\Multitouch.Service.Console.csproj", "{094B04DC-3833-4CC1-8161-D9BD26616D57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostSingleInput", "Multitouch.Service.AddIns\PostSingleInput\PostSingleInput.csproj", "{2E9E7465-48A0-4A18-BB4A-6792E67BA177}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWMaxxAddIn", "Multitouch.Service.AddIns\DWMaxxAddIn\DWMaxxAddIn.csproj", "{40E6272E-A704-467B-AE3F-956D00BB49E8}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = Multitouch.Service.AddIns\\ApplicationSelector\\ApplicationSelector.csproj
-		SccProjectTopLevelParentUniqueName1 = Multitouch.Service.sln
-		SccProjectName1 = Multitouch.Service.AddIns/ApplicationSelector
-		SccLocalPath1 = Multitouch.Service.AddIns\\ApplicationSelector
-		SccProjectUniqueName2 = Multitouch.Service\\Multitouch.Service.csproj
-		SccProjectName2 = Multitouch.Service
-		SccLocalPath2 = Multitouch.Service
-		SccProjectUniqueName3 = Multitouch.Service.Logic\\Multitouch.Service.Logic.csproj
-		SccProjectName3 = Multitouch.Service.Logic
-		SccLocalPath3 = Multitouch.Service.Logic
-		SccProjectUniqueName4 = Multitouch.Service.Console\\Multitouch.Service.Console.csproj
-		SccProjectName4 = Multitouch.Service.Console
-		SccLocalPath4 = Multitouch.Service.Console
-		SccProjectUniqueName5 = Multitouch.Service.AddIns\\PostSingleInput\\PostSingleInput.csproj
-		SccProjectTopLevelParentUniqueName5 = Multitouch.Service.sln
-		SccProjectName5 = Multitouch.Service.AddIns/PostSingleInput
-		SccLocalPath5 = Multitouch.Service.AddIns\\PostSingleInput
-		SccProjectUniqueName6 = Multitouch.Service.AddIns\\DWMaxxAddIn\\DWMaxxAddIn.csproj
-		SccProjectTopLevelParentUniqueName6 = Multitouch.Service.sln
-		SccProjectName6 = Multitouch.Service.AddIns/DWMaxxAddIn
-		SccLocalPath6 = Multitouch.Service.AddIns\\DWMaxxAddIn
+		SccProjectUniqueName1 = Multitouch.Service\\Multitouch.Service.csproj
+		SccProjectName1 = Multitouch.Service
+		SccLocalPath1 = Multitouch.Service
+		SccProjectUniqueName2 = Multitouch.Service.Logic\\Multitouch.Service.Logic.csproj
+		SccProjectName2 = Multitouch.Service.Logic
+		SccLocalPath2 = Multitouch.Service.Logic
+		SccProjectUniqueName3 = Multitouch.Service.Console\\Multitouch.Service.Console.csproj
+		SccProjectName3 = Multitouch.Service.Console
+		SccLocalPath3 = Multitouch.Service.Console
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug with DWMaxx|Any CPU = Debug with DWMaxx|Any CPU
@@ -49,12 +29,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Debug with DWMaxx|Any CPU.ActiveCfg = Debug|Any CPU
-		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Debug with DWMaxx|Any CPU.Build.0 = Debug|Any CPU
-		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DA05C208-0357-4E76-B256-D55511BC48BC}.Debug with DWMaxx|Any CPU.ActiveCfg = Debug|Any CPU
 		{DA05C208-0357-4E76-B256-D55511BC48BC}.Debug with DWMaxx|Any CPU.Build.0 = Debug|Any CPU
 		{DA05C208-0357-4E76-B256-D55511BC48BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -73,23 +47,8 @@ Global
 		{094B04DC-3833-4CC1-8161-D9BD26616D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{094B04DC-3833-4CC1-8161-D9BD26616D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{094B04DC-3833-4CC1-8161-D9BD26616D57}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Debug with DWMaxx|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Debug with DWMaxx|Any CPU.Build.0 = Debug|Any CPU
-		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E9E7465-48A0-4A18-BB4A-6792E67BA177}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Debug with DWMaxx|Any CPU.ActiveCfg = Debug|Any CPU
-		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Debug with DWMaxx|Any CPU.Build.0 = Debug|Any CPU
-		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40E6272E-A704-467B-AE3F-956D00BB49E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{9850B707-63EA-4944-9C7F-F4E2F6BCB2E6} = {0D9521F7-3C05-400F-85C6-DCEB614083D1}
-		{2E9E7465-48A0-4A18-BB4A-6792E67BA177} = {0D9521F7-3C05-400F-85C6-DCEB614083D1}
-		{40E6272E-A704-467B-AE3F-956D00BB49E8} = {0D9521F7-3C05-400F-85C6-DCEB614083D1}
 	EndGlobalSection
 EndGlobal

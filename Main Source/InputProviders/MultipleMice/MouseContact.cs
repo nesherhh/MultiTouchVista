@@ -1,13 +1,12 @@
 using System;
-using System.Diagnostics;
-using System.Drawing;
 using System.Threading;
-using MultipleMice.Native;
+using System.Windows;
 using Multitouch.Contracts;
+using Point=System.Drawing.Point;
 
 namespace MultipleMice
 {
-	class MouseContact : IContact
+	class MouseContact : IContactData
 	{
 		private static int idCounter;
 		private readonly int id;
@@ -23,6 +22,8 @@ namespace MultipleMice
 		public double Width { get; private set; }
 		public double X { get; private set; }
 		public double Y { get; private set; }
+		public double Angle { get { return 0; } }
+		public Rect Bounds { get; private set; }
 
 		public MouseContact(DeviceStatus state)
 		{
@@ -38,6 +39,8 @@ namespace MultipleMice
 			X = location.X;
 			Y = location.Y;
 
+			Bounds = new Rect(X, Y, Width, Height);
+
 			State = ContactState.New;
 		}
 
@@ -46,6 +49,7 @@ namespace MultipleMice
 			Point location = data.Location;
 			X = location.X;
 			Y = location.Y;
+			Bounds = new Rect(X, Y, Width, Height);
 
 			if (data.ButtonState == DeviceState.Move)
 				State = ContactState.Moved;

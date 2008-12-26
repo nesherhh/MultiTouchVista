@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Windows;
 using Multitouch.Contracts;
 
 namespace TuioProvider
 {
-	class TuioContact : IContact
+	class TuioContact : IContactData
 	{
-		public TuioContact(int id, double x, double y, double width, double height, ContactState state)
+		public TuioContact(int id, double x, double y, double width, double height, double angle, Rect bounds, ContactState state)
 		{
 			Id = id;
 			X = x;
 			Y = y;
 			Width = width;
 			Height = height;
+			Angle = angle;
+			Bounds = bounds;
 			State = state;
 		}
 
@@ -21,5 +24,7 @@ namespace TuioProvider
 		public double Width { get; private set; }
 		public double Height { get; private set; }
 		public ContactState State { get; private set; }
+		public double Angle { get; private set; }
+		public Rect Bounds { get; private set; }
 	}
 }

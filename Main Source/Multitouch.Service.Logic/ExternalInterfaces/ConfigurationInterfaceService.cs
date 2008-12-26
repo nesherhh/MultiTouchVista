@@ -39,5 +39,15 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 			if(multitouchInput != null)
 				multitouchInput.Restart();
 		}
+
+		public void ShowConfiguration(IntPtr parent)
+		{
+			MultitouchInput.Instance.ShowConfiguration(parent);
+		}
+
+		public bool HasConfiguration()
+		{
+			return MultitouchInput.Instance.HasConfiguration;
+		}
 	}
 }

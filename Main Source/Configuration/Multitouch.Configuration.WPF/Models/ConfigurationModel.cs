@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interop;
 
 namespace Multitouch.Configuration.WPF.Models
 {
@@ -24,8 +26,9 @@ namespace Multitouch.Configuration.WPF.Models
 			((ConfigurationModel)d).OnSelectedProviderChanged(e);
 		}
 
-		public ICommand SetCurrentProvider{get; private set;}
+		public ICommand SetCurrentProvider { get; private set; }
 		public ICommand RestartService { get; private set; }
+		public ICommand ShowConfiguration { get; private set; }
 
 		public InputProvider CurrentProvider
 		{
@@ -38,7 +41,7 @@ namespace Multitouch.Configuration.WPF.Models
 			get { return (InputProvider)GetValue(SelectedProviderProperty); }
 			set { SetValue(SelectedProviderProperty, value); }
 		}
-        
+
 		public ObservableCollection<InputProvider> AvailableProviders
 		{
 			get { return (ObservableCollection<InputProvider>)GetValue(AvailableProvidersProperty); }
@@ -51,6 +54,20 @@ namespace Multitouch.Configuration.WPF.Models
 			AvailableProviders = new ObservableCollection<InputProvider>();
 			SetCurrentProvider = new DelegateCommand(OnSetCurrentProvider, OnCanSetCurrentProvider);
 			RestartService = new DelegateCommand(OnRestartCommand);
+			ShowConfiguration = new DelegateCommand(OnShowConfiguration, OnCanExecuteShowConfiguration);
+		}
+
+		bool OnCanExecuteShowConfiguration(object arg)
+		{
+			if(DesignerProperties.GetIsInDesignMode(this))
+				return false;
+			return logic.HasConfiguration;
+		}
+
+		void OnShowConfiguration(object obj)
+		{
+			WindowInteropHelper helper = new WindowInteropHelper(Application.Current.MainWindow);
+			logic.ShowConfiguration(helper.Handle);
 		}
 
 		bool OnCanSetCurrentProvider(object arg)

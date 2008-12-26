@@ -11,12 +11,14 @@ namespace Multitouch.Framework.Input
 		static CommunicationLogic instance;
 		static object lockInstance = new object();
 		ServiceCommunicator serviceCommunicator;
-		List<IContactHandler> handlers;
+		List<IContactHandler> contactHandlers;
+		
+		public event EventHandler<FrameEventArgs> Frame;
 
 		CommunicationLogic()
 		{
 			serviceCommunicator = new ServiceCommunicator(this);
-			handlers = new List<IContactHandler>();
+			contactHandlers = new List<IContactHandler>();
 		}
 
 		/// <summary>
@@ -40,12 +42,22 @@ namespace Multitouch.Framework.Input
 		}
 
 		/// <summary>
+		/// Gets or sets a value indicating whether an event will be raised on every frame.
+		/// </summary>
+		/// <value><c>true</c> if [enable frame event]; otherwise, <c>false</c>.</value>
+		public bool EnableFrameEvent
+		{
+			get { return serviceCommunicator.EnableFrameEvent; }
+			set { serviceCommunicator.EnableFrameEvent = value; }
+		}
+
+		/// <summary>
 		/// Makes a connection to Multitouch service.
 		/// </summary>
 		/// <param name="windowHandle">The Handle of a window of your application. This handle used to send multitouch events to this window.</param>
 		public void Connect(IntPtr windowHandle)
 		{
-			if (handlers.Count == 1)
+			if (contactHandlers.Count == 1)
 				serviceCommunicator.Connect(windowHandle);
 		}
 
@@ -54,7 +66,7 @@ namespace Multitouch.Framework.Input
 		/// </summary>
 		public void Disconnect()
 		{
-			if (handlers.Count == 0)
+			if (contactHandlers.Count == 0)
 				serviceCommunicator.Disconnect();
 		}
 
@@ -64,7 +76,7 @@ namespace Multitouch.Framework.Input
 		/// <param name="contactHandler">Instance of an object that implementats <see cref="IContactHandler"/> interface.</param>
 		public void RegisterContactHandler(IContactHandler contactHandler)
 		{
-			handlers.Add(contactHandler);
+			contactHandlers.Add(contactHandler);
 		}
 
 		/// <summary>
@@ -73,9 +85,9 @@ namespace Multitouch.Framework.Input
 		/// <param name="contactHandler">Instance of an object that implementats <see cref="IContactHandler"/> interface.</param>
 		public void UnregisterContactHandler(IContactHandler contactHandler)
 		{
-			handlers.Remove(contactHandler);
+			contactHandlers.Remove(contactHandler);
 		}
-
+        
 		internal void ProcessChangedContact(int id, double x, double y, double width, double height, Service.ContactState state)
 		{
 			ContactState contactState;
@@ -94,8 +106,34 @@ namespace Multitouch.Framework.Input
 					throw new ArgumentOutOfRangeException("state");
 			}
 
-			foreach (IContactHandler handler in handlers)
+			foreach (IContactHandler handler in contactHandlers)
 				handler.ProcessContactChange(id, x, y, width, height, contactState);
+		}
+
+		internal void ProcessFrame(Service.FrameData data)
+		{
+			EventHandler<FrameEventArgs> eventHandler = Frame;
+			if(eventHandler != null)
+				eventHandler(null, new FrameEventArgs(data));
+		}
+
+		/// <summary>
+		/// Shoulds receive image from camera.
+		/// </summary>
+		/// <param name="imageType">Type of the image.</param>
+		/// <param name="value">if set to <c>true</c> [value].</param>
+		public bool ShouldReceiveImage(ImageType imageType, bool value)
+		{
+			Service.ImageType type;
+			switch (imageType)
+			{
+				case ImageType.Normalized:
+					type = Service.ImageType.Normalized;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("imageType");
+			}
+			return serviceCommunicator.ShouldReceiveImage(type, value);
 		}
 	}
 }

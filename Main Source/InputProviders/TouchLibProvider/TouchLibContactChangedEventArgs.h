@@ -6,22 +6,30 @@ using namespace Multitouch::Contracts;
 
 namespace TouchLibProvider
 {
-	ref class TouchLibContactChangedEventArgs : ContactChangedEventArgs
+	ref class TouchLibContactChangedEventArgs : InputDataEventArgs
 	{
 	public:
 		TouchLibContactChangedEventArgs(TouchData data, ContactState state)
 		{
-			contact = gcnew TouchLibContact(data, state);
+			this->data = gcnew TouchLibContact(data, state);
+		}
+		
+		property InputType Type
+		{
+			virtual InputType get(void) override
+			{
+				return InputType::Contact;
+			}
 		}
 
-		property IContact^ Contact
+		property Object^ Data
 		{
-			virtual IContact^ get(void) override
+			virtual Object^ get(void) override
 			{
-				return contact;
+				return data;
 			}
 		}
 	private:
-		IContact^ contact;
+		Object^ data;
 	};
 }

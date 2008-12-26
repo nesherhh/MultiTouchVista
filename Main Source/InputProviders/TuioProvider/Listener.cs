@@ -24,17 +24,17 @@ namespace TuioProvider
 
 		public void addTuioCursor(TuioCursor tuioCursor)
 		{
-			inputProvider.OnContactChanged(new TuioContactChangedEventArgs(tuioCursor, ContactState.New));
+			inputProvider.RaiseInput(tuioCursor, ContactState.New);
 		}
 
 		public void updateTuioCursor(TuioCursor tuioCursor)
 		{
-			inputProvider.OnContactChanged(new TuioContactChangedEventArgs(tuioCursor, ContactState.Moved));
+			inputProvider.RaiseInput(tuioCursor, ContactState.Moved);
 		}
 
 		public void removeTuioCursor(TuioCursor tuioCursor)
 		{
-			inputProvider.OnContactChanged(new TuioContactChangedEventArgs(tuioCursor, ContactState.Removed));
+			inputProvider.RaiseInput(tuioCursor, ContactState.Removed);
 		}
 
 		public void refresh(long timestamp)
