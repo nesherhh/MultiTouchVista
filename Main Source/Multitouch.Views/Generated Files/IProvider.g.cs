@@ -22,7 +22,12 @@ namespace Multitouch.Contracts
         {
             get;
         }
-        event System.EventHandler<InputDataEventArgs> Input;
+        bool SendEmptyFrames
+        {
+            get;
+            set;
+        }
+        event System.EventHandler<NewFrameEventArgs> NewFrame;
         void Start();
         void Stop();
         System.Windows.UIElement GetConfiguration();

@@ -53,7 +53,7 @@ namespace Multitouch.Framework.WPF.Input
 			else
 				pointCollection = contactsHistory[contact.Id];
 
-			pointCollection.Add(new StylusPoint(contact.X, contact.Y));
+			pointCollection.Add(new StylusPoint(contact.Position.X, contact.Position.Y));
 		}
 
 		public void PostProcessInput(ProcessInputEventArgs e)

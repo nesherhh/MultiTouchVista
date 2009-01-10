@@ -80,24 +80,19 @@
     <Compile Include="Generated Files\IContactDataAddInAdapter.g.cs" />
     <Compile Include="Generated Files\IContactDataContractToViewAddInAdapter.g.cs" />
     <Compile Include="Generated Files\IContactDataViewToContractAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IFrameDataAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IFrameDataContractToViewAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IFrameDataViewToContractAddInAdapter.g.cs" />
     <Compile Include="Generated Files\IImageDataAddInAdapter.g.cs" />
     <Compile Include="Generated Files\IImageDataContractToViewAddInAdapter.g.cs" />
     <Compile Include="Generated Files\IImageDataViewToContractAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IInputEventHandlerContractToViewAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\IInputEventHandlerViewToContractAddInAdapter.g.cs" />
     <Compile Include="Generated Files\ImageTypeAddInAdapter.g.cs" />
     <Compile Include="Generated Files\ImageTypeArrayAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\InputDataEventArgsAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\InputDataEventArgsContractToViewAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\InputDataEventArgsViewToContractAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\InputTypeAddInAdapter.g.cs" />
-    <Compile Include="Generated Files\InputTypeArrayAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\INewFrameEventHandlerContractToViewAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\INewFrameEventHandlerViewToContractAddInAdapter.g.cs" />
     <Compile Include="Generated Files\IProviderAddInAdapter.g.cs" />
     <Compile Include="Generated Files\IProviderContractToViewAddInAdapter.g.cs" />
     <Compile Include="Generated Files\IProviderViewToContractAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\NewFrameEventArgsAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\NewFrameEventArgsContractToViewAddInAdapter.g.cs" />
+    <Compile Include="Generated Files\NewFrameEventArgsViewToContractAddInAdapter.g.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

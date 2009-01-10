@@ -1,5 +1,4 @@
 ﻿using System;
-using Multitouch.Contracts;
 using TUIO;
 
 namespace TuioProvider
@@ -24,20 +23,22 @@ namespace TuioProvider
 
 		public void addTuioCursor(TuioCursor tuioCursor)
 		{
-			inputProvider.RaiseInput(tuioCursor, ContactState.New);
+			inputProvider.EnqueueContact(tuioCursor);
 		}
 
 		public void updateTuioCursor(TuioCursor tuioCursor)
 		{
-			inputProvider.RaiseInput(tuioCursor, ContactState.Moved);
+			inputProvider.EnqueueContact(tuioCursor);
 		}
 
 		public void removeTuioCursor(TuioCursor tuioCursor)
 		{
-			inputProvider.RaiseInput(tuioCursor, ContactState.Removed);
+			inputProvider.EnqueueContact(tuioCursor);
 		}
 
 		public void refresh(long timestamp)
-		{ }
+		{
+			inputProvider.RaiseNewFrame(timestamp);
+		}
 	}
 }

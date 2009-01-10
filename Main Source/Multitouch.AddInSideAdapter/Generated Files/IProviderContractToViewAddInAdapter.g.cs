@@ -15,33 +15,33 @@ namespace Multitouch.Contracts.AddInSideAdapters
     {
         private Multitouch.Contracts.Contracts.IProviderContract _contract;
         private System.AddIn.Pipeline.ContractHandle _handle;
-        private Multitouch.Contracts.AddInSideAdapters.IInputEventHandlerViewToContractAddInAdapter Input_Handler;
-        private static System.Reflection.MethodInfo s_InputAddFire;
-		public event System.EventHandler<Multitouch.Contracts.InputDataEventArgs>Input{
+        private Multitouch.Contracts.AddInSideAdapters.INewFrameEventHandlerViewToContractAddInAdapter NewFrame_Handler;
+        private static System.Reflection.MethodInfo s_NewFrameAddFire;
+		public event System.EventHandler<Multitouch.Contracts.NewFrameEventArgs>NewFrame{
 			add{
-				if (_Input == null)
+				if (_NewFrame == null)
 				{
-					_contract.InputAdd(Input_Handler);
+					_contract.NewFrameAdd(NewFrame_Handler);
 				}
-				_Input += value;
+				_NewFrame += value;
 				}
 			remove{
-					_Input -= value;
-				if (_Input == null)
+					_NewFrame -= value;
+				if (_NewFrame == null)
 				{
-					_contract.InputRemove(Input_Handler);
+					_contract.NewFrameRemove(NewFrame_Handler);
 				}
 				}
 		}
         static IProviderContractToViewAddInAdapter()
         {
-            s_InputAddFire = typeof(IProviderContractToViewAddInAdapter).GetMethod("Fire_Input", ((System.Reflection.BindingFlags)(36)));
+            s_NewFrameAddFire = typeof(IProviderContractToViewAddInAdapter).GetMethod("Fire_NewFrame", ((System.Reflection.BindingFlags)(36)));
         }
         public IProviderContractToViewAddInAdapter(Multitouch.Contracts.Contracts.IProviderContract contract)
         {
             _contract = contract;
             _handle = new System.AddIn.Pipeline.ContractHandle(contract);
-            Input_Handler = new Multitouch.Contracts.AddInSideAdapters.IInputEventHandlerViewToContractAddInAdapter(this, s_InputAddFire);
+            NewFrame_Handler = new Multitouch.Contracts.AddInSideAdapters.INewFrameEventHandlerViewToContractAddInAdapter(this, s_NewFrameAddFire);
         }
         public bool IsRunning
         {
@@ -57,7 +57,18 @@ namespace Multitouch.Contracts.AddInSideAdapters
                 return _contract.HasConfiguration;
             }
         }
-        private event System.EventHandler<Multitouch.Contracts.InputDataEventArgs> _Input;
+        public bool SendEmptyFrames
+        {
+            get
+            {
+                return _contract.SendEmptyFrames;
+            }
+            set
+            {
+                _contract.SendEmptyFrames = value;
+            }
+        }
+        private event System.EventHandler<Multitouch.Contracts.NewFrameEventArgs> _NewFrame;
         public void Start()
         {
             _contract.Start();
@@ -74,14 +85,14 @@ namespace Multitouch.Contracts.AddInSideAdapters
         {
             return _contract.SendImageType(Multitouch.Contracts.AddInSideAdapters.ImageTypeAddInAdapter.ViewToContractAdapter(imageType), value);
         }
-        internal virtual void Fire_Input(Multitouch.Contracts.InputDataEventArgs args)
+        internal virtual void Fire_NewFrame(Multitouch.Contracts.NewFrameEventArgs args)
         {
-            if ((_Input == null))
+            if ((_NewFrame == null))
             {
             }
             else
             {
-                _Input.Invoke(this, args);
+                _NewFrame.Invoke(this, args);
             }
         }
         internal Multitouch.Contracts.Contracts.IProviderContract GetSourceContract()

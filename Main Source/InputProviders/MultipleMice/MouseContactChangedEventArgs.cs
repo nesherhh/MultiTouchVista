@@ -1,25 +1,39 @@
 ﻿using System;
+using System.Collections.Generic;
 using Multitouch.Contracts;
 
 namespace MultipleMice
 {
-	class MouseContactChangedEventArgs : InputDataEventArgs
+	class MouseContactChangedEventArgs : NewFrameEventArgs
 	{
-		object data;
+		List<IImageData> images;
+		long timestamp;
+		IList<IContactData> contacts;
 
-		public MouseContactChangedEventArgs(MouseContact contact)
+		public MouseContactChangedEventArgs(IEnumerable<MouseContact> mouseContacts, long timestamp)
 		{
-			data = contact;
+			images = new List<IImageData>();
+
+			contacts = new List<IContactData>();
+			foreach (MouseContact contact in mouseContacts)
+				contacts.Add(contact);
+
+			this.timestamp = timestamp;
 		}
 
-		public override InputType Type
+		public override IList<IImageData> Images
 		{
-			get { return InputType.Contact; }
+			get { return images; }
 		}
 
-		public override object Data
+		public override IList<IContactData> Contacts
 		{
-			get { return data; }
+			get { return contacts; }
+		}
+
+		public override long Timestamp
+		{
+			get { return timestamp; }
 		}
 	}
 }

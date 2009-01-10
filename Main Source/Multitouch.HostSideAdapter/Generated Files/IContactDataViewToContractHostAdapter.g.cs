@@ -32,39 +32,39 @@ namespace Multitouch.Contracts.HostSideAdapters
                 return _view.Bounds;
             }
         }
-        public double X
+        public System.Windows.Point Position
         {
             get
             {
-                return _view.X;
+                return _view.Position;
             }
         }
-        public double Y
+        public double Orientation
         {
             get
             {
-                return _view.Y;
+                return _view.Orientation;
             }
         }
-        public double Width
+        public double Area
         {
             get
             {
-                return _view.Width;
+                return _view.Area;
             }
         }
-        public double Height
+        public double MajorAxis
         {
             get
             {
-                return _view.Height;
+                return _view.MajorAxis;
             }
         }
-        public double Angle
+        public double MinorAxis
         {
             get
             {
-                return _view.Angle;
+                return _view.MinorAxis;
             }
         }
         public Multitouch.Contracts.Contracts.ContactState State

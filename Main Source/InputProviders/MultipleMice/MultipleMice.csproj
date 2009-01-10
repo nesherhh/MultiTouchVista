@@ -78,6 +78,7 @@
     <Compile Include="DeviceCollection.cs" />
     <Compile Include="DeviceState.cs" />
     <Compile Include="DeviceStatus.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="InputProvider.cs" />
     <Compile Include="MouseContactChangedEventArgs.cs" />
     <Compile Include="MouseContact.cs" />

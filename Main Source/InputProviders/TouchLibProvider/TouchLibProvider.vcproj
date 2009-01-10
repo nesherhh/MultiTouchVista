@@ -231,10 +231,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\InputProvider.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Stdafx.cpp"
 				>
 				<FileConfiguration
@@ -282,6 +278,10 @@
 			</File>
 			<File
 				RelativePath=".\TouchLibContactChangedEventArgs.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TouchLibImage.h"
 				>
 			</File>
 			<File

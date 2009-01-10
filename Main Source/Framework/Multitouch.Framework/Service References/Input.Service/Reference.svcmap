@@ -25,8 +25,8 @@
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="967ce5cf-3342-4ab9-9f00-f4e4f58f8a03" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ApplicationInterface/mex" />
     <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="03c35981-cb25-4ae8-a8f7-e9c4f58b6fd2" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ApplicationInterface/mex" />
     <MetadataFile FileName="Multitouch.Contracts.xsd" MetadataType="Schema" ID="253aa8e8-7a22-4543-9725-7fe76ef3927e" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ApplicationInterface/mex" />
-    <MetadataFile FileName="System.Windows.xsd" MetadataType="Schema" ID="c5128725-058b-4a7f-aa25-dcc82c32efc1" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ApplicationInterface/mex" />
     <MetadataFile FileName="Multitouch.Service.Logic.ExternalInterfaces.xsd" MetadataType="Schema" ID="b25b33af-b3b2-41e8-a5f2-701d6574bfac" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ApplicationInterface/mex" />
+    <MetadataFile FileName="System.Windows.xsd" MetadataType="Schema" ID="c5128725-058b-4a7f-aa25-dcc82c32efc1" SourceId="1" SourceUrl="net.pipe://localhost/Multitouch.Service/ApplicationInterface/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />

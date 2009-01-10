@@ -45,17 +45,22 @@ namespace Multitouch.Contracts.Contracts
 		/// Sets kind of image you want to receive.
 		/// </summary>
 		/// <param name="imageType">Kind of image</param>
-		/// <param name="value">if set to <c>true</c> [value].</param>
-		/// <returns></returns>
+		/// <param name="value">if set to <c>true</c> image should be send.</param>
+		/// <returns><c>true</c> if image will be send, <c>false</c> if not.</returns>
 		bool SendImageType(ImageType imageType, bool value);
+
+		/// <summary>
+		/// If <c>true</c> sends every frame, also without any contacts, otherwise only frames with contacts.
+		/// </summary>
+		bool SendEmptyFrames { get; set; }
 
 		/// <summary>
 		/// Raised on any input from device.
 		/// </summary>
 		/// <param name="handler"></param>
-		[EventAdd("Input")]
-		void InputAdd(IInputEventHandlerContract handler);
-		[EventRemove("Input")]
-		void InputRemove(IInputEventHandlerContract handler);
+		[EventAdd("NewFrame")]
+		void NewFrameAdd(INewFrameEventHandlerContract handler);
+		[EventRemove("NewFrame")]
+		void NewFrameRemove(INewFrameEventHandlerContract handler);
 	}
 }

@@ -10,6 +10,10 @@ namespace Multitouch.Framework.Input
 		/// <summary>
 		/// Normalized image from camera
 		/// </summary>
-		Normalized
+		Normalized,
+		/// <summary>
+		/// Binarized image from camera
+		/// </summary>
+		Binarized
 	}
 }

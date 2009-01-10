@@ -1,35 +1,57 @@
 #pragma once
 
 #include "TouchLibContact.h"
+#include "TouchLibImage.h"
 
+using namespace System::Collections::Generic;
 using namespace Multitouch::Contracts;
 
 namespace TouchLibProvider
 {
-	ref class TouchLibContactChangedEventArgs : InputDataEventArgs
+	ref class TouchLibContactChangedEventArgs : NewFrameEventArgs
 	{
 	public:
-		TouchLibContactChangedEventArgs(TouchData data, ContactState state)
+		TouchLibContactChangedEventArgs(System::Drawing::Rectangle screenBounds, IEnumerable<KeyValuePair<System::IntPtr, ContactState>>^ touches, long timestamp)
 		{
-			this->data = gcnew TouchLibContact(data, state);
+			contacts = gcnew List<IContactData^>();
+			images = gcnew List<IImageData^>();
+			this->timestamp = timestamp;
+
+			for each(KeyValuePair<System::IntPtr, ContactState> touch in touches)
+			{
+				TouchData touchData = *(TouchData*)(void*)touch.Key;
+				TouchLibContact^ contact = gcnew TouchLibContact(screenBounds, touchData, touch.Value);
+				contacts->Add(contact);
+			}
 		}
 		
-		property InputType Type
+		virtual property System::Int64 Timestamp 
 		{
-			virtual InputType get(void) override
+			System::Int64 get(void) override
 			{
-				return InputType::Contact;
+				return timestamp;
+			}
+		}
+		
+		virtual property IList<IImageData^>^ Images
+		{
+			IList<IImageData^>^ get(void) override
+			{
+				return images;
 			}
 		}
 
-		property Object^ Data
+		virtual property IList<IContactData^>^ Contacts
 		{
-			virtual Object^ get(void) override
+			IList<IContactData^>^ get(void) override
 			{
-				return data;
+				return contacts;
 			}
 		}
+
 	private:
-		Object^ data;
+		long timestamp;
+		IList<IContactData^>^ contacts;
+		IList<IImageData^>^ images;
 	};
 }

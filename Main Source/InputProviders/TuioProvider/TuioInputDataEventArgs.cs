@@ -1,38 +1,50 @@
 ﻿using System;
-using System.Windows;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Multitouch.Contracts;
 using TUIO;
 
 namespace TuioProvider
 {
-	class TuioInputDataEventArgs : InputDataEventArgs
+	class TuioInputDataEventArgs : NewFrameEventArgs
 	{
 		static System.Drawing.Size monitorSize;
-		object data;
+		IList<IImageData> images;
+		IList<IContactData> contacts;
+		long timestamp;
 
 		static TuioInputDataEventArgs()
 		{
 			monitorSize = SystemInformation.PrimaryMonitorSize;
 		}
 
-		public TuioInputDataEventArgs(TuioCursor cursor, ContactState state)
+		public TuioInputDataEventArgs(IEnumerable<TuioCursor> cursors, long timestamp)
 		{
-			Size size = new Size(10, 10);
-			float x = cursor.getX() * monitorSize.Width;
-			float y = cursor.getY() * monitorSize.Height;
-			Rect bounds = new Rect(x,y, size.Width, size.Height);
-			data = new TuioContact(cursor.getFingerID(), x, y, size.Width, size.Height, 0, bounds, state);
+			images = new List<IImageData>();
+			contacts = new List<IContactData>();
+			this.timestamp = timestamp;
+
+			foreach (TuioCursor cursor in cursors)
+			{
+				if(cursor.getState() == TuioCursor.UNDEFINED)
+					continue;
+				contacts.Add(new TuioContact(cursor, monitorSize));
+			}
 		}
 
-		public override InputType Type
+		public override IList<IImageData> Images
 		{
-			get { return InputType.Contact; }
+			get { return images; }
 		}
 
-		public override object Data
+		public override IList<IContactData> Contacts
 		{
-			get { return data; }
+			get { return contacts; }
+		}
+
+		public override long Timestamp
+		{
+			get { return timestamp; }
 		}
 	}
 }

@@ -9,15 +9,15 @@ using Multitouch.Framework.Input;
 
 namespace Multitouch.Framework.WPF.Input
 {
-	class MultitouchInputProvider : DispatcherObject, IDisposable, IContactHandler
+	class MultitouchInputProvider : DispatcherObject, IDisposable
 	{
 		readonly PresentationSource source;
-		CommunicationLogic communicationLogic;
 		InputManager inputManager;
 		MultitouchLogic multitouchLogic;
 		object lockContactsQueue = new object();
 		Queue<RawMultitouchReport> contactsQueue;
 		DispatcherOperationCallback inputManagerProcessInput;
+		ContactHandler contactHandler;
 
 		public MultitouchInputProvider(PresentationSource source)
 		{
@@ -25,33 +25,41 @@ namespace Multitouch.Framework.WPF.Input
 			contactsQueue = new Queue<RawMultitouchReport>();
 			inputManagerProcessInput = InputManagerProcessInput;
 
-			communicationLogic = CommunicationLogic.Instance;
-			communicationLogic.RegisterContactHandler(this);
-			communicationLogic.Connect(((HwndSource)source).Handle);
+			contactHandler = new ContactHandler(((HwndSource)source).Handle);
+			contactHandler.ContactMoved += HandleContact;
+			contactHandler.ContactRemoved += HandleContact;
+			contactHandler.NewContact += HandleContact;
+
 			inputManager = InputManager.Current;
 			multitouchLogic = MultitouchLogic.Current;
 		}
 
 		public void Dispose()
 		{
-			communicationLogic.Disconnect();
-			communicationLogic.UnregisterContactHandler(this);
+			Dispose(true);
+			GC.SuppressFinalize(this);
 		}
 
-		public void ProcessContactChange(int id, double x, double y, double width, double height, ContactState state)
+		protected virtual void Dispose(bool disposing)
 		{
-			MultitouchDevice device = multitouchLogic.DeviceManager.GetDevice(id, state);
+			if(disposing)
+				contactHandler.Dispose();
+		}
+
+		void HandleContact(object sender, Framework.Input.ContactEventArgs e)
+		{
+			MultitouchDevice device = multitouchLogic.DeviceManager.GetDevice(e.Contact.Id, e.Contact.State);
 			if (device != null)
 			{
-				RawMultitouchReport e = new RawMultitouchReport(device, source, id, x, y, width, height, state, Environment.TickCount);
+				RawMultitouchReport rawReport = new RawMultitouchReport(device, source, e.Contact);
 				lock (lockContactsQueue)
 				{
-					contactsQueue.Enqueue(e);
+					contactsQueue.Enqueue(rawReport);
 				}
 				Dispatcher.BeginInvoke(DispatcherPriority.Input, inputManagerProcessInput, null);
 			}
 			else
-				Trace.TraceError(string.Format("Can't find MultitouchDevice for contact id: {0}, state: {1}", id, state));
+				Trace.TraceError(string.Format("Can't find MultitouchDevice for contact id: {0}, state: {1}", e.Contact.Id, e.Contact.State));
 		}
 
 		object InputManagerProcessInput(object arg)

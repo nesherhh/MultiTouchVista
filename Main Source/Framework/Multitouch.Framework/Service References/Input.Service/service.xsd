@@ -2,31 +2,32 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Multitouch.Contracts" />
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Windows" />
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Multitouch.Service.Logic.ExternalInterfaces" />
-  <xs:element name="Subscribe">
+  <xs:element name="CreateSession">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveSession">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddWindowHandleToSession">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="windowHandle" type="q1:IntPtr" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SubscribeResponse">
+  <xs:element name="RemoveWindowHandleFromSession">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="windowHandle" type="q2:IntPtr" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Unsubscribe">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UnsubscribeResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ReceiveFrames">
+  <xs:element name="SendEmptyFrames">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="value" type="xs:boolean" />
@@ -36,7 +37,7 @@
   <xs:element name="SendImageType">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Multitouch.Contracts" minOccurs="0" name="imageType" type="q2:ImageType" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Multitouch.Contracts" minOccurs="0" name="imageType" type="q3:ImageType" />
         <xs:element minOccurs="0" name="value" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
@@ -48,24 +49,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ContactChanged">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="id" type="xs:int" />
-        <xs:element minOccurs="0" name="x" type="xs:double" />
-        <xs:element minOccurs="0" name="y" type="xs:double" />
-        <xs:element minOccurs="0" name="width" type="xs:double" />
-        <xs:element minOccurs="0" name="height" type="xs:double" />
-        <xs:element minOccurs="0" name="angle" type="xs:double" />
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="bounds" type="q3:Rect" />
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Multitouch.Contracts" minOccurs="0" name="state" type="q4:ContactState" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="Frame">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Multitouch.Service.Logic.ExternalInterfaces" minOccurs="0" name="data" nillable="true" type="q5:FrameData" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Multitouch.Service.Logic.ExternalInterfaces" minOccurs="0" name="data" nillable="true" type="q4:FrameData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -5,10 +5,13 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Multitouch.Framework.Input;
 using Multitouch.Framework.WPF.Input;
+using Contact = Multitouch.Framework.WPF.Input.Contact;
+using ContactEventArgs = Multitouch.Framework.WPF.Input.ContactEventArgs;
 
 namespace TestApplication
 {
@@ -31,6 +34,8 @@ namespace TestApplication
 		public static readonly DependencyProperty CameraImageProperty =
 			DependencyProperty.Register("CameraImage", typeof(ImageSource), typeof(Window1), new UIPropertyMetadata(null));
 
+		ContactHandler contactHandler;
+
 		public ImageSource CameraImage
 		{
 			get { return (ImageSource)GetValue(CameraImageProperty); }
@@ -50,23 +55,23 @@ namespace TestApplication
 
 		void Window1_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (CommunicationLogic.Instance.ShouldReceiveImage(ImageType.Normalized, true))
-			{
-				CommunicationLogic.Instance.Frame += Instance_Frame;
-				CommunicationLogic.Instance.EnableFrameEvent = true;
-			}
+			WindowInteropHelper helper = new WindowInteropHelper(this);
+			contactHandler = new ContactHandler(helper.Handle);
+			contactHandler.Frame += HandleFrame;
+			contactHandler.ReceiveImageType(ImageType.Binarized, true);
+			contactHandler.ReceiveEmptyFrames = true;
 		}
 
 		protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
 		{
-			CommunicationLogic.Instance.EnableFrameEvent = false;
+			contactHandler.Dispose();
 			base.OnClosing(e);
 		}
 
-		void Instance_Frame(object sender, FrameEventArgs e)
+		void HandleFrame(object sender, FrameEventArgs e)
 		{
 			ImageData imageData;
-			if (e.TryGetImage(ImageType.Normalized, 0, 0, 320, 240, out imageData))
+			if (e.TryGetImage(ImageType.Binarized, 0, 0, 320, 240, out imageData))
 			{
 				WriteableBitmap bitmap = CameraImage as WriteableBitmap;
 				if (bitmap == null)

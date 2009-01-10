@@ -35,6 +35,9 @@ namespace Multitouch.Service.Logic
 		public void Start()
 		{
 			string provider = Settings.Default.CurrentProvider;
+
+			Console.WriteLine("Input provider in settings - " + provider);
+
 			if (!string.IsNullOrEmpty(provider))
 			{
 				AddInToken.EnableDirectConnect = true;
@@ -49,6 +52,13 @@ namespace Multitouch.Service.Logic
 				                                   select token).FirstOrDefault();
 				if (currentProviderToken == null)
 					throw new MultitouchException(string.Format("Input provider '{0}' could not be found", provider));
+
+				string text = "Found:" + Environment.NewLine +
+				              "Name: " + currentProviderToken.Name + Environment.NewLine +
+				              "Description: " + currentProviderToken.Description + Environment.NewLine +
+				              "Publisher: " + currentProviderToken.Publisher + Environment.NewLine +
+				              "Version: " + currentProviderToken.Version;
+				Console.WriteLine(text);
 
 				IProvider activatedProvider = currentProviderToken.Activate<IProvider>(AppDomain.CurrentDomain);
 				providerManager = new InputProviderManager(activatedProvider);

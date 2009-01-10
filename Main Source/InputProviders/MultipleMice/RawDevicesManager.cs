@@ -112,9 +112,11 @@ namespace MultipleMice
 					contact.Update(state);
 				}
 				if (contact != null)
-					inputProvider.RaiseInput(contact);
+					inputProvider.EnqueueContact(contact);
 				if (state.ButtonState == DeviceState.Up)
 				{
+					contact = contacts[e.Handle];
+					contact.Update(state);
 					//Debug.WriteLine("Up: " + contact);
 					contacts.Remove(e.Handle);
 				}

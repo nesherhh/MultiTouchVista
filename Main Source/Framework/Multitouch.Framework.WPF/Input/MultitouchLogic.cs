@@ -122,7 +122,7 @@ namespace Multitouch.Framework.WPF.Input
 					if (GestureManager.IsGestureEnabled)
 						GestureManager.PreProcessInput(e);
 
-					Point clientPoint = report.InputSource.RootVisual.PointFromScreen(new Point(report.Contact.X, report.Contact.Y));
+					Point clientPoint = report.InputSource.RootVisual.PointFromScreen(report.Contact.Position);
 					HitTestResult test = VisualTreeHelper.HitTest(report.InputSource.RootVisual, clientPoint);
 					if (test != null)
 					{

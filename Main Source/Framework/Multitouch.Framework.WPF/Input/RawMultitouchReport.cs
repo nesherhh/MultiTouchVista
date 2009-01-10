@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using Multitouch.Framework.Input;
 
 namespace Multitouch.Framework.WPF.Input
 {
@@ -15,15 +14,15 @@ namespace Multitouch.Framework.WPF.Input
 			get { return (MultitouchDevice)Device; }
 		}
 
-		public RawMultitouchReport(MultitouchDevice device, PresentationSource source, int id, double x, double y, double width, double height, ContactState state, int timestamp)
-			: base(device, timestamp)
+		public RawMultitouchReport(MultitouchDevice device, PresentationSource source, Framework.Input.Contact contact)
+			: base(device, (int)contact.Timestamp)
 		{
 			if (device == null)
 				throw new ArgumentNullException("device");
 
 			InputSource = source;
-			Contact = new Contact(device, id, x, y, width, height, state);
 			RoutedEvent = MultitouchLogic.PreviewRawInputEvent;
+			Contact = new Contact(device, contact);
 		}
 
 		public RawMultitouchReport(RawMultitouchReport copy)

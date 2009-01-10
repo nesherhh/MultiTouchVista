@@ -14,53 +14,59 @@ namespace Multitouch.Framework.WPF.Input
 		readonly MultitouchDevice device;
 
 		/// <summary>
+		/// Area
+		/// </summary>
+		public double Area { get; private set; }
+        /// <summary>
+		/// Bounding box
+		/// </summary>
+		public Rect Bounds { get; private set; }
+		/// <summary>
 		/// Contact Id
 		/// </summary>
 		public int Id { get; private set; }
 		/// <summary>
-		/// Center X coordinate
+		/// Major axis for an ellipse
 		/// </summary>
-		public double X { get; private set; }
+		public double MajorAxis { get; private set; }
 		/// <summary>
-		/// Center Y coordinate
+		/// Minor axis for an ellipse
 		/// </summary>
-		public double Y { get; private set; }
+		public double MinorAxis { get; private set; }
+		/// <summary>
+		/// Orientation
+		/// </summary>
+		public double Orientation { get; private set; }
 		/// <summary>
 		/// Center coordinates
 		/// </summary>
 		public Point Position { get; private set; }
 		/// <summary>
-		/// Width of contact
-		/// </summary>
-		public double Width { get; private set; }
-		/// <summary>
-		/// Height of contact
-		/// </summary>
-		public double Height { get; private set; }
-		/// <summary>
 		/// Contacts state
 		/// </summary>
 		public ContactState State { get; private set; }
+		/// <summary>
+		/// Timestamp of frame
+		/// </summary>
+		public long Timestamp { get; private set; }
 		/// <summary>
 		/// Element under contact
 		/// </summary>
 		public UIElement Element { get; private set; }
 
-		internal Contact(MultitouchDevice device, int id, double x, double y, double width, double height, ContactState state)
+		internal Contact(MultitouchDevice multitouchDevice, Framework.Input.Contact contact)
 		{
-			this.device = device;
-			Id = id;
-			X = x;
-			Y = y;
-			Position = new Point(x, y);
-			Width = width;
-			Height = height;
-			State = state;
+			device = multitouchDevice;
+			Area = contact.Area;
+			Bounds = contact.Bounds;
+			Id = contact.Id;
+			MajorAxis = contact.MajorAxis;
+			MinorAxis = contact.MinorAxis;
+			Orientation = contact.Orientation;
+			Position = contact.Position;
+			State = contact.State;
+			Timestamp = contact.Timestamp;
 		}
-
-		internal Contact(RawMultitouchReport report)
-			: this(report.MultitouchDevice, report.Contact.Id, report.Contact.X, report.Contact.Y, report.Contact.Width, report.Contact.Height, report.Contact.State)
-		{ }
 
 		/// <summary>
 		/// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
@@ -114,7 +120,7 @@ namespace Multitouch.Framework.WPF.Input
 		/// </returns>
 		public override string ToString()
 		{
-			return string.Format("Id: {0}, X,Y: {1},{2}, W,H: {3},{4}, State: {5}", Id, X, Y, Width, Height, State);
+			return string.Format("Id: {0}, Position: {1}, State: {2}", Id, Position, State);
 		}
 
 		/// <summary>

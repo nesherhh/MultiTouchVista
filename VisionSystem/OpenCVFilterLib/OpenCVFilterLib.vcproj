@@ -184,6 +184,11 @@
 			ReferencedProjectIdentifier="{17EC13CD-54D8-4D61-98AE-8092F13673F0}"
 			RelativePathToProject=".\OpenCVCommon\OpenCVCommon.csproj"
 		/>
+		<AssemblyReference
+			RelativePath="System.Drawing.dll"
+			AssemblyName="System.Drawing, Version=2.0.0.0, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
+		/>
 	</References>
 	<Files>
 		<Filter

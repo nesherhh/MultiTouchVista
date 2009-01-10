@@ -5,32 +5,29 @@ using Multitouch.Framework.Input.Service;
 
 namespace Multitouch.Framework.Input
 {
-	class ServiceCommunicator
+	class ServiceCommunicator : IDisposable
 	{
 		CommunicationLogic logic;
-		ApplicationInterfaceClient client;
+		ApplicationInterfaceClient service;
 		IApplicationInterfaceCallback contactDispatcher;
-		bool enableFrameEvent;
+		bool sendEmptyFrames;
 
 		public ServiceCommunicator(CommunicationLogic logic)
 		{
 			this.logic = logic;
 		}
 
-		public bool EnableFrameEvent
+		public void AddWindowToSession(IntPtr handle)
 		{
-			get { return enableFrameEvent; }
-			set
-			{
-				if (client == null)
-					throw new MultitouchException("Not connected");
-
-				enableFrameEvent = value;
-				client.ReceiveFrames(value);
-			}
+			GetService().AddWindowHandleToSession(handle);
 		}
 
-		public void Connect(IntPtr windowHandle)
+		public void RemoveWindowFromSession(IntPtr handle)
+		{
+			GetService().RemoveWindowHandleFromSession(handle);
+		}
+
+		internal void CreateSession()
 		{
 			Uri serviceAddress = new Uri("net.pipe://localhost/Multitouch.Service/ApplicationInterface");
 			EndpointAddress remoteAddress = new EndpointAddress(serviceAddress);
@@ -41,37 +38,69 @@ namespace Multitouch.Framework.Input
 
 			IApplicationInterfaceCallback dispatcher = new MultitouchServiceContactDispatcher(logic);
 			InstanceContext instanceContext = new InstanceContext(dispatcher);
-			client = new ApplicationInterfaceClient(instanceContext, namedPipeBinding, remoteAddress);
+			service = new ApplicationInterfaceClient(instanceContext, namedPipeBinding, remoteAddress);
 
 			try
 			{
-				client.Subscribe(windowHandle);
+				service.CreateSession();
 				contactDispatcher = dispatcher;
 			}
-			catch (EndpointNotFoundException)
+			catch (EndpointNotFoundException e)
 			{
-				Trace.TraceWarning("Could not connect to Multitouch service, falling back to single touch mouse input");
-				contactDispatcher = new SingleMouseContactDispatcher(logic);
+				throw new MultitouchException("Could not connect to Multitouch service, please start Multitouch input server before running this application.", e);
 			}
 		}
 
-		public void Disconnect()
+		internal void RemoveSession()
 		{
 			if (contactDispatcher != null)
 			{
-				client.Unsubscribe();
-				client.Close();
+				try
+				{
+					service.RemoveSession();
+					service.Close();
+				}
+				catch (Exception e)
+				{
+					Trace.TraceWarning(e.ToString());
+				}
 				contactDispatcher = null;
-				client = null;
+				service = null;
 			}
 		}
 
-		public bool ShouldReceiveImage(Service.ImageType imageType, bool value)
+		public bool SendImageType(Service.ImageType imageType, bool value)
 		{
-			if (client == null)
-				throw new MultitouchException("Not connected");
+			return GetService().SendImageType(imageType, value);
+		}
 
-			return client.SendImageType(imageType, value);
+		public bool SendEmptyFrames
+		{
+			get { return sendEmptyFrames; }
+			set
+			{
+				sendEmptyFrames = value;
+				GetService().SendEmptyFrames(value);
+			}
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (disposing)
+				RemoveSession();
+		}
+
+		ApplicationInterfaceClient GetService()
+		{
+			if (service == null)
+				throw new MultitouchException("No connection to Multitouch service");
+			return service;
 		}
 	}
 }

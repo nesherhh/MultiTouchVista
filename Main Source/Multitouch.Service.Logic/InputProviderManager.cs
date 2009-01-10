@@ -12,6 +12,7 @@ namespace Multitouch.Service.Logic
 		ServiceHost serviceHost;
 
 		static InputProviderManager instance;
+		ApplicationInterfaceService applicationService;
 
 		public InputProviderManager(IProvider inputProvider)
 		{
@@ -20,8 +21,9 @@ namespace Multitouch.Service.Logic
 			StartService();
 
 			this.inputProvider = inputProvider;
-			this.inputProvider.Input += inputProvider_Input;
+			this.inputProvider.NewFrame += inputProvider_NewFrame;
 			this.inputProvider.Start();
+			Console.WriteLine("Started input provider");
 		}
 
 		public static InputProviderManager Instance
@@ -37,21 +39,25 @@ namespace Multitouch.Service.Logic
 		public void Dispose()
 		{
             inputProvider.Stop();
-			inputProvider.Input -= inputProvider_Input;
+			inputProvider.NewFrame -= inputProvider_NewFrame;
 			inputProvider = null;
+
+			Console.WriteLine("Stopped input provider");
 
 			serviceHost.Close();
 		}
 
-		void inputProvider_Input(object sender, InputDataEventArgs e)
+		void inputProvider_NewFrame(object sender, NewFrameEventArgs e)
 		{
-			ApplicationInterfaceService.DispatchInput(e);
+			applicationService.DispatchFrame(e);
 		}
 
 		void StartService()
 		{
+			applicationService = new ApplicationInterfaceService();
+
 			Uri baseAddress = new Uri("net.pipe://localhost/Multitouch.Service/ApplicationInterface");
-			serviceHost = new ServiceHost(typeof(ApplicationInterfaceService), baseAddress);
+			serviceHost = new ServiceHost(applicationService, baseAddress);
 			NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
 			serviceHost.AddServiceEndpoint(typeof(IApplicationInterface), binding, string.Empty);
 

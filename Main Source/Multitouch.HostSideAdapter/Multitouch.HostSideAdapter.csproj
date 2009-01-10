@@ -80,24 +80,19 @@
     <Compile Include="Generated Files\IContactDataContractToViewHostAdapter.g.cs" />
     <Compile Include="Generated Files\IContactDataHostAdapter.g.cs" />
     <Compile Include="Generated Files\IContactDataViewToContractHostAdapter.g.cs" />
-    <Compile Include="Generated Files\IFrameDataContractToViewHostAdapter.g.cs" />
-    <Compile Include="Generated Files\IFrameDataHostAdapter.g.cs" />
-    <Compile Include="Generated Files\IFrameDataViewToContractHostAdapter.g.cs" />
     <Compile Include="Generated Files\IImageDataContractToViewHostAdapter.g.cs" />
     <Compile Include="Generated Files\IImageDataHostAdapter.g.cs" />
     <Compile Include="Generated Files\IImageDataViewToContractHostAdapter.g.cs" />
-    <Compile Include="Generated Files\IInputEventHandlerContractToViewHostAdapter.g.cs" />
-    <Compile Include="Generated Files\IInputEventHandlerViewToContractHostAdapter.g.cs" />
     <Compile Include="Generated Files\ImageTypeArrayHostAdapter.g.cs" />
     <Compile Include="Generated Files\ImageTypeHostAdapter.g.cs" />
-    <Compile Include="Generated Files\InputDataEventArgsContractToViewHostAdapter.g.cs" />
-    <Compile Include="Generated Files\InputDataEventArgsHostAdapter.g.cs" />
-    <Compile Include="Generated Files\InputDataEventArgsViewToContractHostAdapter.g.cs" />
-    <Compile Include="Generated Files\InputTypeArrayHostAdapter.g.cs" />
-    <Compile Include="Generated Files\InputTypeHostAdapter.g.cs" />
+    <Compile Include="Generated Files\INewFrameEventHandlerContractToViewHostAdapter.g.cs" />
+    <Compile Include="Generated Files\INewFrameEventHandlerViewToContractHostAdapter.g.cs" />
     <Compile Include="Generated Files\IProviderContractToViewHostAdapter.g.cs" />
     <Compile Include="Generated Files\IProviderHostAdapter.g.cs" />
     <Compile Include="Generated Files\IProviderViewToContractHostAdapter.g.cs" />
+    <Compile Include="Generated Files\NewFrameEventArgsContractToViewHostAdapter.g.cs" />
+    <Compile Include="Generated Files\NewFrameEventArgsHostAdapter.g.cs" />
+    <Compile Include="Generated Files\NewFrameEventArgsViewToContractHostAdapter.g.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

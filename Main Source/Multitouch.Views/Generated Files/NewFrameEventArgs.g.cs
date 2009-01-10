@@ -11,13 +11,17 @@
 namespace Multitouch.Contracts
 {
     
-    public abstract class InputDataEventArgs : System.EventArgs
+    public abstract class NewFrameEventArgs : System.EventArgs
     {
-        public abstract InputType Type
+        public abstract System.Collections.Generic.IList<IImageData> Images
         {
             get;
         }
-        public abstract object Data
+        public abstract System.Collections.Generic.IList<IContactData> Contacts
+        {
+            get;
+        }
+        public abstract long Timestamp
         {
             get;
         }
