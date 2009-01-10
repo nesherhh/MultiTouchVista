@@ -54,6 +54,8 @@ namespace Multitouch.Framework.Input
 			{
 				case ImageType.Normalized:
 					return Service.ImageType.Normalized;
+				case ImageType.Binarized:
+					return Service.ImageType.Binarized;
 				default:
 					throw new ArgumentOutOfRangeException("imageType");
 			}

@@ -37,39 +37,39 @@ namespace Multitouch.Contracts.AddInSideAdapters
                 return _contract.Bounds;
             }
         }
-        public double X
+        public System.Windows.Point Position
         {
             get
             {
-                return _contract.X;
+                return _contract.Position;
             }
         }
-        public double Y
+        public double Orientation
         {
             get
             {
-                return _contract.Y;
+                return _contract.Orientation;
             }
         }
-        public double Width
+        public double Area
         {
             get
             {
-                return _contract.Width;
+                return _contract.Area;
             }
         }
-        public double Height
+        public double MajorAxis
         {
             get
             {
-                return _contract.Height;
+                return _contract.MajorAxis;
             }
         }
-        public double Angle
+        public double MinorAxis
         {
             get
             {
-                return _contract.Angle;
+                return _contract.MinorAxis;
             }
         }
         public Multitouch.Contracts.ContactState State

@@ -11,9 +11,15 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 	{
 		[DataMember]
 		public ImageData[] Images { get; private set; }
+		[DataMember]
+		public ContactData[] Contacts { get; private set; }
+		[DataMember]
+		public long Timestamp { get; private set; }
 
-		public void SetImages(IEnumerable<IImageData> images)
+		public FrameData(long timestamp, IEnumerable<ContactData> contacts, IEnumerable<IImageData> images)
 		{
+			Timestamp = timestamp;
+			Contacts = contacts.ToArray();
 			Images = images.Select(i => new ImageData(i)).ToArray();
 		}
 	}

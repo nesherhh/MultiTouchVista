@@ -15,11 +15,11 @@ namespace Multitouch.Contracts.AddInSideAdapters
     public class IProviderViewToContractAddInAdapter : System.AddIn.Pipeline.ContractBase, Multitouch.Contracts.Contracts.IProviderContract
     {
         private Multitouch.Contracts.IProvider _view;
-        private System.Collections.Generic.Dictionary<Multitouch.Contracts.Contracts.IInputEventHandlerContract, System.EventHandler<Multitouch.Contracts.InputDataEventArgs>> Input_handlers;
+        private System.Collections.Generic.Dictionary<Multitouch.Contracts.Contracts.INewFrameEventHandlerContract, System.EventHandler<Multitouch.Contracts.NewFrameEventArgs>> NewFrame_handlers;
         public IProviderViewToContractAddInAdapter(Multitouch.Contracts.IProvider view)
         {
             _view = view;
-            Input_handlers = new System.Collections.Generic.Dictionary<Multitouch.Contracts.Contracts.IInputEventHandlerContract, System.EventHandler<Multitouch.Contracts.InputDataEventArgs>>();
+            NewFrame_handlers = new System.Collections.Generic.Dictionary<Multitouch.Contracts.Contracts.INewFrameEventHandlerContract, System.EventHandler<Multitouch.Contracts.NewFrameEventArgs>>();
         }
         public bool IsRunning
         {
@@ -33,6 +33,17 @@ namespace Multitouch.Contracts.AddInSideAdapters
             get
             {
                 return _view.HasConfiguration;
+            }
+        }
+        public bool SendEmptyFrames
+        {
+            get
+            {
+                return _view.SendEmptyFrames;
+            }
+            set
+            {
+                _view.SendEmptyFrames = value;
             }
         }
         public virtual void Start()
@@ -51,19 +62,19 @@ namespace Multitouch.Contracts.AddInSideAdapters
         {
             return _view.SendImageType(Multitouch.Contracts.AddInSideAdapters.ImageTypeAddInAdapter.ContractToViewAdapter(imageType), value);
         }
-        public virtual void InputAdd(Multitouch.Contracts.Contracts.IInputEventHandlerContract handler)
+        public virtual void NewFrameAdd(Multitouch.Contracts.Contracts.INewFrameEventHandlerContract handler)
         {
-            System.EventHandler<Multitouch.Contracts.InputDataEventArgs> adaptedHandler = new System.EventHandler<Multitouch.Contracts.InputDataEventArgs>(new Multitouch.Contracts.AddInSideAdapters.IInputEventHandlerContractToViewAddInAdapter(handler).Handler);
-            _view.Input += adaptedHandler;
-            Input_handlers[handler] = adaptedHandler;
+            System.EventHandler<Multitouch.Contracts.NewFrameEventArgs> adaptedHandler = new System.EventHandler<Multitouch.Contracts.NewFrameEventArgs>(new Multitouch.Contracts.AddInSideAdapters.INewFrameEventHandlerContractToViewAddInAdapter(handler).Handler);
+            _view.NewFrame += adaptedHandler;
+            NewFrame_handlers[handler] = adaptedHandler;
         }
-        public virtual void InputRemove(Multitouch.Contracts.Contracts.IInputEventHandlerContract handler)
+        public virtual void NewFrameRemove(Multitouch.Contracts.Contracts.INewFrameEventHandlerContract handler)
         {
-            System.EventHandler<Multitouch.Contracts.InputDataEventArgs> adaptedHandler;
-            if (Input_handlers.TryGetValue(handler, out adaptedHandler))
+            System.EventHandler<Multitouch.Contracts.NewFrameEventArgs> adaptedHandler;
+            if (NewFrame_handlers.TryGetValue(handler, out adaptedHandler))
             {
-                Input_handlers.Remove(handler);
-                _view.Input -= adaptedHandler;
+                NewFrame_handlers.Remove(handler);
+                _view.NewFrame -= adaptedHandler;
             }
         }
         internal Multitouch.Contracts.IProvider GetSourceView()

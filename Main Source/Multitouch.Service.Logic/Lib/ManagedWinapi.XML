@@ -1,0 +1,3231 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ManagedWinapi</name>
+    </assembly>
+    <members>
+        <member name="T:ManagedWinapi.Windows.Contents.ListContent">
+            <summary>
+            The content of a list box or combo box.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.Contents.WindowContent">
+            <summary>
+            An abstract representation of the content of a window or control.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.WindowContent.ComponentType">
+            <summary>
+            A short description of the type of this window.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.WindowContent.ShortDescription">
+            <summary>
+            A short description of this content.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.WindowContent.LongDescription">
+            <summary>
+            The full description of this content.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.WindowContent.PropertyList">
+            <summary>
+            A list of properties of this content.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.ListContent.ComponentType">
+            
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.ListContent.ShortDescription">
+            
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.ListContent.LongDescription">
+            
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.ListContent.PropertyList">
+            
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.ListContent.SelectedValue">
+            <summary>
+            The value in this list or combo box that is selected.
+            In a combo box, this value may not be in the list.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.ListContent.SelectedIndex">
+            <summary>
+            The index of the selected item, or -1 if no item
+            is selected.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.ListContent.Count">
+            <summary>
+            The number of items in this list.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.ListContent.Item(System.Int32)">
+            <summary>
+            Accesses individual list items.
+            </summary>
+            <param name="index">Index of list item.</param>
+            <returns>The list item.</returns>
+        </member>
+        <member name="T:ManagedWinapi.Windows.WndProcEventHandler">
+            <summary>
+            Called by an EventDispatchingNativeWindow when a window message is received
+            </summary>
+            <param name="m">The message to handle.</param>
+            <param name="handled">Whether the event has already been handled. If this value is true, the handler
+            should return immediately. It may set the value to true to indicate that no others 
+            should handle it. If the event is not handled by any handler, it is passed to the
+            default WindowProc.</param>
+        </member>
+        <member name="T:ManagedWinapi.Windows.EventDispatchingNativeWindow">
+            <summary>
+            A Win32 native window that delegates window messages to handlers. So several
+            components can use the same native window to save "USER resources". This class
+            is useful when writing your own components.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.EventDispatchingNativeWindow.#ctor">
+            <summary>
+            Create your own event dispatching window.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.EventDispatchingNativeWindow.WndProc(System.Windows.Forms.Message@)">
+            <summary>
+            Parse messages passed to this window and send them to the event handlers.
+            </summary>
+            <param name="m">A System.Windows.Forms.Message that is associated with the 
+            current Windows message.</param>
+        </member>
+        <member name="P:ManagedWinapi.Windows.EventDispatchingNativeWindow.Instance">
+            <summary>
+            A global instance which can be used by components that do not need
+            their own window.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Windows.EventDispatchingNativeWindow.EventHandler">
+            <summary>
+            Attach your event handlers here.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.ProcessMemoryChunk">
+            <summary>
+            A chunk in another processes memory. Mostly used to allocate buffers
+            in another process for sending messages to its windows.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ProcessMemoryChunk.#ctor(System.Diagnostics.Process,System.IntPtr,System.Int32)">
+            <summary>
+            Create a new memory chunk that points to existing memory.
+            Mostly used to read that memory.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ProcessMemoryChunk.Alloc(System.Diagnostics.Process,System.Int32)">
+            <summary>
+            Allocate a chunk in another process.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ProcessMemoryChunk.AllocStruct(System.Diagnostics.Process,System.Object)">
+            <summary>
+            Allocate a chunk in another process and unmarshal a struct
+            there.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ProcessMemoryChunk.Dispose">
+            <summary>
+            Free the memory in the other process, if it has been allocated before.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ProcessMemoryChunk.WriteStructure(System.Int32,System.Object)">
+            <summary>
+            Write a structure into this chunk.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ProcessMemoryChunk.Write(System.Int32,System.IntPtr,System.Int32)">
+            <summary>
+            Write into this chunk.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ProcessMemoryChunk.Write(System.Int32,System.Byte[])">
+            <summary>
+            Write a byte array into this chunk.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ProcessMemoryChunk.Read">
+            <summary>
+            Read this chunk.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManagedWinapi.ProcessMemoryChunk.Read(System.Int32,System.Int32)">
+            <summary>
+            Read a part of this chunk.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ProcessMemoryChunk.ReadToPtr(System.IntPtr)">
+            <summary>
+            Read this chunk to a pointer in this process.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ProcessMemoryChunk.ReadToPtr(System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            Read a part of this chunk to a pointer in this process.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ProcessMemoryChunk.ReadToStructure(System.Int32,System.Type)">
+            <summary>
+            Read a part of this chunk to a structure.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.ProcessMemoryChunk.Process">
+            <summary>
+            The process this chunk refers to.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.ProcessMemoryChunk.Location">
+            <summary>
+            The location in memory (of the other process) this chunk refers to.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.ProcessMemoryChunk.Size">
+            <summary>
+            The size of the chunk.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.ExtendedFileInfo">
+            <summary>
+            Provides methods for getting additional information about
+            files, like icons or compressed file size.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ExtendedFileInfo.GetFolderIcon(System.Boolean)">
+            <summary>
+            Get the icon used for folders.
+            </summary>
+            <param name="small">Whether to get the small icon instead of the large one</param>
+        </member>
+        <member name="M:ManagedWinapi.ExtendedFileInfo.GetFileIcon(System.Boolean)">
+            <summary>
+            Get the icon used for files that do not have their own icon
+            </summary>
+            <param name="small">Whether to get the small icon instead of the large one</param>
+        </member>
+        <member name="M:ManagedWinapi.ExtendedFileInfo.GetExtensionIcon(System.String,System.Boolean)">
+            <summary>
+            Get the icon used by files of a given extension.
+            </summary>
+            <param name="extension">The extension without leading dot</param>
+            <param name="small">Whether to get the small icon instead of the large one</param>
+        </member>
+        <member name="M:ManagedWinapi.ExtendedFileInfo.GetIconForFilename(System.String,System.Boolean)">
+            <summary>
+            Get the icon used for a given, existing file.
+            </summary>
+            <param name="fileName">Name of the file</param>
+            <param name="small">Whether to get the small icon instead of the large one</param>
+        </member>
+        <member name="M:ManagedWinapi.ExtendedFileInfo.GetPhysicalFileSize(System.String)">
+            <summary>
+            Get the size a file requires on disk. This takes NTFS
+            compression into account.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ExtendedFileInfo.GetClusterSize(System.String)">
+            <summary>
+            Get the cluster size for the filesystem that contains the given file.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.WindowStyleFlags">
+            <summary>
+            Window Style Flags. The original constants started with WS_.
+            </summary>
+            <seealso cref="P:ManagedWinapi.Windows.SystemWindow.Style"/>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.OVERLAPPED">
+            <summary>
+            WS_OVERLAPPED
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.POPUP">
+            <summary>
+            WS_POPUP
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.CHILD">
+            <summary>
+            WS_CHILD
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.MINIMIZE">
+            <summary>
+            WS_MINIMIZE
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.VISIBLE">
+            <summary>
+            WS_VISIBLE
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.DISABLED">
+            <summary>
+            WS_DISABLED
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.CLIPSIBLINGS">
+            <summary>
+            WS_CLIPSIBLINGS
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.CLIPCHILDREN">
+            <summary>
+            WS_CLIPCHILDREN
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.MAXIMIZE">
+            <summary>
+            WS_MAXIMIZE
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.BORDER">
+            <summary>
+            WS_BORDER
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.DLGFRAME">
+            <summary>
+            WS_DLGFRAME
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.VSCROLL">
+            <summary>
+            WS_VSCROLL
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.HSCROLL">
+            <summary>
+            WS_HSCROLL
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.SYSMENU">
+            <summary>
+            WS_SYSMENU
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.THICKFRAME">
+            <summary>
+            WS_THICKFRAME
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.GROUP">
+            <summary>
+            WS_GROUP
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.TABSTOP">
+            <summary>
+            WS_TABSTOP
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.MINIMIZEBOX">
+            <summary>
+            WS_MINIMIZEBOX
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.MAXIMIZEBOX">
+            <summary>
+            WS_MAXIMIZEBOX
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.CAPTION">
+            <summary>
+            WS_CAPTION
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.TILED">
+            <summary>
+            WS_TILED
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.ICONIC">
+            <summary>
+            WS_ICONIC
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.SIZEBOX">
+            <summary>
+            WS_SIZEBOX
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.TILEDWINDOW">
+            <summary>
+            WS_TILEDWINDOW
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.OVERLAPPEDWINDOW">
+            <summary>
+            WS_OVERLAPPEDWINDOW
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.POPUPWINDOW">
+            <summary>
+            WS_POPUPWINDOW
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowStyleFlags.CHILDWINDOW">
+            <summary>
+            WS_CHILDWINDOW
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.WindowExStyleFlags">
+            <summary>
+            Extended Window Style Flags. The original constants started with WS_EX_.
+            </summary>
+            <seealso cref="P:ManagedWinapi.Windows.SystemWindow.ExtendedStyle"/>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.ACCEPTFILES">
+            <summary>
+            Specifies that a window created with this style accepts drag-drop files.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.APPWINDOW">
+            <summary>
+            Forces a top-level window onto the taskbar when the window is visible.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.CLIENTEDGE">
+            <summary>
+            Specifies that a window has a border with a sunken edge.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.COMPOSITED">
+            <summary>
+            Windows XP: Paints all descendants of a window in bottom-to-top painting order using double-buffering. For more information, see Remarks. This cannot be used if the window has a class style of either CS_OWNDC or CS_CLASSDC. 
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.CONTEXTHELP">
+            <summary>
+            Includes a question mark in the title bar of the window. When the user clicks the question mark, the cursor changes to a question mark with a pointer. If the user then clicks a child window, the child receives a WM_HELP message. The child window should pass the message to the parent window procedure, which should call the WinHelp function using the HELP_WM_HELP command. The Help application displays a pop-up window that typically contains help for the child window.
+            WS_EX_CONTEXTHELP cannot be used with the WS_MAXIMIZEBOX or WS_MINIMIZEBOX styles.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.CONTROLPARENT">
+            <summary>
+            The window itself contains child windows that should take part in dialog box navigation. If this style is specified, the dialog manager recurses into children of this window when performing navigation operations such as handling the TAB key, an arrow key, or a keyboard mnemonic.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.DLGMODALFRAME">
+            <summary>
+            Creates a window that has a double border; the window can, optionally, be created with a title bar by specifying the WS_CAPTION style in the dwStyle parameter.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.LAYERED">
+            <summary>
+            Windows 2000/XP: Creates a layered window. Note that this cannot be used for child windows. Also, this cannot be used if the window has a class style of either CS_OWNDC or CS_CLASSDC. 
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.LAYOUTRTL">
+            <summary>
+            Arabic and Hebrew versions of Windows 98/Me, Windows 2000/XP: Creates a window whose horizontal origin is on the right edge. Increasing horizontal values advance to the left. 
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.LEFT">
+            <summary>
+            Creates a window that has generic left-aligned properties. This is the default.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.LEFTSCROLLBAR">
+            <summary>
+            If the shell language is Hebrew, Arabic, or another language that supports reading order alignment, the vertical scroll bar (if present) is to the left of the client area. For other languages, the style is ignored.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.LTRREADING">
+            <summary>
+            The window text is displayed using left-to-right reading-order properties. This is the default.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.MDICHILD">
+            <summary>
+            Creates a multiple-document interface (MDI) child window.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.NOACTIVATE">
+            <summary>
+            Windows 2000/XP: A top-level window created with this style does not become the foreground window when the user clicks it. The system does not bring this window to the foreground when the user minimizes or closes the foreground window. 
+            To activate the window, use the SetActiveWindow or SetForegroundWindow function.
+            The window does not appear on the taskbar by default. To force the window to appear on the taskbar, use the WS_EX_APPWINDOW style.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.NOINHERITLAYOUT">
+            <summary>
+            Windows 2000/XP: A window created with this style does not pass its window layout to its child windows.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.NOPARENTNOTIFY">
+            <summary>
+            Specifies that a child window created with this style does not send the WM_PARENTNOTIFY message to its parent window when it is created or destroyed.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.OVERLAPPEDWINDOW">
+            <summary>
+            Combines the WS_EX_CLIENTEDGE and WS_EX_WINDOWEDGE styles.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.PALETTEWINDOW">
+            <summary>
+            Combines the WS_EX_WINDOWEDGE, WS_EX_TOOLWINDOW, and WS_EX_TOPMOST styles.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.RIGHT">
+            <summary>
+            The window has generic "right-aligned" properties. This depends on the window class. This style has an effect only if the shell language is Hebrew, Arabic, or another language that supports reading-order alignment; otherwise, the style is ignored.
+            Using the WS_EX_RIGHT style for static or edit controls has the same effect as using the SS_RIGHT or ES_RIGHT style, respectively. Using this style with button controls has the same effect as using BS_RIGHT and BS_RIGHTBUTTON styles.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.RIGHTSCROLLBAR">
+            <summary>
+            Vertical scroll bar (if present) is to the right of the client area. This is the default.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.RTLREADING">
+            <summary>
+            If the shell language is Hebrew, Arabic, or another language that supports reading-order alignment, the window text is displayed using right-to-left reading-order properties. For other languages, the style is ignored.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.STATICEDGE">
+            <summary>
+            Creates a window with a three-dimensional border style intended to be used for items that do not accept user input.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.TOOLWINDOW">
+            <summary>
+            Creates a tool window; that is, a window intended to be used as a floating toolbar. A tool window has a title bar that is shorter than a normal title bar, and the window title is drawn using a smaller font. A tool window does not appear in the taskbar or in the dialog that appears when the user presses ALT+TAB. If a tool window has a system menu, its icon is not displayed on the title bar. However, you can display the system menu by right-clicking or by typing ALT+SPACE. 
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.TOPMOST">
+            <summary>
+            Specifies that a window created with this style should be placed above all non-topmost windows and should stay above them, even when the window is deactivated. To add or remove this style, use the SetWindowPos function.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.TRANSPARENT">
+            <summary>
+            Specifies that a window created with this style should not be painted until siblings beneath the window (that were created by the same thread) have been painted. The window appears transparent because the bits of underlying sibling windows have already been painted.
+            To achieve transparency without these restrictions, use the SetWindowRgn function.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.WindowExStyleFlags.WINDOWEDGE">
+            <summary>
+            Specifies that a window has a border with a raised edge.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.SystemWindow">
+            <summary>
+            Represents any window used by Windows, including those from other applications.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.FilterToplevelWindows(System.Predicate{ManagedWinapi.Windows.SystemWindow})">
+            <summary>
+            Returns all toplevel windows that match the given predicate.
+            </summary>
+            <param name="predicate">The predicate to filter.</param>
+            <returns>The filtered toplevel windows</returns>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.FromPoint(System.Int32,System.Int32)">
+            <summary>
+            Finds the system window below the given point. This need not be a
+            toplevel window; disabled windows are not returned either.
+            If you have problems with transparent windows that cover nontransparent
+            windows, consider using <see cref="M:ManagedWinapi.Windows.SystemWindow.FromPointEx(System.Int32,System.Int32,System.Boolean,System.Boolean)"/>, since that method
+            tries hard to avoid this problem.
+            </summary>
+            <param name="x">X coordinate</param>
+            <param name="y">Y coordinate</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.FromPointEx(System.Int32,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Finds the system window below the given point. This method uses a more
+            sophisticated algorithm than <see cref="M:ManagedWinapi.Windows.SystemWindow.FromPoint(System.Int32,System.Int32)"/>, but is slower.
+            </summary>
+            <param name="x">X coordinate</param>
+            <param name="y">Y coordinate</param>
+            <param name="toplevel">Whether to return the toplevel window.</param>
+            <param name="enabledOnly">Whether to return enabled windows only.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.#ctor(System.IntPtr)">
+            <summary>
+            Create a new SystemWindow instance from a window handle.
+            </summary>
+            <param name="HWnd">The window handle.</param>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.#ctor(System.Windows.Forms.Control)">
+            <summary>
+            Create a new SystemWindow instance from a Windows Forms Control.
+            </summary>
+            <param name="control">The control.</param>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.FilterDescendantWindows(System.Boolean,System.Predicate{ManagedWinapi.Windows.SystemWindow})">
+            <summary>
+            Returns all child windows that match the given predicate.
+            </summary>
+            <param name="directOnly">Whether to include only direct children (no descendants)</param>
+            <param name="predicate">The predicate to filter.</param>
+            <returns>The list of child windows.</returns>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.IsDescendantOf(ManagedWinapi.Windows.SystemWindow)">
+            <summary>
+            Check whether this window is a descendant of <c>ancestor</c>
+            </summary>
+            <param name="ancestor">The suspected ancestor</param>
+            <returns>If this is really an ancestor</returns>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.GetDeviceContext(System.Boolean)">
+            <summary>
+            Gets a device context for this window.
+            </summary>
+            <param name="clientAreaOnly">Whether to get the context for
+            the client area or for the full window.</param>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.Equals(System.Object)">
+            
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.Equals(ManagedWinapi.Windows.SystemWindow)">
+            
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.GetHashCode">
+            
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.op_Equality(ManagedWinapi.Windows.SystemWindow,ManagedWinapi.Windows.SystemWindow)">
+            <summary>
+            Compare two instances of this class for equality.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemWindow.op_Inequality(ManagedWinapi.Windows.SystemWindow,ManagedWinapi.Windows.SystemWindow)">
+            <summary>
+            Compare two instances of this class for inequality.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.ForegroundWindow">
+            <summary>
+            Allows getting the current foreground window and setting it.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.DesktopWindow">
+            <summary>
+            The Desktop window, i. e. the window that covers the
+            complete desktop.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.AllToplevelWindows">
+            <summary>
+            Returns all available toplevel windows.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.AllDescendantWindows">
+            <summary>
+            Return all descendant windows (child windows and their descendants).
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.AllChildWindows">
+            <summary>
+            Return all direct child windows.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.HWnd">
+            <summary>
+            The Window handle of this window.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Title">
+            <summary>
+            The title of this window (by the <c>GetWindowText</c> API function).
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.ClassName">
+            <summary>
+            The name of the window class (by the <c>GetClassName</c> API function).
+            This class has nothing to do with classes in C# or other .NET languages.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Visible">
+            <summary>
+            Whether this window is currently visible. A window is visible if its 
+            and all ancestor's visibility flags are true.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.TopMost">
+            <summary>
+            Whether this window always appears above all other windows
+            that do not have this property set to true.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Enabled">
+            <summary>
+            Whether this window is currently enabled (able to accept keyboard input).
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.VisibilityFlag">
+            <summary>
+            Returns or sets the visibility flag.
+            </summary>
+            <seealso cref="P:ManagedWinapi.Windows.SystemWindow.Visible"/>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Style">
+            <summary>
+            This window's style flags.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.ExtendedStyle">
+            <summary>
+            This window's extended style flags.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Parent">
+            <summary>
+            This window's parent. A dialog's parent is its owner, a component's parent is
+            the window that contains it.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.ParentSymmetric">
+            <summary>
+            The window's parent, but only if this window is its parent child. Some
+            parents, like dialog owners, do not have the window as its child. In that case,
+            <c>null</c> will be returned.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Position">
+            <summary>
+            The window's position inside its parent or on the screen.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Rectangle">
+            <summary>
+            The window's position in absolute screen coordinates. Use 
+            <see cref="P:ManagedWinapi.Windows.SystemWindow.Position"/> if you want to use the relative position.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Process">
+            <summary>
+            The process which created this window.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Thread">
+            <summary>
+             The Thread which created this window.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.WindowState">
+            <summary>
+            Whether this window is minimized or maximized.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Movable">
+            <summary>
+            Whether this window can be moved on the screen by the user.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Resizable">
+            <summary>
+            Whether this window can be resized by the user. Resizing a window that
+            cannot be resized by the user works, but may be irritating to the user.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Image">
+            <summary>
+            An image of this window. Unlike a screen shot, this will not
+            contain parts of other windows (partially) cover this window.
+            If you want to create a screen shot, use the 
+            <see cref="M:System.Drawing.Graphics.CopyFromScreen(System.Drawing.Point,System.Drawing.Point,System.Drawing.Size)"/> 
+            function and use the <see cref="P:ManagedWinapi.Windows.SystemWindow.Rectangle"/> property for
+            the range.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Region">
+            <summary>
+            The window's visible region.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.PasswordCharacter">
+            <summary>
+            The character used to mask passwords, if this control is
+            a text field. May be used for different purpose by other
+            controls.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.DialogID">
+            <summary>
+            The ID of a control within a dialog. This is used in
+            WM_COMMAND messages to distinguish which control sent the command.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.WindowBelow">
+            <summary>
+            Get the window that is below this window in the Z order,
+            or null if this is the lowest window.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.WindowAbove">
+            <summary>
+            Get the window that is above this window in the Z order,
+            or null, if this is the foreground window.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.Content">
+            <summary>
+            The content of this window. Is only supported for some
+            kinds of controls (like text or list boxes).
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemWindow.CheckState">
+            <summary>
+            Whether this control, which is a check box or radio button, is checked.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.WindowDeviceContext">
+            <summary>
+            A device context of a window that allows you to draw onto that window.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.WindowDeviceContext.CreateGraphics">
+            <summary>
+            Creates a Graphics object for this device context.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.WindowDeviceContext.Dispose">
+            <summary>
+            Frees this device context.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.WindowDeviceContext.HDC">
+            <summary>
+            The device context handle.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hotkey">
+            <summary>
+            Specifies a component that creates a global keyboard hotkey.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hotkey.#ctor(System.ComponentModel.IContainer)">
+            <summary>
+            Initializes a new instance of this class with the specified container.
+            </summary>
+            <param name="container">The container to add it to.</param>
+        </member>
+        <member name="M:ManagedWinapi.Hotkey.#ctor">
+            <summary>
+            Initializes a new instance of this class.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hotkey.Dispose(System.Boolean)">
+            <summary>
+            Releases all resources used by the System.ComponentModel.Component.
+            </summary>
+            <param name="disposing">Whether to dispose managed resources.</param>
+        </member>
+        <member name="E:ManagedWinapi.Hotkey.HotkeyPressed">
+            <summary>
+            Occurs when the hotkey is pressed.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hotkey.Enabled">
+            <summary>
+            Enables the hotkey. When the hotkey is enabled, pressing it causes a
+            <c>HotkeyPressed</c> event instead of being handled by the active 
+            application.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hotkey.KeyCode">
+            <summary>
+            The key code of the hotkey.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hotkey.Ctrl">
+            <summary>
+            Whether the shortcut includes the Control modifier.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hotkey.Alt">
+            <summary>
+            Whether this shortcut includes the Alt modifier.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hotkey.Shift">
+            <summary>
+            Whether this shortcut includes the shift modifier.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hotkey.WindowsKey">
+            <summary>
+            Whether this shortcut includes the Windows key modifier. The windows key
+            is an addition by Microsoft to the keyboard layout. It is located between
+            Control and Alt and depicts a Windows flag.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.HotkeyAlreadyInUseException">
+            <summary>
+            The exception is thrown when a hotkey should be registered that
+            has already been registered by another application.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.InputBlocker">
+            <summary>
+            Blocks keyboard and mouse input until this object is disposed.
+            Unlike <see cref="T:ManagedWinapi.Hooks.InputLocker"/>, you cannot detect when the systems
+            removes the block (which happens when the user presses CTRL+ALT+DEL),
+            but it works on Windows Vista as well.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.InputBlocker.#ctor">
+            <summary>
+            Blocks keyboard and mouse input until this object is disposed.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.InputBlocker.Dispose">
+            <summary>
+            Unblocks keyboard and mouse input.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.MixerControl">
+            <summary>
+            A control of a mixer line. This can be for example a volume slider
+            or a mute switch.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControl.Changed">
+            <summary>
+            Occurs when the value of this control is changed
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.Id">
+            <summary>
+            The ID of this control.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.ShortName">
+            <summary>
+            The short name of this control.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.LongName">
+            <summary>
+            The long name of this control.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.Class">
+            <summary>
+            The class of this control. For example FADER or SWITCH.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.ControlType">
+            <summary>
+            The type of the control. For example mute switch.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.Flags">
+            <summary>
+            The flags of this control.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.IsUniform">
+            <summary>
+            Whether this control is uniform. A uniform control controls
+            more than one channel, but can only set one value for all
+            channels.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.IsMultiple">
+            <summary>
+            Whether this control has multiple values per channel. An
+            example for a multiple value control is a three-band equalizer.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.ChannelCount">
+            <summary>
+            The number of channels.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.MultipleValuesCount">
+            <summary>
+            The number of multiple values. For a three band equalizer,
+            this is 3. Will be always one if IsMultiple is false.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.RawValueMultiplicity">
+            <summary>
+            The number of raw values that have to be get or set. This
+            value is provided as a convenience; it can be computed from
+            MultipleValuesCount, IsUniform and ChannelCount.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.Line">
+            <summary>
+            The line this control belongs to.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerControl.Mixer">
+            <summary>
+            The mixer this control belongs to.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.FaderMixerControl">
+            <summary>
+            A mixer control that is adjusted by a vertical fader, with a linear scale 
+            of positive values (ie, 0 is the lowest possible value).
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.FaderMixerControl.Minimum">
+            <summary>
+            The minimum value of this fader.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.FaderMixerControl.Maximum">
+            <summary>
+            The maximum value of this fader.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.FaderMixerControl.Values">
+            <summary>
+            Used to get or set the values of this fader.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.BooleanMixerControl">
+            <summary>
+            A control that is has only two states (ie, values), 
+            and is therefore adjusted via a button.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.BooleanMixerControl.Values">
+            <summary>
+            Used to get or set the values of this switch.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.MixerControlClass">
+            <summary>
+            Mixer control type classes. These classes are roughly based upon what type of 
+            value a control adjusts, and therefore what kind of graphical user interface 
+            you would normally present to the enduser to let him adjust that control's value. 
+            The descriptions for these classes have been taken from 
+            http://www.borg.com/~jglatt/tech/mixer.htm.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlClass.CUSTOM">
+            <summary>
+            	A custom class of control. If none of the others are applicable.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlClass.METER">
+            <summary>
+            A control that is adjusted by a graphical meter.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlClass.SWITCH">
+            <summary>
+            A control that is has only two states (ie, values), and is 
+            therefore adjusted via a button. 
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlClass.NUMBER">
+            <summary>
+            A control that is adjusted by numeric entry.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlClass.SLIDER">
+            <summary>
+            A control that is adjusted by a horizontal slider 
+            with a linear scale of negative and positive values. 
+            (ie, Generally, 0 is the mid or "neutral" point).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlClass.FADER">
+            <summary>
+            A control that is adjusted by a vertical fader, with 
+            a linear scale of positive values (ie, 0 is the lowest 
+            possible value).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlClass.TIME">
+            <summary>
+            A control that allows the user to enter a time value, such 
+            as Reverb Decay Time.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlClass.LIST">
+            <summary>
+            A control that is adjusted by a listbox containing numerous 
+            "values" to be selected. The user will single-select, or perhaps 
+            multiple-select if desired, his choice of value(s).
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.MixerControlFlags">
+            <summary>
+            Flags of a mixer control.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlFlags.UNIFORM">
+            <summary>
+            This control has multiple channels, but only one value for
+            all of them.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlFlags.MULTIPLE">
+            <summary>
+            This control has multiple values for one channel (like an equalizer).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlFlags.DISABLED">
+            <summary>
+            This control is disabled.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.MixerControlType">
+            <summary>
+            The type of a mixer control.
+            You can find descriptions for most of these types on 
+            http://www.borg.com/~jglatt/tech/mixer.htm.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_SC_SWITCH_BOOLEAN">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_SC_SWITCH_BUTTON">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_SC_METER_POLLED">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_SC_TIME_MICROSECS">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_SC_TIME_MILLISECS">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_SC_LIST_SINGLE">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_SC_LIST_MULTIPLE">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_UNITS_CUSTOM">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_UNITS_BOOLEAN">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_UNITS_SIGNED">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_UNITS_UNSIGNED">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_UNITS_DECIBELS">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CT_UNITS_PERCENT">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_CUSTOM">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_BOOLEANMETER">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_SIGNEDMETER">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_PEAKMETER">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_UNSIGNEDMETER">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_BOOLEAN">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_ONOFF">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_MUTE">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_MONO">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_LOUDNESS">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_STEREOENH">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_BUTTON">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_DECIBELS">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_SIGNED">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_UNSIGNED">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_PERCENT">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_SLIDER">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_PAN">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_QSOUNDPAN">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_FADER">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_VOLUME">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_BASS">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_TREBLE">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_EQUALIZER">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_SINGLESELECT">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_MUX">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_MULTIPLESELECT">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_MIXER">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_MICROTIME">
+            
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerControlType.MIXERCONTROL_CONTROLTYPE_MILLITIME">
+            
+        </member>
+        <member name="T:ManagedWinapi.Crosshair">
+            <summary>
+            This component displays a crosshair icon that can be dragged to any point
+            on screen. This is useful to select other programs by dragging the crosshair
+            to a program window.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Crosshair.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Crosshair.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ManagedWinapi.Crosshair.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Crosshair.#ctor">
+            <summary>
+            Creates a new crosshair control.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Crosshair.RestoreMouseCapture">
+            <summary>
+            When a window is hidden, the .NET framework releases mouse capture.
+            If you hide your window while the crosshair is dragged, invoke
+            this method afterwards to restore mouse capture.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Crosshair.CrosshairDragged">
+            <summary>
+            Occurs when the user finished dragging the crosshair. Use 
+            <see cref="P:System.Windows.Forms.Cursor.Position"/> to detect the cursor position.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Crosshair.CrosshairDragging">
+            <summary>
+            Occurs while the user drags the crosshair. Use 
+            <see cref="P:System.Windows.Forms.Cursor.Position"/> to detect the cursor position.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.ApiHelper">
+            <summary>
+            Helper class that contains static methods useful for API programming. This
+            class is not exposed to the user.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ApiHelper.FailIfZero(System.Int32)">
+            <summary>
+            Throw a <see cref="T:System.ComponentModel.Win32Exception"/> if the supplied (return) value is zero.
+            This exception uses the last Win32 error code as error message.
+            </summary>
+            <param name="returnValue">The return value to test.</param>
+        </member>
+        <member name="M:ManagedWinapi.ApiHelper.FailIfZero(System.IntPtr)">
+            <summary>
+            Throw a <see cref="T:System.ComponentModel.Win32Exception"/> if the supplied (return) value is zero.
+            This exception uses the last Win32 error code as error message.
+            </summary>
+            <param name="returnValue">The return value to test.</param>
+        </member>
+        <member name="T:ManagedWinapi.Windows.SystemListView">
+            <summary>
+            Any list view, including those from other applications.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemListView.FromSystemWindow(ManagedWinapi.Windows.SystemWindow)">
+            <summary>
+            Get a SystemListView reference from a SystemWindow (which is a list view)
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListView.Count">
+            <summary>
+            The number of items (icons) in this list view.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListView.Item(System.Int32)">
+            <summary>
+            An item of this list view.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListView.Item(System.Int32,System.Int32)">
+            <summary>
+            A subitem (a column value) of an item of this list view.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListView.Columns">
+            <summary>
+            All columns of this list view, if it is in report view.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.SystemListViewItem">
+            <summary>
+            An item of a list view.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListViewItem.Title">
+            <summary>
+            The title of this item
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListViewItem.Image">
+            <summary>
+            The index of this item's image in the image list of this list view.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListViewItem.State">
+            <summary>
+            State bits of this item.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListViewItem.Position">
+            <summary>
+            Position of the upper left corner of this item.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListViewItem.Rectangle">
+            <summary>
+            Bounding rectangle of this item.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.SystemListViewColumn">
+            <summary>
+            A column of a list view.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListViewColumn.Format">
+            <summary>
+            The format (like left justified) of this column.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListViewColumn.Width">
+            <summary>
+            The width of this column.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListViewColumn.SubIndex">
+            <summary>
+            The subindex of the subitem displayed in this column. Note
+            that the second column does not necessarily display the second
+            subitem - especially when the columns can be reordered by the user.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListViewColumn.Title">
+            <summary>
+            The title of this column.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.MixerLine">
+            <summary>
+            Represents a mixer line, either a source line or a destination line.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLine.Changed">
+            <summary>
+            Occurs when this line changes.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Audio.Mixer.MixerLine.Dispose">
+            
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerLine.Controls">
+            <summary>
+            All controls of this line.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerLine.VolumeControl">
+            <summary>
+            The volume control of this line, if it has one.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerLine.MuteSwitch">
+            <summary>
+            The mute switch of this control, if it has one.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerLine.Id">
+            <summary>
+            Gets the ID of this line.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerLine.ChannelCount">
+            <summary>
+            Gets the number of channels of this line.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerLine.ControlCount">
+            <summary>
+            Gets the number of controls of this line.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerLine.ShortName">
+            <summary>
+            Gets the short name of this line;
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerLine.Name">
+            <summary>
+            Gets the full name of this line.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerLine.ComponentType">
+            <summary>
+            Gets the component type of this line;
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerLine.Mixer">
+            <summary>
+            The mixer that owns this line.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.DestinationLine">
+            <summary>
+            Represents a destination line. There is one destination line for
+            each way sound can leave the mixer. Usually there are two destination lines,
+            one for playback and one for recording.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Audio.Mixer.DestinationLine.Dispose">
+            
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.DestinationLine.SourceLineCount">
+            <summary>
+            Gets the number of source lines of this destination line.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.DestinationLine.SourceLines">
+            <summary>
+            Gets all source lines of this destination line.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.SourceLine">
+            <summary>
+            Represents a source line. Source lines represent way sound for one
+            destination enters the mixer. So, if you can both record and playback
+            CD audio, there will be two CD audio source lines, one for the Recording
+            destination line and one for the Playback destination line.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.MixerLineComponentType">
+            <summary>
+            Types of source or destination lines. The descriptions for these
+            lines have been taken from http://www.borg.com/~jglatt/tech/mixer.htm.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.DST_UNDEFINED">
+            <summary>
+            An undefined destination line type.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.DST_DIGITAL">
+            <summary>
+            A digital destination, for example, a SPDIF output jack.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.DST_LINE">
+            <summary>
+            A line output destination. Typically used for a line output 
+            jack, if there is a separate speaker output (ie, 
+            MIXERLINE_COMPONENTTYPE_DST_SPEAKERS).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.DST_MONITOR">
+            <summary>
+            Typically a "Monitor Out" jack to be used for a speaker system 
+            separate from the main speaker out. Or, it could be some built-in 
+            monitor speaker on the sound card itself, such as a speaker for a 
+            built-in modem.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.DST_SPEAKERS">
+            <summary>
+            The audio output to a pair of speakers (ie, the "Speaker Out" jack).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.DST_HEADPHONES">
+            <summary>
+            Typically, a headphone output jack.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.DST_TELEPHONE">
+            <summary>
+            Typically used to daisy-chain a telephone to an analog 
+            modem's "telephone out" jack.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.DST_WAVEIN">
+            <summary>
+            The card's ADC (to digitize analog sources, for example, 
+            in recording WAVE files of such).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.DST_VOICEIN">
+            <summary>
+            May be some sort of hardware used for voice recognition. 
+            Typically, a microphone source line would be attached to this.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.SRC_UNDEFINED">
+            <summary>
+            An undefined source line type.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.SRC_DIGITAL">
+            <summary>
+            A digital source, for example, a SPDIF input jack.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.SRC_LINE">
+            <summary>
+            A line input source. Typically used for a line input jack, 
+            if there is a separate microphone input (ie, 
+            MIXERLINE_COMPONENTTYPE_SRC_MICROPHONE).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.SRC_MICROPHONE">
+            <summary>
+            Microphone input (but also used for a combination of 
+            Mic/Line input if there isn't a separate line input source).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.SRC_SYNTHESIZER">
+            <summary>
+            Musical synth. Typically used for a card that contains a 
+            synth capable of playing MIDI. This would be the audio out 
+            of that built-in synth.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.SRC_COMPACTDISC">
+            <summary>
+            The audio feed from an internal CDROM drive (connected to 
+            the sound card).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.SRC_TELEPHONE">
+            <summary>
+            Typically used for a telephone line's incoming audio 
+            to be piped through the computer's speakers, or the 
+            telephone line in jack for a built-in modem.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.SRC_PCSPEAKER">
+            <summary>
+            Typically, to allow sound, that normally goes to the computer's 
+            built-in speaker, to instead be routed through the card's speaker 
+            output. The motherboard's system speaker connector would be internally 
+            connected to some connector on the sound card for this purpose.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.SRC_WAVEOUT">
+            <summary>
+            Wave playback (ie, this is the card's DAC).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.SRC_AUXILIARY">
+            <summary>
+            	An aux jack meant to be routed to the Speaker Out, or to the 
+            ADC (for WAVE recording). Typically, this is used to connect external, 
+            analog equipment (such as tape decks, the audio outputs of musical 
+            instruments, etc) for digitalizing or playback through the sound card.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.MixerLineComponentType.SRC_ANALOG">
+            <summary>
+            May be used similiarly to MIXERLINE_COMPONENTTYPE_SRC_AUXILIARY (although 
+            I have seen some mixers use this like MIXERLINE_COMPONENTTYPE_SRC_PCSPEAKER). 
+            In general, this would be some analog connector on the sound card which is 
+            only accessible internally, to be used to internally connect some analog component 
+            inside of the computer case so that it plays through the speaker out.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Accessibility.SystemAccessibleObject">
+            <summary>
+            Provides access to the Active Accessibility API. Every <see cref="T:ManagedWinapi.Windows.SystemWindow"/>
+            has one ore more AccessibleObjects attached that provide information about the
+            window to visually impaired people. This information is mainly used by screen 
+            readers and other accessibility software..
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.#ctor(Accessibility.IAccessible,System.Int32)">
+            <summary>
+            Create an accessible object from an IAccessible instance and a child ID.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.FromPoint(System.Int32,System.Int32)">
+            <summary>
+            Gets an accessibility object for given screen coordinates.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.FromWindow(ManagedWinapi.Windows.SystemWindow,ManagedWinapi.Accessibility.AccessibleObjectID)">
+            <summary>
+            Gets an accessibility object for a given window.
+            </summary>
+            <param name="window">The window</param>
+            <param name="objectID">Which accessibility object to get</param>
+            <returns></returns>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.RoleToString(System.Int32)">
+            <summary>
+            Convert a role number to a localized string.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.StateToString(System.Int32)">
+            <summary>
+            Convert a state number (which may include more than one state bit)
+            to a localized string.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.StateBitToString(System.Int32)">
+            <summary>
+            Convert a single state bit to a localized string.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.DoDefaultAction">
+            <summary>
+            Perform the default action of this accessible object.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.Equals(System.Object)">
+            
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.Equals(ManagedWinapi.Accessibility.SystemAccessibleObject)">
+            
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.GetHashCode">
+            
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.op_Equality(ManagedWinapi.Accessibility.SystemAccessibleObject,ManagedWinapi.Accessibility.SystemAccessibleObject)">
+            <summary>
+            Compare two instances of this class for equality.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.op_Inequality(ManagedWinapi.Accessibility.SystemAccessibleObject,ManagedWinapi.Accessibility.SystemAccessibleObject)">
+            <summary>
+            Compare two instances of this class for inequality.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.SystemAccessibleObject.ToString">
+            
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.IAccessible">
+            <summary>
+            The IAccessible instance of this object (if <see cref="P:ManagedWinapi.Accessibility.SystemAccessibleObject.ChildID"/> is zero)
+            or its parent.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.ChildID">
+            <summary>
+            The underlying child ID
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.MouseCursor">
+            <summary>
+            Gets an accessibility object for the mouse cursor.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.Caret">
+            <summary>
+            Gets an accessibility object for the input caret, or
+            <b>null</b> if there is none.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.Description">
+            <summary>
+            The description of this accessible object.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.Name">
+            <summary>
+            The name of this accessible object.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.Role">
+            <summary>
+            The role of this accessible object. This can either be an int
+            (for a predefined role) or a string.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.RoleIndex">
+            <summary>
+            The role of this accessible object, as an integer. If this role
+            is not predefined, -1 is returned.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.RoleString">
+            <summary>
+            The role of this accessible object, as a localized string.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.Location">
+            <summary>
+            The location of this accessible object on screen. This rectangle
+            is the smallest rectangle that includes the whole object, but not
+            every point in the rectangle must be part of the object.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.Value">
+            <summary>
+            The value of this accessible object.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.State">
+            <summary>
+            The state of this accessible object.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.StateString">
+            <summary>
+            A string representation of the state of this accessible object.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.Visible">
+            <summary>
+            Whether this accessibile object is visible.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.Parent">
+            <summary>
+            The parent of this accessible object, or <b>null</b> if none exists.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.KeyboardShortcut">
+            <summary>
+            The keyboard shortcut of this accessible object.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.DefaultAction">
+            <summary>
+            A string describing the default action of this accessible object.
+            For a button, this might be "Press".
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.SelectedObjects">
+            <summary>
+            Get all objects of this accessible object that are selected.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.Window">
+            <summary>
+            Get the SystemWindow that owns this accessible object.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.SystemAccessibleObject.Children">
+            <summary>
+            Get all child accessible objects.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Accessibility.AccessibleObjectID">
+            <summary>
+            This enumeration lists all kinds of accessible objects that can
+            be directly assigned to a window.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleObjectID.OBJID_WINDOW">
+            <summary>
+            The window itself.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleObjectID.OBJID_SYSMENU">
+            <summary>
+            The system menu.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleObjectID.OBJID_TITLEBAR">
+            <summary>
+            The title bar.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleObjectID.OBJID_MENU">
+            <summary>
+            The menu.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleObjectID.OBJID_CLIENT">
+            <summary>
+            The client area.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleObjectID.OBJID_VSCROLL">
+            <summary>
+            The vertical scroll bar.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleObjectID.OBJID_HSCROLL">
+            <summary>
+            The horizontal scroll bar.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleObjectID.OBJID_SIZEGRIP">
+            <summary>
+            The size grip (part in the lower right corner that
+            makes resizing the window easier).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleObjectID.OBJID_CARET">
+            <summary>
+            The caret (text cursor).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleObjectID.OBJID_CURSOR">
+            <summary>
+            The mouse cursor. There is only one mouse
+            cursor and it is not assigned to any window.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleObjectID.OBJID_ALERT">
+            <summary>
+            An alert window.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleObjectID.OBJID_SOUND">
+            <summary>
+            A sound this window is playing.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.Hook">
+            <summary>
+            A hook is a point in the system message-handling mechanism where an application
+            can install a subroutine to monitor the message traffic in the system and process 
+            certain types of messages before they reach the target window procedure.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.Hook.#ctor(ManagedWinapi.Hooks.HookType,ManagedWinapi.Hooks.Hook.HookCallback,System.Boolean,System.Boolean)">
+            <summary>
+            Creates a new hook and hooks it.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.Hook.#ctor(ManagedWinapi.Hooks.HookType,System.Boolean,System.Boolean)">
+            <summary>
+            Creates a new hook.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.Hook.#ctor(System.ComponentModel.IContainer)">
+            <summary>
+            Creates a new hook.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.Hook.#ctor">
+            <summary>
+            Creates a new hook.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.Hook.StartHook">
+            <summary>
+            Hooks the hook.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.Hook.Unhook">
+            <summary>
+            Unhooks the hook.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.Hook.Dispose(System.Boolean)">
+            <summary>
+            Unhooks the hook if necessary.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.Hook.InternalCallback(System.Int32,System.IntPtr,System.IntPtr)">
+            <summary>
+            Override this method if you want to prevent a call
+            to the CallNextHookEx method or if you want to return
+            a different return value. For most hooks this is not needed.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.Hook.Callback">
+            <summary>
+            Occurs when the hook's callback is called.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.Hook.Type">
+            <summary>
+            The type of the hook.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.Hook.Hooked">
+            <summary>
+            Whether this hook has been started.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.Hook.HookCallback">
+            <summary>
+            Represents a method that handles a callback from a hook.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.LocalMessageHook">
+            <summary>
+            A hook that intercepts local window messages.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.LocalMessageHook.#ctor(ManagedWinapi.Hooks.LocalMessageHook.MessageCallback)">
+            <summary>
+            Creates a local message hook and hooks it.
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.LocalMessageHook.#ctor">
+            <summary>
+            Creates a local message hook.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.LocalMessageHook.MessageOccurred">
+            <summary>
+            Called when a message has been intercepted.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.LocalMessageHook.MessageCallback">
+            <summary>
+            Represents a method that handles a message from a message hook.
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.HookType">
+            <summary>
+            Hook Types. See the documentation of SetWindowsHookEx for reference.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_JOURNALRECORD">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_JOURNALPLAYBACK">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_KEYBOARD">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_GETMESSAGE">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_CALLWNDPROC">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_CBT">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_SYSMSGFILTER">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_MOUSE">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_HARDWARE">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_DEBUG">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_SHELL">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_FOREGROUNDIDLE">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_CALLWNDPROCRET">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_KEYBOARD_LL">
+            
+        </member>
+        <member name="F:ManagedWinapi.Hooks.HookType.WH_MOUSE_LL">
+            
+        </member>
+        <member name="T:ManagedWinapi.ClipboardNotifier">
+            <summary>
+            Specifies a component that monitors the system clipboard for changes.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ClipboardNotifier.#ctor(System.ComponentModel.IContainer)">
+            <summary>
+            Creates a new clipboard notifier.
+            </summary>
+            <param name="container">The container.</param>
+        </member>
+        <member name="M:ManagedWinapi.ClipboardNotifier.#ctor">
+            <summary>
+            Creates a new clipboard notifier.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ClipboardNotifier.Dispose(System.Boolean)">
+            <summary>
+            Frees resources.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.ClipboardNotifier.ClipboardChanged">
+            <summary>
+            Occurs when the clipboard contents have changed.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.SystemListBox">
+            <summary>
+            Any list box, including those from other applications.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemListBox.FromSystemWindow(ManagedWinapi.Windows.SystemWindow)">
+            <summary>
+            Get a SystemListBox reference from a SystemWindow (which is a list box)
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListBox.SystemWindow">
+            <summary>
+            The SystemWindow instance that represents this list box.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListBox.Count">
+            <summary>
+            The number of elements in this list box.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListBox.SelectedIndex">
+            <summary>
+            The index of the selected element in this list box.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListBox.SelectedItem">
+            <summary>
+            The selected element in this list box.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemListBox.Item(System.Int32)">
+            <summary>
+            Get an element of this list box by index.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.SystemComboBox">
+            <summary>
+            Any combo box, including those from other applications.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemComboBox.FromSystemWindow(ManagedWinapi.Windows.SystemWindow)">
+            <summary>
+            Get a SystemComboBox reference from a SystemWindow (which is a combo box)
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemComboBox.SystemWindow">
+            <summary>
+            The SystemWindow instance that represents this combo box.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemComboBox.Count">
+            <summary>
+            The number of elements in this combo box.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemComboBox.Item(System.Int32)">
+            <summary>
+            Gets an element by index.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.LockKeyResetter">
+            <summary>
+            Utility class that can be used to create key events with all current 
+            locking keys (like Caps Lock) disabled. Other modifier keys (like Ctrl or Shift)
+            are also ignored if they are currently pressed on the "real" keyboard.
+            </summary>
+            <example>
+            <code>
+            using (new LockKeysResetter()) {
+                SendKeys.Send("Hello");
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:ManagedWinapi.LockKeyResetter.#ctor">
+            <summary>
+            Reset all modifier keys and remember in this object which modifier keys
+            have been set.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.LockKeyResetter.Dispose">
+            <summary>
+            Set all modifier keys that have been set before. Since this class implements
+            <see cref="T:System.IDisposable"/>, you can use the <c>using</c> 
+            keyword in C# to automatically set modifier keys when you have finished.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.LockKeyResetter.Send(System.String)">
+            <summary>
+            Convenience method to send keys with all modifiers disabled.
+            </summary>
+            <param name="keys">The keys to send</param>
+        </member>
+        <member name="M:ManagedWinapi.LockKeyResetter.SendWait(System.String)">
+            <summary>
+            Convenience method to send keys and wait for them (like 
+            <see cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)">SendKeys.SendWait</see>) with all modifiers disabled.
+            </summary>
+            <param name="keys"></param>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.LowLevelKeyboardHook">
+            <summary>
+            A hook that intercepts keyboard events.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.LowLevelKeyboardHook.#ctor(ManagedWinapi.Hooks.LowLevelKeyboardHook.KeyCallback)">
+            <summary>
+            Creates a low-level keyboard hook and hooks it.
+            </summary>
+            <param name="callback"></param>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.LowLevelKeyboardHook.#ctor">
+            <summary>
+            Creates a low-level keyboard hook.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.LowLevelKeyboardHook.KeyIntercepted">
+            <summary>
+            Called when a key has been intercepted.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.LowLevelKeyboardHook.MessageIntercepted">
+            <summary>
+            Called when a key message has been intercepted.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.LowLevelKeyboardHook.KeyCallback">
+            <summary>
+            Represents a method that handles an intercepted key.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.LowLevelMouseHook">
+            <summary>
+            A hook that intercepts mouse events
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.LowLevelMouseHook.#ctor(ManagedWinapi.Hooks.LowLevelMouseHook.MouseCallback)">
+            <summary>
+            Creates a low-level mouse hook and hooks it.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.LowLevelMouseHook.#ctor">
+            <summary>
+            Creates a low-level mouse hook.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.LowLevelMouseHook.MouseIntercepted">
+            <summary>
+            Called when a mouse action has been intercepted.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.LowLevelMouseHook.MessageIntercepted">
+            <summary>
+            Called when a mouse message has been intercepted.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.LowLevelMouseHook.MouseCallback">
+            <summary>
+            Represents a method that handles an intercepted mouse action.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.LowLevelMessageCallback">
+            <summary>
+            Represents a method that handles an intercepted low-level message.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.LowLevelMessage">
+            <summary>
+            A message that has been intercepted by a low-level hook
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.LowLevelMessage.ReplayEvent">
+            <summary>
+            Replays this event as if the user did it again.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.LowLevelMessage.Time">
+            <summary>
+            The time this message happened.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.LowLevelMessage.Flags">
+            <summary>
+            Flags of the message. Its contents depend on the message.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.LowLevelMessage.Message">
+            <summary>
+            The message identifier.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.LowLevelMessage.ExtraInfo">
+            <summary>
+            Extra information. Its contents depend on the message.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.LowLevelMouseMessage">
+            <summary>
+            A message that has been intercepted by a low-level mouse hook
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.LowLevelMouseMessage.#ctor(System.Int32,ManagedWinapi.Windows.POINT,System.Int32,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            Creates a new low-level mouse message.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.LowLevelMouseMessage.ReplayEvent">
+            <summary>
+            Replays this event.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.LowLevelMouseMessage.Point">
+            <summary>
+            The mouse position where this message occurred.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.LowLevelMouseMessage.MouseData">
+            <summary>
+            Additional mouse data, depending on the type of event.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.LowLevelMouseMessage.MouseEventFlags">
+            <summary>
+            Mouse event flags needed to replay this message.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.LowLevelKeyboardMessage">
+            <summary>
+            A message that has been intercepted by a low-level mouse hook
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.LowLevelKeyboardMessage.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            Creates a new low-level keyboard message.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.LowLevelKeyboardMessage.ReplayEvent">
+            <summary>
+            Replays this event.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.LowLevelKeyboardMessage.VirtualKeyCode">
+            <summary>
+            The virtual key code that caused this message.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.LowLevelKeyboardMessage.ScanCode">
+            <summary>
+            The scan code that caused this message.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.LowLevelKeyboardMessage.KeyboardEventFlags">
+            <summary>
+            Flags needed to replay this event.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.JournalHook">
+            <summary>
+            Abstract base class for hooks that can be used to create or playback 
+            a log of keyboard and mouse events.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.JournalHook.#ctor(ManagedWinapi.Hooks.HookType)">
+            <summary>
+            Creates a new journal hook.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.JournalHook.StartHook">
+            <summary>
+            Hooks the hook.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.JournalHook.Unhook">
+            <summary>
+            Unhooks the hook.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.JournalHook.JournalCancelled">
+            <summary>
+            Occurs when the journal activity has been cancelled by
+            CTRL+ALT+DEL or CTRL+ESC.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.JournalMessage">
+            <summary>
+            An event that has been recorded by a journal hook.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.JournalMessage.#ctor(System.IntPtr,System.UInt32,System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            Creates a new journal message.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.JournalMessage.ToString">
+            <summary>
+            Returns a System.String that represents the current System.Object.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.JournalMessage.HWnd">
+            <summary>
+            The window this message has been sent to.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.JournalMessage.Message">
+            <summary>
+            The message.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.JournalMessage.ParamL">
+            <summary>
+            The first parameter of the message.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.JournalMessage.ParamH">
+            <summary>
+            The second parameter of the message.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.JournalMessage.Time">
+            <summary>
+            The timestamp of the message.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.JournalRecordEventArgs">
+            <summary>
+            Event data for a journal record event.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Hooks.JournalRecordEventArgs.RecordedMessage">
+            <summary>
+            The recorded message.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.JournalRecordHook">
+            <summary>
+            A hook that can be used to create a log of keyboard and mouse events.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.JournalRecordHook.#ctor">
+            <summary>
+            Creates a new journal record hook.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.JournalRecordHook.SystemModalDialogAppeared">
+            <summary>
+            Occurs when a system modal dialog appears. This may be used
+            to stop recording.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.JournalRecordHook.SystemModalDialogDisappeared">
+            <summary>
+            Occurs when a system modal dialog disappears. This may be used
+            to continue recording.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.JournalRecordHook.RecordEvent">
+            <summary>
+            Occurs when an event can be recorded.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.JournalPlaybackHook">
+            <summary>
+            A hook that can be used to playback a log of keyboard and mouse events.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.JournalPlaybackHook.#ctor">
+            <summary>
+            Creates a new journal playback hook.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.JournalPlaybackHook.SystemModalDialogAppeared">
+            <summary>
+            Occurs when a system modal dialog appears. This may be used to 
+            stop playback.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.JournalPlaybackHook.SystemModalDialogDisappeared">
+            <summary>
+            Occurs when a system modal dialog disappears. This may be used
+            to continue playback.
+            </summary>
+        </member>
+        <member name="E:ManagedWinapi.Hooks.JournalPlaybackHook.GetNextJournalMessage">
+            <summary>
+            Occurs when the next journal message is needed. If the message is
+            <null/> and a timestamp in the future, it just waits for that time and
+            asks for a message again. If the message is <null/> and the timestamp is
+            in the past, playback stops.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.JournalPlaybackHook.JournalQuery">
+            <summary>
+            Represents a method that yields the next journal message.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Hooks.InputLocker">
+            <summary>
+            Convenience class that uses a journal playback hook to block keyboard
+            and mouse input for some time.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.InputLocker.#ctor(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Locks the input for <code>interval * count</code> milliseconds. The
+            lock can be canceled every <code>interval</code> milliseconds. If count is
+            negative, the lock will be active until cancelled.
+            </summary>
+            <param name="interval">The interval to lock the input.</param>
+            <param name="count">How often to lock the input.</param>
+            <param name="force">If <code>true</code>, the lock cannot be canceled
+            by pressing Control+Alt+Delete</param>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.InputLocker.Unlock">
+            <summary>
+            Unlocks the input.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.InputLocker.Dispose">
+            <summary>
+            Unlocks the input.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Hooks.InputLocker.LockInputFor(System.Int32,System.Boolean)">
+            <summary>
+            Lock input for given number of milliseconds
+            </summary>
+            <param name="millis">Number of milliseconds to lock</param>
+            <param name="force">If <code>true</code>, the lock cannot be canceled
+            by pressing Control+Alt+Delete</param>
+        </member>
+        <member name="T:ManagedWinapi.SendKeysEscaper">
+            <summary>
+            Utility class to escape literal strings so that they can be used 
+            for the <see cref="T:System.Windows.Forms.SendKeys"/> class.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.SendKeysEscaper.escape(System.String,System.Boolean)">
+            <summary>
+            Escapes a literal string.
+            </summary>
+            <param name="literal">The literal string to be sent.</param>
+            <param name="preferBraced">Whether you prefer to put characters into braces.
+            </param>
+            <returns>The escaped string.</returns>
+        </member>
+        <member name="P:ManagedWinapi.SendKeysEscaper.Instance">
+            <summary>
+            The singleton instance.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.SendKeysEscaper.EscapableState">
+            <summary>
+            Specifies if a character needs to be escaped.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.SendKeysEscaper.EscapableState.NOT_AT_ALL">
+            <summary>
+            The character cannot be used at all with SendKeys.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.SendKeysEscaper.EscapableState.BRACED_ONLY">
+            <summary>
+            The character must be escaped by putting it into braces
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.SendKeysEscaper.EscapableState.UNBRACED_ONLY">
+            <summary>
+            The character may not be escaped by putting it into braces
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.SendKeysEscaper.EscapableState.ALWAYS">
+            <summary>
+            Both ways are okay.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.KeyboardKey">
+            <summary>
+            This class contains utility methods related to keys on the keyboard.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.KeyboardKey.#ctor(System.Windows.Forms.Keys)">
+            <summary>
+            Initializes a new instance of this class for a given key.
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:ManagedWinapi.KeyboardKey.PressAndRelease">
+            <summary>
+            Press this key and release it.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.KeyboardKey.Press">
+            <summary>
+            Press this key.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.KeyboardKey.Release">
+            <summary>
+            Release this key.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.KeyboardKey.InjectKeyboardEvent(System.Windows.Forms.Keys,System.Byte,System.UInt32,System.UIntPtr)">
+            <summary>
+            Inject a keyboard event into the event loop, as if the user performed
+            it with his keyboard.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.KeyboardKey.InjectMouseEvent(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UIntPtr)">
+            <summary>
+            Inject a mouse event into the event loop, as if the user performed
+            it with his mouse.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.KeyboardKey.State">
+            <summary>
+            The state of this key, as seen by this application.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.KeyboardKey.AsyncState">
+            <summary>
+            The global state of this key.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.KeyboardKey.KeyName">
+            <summary>
+            Determine the name of a key in the current keyboard layout.
+            </summary>
+            <returns>The key's name</returns>
+        </member>
+        <member name="T:ManagedWinapi.Accessibility.AccessibleEventListener">
+            <summary>
+            Listens to events from the Windows accessibility system. These events are useful
+            if you want to write a screenreader or similar program.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.AccessibleEventListener.#ctor(System.ComponentModel.IContainer)">
+            <summary>
+            Initializes a new instance of this class with the specified container.
+            </summary>
+            <param name="container">The container to add it to.</param>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.AccessibleEventListener.#ctor">
+            <summary>
+            Initializes a new instance of this class.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.AccessibleEventListener.Dispose(System.Boolean)">
+            <summary>
+            Releases all resources used by the System.ComponentModel.Component.
+            </summary>
+            <param name="disposing">Whether to dispose managed resources.</param>
+        </member>
+        <member name="E:ManagedWinapi.Accessibility.AccessibleEventListener.EventOccurred">
+            <summary>
+            Occurs when an accessible event is received.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.AccessibleEventListener.Enabled">
+            <summary>
+            Enables this listener so that it reports accessible events.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.AccessibleEventListener.MinimalEventType">
+            <summary>
+            The minimal event type to listen to.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.AccessibleEventListener.MaximalEventType">
+            <summary>
+            The maximal event type to listen to.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Accessibility.AccessibleEventHandler">
+            <summary>
+            Represents the method that will handle accessibility events.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Accessibility.AccessibleEventArgs">
+            <summary>
+            Provides data for accessible events.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Accessibility.AccessibleEventArgs.#ctor(ManagedWinapi.Accessibility.AccessibleEventType,System.IntPtr,System.UInt32,System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            Initializes a new instance of the AccessibleEventArgs class.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.AccessibleEventArgs.EventType">
+            <summary>
+            Type of this accessible event
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.AccessibleEventArgs.HWnd">
+            <summary>
+            Handle of the affected window, if any.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.AccessibleEventArgs.ObjectID">
+            <summary>
+            Object ID.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.AccessibleEventArgs.ChildID">
+            <summary>
+            Child ID.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.AccessibleEventArgs.Thread">
+            <summary>
+            The thread that generated this event.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.AccessibleEventArgs.Time">
+            <summary>
+            Time in milliseconds when the event was generated.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Accessibility.AccessibleEventArgs.AccessibleObject">
+            <summary>
+            The accessible object related to this event.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Accessibility.AccessibleEventType">
+            <summary>
+            This enumeration lists known accessible event types.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_SOUND">
+            <summary>
+             Sent when a sound is played.  Currently nothing is generating this, we
+             are going to be cleaning up the SOUNDSENTRY feature in the control panel
+             and will use this at that time.  Applications implementing WinEvents
+             are perfectly welcome to use it.  Clients of IAccessible* will simply
+             turn around and get back a non-visual object that describes the sound.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_ALERT">
+            <summary>
+            Sent when an alert needs to be given to the user.  MessageBoxes generate
+            alerts for example.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_FOREGROUND">
+            <summary>
+            Sent when the foreground (active) window changes, even if it is changing
+            to another window in the same thread as the previous one.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_MENUSTART">
+            <summary>
+            Sent when entering into and leaving from menu mode (system, app bar, and
+            track popups).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_MENUEND">
+            <summary>
+            Sent when entering into and leaving from menu mode (system, app bar, and
+            track popups).
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_MENUPOPUPSTART">
+            <summary>
+            Sent when a menu popup comes up and just before it is taken down.  Note
+            that for a call to TrackPopupMenu(), a client will see EVENT_SYSTEM_MENUSTART
+            followed almost immediately by EVENT_SYSTEM_MENUPOPUPSTART for the popup
+            being shown.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_MENUPOPUPEND">
+            <summary>
+            Sent when a menu popup comes up and just before it is taken down.  Note
+            that for a call to TrackPopupMenu(), a client will see EVENT_SYSTEM_MENUSTART
+            followed almost immediately by EVENT_SYSTEM_MENUPOPUPSTART for the popup
+            being shown.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_CAPTURESTART">
+            <summary>
+            Sent when a window takes the capture and releases the capture.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_CAPTUREEND">
+            <summary>
+            Sent when a window takes the capture and releases the capture.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_MOVESIZESTART">
+            <summary>
+            Sent when a window enters and leaves move-size dragging mode.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_MOVESIZEEND">
+            <summary>
+            Sent when a window enters and leaves move-size dragging mode.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_CONTEXTHELPSTART">
+            <summary>
+            Sent when a window enters and leaves context sensitive help mode.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_CONTEXTHELPEND">
+            <summary>
+            Sent when a window enters and leaves context sensitive help mode.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_DRAGDROPSTART">
+            <summary>
+            Sent when a window enters and leaves drag drop mode.  Note that it is up
+            to apps and OLE to generate this, since the system doesn't know.  Like
+            EVENT_SYSTEM_SOUND, it will be a while before this is prevalent.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_DRAGDROPEND">
+            <summary>
+            Sent when a window enters and leaves drag drop mode.  Note that it is up
+            to apps and OLE to generate this, since the system doesn't know.  Like
+            EVENT_SYSTEM_SOUND, it will be a while before this is prevalent.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_DIALOGSTART">
+            <summary>
+            Sent when a dialog comes up and just before it goes away.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_DIALOGEND">
+            <summary>
+            Sent when a dialog comes up and just before it goes away.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_SCROLLINGSTART">
+            <summary>
+            Sent when beginning and ending the tracking of a scrollbar in a window,
+            and also for scrollbar controls.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_SCROLLINGEND">
+            <summary>
+            Sent when beginning and ending the tracking of a scrollbar in a window,
+            and also for scrollbar controls.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_SWITCHSTART">
+            <summary>
+            Sent when beginning and ending alt-tab mode with the switch window.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_SWITCHEND">
+            <summary>
+            Sent when beginning and ending alt-tab mode with the switch window.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_MINIMIZESTART">
+            <summary>
+            Sent when a window minimizes.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_SYSTEM_MINIMIZEEND">
+            <summary>
+            Sent just before a window restores.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_CREATE">
+            <summary>
+            hwnd + ID + idChild is created item
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_DESTROY">
+            <summary>
+            hwnd + ID + idChild is destroyed item
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_SHOW">
+            <summary>
+            hwnd + ID + idChild is shown item
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_HIDE">
+            <summary>
+            hwnd + ID + idChild is hidden item
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_REORDER">
+            <summary>
+            hwnd + ID + idChild is parent of zordering children
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_FOCUS">
+            <summary>
+            hwnd + ID + idChild is focused item
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_SELECTION">
+            <summary>
+            hwnd + ID + idChild is selected item (if only one), or idChild is OBJID_WINDOW if complex
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_SELECTIONADD">
+            <summary>
+            hwnd + ID + idChild is item added
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_SELECTIONREMOVE">
+            <summary>
+            hwnd + ID + idChild is item removed
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_SELECTIONWITHIN">
+            <summary>
+            hwnd + ID + idChild is parent of changed selected items
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_STATECHANGE">
+            <summary>
+            hwnd + ID + idChild is item w/ state change
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_LOCATIONCHANGE">
+            <summary>
+            hwnd + ID + idChild is moved/sized item
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_NAMECHANGE">
+            <summary>
+            hwnd + ID + idChild is item w/ name change
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_DESCRIPTIONCHANGE">
+            <summary>
+            hwnd + ID + idChild is item w/ desc change
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_VALUECHANGE">
+            <summary>
+            hwnd + ID + idChild is item w/ value change
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_PARENTCHANGE">
+            <summary>
+            hwnd + ID + idChild is item w/ new parent
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_HELPCHANGE">
+            <summary>
+            hwnd + ID + idChild is item w/ help change
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_DEFACTIONCHANGE">
+            <summary>
+            hwnd + ID + idChild is item w/ def action change
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_OBJECT_ACCELERATORCHANGE">
+            <summary>
+            hwnd + ID + idChild is item w/ keybd accel change
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_MIN">
+            <summary>
+            The lowest possible event value
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Accessibility.AccessibleEventType.EVENT_MAX">
+            <summary>
+            The highest possible event value
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.SystemTreeView">
+            <summary>
+            Any tree view, including those from other applications.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.SystemTreeView.FromSystemWindow(ManagedWinapi.Windows.SystemWindow)">
+            <summary>
+            Get a SystemTreeView reference from a SystemWindow (which is a tree view)
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemTreeView.Count">
+            <summary>
+            The number of items (icons) in this tree view.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemTreeView.Roots">
+            <summary>
+            The root items of this tree view.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.SystemTreeViewItem">
+            <summary>
+            An item of a tree view.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemTreeViewItem.Title">
+            <summary>
+            The title of that item.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.SystemTreeViewItem.Children">
+            <summary>
+            All child items of that item.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.Mixer">
+            <summary>
+            Represents a mixer provided by a sound card. Each mixer has
+            multiple destination lines (e. g. Record and Playback) of which
+            each has multiple source lines (Wave, MIDI, Mic, etc.).
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Audio.Mixer.Mixer.OpenMixer(System.UInt32)">
+            <summary>
+            Opens a mixer.
+            </summary>
+            <param name="index">The zero-based index of this mixer.</param>
+            <returns>A reference to this mixer.</returns>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.Mixer.ControlChanged">
+            <summary>
+            Occurs when a control of this mixer changes value.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Audio.Mixer.Mixer.LineChanged">
+            <summary>
+            Occurs when a line of this mixer changes.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Audio.Mixer.Mixer.Dispose">
+            <summary>
+            Disposes this mixer.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Audio.Mixer.Mixer.FindLine(System.Int32)">
+            <summary>
+            Find a line of this mixer by ID.
+            </summary>
+            <param name="lineId">ID of the line to find</param>
+            <returns>The line, or <code>null</code> if no line was found.</returns>
+        </member>
+        <member name="M:ManagedWinapi.Audio.Mixer.Mixer.FindControl(System.Int32)">
+            <summary>
+            Find a control of this mixer by ID.
+            </summary>
+            <param name="ctrlId">ID of the control to find.</param>
+            <returns>The control, or <code>null</code> if no control was found.</returns>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.Mixer.MixerCount">
+            <summary>
+            Gets the number of available mixers in this system.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.Mixer.CreateEvents">
+            <summary>
+            Whether to create change events.
+            Enabling this may create a slight performance impact, so only
+            enable it if you handle these events.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.Mixer.Name">
+            <summary>
+            Gets the name of this mixer's sound card.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.Mixer.DestinationLineCount">
+            <summary>
+            Gets the number of destination lines of this mixer.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.Mixer.DestinationLines">
+            <summary>
+            Gets all destination lines of this mixer
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.MixerEventHandler">
+            <summary>
+            Represents the method that will handle the <b>LineChanged</b> or 
+            <b>ControlChanged</b> event of a <see cref="T:ManagedWinapi.Audio.Mixer.Mixer">Mixer</see>.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">A <see cref="T:ManagedWinapi.Audio.Mixer.MixerEventArgs">MixerEventArgs</see> 
+            that contains the event data.</param>
+        </member>
+        <member name="T:ManagedWinapi.Audio.Mixer.MixerEventArgs">
+            <summary>
+            Provides data for the LineChanged and ControlChanged events of a 
+            <see cref="P:ManagedWinapi.Audio.Mixer.MixerEventArgs.Mixer">Mixer</see>.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Audio.Mixer.MixerEventArgs.#ctor(ManagedWinapi.Audio.Mixer.Mixer,ManagedWinapi.Audio.Mixer.MixerLine,ManagedWinapi.Audio.Mixer.MixerControl)">
+            <summary>
+            Initializes a new instance of the 
+            <see cref="T:ManagedWinapi.Audio.Mixer.MixerEventArgs">MixerEventArgs</see> class.
+            </summary>
+            <param name="mixer">The affected mixer</param>
+            <param name="line">The affected line</param>
+            <param name="control">The affected control, or <code>null</code>
+            if this is a LineChanged event.</param>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerEventArgs.Mixer">
+            <summary>
+            The affected mixer.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerEventArgs.Line">
+            <summary>
+            The affected line.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Audio.Mixer.MixerEventArgs.Control">
+            <summary>
+            The affected control.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.ShortcutBox">
+            <summary>
+            A <see cref="T:System.Windows.Forms.TextBox"/> that can be used to select a keyboard shortcut.
+            A context menu allows selecting keys that are not available directly
+            by typing them.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.ShortcutBox.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ShortcutBox.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ManagedWinapi.ShortcutBox.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.ShortcutBox.#ctor">
+            <summary>
+            Creates a new shortcut box.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.ShortcutBox.KeyCode">
+            <summary>
+            The "non-modifier" key code of the currently selected shortcut, or
+            <see cref="F:System.Windows.Forms.Keys.None"/> if no key is selected.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.ShortcutBox.Shift">
+            <summary>
+            Whether the currently selected shortcut includes the Shift key.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.ShortcutBox.Alt">
+            <summary>
+            Whether the currently selected shortcut includes the Alt key.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.ShortcutBox.Ctrl">
+            <summary>
+            Whether the currently selected shortcut includes the Control key.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.ShortcutBox.WindowsKey">
+            <summary>
+            Whether the currently selected shortcut includes the Windows key.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.ShortcutBox.Text">
+            <summary>
+            The textual representation of the currently selected key.
+            This property cannot be set.
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.Contents.TextContent">
+            <summary>
+            The content of a text box.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.TextContent.ComponentType">
+            
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.TextContent.ShortDescription">
+            
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.TextContent.LongDescription">
+            
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.TextContent.PropertyList">
+            
+        </member>
+        <member name="T:ManagedWinapi.Windows.POINT">
+            <summary>
+            Wrapper around the Winapi POINT type.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.POINT.X">
+            <summary>
+            The X Coordinate.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.POINT.Y">
+            <summary>
+            The Y Coordinate.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.POINT.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a new POINT.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:ManagedWinapi.Windows.POINT.op_Implicit(ManagedWinapi.Windows.POINT)~System.Drawing.Point">
+            <summary>
+            Implicit cast.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ManagedWinapi.Windows.POINT.op_Implicit(System.Drawing.Point)~ManagedWinapi.Windows.POINT">
+            <summary>
+            Implicit cast.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ManagedWinapi.Windows.RECT">
+            <summary>
+            Wrapper around the Winapi RECT type.
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.RECT.Left">
+            <summary>
+            LEFT
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.RECT.Top">
+            <summary>
+            TOP
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.RECT.Right">
+            <summary>
+            RIGHT
+            </summary>
+        </member>
+        <member name="F:ManagedWinapi.Windows.RECT.Bottom">
+            <summary>
+            BOTTOM
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.RECT.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a new RECT.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.RECT.ToRectangle">
+            <summary>
+            Convert RECT to a Rectangle.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.RECT.FromRectangle(System.Drawing.Rectangle)">
+            <summary>
+            Convert Rectangle to a RECT
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.RECT.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.RECT.op_Implicit(ManagedWinapi.Windows.RECT)~System.Drawing.Rectangle">
+            <summary>
+            Implicit Cast.
+            </summary>
+        </member>
+        <member name="M:ManagedWinapi.Windows.RECT.op_Implicit(System.Drawing.Rectangle)~ManagedWinapi.Windows.RECT">
+            <summary>
+            Implicit Cast.
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.RECT.Height">
+            <summary>
+            HEIGHT
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.RECT.Width">
+            <summary>
+            WIDTH
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.RECT.Size">
+            <summary>
+            SIZE
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.RECT.Location">
+            <summary>
+            LOCATION
+            </summary>
+        </member>
+        <member name="T:ManagedWinapi.Windows.Contents.AccessibleWindowContent">
+            <summary>
+            The content of an object that supports the Accessibility API 
+            (used by screen readers and similar programs).
+            </summary>
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.AccessibleWindowContent.ComponentType">
+            
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.AccessibleWindowContent.ShortDescription">
+            
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.AccessibleWindowContent.LongDescription">
+            
+        </member>
+        <member name="P:ManagedWinapi.Windows.Contents.AccessibleWindowContent.PropertyList">
+            
+        </member>
+    </members>
+</doc>

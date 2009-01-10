@@ -14,6 +14,7 @@ namespace Multitouch.Contracts
     public enum ImageType
     {
         Normalized = 0,
+        Binarized = 1,
     }
 }
 

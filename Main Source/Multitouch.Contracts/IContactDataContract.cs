@@ -14,32 +14,25 @@ namespace Multitouch.Contracts.Contracts
 		/// <summary>
 		/// Contact bounds
 		/// </summary>
-		Rect Bounds{get;}
+		Rect Bounds { get; }
 
 		/// <summary>
-		/// X coordinate of contact center.
+		/// Position of contact
 		/// </summary>
-		double X { get; }
-		
-		/// <summary>
-		/// Y coordinate of contact center.
-		/// </summary>
-		double Y { get; }
+		Point Position { get; }
 
 		/// <summary>
-		/// Width of contact.
+		/// Orientation
 		/// </summary>
-		double Width { get; }
-		
-		/// <summary>
-		/// Height of contact.
-		/// </summary>
-		double Height { get; }
+		double Orientation { get; }
 
 		/// <summary>
-		/// Angle
+		/// Area
 		/// </summary>
-		double Angle { get; }
+		double Area { get; }
+
+        double MajorAxis { get; }
+		double MinorAxis { get; }
 		
 		/// <summary>
 		/// State of contact. See <see cref="ContactState"/>

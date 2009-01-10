@@ -19,108 +19,9 @@ namespace Multitouch.Framework.Input.Service {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Normalized = 0,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Rect", Namespace="http://schemas.datacontract.org/2004/07/System.Windows")]
-    [System.SerializableAttribute()]
-    internal partial struct Rect : System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private double _heightField;
-        
-        private double _widthField;
-        
-        private double _xField;
-        
-        private double _yField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        internal double _height {
-            get {
-                return this._heightField;
-            }
-            set {
-                if ((this._heightField.Equals(value) != true)) {
-                    this._heightField = value;
-                    this.RaisePropertyChanged("_height");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        internal double _width {
-            get {
-                return this._widthField;
-            }
-            set {
-                if ((this._widthField.Equals(value) != true)) {
-                    this._widthField = value;
-                    this.RaisePropertyChanged("_width");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        internal double _x {
-            get {
-                return this._xField;
-            }
-            set {
-                if ((this._xField.Equals(value) != true)) {
-                    this._xField = value;
-                    this.RaisePropertyChanged("_x");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        internal double _y {
-            get {
-                return this._yField;
-            }
-            set {
-                if ((this._yField.Equals(value) != true)) {
-                    this._yField = value;
-                    this.RaisePropertyChanged("_y");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ContactState", Namespace="http://schemas.datacontract.org/2004/07/Multitouch.Contracts")]
-    internal enum ContactState : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        New = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Removed = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Moved = 2,
+        Binarized = 1,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -134,7 +35,13 @@ namespace Multitouch.Framework.Input.Service {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Multitouch.Framework.Input.Service.ContactData[] ContactsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Multitouch.Framework.Input.Service.ImageData[] ImagesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long TimestampField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -147,6 +54,19 @@ namespace Multitouch.Framework.Input.Service {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        internal Multitouch.Framework.Input.Service.ContactData[] Contacts {
+            get {
+                return this.ContactsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContactsField, value) != true)) {
+                    this.ContactsField = value;
+                    this.RaisePropertyChanged("Contacts");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         internal Multitouch.Framework.Input.Service.ImageData[] Images {
             get {
                 return this.ImagesField;
@@ -155,6 +75,193 @@ namespace Multitouch.Framework.Input.Service {
                 if ((object.ReferenceEquals(this.ImagesField, value) != true)) {
                     this.ImagesField = value;
                     this.RaisePropertyChanged("Images");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal long Timestamp {
+            get {
+                return this.TimestampField;
+            }
+            set {
+                if ((this.TimestampField.Equals(value) != true)) {
+                    this.TimestampField = value;
+                    this.RaisePropertyChanged("Timestamp");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ContactData", Namespace="http://schemas.datacontract.org/2004/07/Multitouch.Service.Logic.ExternalInterfac" +
+        "es")]
+    [System.SerializableAttribute()]
+    internal partial class ContactData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double AreaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Windows.Rect BoundsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.IntPtr HwndField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double MajorAxisField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double MinorAxisField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double OrientationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Windows.Point PositionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Multitouch.Framework.Input.Service.ContactState StateField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal double Area {
+            get {
+                return this.AreaField;
+            }
+            set {
+                if ((this.AreaField.Equals(value) != true)) {
+                    this.AreaField = value;
+                    this.RaisePropertyChanged("Area");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal System.Windows.Rect Bounds {
+            get {
+                return this.BoundsField;
+            }
+            set {
+                if ((this.BoundsField.Equals(value) != true)) {
+                    this.BoundsField = value;
+                    this.RaisePropertyChanged("Bounds");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal System.IntPtr Hwnd {
+            get {
+                return this.HwndField;
+            }
+            set {
+                if ((this.HwndField.Equals(value) != true)) {
+                    this.HwndField = value;
+                    this.RaisePropertyChanged("Hwnd");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal double MajorAxis {
+            get {
+                return this.MajorAxisField;
+            }
+            set {
+                if ((this.MajorAxisField.Equals(value) != true)) {
+                    this.MajorAxisField = value;
+                    this.RaisePropertyChanged("MajorAxis");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal double MinorAxis {
+            get {
+                return this.MinorAxisField;
+            }
+            set {
+                if ((this.MinorAxisField.Equals(value) != true)) {
+                    this.MinorAxisField = value;
+                    this.RaisePropertyChanged("MinorAxis");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal double Orientation {
+            get {
+                return this.OrientationField;
+            }
+            set {
+                if ((this.OrientationField.Equals(value) != true)) {
+                    this.OrientationField = value;
+                    this.RaisePropertyChanged("Orientation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal System.Windows.Point Position {
+            get {
+                return this.PositionField;
+            }
+            set {
+                if ((this.PositionField.Equals(value) != true)) {
+                    this.PositionField = value;
+                    this.RaisePropertyChanged("Position");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        internal Multitouch.Framework.Input.Service.ContactState State {
+            get {
+                return this.StateField;
+            }
+            set {
+                if ((this.StateField.Equals(value) != true)) {
+                    this.StateField = value;
+                    this.RaisePropertyChanged("State");
                 }
             }
         }
@@ -295,18 +402,38 @@ namespace Multitouch.Framework.Input.Service {
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ContactState", Namespace="http://schemas.datacontract.org/2004/07/Multitouch.Contracts")]
+    internal enum ContactState : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        New = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Removed = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Moved = 2,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Input.Service.IApplicationInterface", CallbackContract=typeof(Multitouch.Framework.Input.Service.IApplicationInterfaceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     internal interface IApplicationInterface {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IApplicationInterface/Subscribe", ReplyAction="http://tempuri.org/IApplicationInterface/SubscribeResponse")]
-        void Subscribe(System.IntPtr windowHandle);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IApplicationInterface/CreateSession")]
+        void CreateSession();
         
-        [System.ServiceModel.OperationContractAttribute(IsTerminating=true, Action="http://tempuri.org/IApplicationInterface/Unsubscribe", ReplyAction="http://tempuri.org/IApplicationInterface/UnsubscribeResponse")]
-        void Unsubscribe();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, IsTerminating=true, Action="http://tempuri.org/IApplicationInterface/RemoveSession")]
+        void RemoveSession();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IApplicationInterface/ReceiveFrames")]
-        void ReceiveFrames(bool value);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IApplicationInterface/AddWindowHandleToSession")]
+        void AddWindowHandleToSession(System.IntPtr windowHandle);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IApplicationInterface/RemoveWindowHandleFromSession")]
+        void RemoveWindowHandleFromSession(System.IntPtr windowHandle);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IApplicationInterface/SendEmptyFrames")]
+        void SendEmptyFrames(bool value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IApplicationInterface/SendImageType", ReplyAction="http://tempuri.org/IApplicationInterface/SendImageTypeResponse")]
         bool SendImageType(Multitouch.Framework.Input.Service.ImageType imageType, bool value);
@@ -314,9 +441,6 @@ namespace Multitouch.Framework.Input.Service {
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     internal interface IApplicationInterfaceCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IApplicationInterface/ContactChanged")]
-        void ContactChanged(int id, double x, double y, double width, double height, double angle, Multitouch.Framework.Input.Service.Rect bounds, Multitouch.Framework.Input.Service.ContactState state);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IApplicationInterface/Frame")]
         void Frame(Multitouch.Framework.Input.Service.FrameData data);
@@ -350,16 +474,24 @@ namespace Multitouch.Framework.Input.Service {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void Subscribe(System.IntPtr windowHandle) {
-            base.Channel.Subscribe(windowHandle);
+        public void CreateSession() {
+            base.Channel.CreateSession();
         }
         
-        public void Unsubscribe() {
-            base.Channel.Unsubscribe();
+        public void RemoveSession() {
+            base.Channel.RemoveSession();
         }
         
-        public void ReceiveFrames(bool value) {
-            base.Channel.ReceiveFrames(value);
+        public void AddWindowHandleToSession(System.IntPtr windowHandle) {
+            base.Channel.AddWindowHandleToSession(windowHandle);
+        }
+        
+        public void RemoveWindowHandleFromSession(System.IntPtr windowHandle) {
+            base.Channel.RemoveWindowHandleFromSession(windowHandle);
+        }
+        
+        public void SendEmptyFrames(bool value) {
+            base.Channel.SendEmptyFrames(value);
         }
         
         public bool SendImageType(Multitouch.Framework.Input.Service.ImageType imageType, bool value) {

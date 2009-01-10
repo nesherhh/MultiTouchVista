@@ -6,154 +6,158 @@ using Multitouch.Contracts;
 
 namespace Multitouch.Service.Logic.ExternalInterfaces
 {
-	[ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
+	[ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true)]
 	public class ApplicationInterfaceService : IApplicationInterface
 	{
-		IApplicationInterfaceCallback callback;
-		IntPtr hWnd;
-		Action<IContactData> contactChangedHandler;
-		Action<IFrameData> frameHandler;
-
-		static Dictionary<IntPtr, Receiver> receivers;
-		Dictionary<ImageType, int> imagesToSend;
-
-		static ApplicationInterfaceService()
-		{
-			receivers = new Dictionary<IntPtr, Receiver>();
-		}
+		Dictionary<string, SessionContext> sessions;
+		Dictionary<IntPtr, SessionContext> handleToSessionMap;
 
 		public ApplicationInterfaceService()
 		{
-			imagesToSend = new Dictionary<ImageType, int>();
-			foreach (ImageType value in Enum.GetValues(typeof(ImageType)))
-				imagesToSend.Add(value, 0);
+			sessions = new Dictionary<string, SessionContext>();
+			handleToSessionMap = new Dictionary<IntPtr, SessionContext>();
 		}
 
-		public void Subscribe(IntPtr windowHandle)
+		public void CreateSession()
 		{
-			hWnd = windowHandle;
-			callback = OperationContext.Current.GetCallbackChannel<IApplicationInterfaceCallback>();
-			contactChangedHandler = OnContactChanged;
-			frameHandler = OnFrame;
+			string sessionId = OperationContext.Current.SessionId;
+			if (sessions.ContainsKey(sessionId))
+				throw new MultitouchException(string.Format("session '{0}' is already created", sessionId));
+			sessions.Add(sessionId, new SessionContext(OperationContext.Current.GetCallbackChannel<IApplicationInterfaceCallback>()));
 
-			receivers.Add(hWnd, new Receiver(contactChangedHandler));
+			UpdateGlobalSendEmptyFrames();
+			UpdateGlobalImageSetting(ImageType.Binarized);
+			UpdateGlobalImageSetting(ImageType.Normalized);
 		}
 
-		public void Unsubscribe()
+		public void RemoveSession()
 		{
-			receivers.Remove(hWnd);
+			RemoveSession(GetSessionContext());
 		}
 
-		public void ReceiveFrames(bool value)
+		void RemoveSession(SessionContext session)
 		{
-			Receiver receiver;
-			receivers.TryGetValue(hWnd, out receiver);
+			foreach (IntPtr handle in session)
+				handleToSessionMap.Remove(handle);
+			sessions.Remove(OperationContext.Current.SessionId);
 
-			if (receiver != null)
-			{
-				if (value)
-					receiver.FrameHandler = frameHandler;
-				else
-					receiver.FrameHandler = null;
-			}
+			UpdateGlobalSendEmptyFrames();
+			UpdateGlobalImageSetting(ImageType.Binarized);
+			UpdateGlobalImageSetting(ImageType.Normalized);
+		}
+
+		public void AddWindowHandleToSession(IntPtr windowHandle)
+		{
+			SessionContext sessionContext = GetSessionContext();
+			sessionContext.Add(windowHandle);
+			handleToSessionMap.Add(windowHandle, sessionContext);
+		}
+
+		public void RemoveWindowHandleFromSession(IntPtr windowHandle)
+		{
+			GetSessionContext().Remove(windowHandle);
+			handleToSessionMap.Remove(windowHandle);
+		}
+
+		SessionContext GetSessionContext()
+		{
+			string sessionId = OperationContext.Current.SessionId;
+			SessionContext sessionContext;
+			if (!sessions.TryGetValue(sessionId, out sessionContext))
+				throw new MultitouchException(string.Format("Session '{0}' is not registered. You have to execute CreateSession first", sessionId));
+			return sessionContext;
+		}
+
+		public void SendEmptyFrames(bool value)
+		{
+			GetSessionContext().SendEmptyFrames = value;
+			UpdateGlobalSendEmptyFrames();
 		}
 
 		public bool SendImageType(ImageType imageType, bool value)
 		{
-			if(value)
-				imagesToSend[imageType]++;
-			else
-				imagesToSend[imageType]--;
-
-			if (imagesToSend[imageType] > 0)
-				InputProviderManager.Instance.Provider.SendImageType(imageType, true);
-			else
-				InputProviderManager.Instance.Provider.SendImageType(imageType, false);
-			
-			return true;
+			SessionContext sessionContext = GetSessionContext();
+			sessionContext.ImagesToSend[imageType] = true;
+			return sessionContext.ImagesToSend[imageType] = UpdateGlobalImageSetting(imageType);
 		}
 
-		void OnContactChanged(IContactData contact)
+		void UpdateGlobalSendEmptyFrames()
 		{
-			callback.ContactChanged(contact.Id, contact.X, contact.Y, contact.Width, contact.Height, contact.Angle, contact.Bounds, contact.State);
+			bool sendEmptyFrames = false;
+			foreach (SessionContext context in sessions.Values)
+				sendEmptyFrames = sendEmptyFrames || context.SendEmptyFrames;
+			InputProviderManager.Instance.Provider.SendEmptyFrames = sendEmptyFrames;
 		}
 
-		void OnFrame(IFrameData frame)
+		bool UpdateGlobalImageSetting(ImageType imageType)
 		{
-			FrameData data = new FrameData();
-			data.SetImages(frame.Image.Where(i => imagesToSend[i.Type] > 0));
-			callback.Frame(data);
+			int count = sessions.Count(app => app.Value.ImagesToSend[imageType]);
+			return InputProviderManager.Instance.Provider.SendImageType(imageType, count > 0);
 		}
 
-		public static void DispatchInput(InputDataEventArgs e)
+		public void DispatchFrame(NewFrameEventArgs e)
 		{
-			switch (e.Type)
+			if(sessions.Count == 0)
+				return;
+
+			// For each contact determinte it's target handle and group by this handle
+			IEnumerable<IGrouping<IntPtr, IContactData>> contactsGroups = e.Contacts.GroupBy(contact => Utils.GetWindowFromPoint(contact.Position));
+
+			// Create a list with sessions and contacts that belong to this session
+			Dictionary<SessionContext, List<ContactData>> sessionList = new Dictionary<SessionContext, List<ContactData>>();
+
+			foreach (IGrouping<IntPtr, IContactData> contactsGroup in contactsGroups)
 			{
-				case InputType.Contact:
-					HandleContact((IContactData)e.Data);
-					break;
-				case InputType.Frame:
-					HandleFrame((IFrameData)e.Data);
-					break;
-				default:
-					throw new ArgumentOutOfRangeException();
+				List<ContactData> contacts;
+
+				SessionContext sessionContext;
+				if(!handleToSessionMap.TryGetValue(contactsGroup.Key, out sessionContext))
+					continue;
+				
+				if(!sessionList.TryGetValue(sessionContext, out contacts))
+				{
+					contacts = new List<ContactData>();
+					sessionList.Add(sessionContext, contacts);
+				}
+
+				contacts.AddRange(contactsGroup.Select(c => new ContactData(c, contactsGroup.Key)));
 			}
-		}
 
-		static void HandleFrame(IFrameData frame)
-		{
-			foreach (KeyValuePair<IntPtr, Receiver> keyValuePair in receivers.Where(pair => pair.Value.FrameHandler != null).ToList())
+			List<SessionContext> emptyFrameReceivers = new List<SessionContext>(sessions.Values);
+
+			// Send contact data to session
+			foreach (KeyValuePair<SessionContext, List<ContactData>> keyValuePair in sessionList)
 			{
+				SessionContext session = keyValuePair.Key;
 				try
 				{
-					keyValuePair.Value.FrameHandler(frame);
+					session.Callback.Frame(new FrameData(e.Timestamp, keyValuePair.Value, GetImages(session, e.Images)));
 				}
 				catch (Exception)
 				{
-					receivers.Remove(keyValuePair.Key);
+					RemoveSession(session);
 				}
+				emptyFrameReceivers.Remove(keyValuePair.Key);
 			}
-		}
 
-		static void HandleContact(IContactData contact)
-		{
-			IntPtr hWnd = NativeMethods.WindowFromPoint(new NativeMethods.POINT((int)contact.X, (int)contact.Y));
-			if (hWnd == IntPtr.Zero)
-				DeliverContact(contact);
-			else
-				DeliverContact(hWnd, contact);
-		}
-
-		static void DeliverContact(IntPtr hWnd, IContactData contact)
-		{
-			Receiver receiver;
-			if (receivers.TryGetValue(hWnd, out receiver))
+			// Send frame data to sessions that requested empty frames
+			foreach (SessionContext session in emptyFrameReceivers.Where(s => s.SendEmptyFrames))
 			{
 				try
 				{
-					receiver.ContactHandler(contact);
+					session.Callback.Frame(new FrameData(e.Timestamp, new ContactData[0], GetImages(session, e.Images)));
 				}
 				catch (Exception)
 				{
-					receivers.Remove(hWnd);
+					RemoveSession(session);
 				}
 			}
 		}
 
-		static void DeliverContact(IContactData contact)
+		static IEnumerable<IImageData> GetImages(SessionContext context, IEnumerable<IImageData> availableImages)
 		{
-			List<KeyValuePair<IntPtr, Receiver>> handlers = receivers.ToList();
-			foreach (KeyValuePair<IntPtr, Receiver> pair in handlers)
-			{
-				try
-				{
-					pair.Value.ContactHandler(contact);
-				}
-				catch (Exception)
-				{
-					receivers.Remove(pair.Key);
-				}
-			}
+			IEnumerable<ImageType> imageTypes = context.ImagesToSend.Where(i => i.Value).Select(i => i.Key);
+			return availableImages.Where(i => imageTypes.Contains(i.Type));
 		}
 	}
 }

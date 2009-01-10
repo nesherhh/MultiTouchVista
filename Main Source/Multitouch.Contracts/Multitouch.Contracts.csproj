@@ -67,12 +67,10 @@
   <ItemGroup>
     <Compile Include="ContactState.cs" />
     <Compile Include="IContactDataContract.cs" />
-    <Compile Include="IFrameDataContract.cs" />
-    <Compile Include="IInputDataEventArgsContract.cs" />
-    <Compile Include="IInputEventHandlerContract.cs" />
+    <Compile Include="INewFrameEventArgsContract.cs" />
+    <Compile Include="INewFrameEventHandlerContract.cs" />
     <Compile Include="IImageDataContract.cs" />
     <Compile Include="ImageType.cs" />
-    <Compile Include="InputType.cs" />
     <Compile Include="IProviderContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

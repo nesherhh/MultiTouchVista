@@ -3,6 +3,7 @@
   <xs:simpleType name="ImageType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Normalized" />
+      <xs:enumeration value="Binarized" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ImageType" nillable="true" type="tns:ImageType" />

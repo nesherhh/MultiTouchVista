@@ -21,23 +21,23 @@ namespace Multitouch.Contracts
         {
             get;
         }
-        double X
+        System.Windows.Point Position
         {
             get;
         }
-        double Y
+        double Orientation
         {
             get;
         }
-        double Width
+        double Area
         {
             get;
         }
-        double Height
+        double MajorAxis
         {
             get;
         }
-        double Angle
+        double MinorAxis
         {
             get;
         }

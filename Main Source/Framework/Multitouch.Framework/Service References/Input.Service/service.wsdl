@@ -20,24 +20,24 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Multitouch.Contracts" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Windows" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Multitouch.Service.Logic.ExternalInterfaces" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Windows" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IApplicationInterface_Subscribe_InputMessage">
-    <wsdl:part name="parameters" element="tns:Subscribe" />
+  <wsdl:message name="IApplicationInterface_CreateSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSession" />
   </wsdl:message>
-  <wsdl:message name="IApplicationInterface_Subscribe_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SubscribeResponse" />
+  <wsdl:message name="IApplicationInterface_RemoveSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveSession" />
   </wsdl:message>
-  <wsdl:message name="IApplicationInterface_Unsubscribe_InputMessage">
-    <wsdl:part name="parameters" element="tns:Unsubscribe" />
+  <wsdl:message name="IApplicationInterface_AddWindowHandleToSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddWindowHandleToSession" />
   </wsdl:message>
-  <wsdl:message name="IApplicationInterface_Unsubscribe_OutputMessage">
-    <wsdl:part name="parameters" element="tns:UnsubscribeResponse" />
+  <wsdl:message name="IApplicationInterface_RemoveWindowHandleFromSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveWindowHandleFromSession" />
   </wsdl:message>
-  <wsdl:message name="IApplicationInterface_ReceiveFrames_InputMessage">
-    <wsdl:part name="parameters" element="tns:ReceiveFrames" />
+  <wsdl:message name="IApplicationInterface_SendEmptyFrames_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmptyFrames" />
   </wsdl:message>
   <wsdl:message name="IApplicationInterface_SendImageType_InputMessage">
     <wsdl:part name="parameters" element="tns:SendImageType" />
@@ -45,30 +45,28 @@
   <wsdl:message name="IApplicationInterface_SendImageType_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendImageTypeResponse" />
   </wsdl:message>
-  <wsdl:message name="IApplicationInterface_ContactChanged_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ContactChanged" />
-  </wsdl:message>
   <wsdl:message name="IApplicationInterface_Frame_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:Frame" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IApplicationInterface">
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Subscribe">
-      <wsdl:input wsam:Action="http://tempuri.org/IApplicationInterface/Subscribe" message="tns:IApplicationInterface_Subscribe_InputMessage" />
-      <wsdl:output wsam:Action="http://tempuri.org/IApplicationInterface/SubscribeResponse" message="tns:IApplicationInterface_Subscribe_OutputMessage" />
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CreateSession">
+      <wsdl:input wsam:Action="http://tempuri.org/IApplicationInterface/CreateSession" message="tns:IApplicationInterface_CreateSession_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="true" name="Unsubscribe">
-      <wsdl:input wsam:Action="http://tempuri.org/IApplicationInterface/Unsubscribe" message="tns:IApplicationInterface_Unsubscribe_InputMessage" />
-      <wsdl:output wsam:Action="http://tempuri.org/IApplicationInterface/UnsubscribeResponse" message="tns:IApplicationInterface_Unsubscribe_OutputMessage" />
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="true" name="RemoveSession">
+      <wsdl:input wsam:Action="http://tempuri.org/IApplicationInterface/RemoveSession" message="tns:IApplicationInterface_RemoveSession_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReceiveFrames">
-      <wsdl:input wsam:Action="http://tempuri.org/IApplicationInterface/ReceiveFrames" message="tns:IApplicationInterface_ReceiveFrames_InputMessage" />
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="AddWindowHandleToSession">
+      <wsdl:input wsam:Action="http://tempuri.org/IApplicationInterface/AddWindowHandleToSession" message="tns:IApplicationInterface_AddWindowHandleToSession_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RemoveWindowHandleFromSession">
+      <wsdl:input wsam:Action="http://tempuri.org/IApplicationInterface/RemoveWindowHandleFromSession" message="tns:IApplicationInterface_RemoveWindowHandleFromSession_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendEmptyFrames">
+      <wsdl:input wsam:Action="http://tempuri.org/IApplicationInterface/SendEmptyFrames" message="tns:IApplicationInterface_SendEmptyFrames_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendImageType">
       <wsdl:input wsam:Action="http://tempuri.org/IApplicationInterface/SendImageType" message="tns:IApplicationInterface_SendImageType_InputMessage" />
       <wsdl:output wsam:Action="http://tempuri.org/IApplicationInterface/SendImageTypeResponse" message="tns:IApplicationInterface_SendImageType_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ContactChanged">
-      <wsdl:output wsam:Action="http://tempuri.org/IApplicationInterface/ContactChanged" message="tns:IApplicationInterface_ContactChanged_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Frame">
       <wsdl:output wsam:Action="http://tempuri.org/IApplicationInterface/Frame" message="tns:IApplicationInterface_Frame_OutputCallbackMessage" />
@@ -78,26 +76,32 @@
     <wsp:PolicyReference URI="#NetNamedPipeBinding_IApplicationInterface_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
-    <wsdl:operation name="Subscribe">
-      <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/Subscribe" style="document" />
+    <wsdl:operation name="CreateSession">
+      <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/CreateSession" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Unsubscribe">
-      <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/Unsubscribe" style="document" />
+    <wsdl:operation name="RemoveSession">
+      <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/RemoveSession" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReceiveFrames">
-      <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/ReceiveFrames" style="document" />
+    <wsdl:operation name="AddWindowHandleToSession">
+      <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/AddWindowHandleToSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveWindowHandleFromSession">
+      <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/RemoveWindowHandleFromSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmptyFrames">
+      <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/SendEmptyFrames" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -107,12 +111,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ContactChanged">
-      <soap12:operation soapAction="http://tempuri.org/IApplicationInterface/ContactChanged" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

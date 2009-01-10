@@ -8,22 +8,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Multitouch.Contracts.HostSideAdapters
+namespace Multitouch.Contracts.AddInSideAdapters
 {
     
-    public class IInputEventHandlerViewToContractHostAdapter : System.AddIn.Pipeline.ContractBase, Multitouch.Contracts.Contracts.IInputEventHandlerContract
+    public class INewFrameEventHandlerViewToContractAddInAdapter : System.AddIn.Pipeline.ContractBase, Multitouch.Contracts.Contracts.INewFrameEventHandlerContract
     {
         private object _view;
         private System.Reflection.MethodInfo _event;
-        public IInputEventHandlerViewToContractHostAdapter(object view, System.Reflection.MethodInfo eventProp)
+        public INewFrameEventHandlerViewToContractAddInAdapter(object view, System.Reflection.MethodInfo eventProp)
         {
             _view = view;
             _event = eventProp;
         }
-        public void Handler(Multitouch.Contracts.Contracts.IInputDataEventArgsContract args)
+        public void Handler(Multitouch.Contracts.Contracts.INewFrameEventArgsContract args)
         {
-            Multitouch.Contracts.HostSideAdapters.InputDataEventArgsContractToViewHostAdapter adaptedArgs;
-            adaptedArgs = new Multitouch.Contracts.HostSideAdapters.InputDataEventArgsContractToViewHostAdapter(args);
+            Multitouch.Contracts.AddInSideAdapters.NewFrameEventArgsContractToViewAddInAdapter adaptedArgs;
+            adaptedArgs = new Multitouch.Contracts.AddInSideAdapters.NewFrameEventArgsContractToViewAddInAdapter(args);
             object[] argsArray = new object[1];
             argsArray[0] = adaptedArgs;
             _event.Invoke(_view, argsArray);

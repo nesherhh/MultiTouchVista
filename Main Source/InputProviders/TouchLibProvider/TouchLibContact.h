@@ -9,16 +9,17 @@ namespace TouchLibProvider
 	ref class TouchLibContact : IContactData
 	{
 	public:
-		TouchLibContact(TouchData data, ContactState state)
+		TouchLibContact(System::Drawing::Rectangle screenBounds, TouchData data, ContactState state)
 		{
 			id = data.ID;
-			x = data.X * InputProvider::ScreenBounds.Width;
-			y = data.Y * InputProvider::ScreenBounds.Height;
-			width = data.width;
-			height = data.height;
+			position = System::Windows::Point(data.X * screenBounds.Width, data.Y * screenBounds.Height);
+
+			minorAxis = data.height;
+			majorAxis = data.width;
+
 			this->state = state;
-			angle = data.angle;
-			bounds = Rect(data.X, data.Y, data.width, data.height);
+			orientation = data.angle;
+			bounds = System::Windows::Rect(data.X - data.width / 2, data.Y - data.height / 2, data.width, data.height);
 		}
 
 		property int Id
@@ -29,51 +30,51 @@ namespace TouchLibProvider
 			}
 		}
 
-		property double X
+		property System::Windows::Point Position
 		{
-			virtual double get(void)
+			virtual System::Windows::Point get(void)
 			{
-				return x;
+				return position;
 			}
 		}
 
-		property double Y
+		property double MajorAxis
 		{
 			virtual double get(void)
 			{
-				return y;
+				return majorAxis;
 			}
 		}
 
-		property double Width
+		property double MinorAxis
 		{
 			virtual double get(void)
 			{
-				return width;
+				return minorAxis;
 			}
 		}
 
-		property double Height
+		property double Orientation
 		{
 			virtual double get(void)
 			{
-				return height;
+				return orientation;
 			}
 		}
 
-		property double Angle
+		property System::Windows::Rect Bounds
 		{
-			virtual double get(void)
-			{
-				return angle;
-			}
-		}
-
-		property Rect Bounds
-		{
-			virtual Rect get(void)
+			virtual System::Windows::Rect get(void)
 			{
 				return bounds;
+			}
+		}
+
+		property double Area
+		{
+			virtual double get(void)
+			{
+				return area;
 			}
 		}
 
@@ -87,12 +88,12 @@ namespace TouchLibProvider
 
 	private:
 		int id;
-		double x;
-		double y;
-		double width;
-		double height;
-		double angle;
-		Rect bounds;
+		System::Windows::Point position;
+		double majorAxis;
+		double minorAxis;
+		double orientation;
+		System::Windows::Rect bounds;
 		ContactState state;
+		double area;
 	};
 }

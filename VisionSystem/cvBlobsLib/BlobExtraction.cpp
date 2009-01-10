@@ -106,10 +106,13 @@ bool BlobAnalysis(	IplImage* inputImage,
 			return false;
 
 		// comprova que la màscara tingui les mateixes dimensions que la imatge
-		if( !CV_ARE_SIZES_EQ(inputImage, maskImage ) )
-		{
+		//if( !CV_ARE_SIZES_EQ(inputImage, maskImage ) )
+		//{
+		//	return false;
+		//}
+
+		if(inputImage->imageSize != maskImage->imageSize)
 			return false;
-		}
 
 		// comprova que la màscara sigui una imatge d'un sol canal (grayscale)
 		if( maskImage->nChannels != 1 )

@@ -7,9 +7,10 @@ using Multitouch.Framework.Input;
 
 namespace TestConsoleApplication
 {
-	public partial class Form1 : Form, IContactHandler
+	public partial class Form1 : Form
 	{
 		Bitmap bitmap;
+		ContactHandler contactHandler;
 
 		public Form1()
 		{
@@ -18,21 +19,37 @@ namespace TestConsoleApplication
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			CommunicationLogic logic = CommunicationLogic.Instance;
-
-			logic.RegisterContactHandler(this);
-			logic.Connect(Handle);
-			if (logic.ShouldReceiveImage(ImageType.Normalized, true))
-			{
-				logic.EnableFrameEvent = true;
-				logic.Frame += Instance_Frame;
-			}
+			contactHandler = new ContactHandler(Handle);
+			contactHandler.NewContact += HandleContact;
+			contactHandler.ContactRemoved += HandleContact;
+			contactHandler.ContactMoved += HandleContact;
+			contactHandler.Frame += HandleFrame;
+			contactHandler.ReceiveImageType(ImageType.Normalized, true);
+			contactHandler.ReceiveImageType(ImageType.Binarized, true);
+			contactHandler.ReceiveEmptyFrames = true;
 		}
 
-		void Instance_Frame(object sender, FrameEventArgs e)
+		protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+		{
+			contactHandler.Dispose();
+			base.OnClosing(e);
+		}
+
+		void HandleContact(object sender, ContactEventArgs e)
+		{
+			Console.WriteLine(e.Contact);
+		}
+
+		void HandleFrame(object sender, FrameEventArgs e)
+		{
+			UpdateImage(e, ImageType.Normalized, groupBoxNormalized);
+			UpdateImage(e, ImageType.Binarized, groupBoxBinarized);
+		}
+
+		void UpdateImage(FrameEventArgs e, ImageType imageType, IWin32Window panel)
 		{
 			ImageData data;
-			if (e.TryGetImage(ImageType.Normalized, 0, 0, 320, 240, out data))
+			if (e.TryGetImage(imageType, 0, 0, 320, 240, out data))
 			{
 				if (bitmap == null)
 				{
@@ -47,18 +64,18 @@ namespace TestConsoleApplication
 				Marshal.Copy(data.Data, 0, bits.Scan0, data.Data.Length);
 				bitmap.UnlockBits(bits);
 
-				using(Graphics graphics = Graphics.FromHwnd(Handle))
-				{
-					graphics.DrawImage(bitmap, 0, 0);
-				}
+				DrawImage(panel.Handle, bitmap);
 			}
 			else
 				Console.WriteLine("no image received");
 		}
 
-		public void ProcessContactChange(int id, double x, double y, double width, double height, ContactState state)
+		void DrawImage(IntPtr handle, Image image)
 		{
-
+			using (Graphics graphics = Graphics.FromHwnd(handle))
+			{
+				graphics.DrawImage(image, 0, 0);
+			}
 		}
 	}
 }

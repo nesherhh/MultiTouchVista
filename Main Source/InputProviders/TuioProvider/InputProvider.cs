@@ -1,5 +1,6 @@
 ﻿using System;
 using System.AddIn;
+using System.Collections.Generic;
 using System.Windows;
 using Multitouch.Contracts;
 using TUIO;
@@ -11,14 +12,24 @@ namespace TuioProvider
 	{
 		TuioClient client;
 		Listener listener;
+		Queue<TuioCursor> contactsQueue;
+
 		internal const string VERSION = "2.0.0.0";
 
-		public event EventHandler<InputDataEventArgs> Input;
+		public event EventHandler<NewFrameEventArgs> NewFrame;
+
+		public InputProvider()
+		{
+			contactsQueue = new Queue<TuioCursor>();
+			SendEmptyFrames = false;
+		}
 
 		public bool SendImageType(ImageType imageType, bool isEnable)
 		{
 			return false;
 		}
+
+		public bool SendEmptyFrames { get; set; }
 
 		public void Start()
 		{
@@ -52,11 +63,26 @@ namespace TuioProvider
 			get { return false; }
 		}
 
-		internal void RaiseInput(TuioCursor cursor, ContactState state)
+		internal void EnqueueContact(TuioCursor cursor)
 		{
-			EventHandler<InputDataEventArgs> eventHandler = Input;
-			if (eventHandler != null)
-				eventHandler(this, new TuioInputDataEventArgs(cursor, state));
+			lock (contactsQueue)
+			{
+				contactsQueue.Enqueue(cursor);
+			}
+		}
+
+		internal void RaiseNewFrame(long timestamp)
+		{
+			lock (contactsQueue)
+			{
+				if (SendEmptyFrames || contactsQueue.Count > 0)
+				{
+					EventHandler<NewFrameEventArgs> eventHandler = NewFrame;
+					if (eventHandler != null)
+						eventHandler(this, new TuioInputDataEventArgs(contactsQueue, timestamp));
+					contactsQueue.Clear();
+				}
+			}
 		}
 	}
 }

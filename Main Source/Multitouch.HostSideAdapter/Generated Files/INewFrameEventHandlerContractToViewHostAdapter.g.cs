@@ -11,20 +11,20 @@
 namespace Multitouch.Contracts.HostSideAdapters
 {
     
-    public class IInputEventHandlerContractToViewHostAdapter
+    public class INewFrameEventHandlerContractToViewHostAdapter
     {
-        private Multitouch.Contracts.Contracts.IInputEventHandlerContract _contract;
+        private Multitouch.Contracts.Contracts.INewFrameEventHandlerContract _contract;
         private System.AddIn.Pipeline.ContractHandle _handle;
-        public IInputEventHandlerContractToViewHostAdapter(Multitouch.Contracts.Contracts.IInputEventHandlerContract contract)
+        public INewFrameEventHandlerContractToViewHostAdapter(Multitouch.Contracts.Contracts.INewFrameEventHandlerContract contract)
         {
             _contract = contract;
             _handle = new System.AddIn.Pipeline.ContractHandle(contract);
         }
-        public void Handler(object sender, Multitouch.Contracts.InputDataEventArgs args)
+        public void Handler(object sender, Multitouch.Contracts.NewFrameEventArgs args)
         {
-            _contract.Handler(Multitouch.Contracts.HostSideAdapters.InputDataEventArgsHostAdapter.ViewToContractAdapter(args));
+            _contract.Handler(Multitouch.Contracts.HostSideAdapters.NewFrameEventArgsHostAdapter.ViewToContractAdapter(args));
         }
-        internal Multitouch.Contracts.Contracts.IInputEventHandlerContract GetSourceContract()
+        internal Multitouch.Contracts.Contracts.INewFrameEventHandlerContract GetSourceContract()
         {
             return _contract;
         }

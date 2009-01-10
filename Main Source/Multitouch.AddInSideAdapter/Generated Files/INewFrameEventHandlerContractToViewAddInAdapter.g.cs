@@ -11,20 +11,20 @@
 namespace Multitouch.Contracts.AddInSideAdapters
 {
     
-    public class IInputEventHandlerContractToViewAddInAdapter
+    public class INewFrameEventHandlerContractToViewAddInAdapter
     {
-        private Multitouch.Contracts.Contracts.IInputEventHandlerContract _contract;
+        private Multitouch.Contracts.Contracts.INewFrameEventHandlerContract _contract;
         private System.AddIn.Pipeline.ContractHandle _handle;
-        public IInputEventHandlerContractToViewAddInAdapter(Multitouch.Contracts.Contracts.IInputEventHandlerContract contract)
+        public INewFrameEventHandlerContractToViewAddInAdapter(Multitouch.Contracts.Contracts.INewFrameEventHandlerContract contract)
         {
             _contract = contract;
             _handle = new System.AddIn.Pipeline.ContractHandle(contract);
         }
-        public void Handler(object sender, Multitouch.Contracts.InputDataEventArgs args)
+        public void Handler(object sender, Multitouch.Contracts.NewFrameEventArgs args)
         {
-            _contract.Handler(Multitouch.Contracts.AddInSideAdapters.InputDataEventArgsAddInAdapter.ViewToContractAdapter(args));
+            _contract.Handler(Multitouch.Contracts.AddInSideAdapters.NewFrameEventArgsAddInAdapter.ViewToContractAdapter(args));
         }
-        internal Multitouch.Contracts.Contracts.IInputEventHandlerContract GetSourceContract()
+        internal Multitouch.Contracts.Contracts.INewFrameEventHandlerContract GetSourceContract()
         {
             return _contract;
         }

@@ -60,12 +60,10 @@
   <ItemGroup>
     <Compile Include="Generated Files\ContactState.g.cs" />
     <Compile Include="Generated Files\IContactData.g.cs" />
-    <Compile Include="Generated Files\IFrameData.g.cs" />
     <Compile Include="Generated Files\IImageData.g.cs" />
     <Compile Include="Generated Files\ImageType.g.cs" />
-    <Compile Include="Generated Files\InputDataEventArgs.g.cs" />
-    <Compile Include="Generated Files\InputType.g.cs" />
     <Compile Include="Generated Files\IProvider.g.cs" />
+    <Compile Include="Generated Files\NewFrameEventArgs.g.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

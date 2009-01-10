@@ -54,17 +54,21 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\ReadOnlyDictionary.cs" />
+    <Compile Include="Input\Contact.cs" />
+    <Compile Include="Input\ContactEventArgs.cs" />
+    <Compile Include="Input\ContactHandler.cs" />
     <Compile Include="Input\FrameEventArgs.cs" />
-    <Compile Include="Input\IContactHandler.cs" />
     <Compile Include="Input\ImageData.cs" />
     <Compile Include="Input\ImageType.cs" />
     <Compile Include="Input\MultitouchServiceContactDispatcher.cs" />
     <Compile Include="Input\CommunicationLogic.cs" />
     <Compile Include="Input\ServiceCommunicator.cs" />
-    <Compile Include="Input\SingleMouseContactDispatcher.cs" />
     <Compile Include="Input\ContactState.cs" />
     <Compile Include="MultitouchException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

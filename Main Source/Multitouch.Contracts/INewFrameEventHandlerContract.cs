@@ -5,8 +5,8 @@ using PipelineHints;
 namespace Multitouch.Contracts.Contracts
 {
 	[EventHandler]
-	public interface IInputEventHandlerContract : IContract
+	public interface INewFrameEventHandlerContract : IContract
 	{
-		void Handler(IInputDataEventArgsContract e);
+		void Handler(INewFrameEventArgsContract e);
 	}
 }
