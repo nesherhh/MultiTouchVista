@@ -8,7 +8,7 @@ namespace Multitouch.Framework.Input
 	class ServiceCommunicator : IDisposable
 	{
 		CommunicationLogic logic;
-		ApplicationInterfaceClient service;
+		IApplicationInterface service;
 		IApplicationInterfaceCallback contactDispatcher;
 		bool sendEmptyFrames;
 
@@ -43,12 +43,18 @@ namespace Multitouch.Framework.Input
 			try
 			{
 				service.CreateSession();
-				contactDispatcher = dispatcher;
+				MouseHelper.SingleMouseFallback = false;
 			}
-			catch (EndpointNotFoundException e)
+			catch (EndpointNotFoundException)
 			{
-				throw new MultitouchException("Could not connect to Multitouch service, please start Multitouch input server before running this application.", e);
+				//throw new MultitouchException("Could not connect to Multitouch service, please start Multitouch input server before running this application.", e);
+				Trace.TraceWarning("Could not connect to Multitouch service. Enabling single mouse input.");
+				SingleMouseClientAndDispatcher client = new SingleMouseClientAndDispatcher(logic);
+				service = client;
+				dispatcher = client;
+				MouseHelper.SingleMouseFallback = true;
 			}
+			contactDispatcher = dispatcher;
 		}
 
 		internal void RemoveSession()
@@ -58,7 +64,9 @@ namespace Multitouch.Framework.Input
 				try
 				{
 					service.RemoveSession();
-					service.Close();
+					IDisposable client = service as IDisposable;
+					if(client != null)
+						client.Dispose();
 				}
 				catch (Exception e)
 				{
@@ -96,7 +104,7 @@ namespace Multitouch.Framework.Input
 				RemoveSession();
 		}
 
-		ApplicationInterfaceClient GetService()
+		IApplicationInterface GetService()
 		{
 			if (service == null)
 				throw new MultitouchException("No connection to Multitouch service");

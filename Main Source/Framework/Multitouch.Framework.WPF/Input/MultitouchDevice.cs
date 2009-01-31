@@ -73,7 +73,7 @@ namespace Multitouch.Framework.WPF.Input
 			if (presentationSource == null || presentationSource.RootVisual == null)
 				return new Point(0.0, 0.0);
 
-			Point clientPoint = PointUtil.ScreenToClient(rawPosition, presentationSource);
+			Point clientPoint = rawPosition;
 			bool success;
 			Point rootPoint = PointUtil.TryClientToRoot(clientPoint, presentationSource, false, out success);
 			if (!success)
