@@ -48,7 +48,8 @@ namespace Multitouch.Framework.WPF.Input
 
 		public MultitouchLogic(InputManager inputManager)
 		{
-			Mouse.OverrideCursor = Cursors.None;
+			if(!MouseHelper.SingleMouseFallback)
+				Mouse.OverrideCursor = Cursors.None;
 
             presentationCoreAssembly = typeof(InputManager).Assembly;
 			rawStylusInputReportType = presentationCoreAssembly.GetType("System.Windows.Input.RawStylusInputReport");
@@ -122,7 +123,7 @@ namespace Multitouch.Framework.WPF.Input
 					if (GestureManager.IsGestureEnabled)
 						GestureManager.PreProcessInput(e);
 
-					Point clientPoint = report.InputSource.RootVisual.PointFromScreen(report.Contact.Position);
+					Point clientPoint = report.Contact.Position;
 					HitTestResult test = VisualTreeHelper.HitTest(report.InputSource.RootVisual, clientPoint);
 					if (test != null)
 					{

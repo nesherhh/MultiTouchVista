@@ -57,7 +57,7 @@ namespace Multitouch.Framework.Input
 				contactHandlers.Add(handler);
 			else
 			{
-				if(windowsMap.Count == 0)
+				if (windowsMap.Count == 0)
 					serviceCommunicator.CreateSession();
 				contactHandlers = new HashSet<ContactHandler>();
 				contactHandlers.Add(handler);
