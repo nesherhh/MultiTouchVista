@@ -40,30 +40,33 @@ namespace Multitouch.Framework.Input
 				contact.Position = new Point(message.Point.X, message.Point.Y);
 
 				SystemWindow window = SystemWindow.FromPointEx(message.Point.X, message.Point.Y, true, true);
-				contact.Hwnd = window.HWnd;
-
-				switch ((MouseEventFlagValues)message.MouseEventFlags)
+				if (window != null)
 				{
-					case MouseEventFlagValues.LEFTDOWN:
-						id++;
-						if (id == int.MaxValue)
-							id = 0;
-						contact.State = Service.ContactState.New;
-						break;
-					case MouseEventFlagValues.LEFTUP:
-						contact.State = Service.ContactState.Removed;
-						break;
-					case MouseEventFlagValues.MOVE:
-						contact.State = Service.ContactState.Moved;
-						break;
-					default:
-						return;
+					contact.Hwnd = window.HWnd;
+
+					switch ((MouseEventFlagValues)message.MouseEventFlags)
+					{
+						case MouseEventFlagValues.LEFTDOWN:
+							id++;
+							if (id == int.MaxValue)
+								id = 0;
+							contact.State = Service.ContactState.New;
+							break;
+						case MouseEventFlagValues.LEFTUP:
+							contact.State = Service.ContactState.Removed;
+							break;
+						case MouseEventFlagValues.MOVE:
+							contact.State = Service.ContactState.Moved;
+							break;
+						default:
+							return;
+					}
+					contact.Id = id;
+					contact.Bounds = new Rect(contact.Position.X - (contact.MajorAxis / 2), contact.Position.Y - (contact.MinorAxis / 2), contact.MajorAxis, contact.MinorAxis);
+					data.Contacts = new[] {contact};
+
+					Frame(data);
 				}
-				contact.Id = id;
-				contact.Bounds = new Rect(contact.Position.X - (contact.MajorAxis / 2), contact.Position.Y - (contact.MinorAxis / 2), contact.MajorAxis, contact.MinorAxis);
-				data.Contacts = new[] { contact };
-				
-				Frame(data);
 			}
 		}
 

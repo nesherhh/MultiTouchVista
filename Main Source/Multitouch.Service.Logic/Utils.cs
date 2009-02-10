@@ -23,6 +23,8 @@ namespace Multitouch.Service.Logic
 		public static IntPtr GetWindowFromPoint(Point position)
 		{
 			SystemWindow window = SystemWindow.FromPoint((int)(position.X + 0.5), (int)(position.Y+ 0.5));
+			if (window == null)
+				return new IntPtr(-1);
 			return window.HWnd;
 		}
 
