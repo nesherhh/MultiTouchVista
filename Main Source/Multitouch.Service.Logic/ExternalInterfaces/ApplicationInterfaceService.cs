@@ -106,7 +106,8 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 			// Create a list with sessions and contacts that belong to this session
 			Dictionary<SessionContext, List<ContactData>> sessionList = new Dictionary<SessionContext, List<ContactData>>();
 
-			foreach (IGrouping<IntPtr, IContactData> contactsGroup in contactsGroups)
+			IntPtr invalidHandle = new IntPtr(-1);
+			foreach (IGrouping<IntPtr, IContactData> contactsGroup in contactsGroups.Where(g => !g.Key.Equals(invalidHandle)))
 			{
 				List<ContactData> contacts;
 
