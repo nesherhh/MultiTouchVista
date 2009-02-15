@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 using AdvanceMath;
 using Multitouch.Framework.WPF.Input;
@@ -75,7 +76,7 @@ namespace Multitouch.Framework.WPF.Controls
 			AddHandler(MultitouchScreen.NewContactEvent, (NewContactEventHandler)OnNewContact);
 			AddHandler(MultitouchScreen.ContactMovedEvent, (ContactEventHandler)OnContactMoved);
 			AddHandler(MultitouchScreen.ContactRemovedEvent, (ContactEventHandler)OnContactRemoved);
-			AddHandler(MultitouchScreen.ContactLeaveEvent, (ContactEventHandler)OnContactRemoved);	
+			AddHandler(MultitouchScreen.ContactLeaveEvent, (ContactEventHandler)OnContactLeave);	
 
 			engine = new PhysicsEngine();
 			engine.BroadPhase = new SweepAndPruneDetector();
@@ -147,6 +148,14 @@ namespace Multitouch.Framework.WPF.Controls
 				firstContactId = null;
 			}
 		}
+
+        void OnContactLeave(object sender, ContactEventArgs e)
+        {
+            HitTestResult htr = VisualTreeHelper.HitTest(this, e.GetPosition(this));
+            if (htr != null) return;
+
+            OnContactRemoved(sender, e);
+        }
 
 		void PhysicsTimerCallback(double dt, double trueDt)
 		{
