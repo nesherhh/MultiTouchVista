@@ -9,18 +9,12 @@ namespace MultipleMice
 	class DeviceStatus
 	{
 		readonly RawDevice device;
-		DebugCursor debugCursor;
-		SynchronizationContext syncContext;
+		readonly DebugCursor debugCursor;
 		Point location;
 
 		public DeviceStatus(RawDevice device)
 		{
 			this.device = device;
-
-			syncContext = SynchronizationContext.Current;
-
-			if (syncContext == null)
-				syncContext = new SynchronizationContext();
 
 			debugCursor = new DebugCursor();
 			debugCursor.Name = "DebugCursor";

@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Driver.Logic", "Multitouch.Driver\Multitouch.Driver.Logic\Multitouch.Driver.Logic.csproj", "{8597DE3C-7AA0-4183-A8A9-DD28DE5BC6B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Driver.Console", "Multitouch.Driver\Multitouch.Driver.Console\Multitouch.Driver.Console.csproj", "{D8138474-1BDB-44DE-9486-9CF54D711D47}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs06.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Multitouch.Driver\\Multitouch.Driver.Console\\Multitouch.Driver.Console.csproj
+		SccProjectName1 = Multitouch.Driver/Multitouch.Driver.Console
+		SccLocalPath1 = Multitouch.Driver\\Multitouch.Driver.Console
+		SccProjectUniqueName2 = Multitouch.Driver\\Multitouch.Driver.Logic\\Multitouch.Driver.Logic.csproj
+		SccProjectName2 = Multitouch.Driver/Multitouch.Driver.Logic
+		SccLocalPath2 = Multitouch.Driver\\Multitouch.Driver.Logic
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8597DE3C-7AA0-4183-A8A9-DD28DE5BC6B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8597DE3C-7AA0-4183-A8A9-DD28DE5BC6B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8597DE3C-7AA0-4183-A8A9-DD28DE5BC6B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8597DE3C-7AA0-4183-A8A9-DD28DE5BC6B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8138474-1BDB-44DE-9486-9CF54D711D47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8138474-1BDB-44DE-9486-9CF54D711D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8138474-1BDB-44DE-9486-9CF54D711D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8138474-1BDB-44DE-9486-9CF54D711D47}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

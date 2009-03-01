@@ -76,12 +76,12 @@ namespace MultipleMice
 
 		public UIElement GetConfiguration()
 		{
-			return null;
+			return new ConfigurationWindow();
 		}
 
 		public bool HasConfiguration
 		{
-			get { return false; }
+			get { return true; }
 		}
 
 		public bool SendEmptyFrames { get; set; }

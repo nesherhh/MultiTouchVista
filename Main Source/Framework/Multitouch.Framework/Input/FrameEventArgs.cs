@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Multitouch.Framework.Input
@@ -13,6 +14,14 @@ namespace Multitouch.Framework.Input
 		internal FrameEventArgs(Service.FrameData data)
 		{
 			this.data = data;
+		}
+
+		/// <summary>
+		/// All contacts in this frame.
+		/// </summary>
+		public IEnumerable<Contact> Contacts
+		{
+			get { return data.Contacts.Select(c => new Contact(c, data.Timestamp)); }
 		}
 
 		/// <summary>

@@ -6,10 +6,12 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 {
 	class SessionContext : HashSet<IntPtr>
 	{
+		public string SessionId { get; private set; }
 		public IApplicationInterfaceCallback Callback { get; private set; }
 
-		public SessionContext(IApplicationInterfaceCallback callback)
+		public SessionContext(string sessionId, IApplicationInterfaceCallback callback)
 		{
+			SessionId = sessionId;
 			Callback = callback;
 			ImagesToSend = new Dictionary<ImageType, bool>();
 			foreach (ImageType value in Enum.GetValues(typeof(ImageType)))

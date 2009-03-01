@@ -19,6 +19,7 @@ namespace Multitouch.Framework.Input
 			MinorAxis = contact.MinorAxis;
 			Orientation = contact.Orientation;
 			Position = contact.Position;
+			Hwnd = contact.Hwnd;
 
 			switch (contact.State)
 			{
@@ -82,6 +83,11 @@ namespace Multitouch.Framework.Input
 		/// Timestamp of frame
 		/// </summary>
 		public long Timestamp { get; private set; }
+
+		/// <summary>
+		/// Window Handle
+		/// </summary>
+		public IntPtr Hwnd { get; private set; }
 
 		/// <summary>
 		/// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.

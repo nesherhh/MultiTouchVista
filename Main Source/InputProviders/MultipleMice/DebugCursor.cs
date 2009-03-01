@@ -14,18 +14,17 @@ namespace MultipleMice
 	{
 		private bool isClosing;
 		private Bitmap backgroundImage;
-		private Bitmap feedbackImage;
-		private Bitmap actionImage;
-		private int xCenter;
-		private int yCenter;
-		
+		private readonly Bitmap feedbackImage;
+		private readonly int xCenter;
+		private readonly int yCenter;
+
 		public DebugCursor()
 		{
 			FormBorderStyle = FormBorderStyle.None;
 			ShowInTaskbar = false;
 			TopMost = true;
 			backgroundImage = Resources.GlassDiscImage;
-			actionImage = null;
+			ActionImage = null;
 			feedbackImage = new Bitmap(backgroundImage.Width, backgroundImage.Height);
 
 			Bitmap defaultImage = new Bitmap(10, 10);
@@ -34,11 +33,11 @@ namespace MultipleMice
 			g.FillEllipse(Brushes.Red, 0, 0, 10, 10);
 
 			ActionImage = defaultImage;
-            
-			Width = actionImage.Width;
-			Height = actionImage.Height;
-			xCenter = Width / 2;
-			yCenter = Height / 2;
+
+			Width = ActionImage.Width;
+			Height = ActionImage.Height;
+			xCenter = (Width / 2);
+			yCenter = (Height / 2);
 		}
 
 		private void Render(Graphics g)
@@ -47,10 +46,10 @@ namespace MultipleMice
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 			try
 			{
-				g.DrawImage(actionImage, 0, 0);
+				g.DrawImage(ActionImage, 0, 0);
 			}
 			catch
-			{}
+			{ }
 			g.SmoothingMode = SmoothingMode.None;
 		}
 
@@ -102,11 +101,7 @@ namespace MultipleMice
 				base.WndProc(ref msg);
 		}
 
-		public Bitmap ActionImage
-		{
-			get { return actionImage; }
-			set { actionImage = value; }
-		}
+		public Bitmap ActionImage { get; set; }
 
 		public new Bitmap BackgroundImage
 		{
