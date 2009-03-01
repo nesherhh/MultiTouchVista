@@ -2,34 +2,29 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Multitouch.Contracts;
-using TUIO;
 
 namespace TuioProvider
 {
 	class TuioInputDataEventArgs : NewFrameEventArgs
 	{
-		static System.Drawing.Size monitorSize;
-		IList<IImageData> images;
-		IList<IContactData> contacts;
-		long timestamp;
+		static readonly System.Drawing.Size monitorSize;
+		readonly IList<IImageData> images;
+		readonly IList<IContactData> contacts;
+		readonly long timestamp;
 
 		static TuioInputDataEventArgs()
 		{
-			monitorSize = SystemInformation.PrimaryMonitorSize;
+			monitorSize = SystemInformation.VirtualScreen.Size;
 		}
 
-		public TuioInputDataEventArgs(IEnumerable<TuioCursor> cursors, long timestamp)
+		public TuioInputDataEventArgs(Queue<InputProvider.CursorState> cursors, long timestamp)
 		{
 			images = new List<IImageData>();
 			contacts = new List<IContactData>();
 			this.timestamp = timestamp;
 
-			foreach (TuioCursor cursor in cursors)
-			{
-				if(cursor.getState() == TuioCursor.UNDEFINED)
-					continue;
-				contacts.Add(new TuioContact(cursor, monitorSize));
-			}
+			foreach (InputProvider.CursorState cursor in cursors)
+				contacts.Add(new TuioContact(cursor.Cursor, cursor.State, monitorSize));
 		}
 
 		public override IList<IImageData> Images

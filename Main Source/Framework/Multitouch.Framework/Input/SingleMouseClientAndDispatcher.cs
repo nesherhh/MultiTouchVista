@@ -10,7 +10,7 @@ namespace Multitouch.Framework.Input
 	class SingleMouseClientAndDispatcher : IApplicationInterface, IApplicationInterfaceCallback, IDisposable
 	{
 		readonly CommunicationLogic logic;
-		LowLevelMouseHook mouseHook;
+		readonly LowLevelMouseHook mouseHook;
 		int id;
 
 		public SingleMouseClientAndDispatcher(CommunicationLogic logic)
@@ -112,7 +112,7 @@ namespace Multitouch.Framework.Input
 		public void Dispose()
 		{
 			if(mouseHook != null)
-				mouseHook.Dispose();
+				mouseHook.Unhook();
 		}
 	}
 }

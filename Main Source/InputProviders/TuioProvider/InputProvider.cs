@@ -10,9 +10,21 @@ namespace TuioProvider
 	[AddIn("Tuio", Publisher = "Daniel Danilin", Description = "Provides input from TUIO server.", Version = VERSION)]
 	public class InputProvider : IProvider
 	{
+		public class CursorState
+		{
+			public CursorState(TuioCursor cursor, ContactState state)
+			{
+				Cursor = cursor;
+				State = state;
+			}
+
+			public TuioCursor Cursor { get; private set; }
+			public ContactState State { get; private set; }
+		}
+
 		TuioClient client;
 		Listener listener;
-		Queue<TuioCursor> contactsQueue;
+		readonly Queue<CursorState> contactsQueue;
 
 		internal const string VERSION = "2.0.0.0";
 
@@ -20,7 +32,7 @@ namespace TuioProvider
 
 		public InputProvider()
 		{
-			contactsQueue = new Queue<TuioCursor>();
+			contactsQueue = new Queue<CursorState>();
 			SendEmptyFrames = false;
 		}
 
@@ -63,11 +75,11 @@ namespace TuioProvider
 			get { return false; }
 		}
 
-		internal void EnqueueContact(TuioCursor cursor)
+		internal void EnqueueContact(TuioCursor cursor, ContactState state)
 		{
 			lock (contactsQueue)
 			{
-				contactsQueue.Enqueue(cursor);
+				contactsQueue.Enqueue(new CursorState(cursor, state));
 			}
 		}
 

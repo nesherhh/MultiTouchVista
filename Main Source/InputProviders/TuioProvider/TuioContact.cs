@@ -7,23 +7,12 @@ namespace TuioProvider
 {
 	class TuioContact : IContactData
 	{
-		public TuioContact(TuioCursor cursor, System.Drawing.Size monitorSize)
+		public TuioContact(TuioCursor cursor, ContactState state, System.Drawing.Size monitorSize)
 		{
 			Size size = new Size(20, 20);
 			float x = cursor.getScreenX(monitorSize.Width);
 			float y = cursor.getScreenY(monitorSize.Height);
 			Rect bounds = new Rect(x - size.Width / 2, y - size.Height / 2, size.Width, size.Height);
-
-			ContactState contactState;
-			int state = cursor.getState();
-			if (state == TuioCursor.ADDED)
-				contactState = ContactState.New;
-			else if (state == TuioCursor.REMOVED)
-				contactState = ContactState.Removed;
-			else if (state == TuioCursor.UPDATED)
-				contactState = ContactState.Moved;
-			else
-				throw new ArgumentException("invalid state", "cursor");
 
 			Id = cursor.getFingerID();
 			Bounds = bounds;
@@ -32,7 +21,7 @@ namespace TuioProvider
 			Area = bounds.Width * bounds.Height;
 			MajorAxis = bounds.Width;
 			MinorAxis = bounds.Height;
-			State = contactState;
+			State = state;
 		}
 
 		public int Id { get; private set; }

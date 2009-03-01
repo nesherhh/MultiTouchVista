@@ -5,19 +5,21 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using ManagedWinapi.Hooks;
+using ManagedWinapi.Windows;
 using MultipleMice.Native;
+using MultipleMice.Properties;
 
 namespace MultipleMice
 {
 	class RawDevicesManager : IDisposable
 	{
-		InputProvider inputProvider;
-		DeviceCollection devices;
-		ContactCollection contacts;
-		int screenWidth;
-		int screenHeight;
-		double mouseSpeed;
+		readonly InputProvider inputProvider;
+		readonly DeviceCollection devices;
+		readonly ContactCollection contacts;
+		readonly double mouseSpeed;
 		Rectangle virtualScreen;
+		private LowLevelMouseHook hook;
 
 		//const ushort PEN_X_MAX = 9650;
 		//const ushort PEN_Y_MAX = 7188;
@@ -30,8 +32,6 @@ namespace MultipleMice
 
 			this.inputProvider = inputProvider;
 			mouseSpeed = SystemInformation.MouseSpeed * 0.15;
-			screenWidth = Screen.PrimaryScreen.Bounds.Width;
-			screenHeight = Screen.PrimaryScreen.Bounds.Height;
 
 			devices = new DeviceCollection();
 			contacts = new ContactCollection();
@@ -61,7 +61,16 @@ namespace MultipleMice
 			RawDevice.RegisterRawDevices(0x01, 0x02, InputMode.BackgroundMode);
 			RawDevice.RegisterRawDevices(HID_USAGE_PAGE_DIGITIZER, HID_USAGE_DIGITIZER_PEN, InputMode.BackgroundMode);
 			RawDevice.RawInput += RawDevice_RawInput;
+
+			hook = new LowLevelMouseHook(OnMouseAction);
+
 			Application.Run();
+		}
+
+		private void OnMouseAction(int msg, POINT pt, int mouseData, int flags, int time, IntPtr dwExtraInfo, ref bool handled)
+		{
+			if (Settings.Default.BlockMouse && flags == 0)
+				handled = true;
 		}
 
 		public const ushort HID_USAGE_PAGE_DIGITIZER = 0x0D;
@@ -70,9 +79,11 @@ namespace MultipleMice
 		public const ushort HID_USAGE_DIGITIZER_LIGHTPEN = 3;
 		public const ushort HID_USAGE_DIGITIZER_TOUCHSCREEN = 4;
 
-
 		public void Dispose()
 		{
+			if(hook != null)
+				hook.Dispose();
+
 			RawDevice.UnregisterRawDevices(0x01, 0x02);
 			RawDevice.UnregisterRawDevices(HID_USAGE_PAGE_DIGITIZER, HID_USAGE_DIGITIZER_PEN);
 			RawDevice.RawInput -= RawDevice_RawInput;
@@ -155,10 +166,10 @@ namespace MultipleMice
 				location.X = 0;
 			if (location.Y <= 0)
 				location.Y = 0;
-			if (location.X >= screenWidth)
-				location.X = screenWidth;
-			if (location.Y >= screenHeight)
-				location.Y = screenHeight;
+			if (location.X >= virtualScreen.Width)
+				location.X = virtualScreen.Width;
+			if (location.Y >= virtualScreen.Height)
+				location.Y = virtualScreen.Height;
 
 			state.Location = location;
 

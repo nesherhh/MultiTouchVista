@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -9,8 +10,8 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 	[ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true)]
 	public class ApplicationInterfaceService : IApplicationInterface
 	{
-		Dictionary<string, SessionContext> sessions;
-		Dictionary<IntPtr, SessionContext> handleToSessionMap;
+		readonly Dictionary<string, SessionContext> sessions;
+		readonly Dictionary<IntPtr, SessionContext> handleToSessionMap;
 
 		public ApplicationInterfaceService()
 		{
@@ -23,7 +24,7 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 			string sessionId = OperationContext.Current.SessionId;
 			if (sessions.ContainsKey(sessionId))
 				throw new MultitouchException(string.Format("session '{0}' is already created", sessionId));
-			sessions.Add(sessionId, new SessionContext(OperationContext.Current.GetCallbackChannel<IApplicationInterfaceCallback>()));
+			sessions.Add(sessionId, new SessionContext(sessionId, OperationContext.Current.GetCallbackChannel<IApplicationInterfaceCallback>()));
 
 			UpdateGlobalSendEmptyFrames();
 			UpdateGlobalImageSetting(ImageType.Binarized);
@@ -39,7 +40,10 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 		{
 			foreach (IntPtr handle in session)
 				handleToSessionMap.Remove(handle);
-			sessions.Remove(OperationContext.Current.SessionId);
+			if (OperationContext.Current != null)
+				sessions.Remove(OperationContext.Current.SessionId);
+			else
+				sessions.Remove(session.SessionId);
 
 			UpdateGlobalSendEmptyFrames();
 			UpdateGlobalImageSetting(ImageType.Binarized);
@@ -112,9 +116,12 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 				List<ContactData> contacts;
 
 				SessionContext sessionContext;
-				if(!handleToSessionMap.TryGetValue(contactsGroup.Key, out sessionContext))
-					continue;
-				
+				if (!handleToSessionMap.TryGetValue(contactsGroup.Key, out sessionContext))
+				{
+					if (!handleToSessionMap.TryGetValue(IntPtr.Zero, out sessionContext))
+						continue;
+				}
+
 				if(!sessionList.TryGetValue(sessionContext, out contacts))
 				{
 					contacts = new List<ContactData>();
@@ -134,8 +141,9 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 				{
 					session.Callback.Frame(new FrameData(e.Timestamp, keyValuePair.Value, GetImages(session, e.Images)));
 				}
-				catch (Exception)
+				catch (Exception exc)
 				{
+					Trace.TraceError("Error during sending frame to application:\r\n" + exc.Message);
 					RemoveSession(session);
 				}
 				emptyFrameReceivers.Remove(keyValuePair.Key);
@@ -148,8 +156,9 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 				{
 					session.Callback.Frame(new FrameData(e.Timestamp, new ContactData[0], GetImages(session, e.Images)));
 				}
-				catch (Exception)
+				catch (Exception exc)
 				{
+					Trace.TraceError("Error during sending frame to application:\r\n" + exc.Message);
 					RemoveSession(session);
 				}
 			}

@@ -10,12 +10,12 @@ namespace Multitouch.Framework.Input
 	/// </summary>
 	class CommunicationLogic : IDisposable
 	{
-		ServiceCommunicator serviceCommunicator;
-		Dictionary<IntPtr, HashSet<ContactHandler>> windowsMap;
-		static object lockObject = new object();
+		readonly ServiceCommunicator serviceCommunicator;
+		readonly Dictionary<IntPtr, HashSet<ContactHandler>> windowsMap;
+		static readonly object lockObject = new object();
 		static CommunicationLogic instance;
 		int receiveEmptyFramesCount;
-		Dictionary<Service.ImageType, int> sendImagesCount;
+		readonly Dictionary<Service.ImageType, int> sendImagesCount;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="CommunicationLogic"/> class.
@@ -115,8 +115,10 @@ namespace Multitouch.Framework.Input
 
 		void HandleFrame(FrameData data)
 		{
-			IEnumerable<ContactHandler> handlers = windowsMap.SelectMany(pair => pair.Value.Where(handler => handler.ReceiveEmptyFrames
-			                                                                                                 || data.Contacts.Count(c => c.Hwnd.Equals(pair.Key)) > 0));
+			IEnumerable<ContactHandler> handlers = windowsMap
+				.SelectMany(pair => pair.Value
+					.Where(handler => handler.ReceiveEmptyFrames || pair.Key == IntPtr.Zero || data.Contacts.Any(c => c.Hwnd.Equals(pair.Key))));
+
 			foreach (ContactHandler handler in handlers)
 				handler.HandleFrame(data);
 		}
