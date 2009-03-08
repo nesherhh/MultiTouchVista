@@ -38,9 +38,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ManagedWinapi, Version=0.2.0.0, Culture=neutral, PublicKeyToken=b860f1b8cf45f41c, processorArchitecture=MSIL">
+    <Reference Include="ManagedWinapi, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\ManagedWinapi.dll</HintPath>
+      <HintPath>..\..\Libraries\ManagedWinapi\ManagedWinapi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

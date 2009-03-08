@@ -3,6 +3,8 @@ using Multitouch.Driver.Logic;
 
 namespace Multitouch.Driver.Console
 {
+	using Console = System.Console;
+
 	class Program
 	{
 		static void Main()
@@ -11,18 +13,20 @@ namespace Multitouch.Driver.Console
 			try
 			{
 				driver.Start();
-				System.Console.WriteLine("Multitouch driver is running.");
-				System.Console.WriteLine("Press ENTER to stop and exit.");
+				Console.WriteLine("Multitouch driver is running.");
+				Console.WriteLine("Press ENTER to stop and exit.");
 
-				System.Console.ReadLine();
+				Console.ReadLine();
 
-				System.Console.WriteLine("Stopping service...");
+				Console.WriteLine("Stopping service...");
 				driver.Stop();
-				System.Console.WriteLine("Service stopped.");
+				Console.WriteLine("Service stopped.");
 			}
 			catch (Exception e)
 			{
-				System.Console.WriteLine(e.ToString());
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine(e.Message);
+				Console.ResetColor();
 			}
 		}
 	}

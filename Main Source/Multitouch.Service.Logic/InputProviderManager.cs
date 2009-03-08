@@ -40,6 +40,9 @@ namespace Multitouch.Service.Logic
 		{
             inputProvider.Stop();
 			inputProvider.NewFrame -= inputProvider_NewFrame;
+			IDisposable disposable = inputProvider as IDisposable;
+			if(disposable != null)
+				disposable.Dispose();
 			inputProvider = null;
 
 			Console.WriteLine("Stopped input provider");

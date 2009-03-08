@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Multitouch.Contracts;
 
 namespace Multitouch.Service.Logic.ExternalInterfaces
 {
@@ -16,11 +15,16 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 		[DataMember]
 		public long Timestamp { get; private set; }
 
-		public FrameData(long timestamp, IEnumerable<ContactData> contacts, IEnumerable<IImageData> images)
+		public FrameData(long timestamp, IEnumerable<ContactData> contacts, IEnumerable<ImageData> images)
 		{
+			if (contacts == null)
+				throw new ArgumentNullException("contacts");
+			if (images == null)
+				images = Enumerable.Empty<ImageData>();
+
 			Timestamp = timestamp;
 			Contacts = contacts.ToArray();
-			Images = images.Select(i => new ImageData(i)).ToArray();
+			Images = images.ToArray();
 		}
 	}
 }

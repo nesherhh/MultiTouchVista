@@ -1,15 +1,22 @@
 ﻿using System;
-using System.AddIn;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Windows;
+using System.Windows.Forms;
 using Multitouch.Contracts;
 using TUIO;
+using Size=System.Drawing.Size;
 
 namespace TuioProvider
 {
 	[AddIn("Tuio", Publisher = "Daniel Danilin", Description = "Provides input from TUIO server.", Version = VERSION)]
+	[Export(typeof(IProvider))]
 	public class InputProvider : IProvider
 	{
+		internal const string VERSION = "3.0.0.0";
+
+		Size monitorSize;
+
 		public class CursorState
 		{
 			public CursorState(TuioCursor cursor, ContactState state)
@@ -24,15 +31,14 @@ namespace TuioProvider
 
 		TuioClient client;
 		Listener listener;
-		readonly Queue<CursorState> contactsQueue;
-
-		internal const string VERSION = "2.0.0.0";
+		readonly Queue<Contact> contactsQueue;
 
 		public event EventHandler<NewFrameEventArgs> NewFrame;
 
 		public InputProvider()
 		{
-			contactsQueue = new Queue<CursorState>();
+			contactsQueue = new Queue<Contact>();
+			monitorSize = SystemInformation.PrimaryMonitorSize;
 			SendEmptyFrames = false;
 		}
 
@@ -79,7 +85,7 @@ namespace TuioProvider
 		{
 			lock (contactsQueue)
 			{
-				contactsQueue.Enqueue(new CursorState(cursor, state));
+				contactsQueue.Enqueue(new TuioContact(cursor, state, monitorSize));
 			}
 		}
 
@@ -91,7 +97,7 @@ namespace TuioProvider
 				{
 					EventHandler<NewFrameEventArgs> eventHandler = NewFrame;
 					if (eventHandler != null)
-						eventHandler(this, new TuioInputDataEventArgs(contactsQueue, timestamp));
+						eventHandler(this, new NewFrameEventArgs(timestamp, contactsQueue, null));
 					contactsQueue.Clear();
 				}
 			}

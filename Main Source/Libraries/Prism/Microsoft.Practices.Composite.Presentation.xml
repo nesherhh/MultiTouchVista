@@ -1,0 +1,1826 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Practices.Composite.Presentation</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.BindRegionContextToDependencyObjectBehavior">
+            <summary>
+            Defines a behavior that forwards the <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionContextProperty"/> 
+            to the views in the region.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.BindRegionContextToDependencyObjectBehavior.BehaviorKey">
+            <summary>
+            The key of this behavior.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.BindRegionContextToDependencyObjectBehavior.Attach">
+            <summary>
+            Attaches the behavior to the specified region.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.BindRegionContextToDependencyObjectBehavior.Region">
+            <summary>
+            Behavior's attached region.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.ItemsControlRegionAdapter">
+            <summary>
+            Adapter that creates a new <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.AllActiveRegion"/> and binds all
+            the views to the adapted <see cref="T:System.Windows.Controls.ItemsControl"/>. 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterBase`1">
+            <summary>
+            Base class to facilitate the creation of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionAdapter"/> implementations.
+            </summary>
+            <typeparam name="T">Type of object to adapt.</typeparam>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterBase`1.#ctor(Microsoft.Practices.Composite.Presentation.Regions.IRegionBehaviorFactory)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterBase`1"/>.
+            </summary>
+            <param name="regionBehaviorFactory">The factory used to create the region behaviors to attach to the created regions.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterBase`1.Initialize(`0,System.String)">
+            <summary>
+            Adapts an object and binds it to a new <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>.
+            </summary>
+            <param name="regionTarget">The object to adapt.</param>
+            <param name="regionName">The name of the region to be created.</param>
+            <returns>The new instance of <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> that the <paramref name="regionTarget"/> is bound to.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterBase`1.Microsoft#Practices#Composite#Regions#IRegionAdapter#Initialize(System.Object,System.String)">
+            <summary>
+            Adapts an object and binds it to a new <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>.
+            </summary>
+            <param name="regionTarget">The object to adapt.</param>
+            <param name="regionName">The name of the region to be created.</param>
+            <returns>The new instance of <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> that the <paramref name="regionTarget"/> is bound to.</returns>
+            <remarks>This methods performs validation to check that <paramref name="regionTarget"/>
+            is of type <typeparamref name="T"/>.</remarks>
+            <exception cref="T:System.ArgumentNullException">When <paramref name="regionTarget"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.InvalidOperationException">When <paramref name="regionTarget"/> is not of type <typeparamref name="T"/>.</exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterBase`1.AttachDefaultBehaviors(Microsoft.Practices.Composite.Regions.IRegion,`0)">
+            <summary>
+            This method adds the default behaviors by using the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.IRegionBehaviorFactory"/> object.
+            </summary>
+            <param name="region">The region being used.</param>
+            <param name="regionTarget">The object to adapt.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterBase`1.AttachBehaviors(Microsoft.Practices.Composite.Regions.IRegion,`0)">
+            <summary>
+            Template method to attach new behaviors.
+            </summary>
+            <param name="region">The region being used.</param>
+            <param name="regionTarget">The object to adapt.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterBase`1.Adapt(Microsoft.Practices.Composite.Regions.IRegion,`0)">
+            <summary>
+            Template method to adapt the object to an <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>.
+            </summary>
+            <param name="region">The new region being used.</param>
+            <param name="regionTarget">The object to adapt.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterBase`1.CreateRegion">
+            <summary>
+            Template method to create a new instance of <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>
+            that will be used to adapt the object.
+            </summary>
+            <returns>A new instance of <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>.</returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterBase`1.RegionBehaviorFactory">
+            <summary>
+            Gets or sets the factory used to create the region behaviors to attach to the created regions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ItemsControlRegionAdapter.#ctor(Microsoft.Practices.Composite.Presentation.Regions.IRegionBehaviorFactory)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.ItemsControlRegionAdapter"/>.
+            </summary>
+            <param name="regionBehaviorFactory">The factory used to create the region behaviors to attach to the created regions.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ItemsControlRegionAdapter.Adapt(Microsoft.Practices.Composite.Regions.IRegion,System.Windows.Controls.ItemsControl)">
+            <summary>
+            Adapts an <see cref="T:System.Windows.Controls.ItemsControl"/> to an <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>.
+            </summary>
+            <param name="region">The new region being used.</param>
+            <param name="regionTarget">The object to adapt.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ItemsControlRegionAdapter.CreateRegion">
+            <summary>
+            Creates a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.AllActiveRegion"/>.
+            </summary>
+            <returns>A new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.AllActiveRegion"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.ViewRegistrationException">
+            <summary>
+            Exception that's thrown when something goes wrong while Registering a View with a region name in the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionViewRegistry"/> class. 
+            </summary>
+            <summary>
+            Exception that's thrown when something goes wrong while Registering a View with a region name in the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionViewRegistry"/> class. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ViewRegistrationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.ViewRegistrationException"/> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized 
+            object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ViewRegistrationException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.ViewRegistrationException"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ViewRegistrationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.ViewRegistrationException"/> class.
+            </summary>
+            <param name="message">The exception message.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ViewRegistrationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.ViewRegistrationException"/> class.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="inner">The inner exception.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand">
+            <summary>
+            The CompositeCommand composites one or more ICommands.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.OnCanExecuteChanged">
+            <summary>
+            Raises <see cref="E:System.Windows.Input.ICommand.CanExecuteChanged"/> on the UI thread so every 
+            command invoker can requery <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/> to check if the
+            <see cref="T:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand"/> can execute.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand"/>.
+            </summary>
+            <param name="monitorCommandActivity">Indicates when the command activity is going to be monitored.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.RegisterCommand(System.Windows.Input.ICommand)">
+            <summary>
+            Adds a command to the collection and signs up for the <see cref="E:System.Windows.Input.ICommand.CanExecuteChanged"/> event of it.
+            </summary>
+             <remarks>
+            If this command is set to monitor command activity, and <paramref name="command"/> 
+            implements the <see cref="T:Microsoft.Practices.Composite.IActiveAware"/> interface, this method will subscribe to its
+            <see cref="E:Microsoft.Practices.Composite.IActiveAware.IsActiveChanged"/> event.
+            </remarks>
+            <param name="command">The command to register.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.UnregisterCommand(System.Windows.Input.ICommand)">
+            <summary>
+            Removes a command from the collection and removes itself from the <see cref="E:System.Windows.Input.ICommand.CanExecuteChanged"/> event of it.
+            </summary>
+            <param name="command">The command to unregister.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.CanExecute(System.Object)">
+            <summary>
+            Forwards <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/> to the registered commands and returns
+            <see langword="true"/> if all of the commands return <see langword="true"/>.
+            </summary>
+            <param name="parameter">Data used by the command.
+            If the command does not require data to be passed, this object can be set to <see langword="null"/>.
+            </param>
+            <returns><see langword="true"/> if all of the commands return <see langword="true"/>; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.Execute(System.Object)">
+            <summary>
+            Forwards <see cref="M:System.Windows.Input.ICommand.Execute(System.Object)"/> to the registered commands.
+            </summary>
+            <param name="parameter">Data used by the command.
+            If the command does not require data to be passed, this object can be set to <see langword="null"/>.
+            </param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.ShouldExecute(System.Windows.Input.ICommand)">
+            <summary>
+            Evaluates if a command should execute.
+            </summary>
+            <param name="command">The command to evaluate.</param>
+            <returns>A <see cref="T:System.Boolean"/> value indicating whether the command should be used 
+            when evaluating <see cref="M:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.CanExecute(System.Object)"/> and <see cref="M:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.Execute(System.Object)"/>.</returns>
+            <remarks>
+            If this command is set to monitor command activity, and <paramref name="command"/>
+            implements the <see cref="T:Microsoft.Practices.Composite.IActiveAware"/> interface, 
+            this method will return <see langword="false"/> if the command's <see cref="P:Microsoft.Practices.Composite.IActiveAware.IsActive"/> 
+            property is <see langword="false"/>; otherwise it always returns <see langword="true"/>.</remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.Command_IsActiveChanged(System.Object,System.EventArgs)">
+            <summary>
+            Handler for IsActiveChanged events of registered commands.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">EventArgs to pass to the event.</param>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.CanExecuteChanged">
+            <summary>
+            Occurs when any of the registered commands raise <seealso cref="E:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.CanExecuteChanged"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand.RegisteredCommands">
+            <summary>
+            Gets the list of all the registered commands.
+            </summary>
+            <value>A list of registered commands.</value>
+            <remarks>This returns a copy of the commands subscribed to the CompositeCommand.</remarks>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.SelectorRegionAdapter">
+            <summary>
+            Adapter that creates a new <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Region"/> and binds all
+            the views to the adapted <see cref="T:System.Windows.Controls.Primitives.Selector"/>.
+            It also keeps the <see cref="P:Microsoft.Practices.Composite.Regions.IRegion.ActiveViews"/> and the selected items
+            of the <see cref="T:System.Windows.Controls.Primitives.Selector"/> in sync.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.SelectorRegionAdapter.#ctor(Microsoft.Practices.Composite.Presentation.Regions.IRegionBehaviorFactory)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.SelectorRegionAdapter"/>.
+            </summary>
+            <param name="regionBehaviorFactory">The factory used to create the region behaviors to attach to the created regions.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.SelectorRegionAdapter.Adapt(Microsoft.Practices.Composite.Regions.IRegion,System.Windows.Controls.Primitives.Selector)">
+            <summary>
+            Adapts an <see cref="T:System.Windows.Controls.Primitives.Selector"/> to an <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>.
+            </summary>
+            <param name="region">The new region being used.</param>
+            <param name="regionTarget">The object to adapt.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.SelectorRegionAdapter.AttachBehaviors(Microsoft.Practices.Composite.Regions.IRegion,System.Windows.Controls.Primitives.Selector)">
+            <summary>
+            Attach new behaviors.
+            </summary>
+            <param name="region">The region being used.</param>
+            <param name="regionTarget">The object to adapt.</param>
+            <remarks>
+            This class attaches the base behaviors and also listens for changes in the
+            activity of the region or the control selection and keeps the in sync.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.SelectorRegionAdapter.CreateRegion">
+            <summary>
+            Creates a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Region"/>.
+            </summary>
+            <returns>A new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Region"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.IRegionBehaviorFactory">
+            <summary>
+            Interface for RegionBehaviorFactories. This factory allows the registration of the default set of RegionBehaviors, that will
+            be added to the <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehaviorCollection"/>s of all <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>s, unless overridden on a 'per-region' basis. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.IRegionBehaviorFactory.AddIfMissing(System.String,System.Type)">
+            <summary>
+            Adds a particular type of RegionBehavior if it was not already registered. the <paramref name="behaviorKey"/> string is used to check if the behavior is already present
+            </summary>
+            <param name="behaviorKey">The behavior key that's used to find if a certain behavior is already added.</param>
+            <param name="behaviorType">Type of the behavior to add. .</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.IRegionBehaviorFactory.ContainsKey(System.String)">
+            <summary>
+            Determines whether a behavior with the specified key already exists
+            </summary>
+            <param name="behaviorKey">The behavior key.</param>
+            <returns>
+            <see langword="true"/> if a behavior with the specified key is present; otherwise, <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.IRegionBehaviorFactory.CreateFromKey(System.String)">
+            <summary>
+            Creates an instance of the the Behaviortype that's registered using the specified key.
+            </summary>
+            <param name="key">The key that's used to register a behavior type.</param>
+            <returns>The created behavior. </returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionManagerRegistrationBehavior">
+            <summary>
+            Subscribes to a static event from the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionManager"/> in order to register the target <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>
+            in a <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> when one is available on the host control by walking up the tree and finding
+            a control whose <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionManagerProperty"/> property is not <see langword="null"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.RegionBehavior">
+            <summary>
+            Provides a base class for region's behaviors.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehavior.Attach">
+            <summary>
+            Attaches the behavior to the region.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehavior.OnAttach">
+            <summary>
+            Override this method to perform the logic after the behavior has been attached.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.RegionBehavior.Region">
+            <summary>
+            Behavior's attached region.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.RegionBehavior.IsAttached">
+            <summary>
+            Returns <see langword="true"/> if the behavior is attached to a region, <see langword="false"/> otherwise.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.IHostAwareRegionBehavior">
+            <summary>
+            Defines a <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> that not allows extensible behaviors on regions which also interact
+            with the target element that the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> is attached to.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.IHostAwareRegionBehavior.HostControl">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DependencyObject"/> that the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> is attached to.
+            </summary>
+            <value>A <see cref="T:System.Windows.DependencyObject"/> that the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> is attached to.
+            This is usually a <see cref="T:System.Windows.FrameworkElement"/> that is part of the tree.</value>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionManagerRegistrationBehavior.BehaviorKey">
+            <summary>
+            The key of this behavior.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionManagerRegistrationBehavior.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionManagerRegistrationBehavior"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionManagerRegistrationBehavior.OnAttach">
+            <summary>
+            When the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> has a name assigned, the behavior will start monitoring the ancestor controls in the element tree
+            to look for an <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> where to register the region in.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionManagerRegistrationBehavior.OnUpdatingRegions(System.Object,System.EventArgs)">
+            <summary>
+            This event handler gets called when a RegionManager is requering the instances of a region to be registered if they are not already.
+            <remarks>Although this is a public method to support Weak Delegates in Silverlight, it should not be called by the user.</remarks>
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The arguments.</param>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionManagerRegistrationBehavior.RegionManagerAccessor">
+            <summary>
+            Provides an abstraction on top of the RegionManager static members.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionManagerRegistrationBehavior.HostControl">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DependencyObject"/> that the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> is attached to.
+            </summary>
+            <value>A <see cref="T:System.Windows.DependencyObject"/> that the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> is attached to.
+            This is usually a <see cref="T:System.Windows.FrameworkElement"/> that is part of the tree.</value>
+            <exception cref="T:System.InvalidOperationException">When this member is set after the <see cref="M:Microsoft.Practices.Composite.Regions.IRegionBehavior.Attach"/> method has being called.</exception>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Commands.Click">
+            <summary>
+            Static Class that holds all Dependency Properties and Static methods to allow 
+            the Click event of the ButtonBase class to be attached to a Command. 
+            </summary>
+            <remarks>
+            This class is required, because Silverlight doesn't have native support for Commands. 
+            </remarks>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Commands.Click.CommandProperty">
+            <summary>
+            Command to execute on click event.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Commands.Click.CommandParameterProperty">
+            <summary>
+            Command parameter to supply on command execution.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.Click.SetCommand(System.Windows.Controls.Primitives.ButtonBase,System.Windows.Input.ICommand)">
+            <summary>
+            Sets the <see cref="T:System.Windows.Input.ICommand"/> to execute on the click event.
+            </summary>
+            <param name="buttonBase">ButtonBase dependency object to attach command</param>
+            <param name="command">Command to attach</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.Click.GetCommand(System.Windows.Controls.Primitives.ButtonBase)">
+            <summary>
+            Retrieves the <see cref="T:System.Windows.Input.ICommand"/> attached to the <see cref="T:System.Windows.Controls.Primitives.ButtonBase"/>.
+            </summary>
+            <param name="buttonBase">ButtonBase containing the Command dependency property</param>
+            <returns>The value of the command attached</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.Click.SetCommandParameter(System.Windows.Controls.Primitives.ButtonBase,System.Object)">
+            <summary>
+            Sets the value for the CommandParameter attached property on the provided <see cref="T:System.Windows.Controls.Primitives.ButtonBase"/>.
+            </summary>
+            <param name="buttonBase">ButtonBase to attach CommandParameter</param>
+            <param name="parameter">Parameter value to attach</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.Click.GetCommandParameter(System.Windows.Controls.Primitives.ButtonBase)">
+            <summary>
+            Gets the value in CommandParameter attached property on the provided <see cref="T:System.Windows.Controls.Primitives.ButtonBase"/>
+            </summary>
+            <param name="buttonBase">ButtonBase that has the CommandParameter</param>
+            <returns>The value of the property</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Commands.CommandBehaviorBase`1">
+            <summary>
+            Base behavior to handle connecting a <see cref="T:System.Windows.Controls.Control"/> to a Command.
+            </summary>
+            <typeparam name="T">The target object must derive from Control</typeparam>
+            <remarks>
+            CommandBehaviorBase can be used to provide new behaviors similar to <see cref="T:Microsoft.Practices.Composite.Presentation.Commands.ButtonBaseClickCommandBehavior"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.CommandBehaviorBase`1.#ctor(`0)">
+            <summary>
+            Constructor specifying the target object.
+            </summary>
+            <param name="targetObject">The target object the behavior is attached to.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.CommandBehaviorBase`1.UpdateEnabledState">
+            <summary>
+            Updates the target object's IsEnabled property based on the commands ability to execute.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.CommandBehaviorBase`1.ExecuteCommand">
+            <summary>
+            Executes the command, if it's set, providing the <see cref="P:Microsoft.Practices.Composite.Presentation.Commands.CommandBehaviorBase`1.CommandParameter"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Commands.CommandBehaviorBase`1.Command">
+            <summary>
+            Corresponding command to be execute and monitored for <see cref="E:System.Windows.Input.ICommand.CanExecuteChanged"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Commands.CommandBehaviorBase`1.CommandParameter">
+            <summary>
+            The parameter to supply the command during execution
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Commands.CommandBehaviorBase`1.TargetObject">
+            <summary>
+            Object to which this behavior is attached.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterMappings">
+            <summary>
+            This class maps <see cref="T:System.Type"/> with <see cref="T:Microsoft.Practices.Composite.Regions.IRegionAdapter"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterMappings.RegisterMapping(System.Type,Microsoft.Practices.Composite.Regions.IRegionAdapter)">
+            <summary>
+            Registers the mapping between a type and an adapter.
+            </summary>
+            <param name="controlType">The type of the control.</param>
+            <param name="adapter">The adapter to use with the <paramref name="controlType"/> type.</param>
+            <exception cref="T:System.ArgumentNullException">When any of <paramref name="controlType"/> or <paramref name="adapter"/> are <see langword="null"/>.</exception>
+            <exception cref="T:System.InvalidOperationException">If a mapping for <paramref name="controlType"/> already exists.</exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterMappings.GetMapping(System.Type)">
+            <summary>
+            Returns the adapter associated with the type provided.
+            </summary>
+            <param name="controlType">The type to obtain the <seealso cref="T:Microsoft.Practices.Composite.Regions.IRegionAdapter"/> mapped.</param>
+            <returns>The <seealso cref="T:Microsoft.Practices.Composite.Regions.IRegionAdapter"/> mapped to the <paramref name="controlType"/>.</returns>
+            <remarks>This class will look for a registered type for <paramref name="controlType"/> and if there is not any,
+            it will look for a registered type for any of its ancestors in the class hierarchy.
+            If there is no registered type for <paramref name="controlType"/> or any of its ancestors,
+            an exception will be thrown.</remarks>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">When there is no registered type for <paramref name="controlType"/> or any of its ancestors.</exception>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.SelectorItemsSourceSyncBehavior">
+            <summary>
+            Defines the attached behavior that keeps the items of the <see cref="T:System.Windows.Controls.Primitives.Selector"/> host control in synchronization with the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>.
+            
+            This behavior also makes sure that, if you activate a view in a region, the SelectedItem is set. If you set the SelectedItem or SelectedItems (ListBox)
+            then this behavior will also call Activate on the selected items. 
+            <remarks>
+            When calling Activate on a view, you can only select a single active view at a time. By setting the SelectedItems property of a listbox, you can set
+            multiple views to active. 
+            </remarks>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.SelectorItemsSourceSyncBehavior.BehaviorKey">
+            <summary>
+            Name that identifies the SelectorItemsSourceSyncBehavior behavior in a collection of RegionsBehaviors. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.SelectorItemsSourceSyncBehavior.OnAttach">
+            <summary>
+            Starts to monitor the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> to keep it in synch with the items of the <see cref="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.SelectorItemsSourceSyncBehavior.HostControl"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.SelectorItemsSourceSyncBehavior.HostControl">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DependencyObject"/> that the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> is attached to.
+            </summary>
+            <value>
+            A <see cref="T:System.Windows.DependencyObject"/> that the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> is attached to.
+            </value>
+            <remarks>For this behavior, the host control must always be a <see cref="T:System.Windows.Controls.Primitives.Selector"/> or an inherited class.</remarks>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1">
+            <summary>
+            An <see cref="T:System.Windows.Input.ICommand"/> whose delegates can be attached for <see cref="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.Execute(`0)"/> and <see cref="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.CanExecute(`0)"/>.
+            It also implements the <see cref="T:Microsoft.Practices.Composite.IActiveAware"/> interface, which is
+            useful when registering this command in a <see cref="T:Microsoft.Practices.Composite.Presentation.Commands.CompositeCommand"/>
+            that monitors command's activity.
+            </summary>
+            <typeparam name="T">Parameter type.</typeparam>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.#ctor(System.Action{`0})">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1"/>.
+            </summary>
+            <param name="executeMethod">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
+            <remarks><seealso cref="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.CanExecute(`0)"/> will always return true.</remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.#ctor(System.Action{`0},System.Func{`0,System.Boolean})">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1"/>.
+            </summary>
+            <param name="executeMethod">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
+            <param name="canExecuteMethod">Delegate to execute when CanExecute is called on the command.  This can be null.</param>
+            <exception cref="T:System.ArgumentNullException">When both <paramref name="executeMethod"/> and <paramref name="canExecuteMethod"/> ar <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.CanExecute(`0)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to <see langword="null" />.</param>
+            <returns>
+            <see langword="true" /> if this command can be executed; otherwise, <see langword="false" />.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.Execute(`0)">
+            <summary>
+            Defines the method to be called when the command is invoked.
+            </summary>
+            <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to <see langword="null" />.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.System#Windows#Input#ICommand#CanExecute(System.Object)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+            <returns>
+            true if this command can be executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.System#Windows#Input#ICommand#Execute(System.Object)">
+            <summary>
+            Defines the method to be called when the command is invoked.
+            </summary>
+            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.RaiseCanExecuteChanged">
+            <summary>
+            Raises <see cref="E:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.CanExecuteChanged"/> on the UI thread so every command invoker
+            can requery to check if the command can execute.
+            <remarks>Note that this will trigger the execution of <see cref="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.CanExecute(`0)"/> once for each invoker.</remarks>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.OnIsActiveChanged">
+            <summary>
+            This raises the <see cref="E:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.IsActiveChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.OnCanExecuteChanged">
+            <summary>
+            Raises <see cref="E:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.CanExecuteChanged"/> on the UI thread so every command invoker can requery to check if the command can execute.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.CanExecuteChanged">
+            <summary>
+            Occurs when changes occur that affect whether or not the command should execute.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.IsActiveChanged">
+            <summary>
+            Fired if the <see cref="P:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.IsActive"/> property changes.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Commands.DelegateCommand`1.IsActive">
+            <summary>
+            Gets or sets a value indicating whether the object is active.
+            </summary>
+            <value><see langword="true" /> if the object is active; otherwise <see langword="false" />.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.AutoPopulateRegionBehavior">
+            <summary>
+            Populates the target region with the views registered to it in the <see cref="T:Microsoft.Practices.Composite.Regions.IRegionViewRegistry"/>.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.AutoPopulateRegionBehavior.BehaviorKey">
+            <summary>
+            The key of this behavior.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.AutoPopulateRegionBehavior.#ctor(Microsoft.Practices.Composite.Regions.IRegionViewRegistry)">
+            <summary>
+            Creates a new instance of the AutoPopulateRegionBehavior 
+            associated with the <see cref="T:Microsoft.Practices.Composite.Regions.IRegionViewRegistry"/> received.
+            </summary>
+            <param name="regionViewRegistry"><see cref="T:Microsoft.Practices.Composite.Regions.IRegionViewRegistry"/> that the behavior will monitor for views to populate the region.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.AutoPopulateRegionBehavior.OnAttach">
+            <summary>
+            Attaches the AutoPopulateRegionBehavior to the Region.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.AutoPopulateRegionBehavior.CreateViewsToAutoPopulate">
+            <summary>
+            Returns a collection of views that will be added to the
+            View collection. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.AutoPopulateRegionBehavior.AddViewIntoRegion(System.Object)">
+            <summary>
+            Adds a view into the views collection of this region. 
+            </summary>
+            <param name="viewToAdd"></param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.AutoPopulateRegionBehavior.OnViewRegistered(System.Object,Microsoft.Practices.Composite.Regions.ViewRegisteredEventArgs)">
+            <summary>
+            Handler of the event that fires when a new viewtype is registered to the registry. 
+            </summary>
+            <remarks>Although this is a public method to support Weak Delegates in Silverlight, it should not be called by the user.</remarks>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.AdapterInvalidTypeException">
+            <summary>
+              Looks up a localized string similar to The object must be of type &apos;{0}&apos; in order to use the current region adapter..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.CannotChangeRegionNameException">
+            <summary>
+              Looks up a localized string similar to Cannot change the region name once is set. The current region name is &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.CannotRegisterCompositeCommandInItself">
+            <summary>
+              Looks up a localized string similar to Cannot register a CompositeCommand in itself..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.CannotRegisterSameCommandTwice">
+            <summary>
+              Looks up a localized string similar to Cannot register the same command twice in the same CompositeCommand..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.CanOnlyAddTypesThatInheritIFromRegionBehavior">
+            <summary>
+              Looks up a localized string similar to Type &apos;{0}&apos; does not implement from IRegionBehavior..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.ContentControlHasContentException">
+            <summary>
+              Looks up a localized string similar to ContentControl&apos;s Content property is not empty. 
+               This control is being associated with a region, but the control is already bound to something else. 
+               If you did not explicitly set the control&apos;s Content property, 
+               this exception may be caused by a change in the value of the inherited RegionManager attached property..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.DeactiveNotPossibleException">
+            <summary>
+              Looks up a localized string similar to Deactivation is not possible in this type of region..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.DelegateCommandDelegatesCannotBeNull">
+            <summary>
+              Looks up a localized string similar to Both the executeMethod and the canExecuteMethod delegates cannot be null..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.HostControlCannotBeNull">
+            <summary>
+              Looks up a localized string similar to HostControl cannot have null value when behavior attaches. .
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.HostControlCannotBeSetAfterAttach">
+            <summary>
+              Looks up a localized string similar to The HostControl property cannot be set after Attach method has been called..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.HostControlMustBeATabControl">
+            <summary>
+              Looks up a localized string similar to HostControl type must be a TabControl..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.ItemsControlHasItemsSourceException">
+            <summary>
+              Looks up a localized string similar to ItemsControl&apos;s ItemsSource property is not empty. 
+               This control is being associated with a region, but the control is already bound to something else. 
+               If you did not explicitly set the control&apos;s ItemSource property, 
+               this exception may be caused by a change in the value of the inherited RegionManager attached property..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.MappingExistsException">
+            <summary>
+              Looks up a localized string similar to Mapping with the given type is already registered: {0}..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.OnViewRegisteredException">
+            <summary>
+              Looks up a localized string similar to An exception has occurred while trying to add a view to region &apos;{0}&apos;. 
+               - The most likely causing exception was was: &apos;{1}&apos;.
+               But also check the InnerExceptions for more detail or call .GetRootException(). .
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.RegionBehaviorAttachCannotBeCallWithNullRegion">
+            <summary>
+              Looks up a localized string similar to The Attach method cannot be called when Region property is null..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.RegionBehaviorRegionCannotBeSetAfterAttach">
+            <summary>
+              Looks up a localized string similar to The Region property cannot be set after Attach method has been called..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.RegionCreationException">
+            <summary>
+              Looks up a localized string similar to An exception occurred while creating a region with name &apos;{0}&apos;. The exception was: {1}. .
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.RegionNameCannotBeEmptyException">
+            <summary>
+              Looks up a localized string similar to The region name cannot be null or empty..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.RegionNameExistsException">
+            <summary>
+              Looks up a localized string similar to Region with the given name is already registered: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.RegionNotInRegionManagerException">
+            <summary>
+              Looks up a localized string similar to The region manager does not contain the {0} region..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.RegionViewExistsException">
+            <summary>
+              Looks up a localized string similar to View already exists in region..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.RegionViewNameExistsException">
+            <summary>
+              Looks up a localized string similar to View with name &apos;{0}&apos; already exists in the region..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.StringCannotBeNullOrEmpty">
+            <summary>
+              Looks up a localized string similar to The provided String argument {0} must not be null or empty..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.TypeWithKeyNotRegistered">
+            <summary>
+              Looks up a localized string similar to No BehaviorType with key &apos;{0}&apos; was registered..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.UpdateRegionException">
+            <summary>
+              Looks up a localized string similar to An exception occurred while trying to create region objects. 
+               - The most likely causing exception was: &apos;{0}&apos;.
+               But also check the InnerExceptions for more detail or call .GetRootException(). .
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.ValueNotFound">
+            <summary>
+              Looks up a localized string similar to {0} not found..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Properties.Resources.ViewNotInRegionException">
+            <summary>
+              Looks up a localized string similar to The region does not contain the specified view..
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.AllActiveRegion">
+            <summary>
+            Region that keeps all the views in it as active. Deactivation of views is not allowed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.Region">
+            <summary>
+            Implementation of <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> that allows multiple active views.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Region.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Region"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Region.Add(System.Object)">
+            <overloads>Adds a new view to the region.</overloads>
+            <summary>
+            Adds a new view to the region.
+            </summary>
+            <param name="view">The view to add.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> that is set on the view if it is a <see cref="T:System.Windows.DependencyObject"/>. It will be the current region manager when using this overload.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Region.Add(System.Object,System.String)">
+            <summary>
+            Adds a new view to the region.
+            </summary>
+            <param name="view">The view to add.</param>
+            <param name="viewName">The name of the view. This can be used to retrieve it later by calling <see cref="M:Microsoft.Practices.Composite.Regions.IRegion.GetView(System.String)"/>.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> that is set on the view if it is a <see cref="T:System.Windows.DependencyObject"/>. It will be the current region manager when using this overload.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Region.Add(System.Object,System.String,System.Boolean)">
+            <summary>
+            Adds a new view to the region.
+            </summary>
+            <param name="view">The view to add.</param>
+            <param name="viewName">The name of the view. This can be used to retrieve it later by calling <see cref="M:Microsoft.Practices.Composite.Regions.IRegion.GetView(System.String)"/>.</param>
+            <param name="createRegionManagerScope">When <see langword="true"/>, the added view will receive a new instance of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/>, otherwise it will use the current region manager for this region.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> that is set on the view if it is a <see cref="T:System.Windows.DependencyObject"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Region.Remove(System.Object)">
+            <summary>
+            Removes the specified view from the region.
+            </summary>
+            <param name="view">The view to remove.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Region.Activate(System.Object)">
+            <summary>
+            Marks the specified view as active. 
+            </summary>
+            <param name="view">The view to activate.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Region.Deactivate(System.Object)">
+            <summary>
+            Marks the specified view as inactive. 
+            </summary>
+            <param name="view">The view to deactivate.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Region.GetView(System.String)">
+            <summary>
+            Returns the view instance that was added to the region using a specific name.
+            </summary>
+            <param name="viewName">The name used when adding the view to the region.</param>
+            <returns>Returns the named view or <see langword="null"/> if the view with <paramref name="viewName"/> does not exist in the current region.</returns>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.Presentation.Regions.Region.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Region.Behaviors">
+            <summary>
+            Gets the collection of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/>s that can extend the behavior of regions. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Region.Context">
+            <summary>
+            Gets or sets a context for the region. This value can be used by the user to share context with the views.
+            </summary>
+            <value>The context value to be shared.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Region.Name">
+            <summary>
+            Gets the name of the region that uniequely identifies the region within a <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/>.
+            </summary>
+            <value>The name of the region.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Region.Views">
+            <summary>
+            Gets a readonly view of the collection of views in the region.
+            </summary>
+            <value>An <see cref="T:Microsoft.Practices.Composite.Regions.IViewsCollection"/> of all the added views.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Region.ActiveViews">
+            <summary>
+            Gets a readonly view of the collection of all the active views in the region.
+            </summary>
+            <value>An <see cref="T:Microsoft.Practices.Composite.Regions.IViewsCollection"/> of all the active views.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Region.RegionManager">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> that will be passed to the views when adding them to the region, unless the view is added by specifying createRegionManagerScope as <see langword="true"/>.
+            </summary>
+            <value>The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> where this <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> is registered.</value>
+            <remarks>This is usually used by implementations of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> and should not be
+            used by the developer explicitely.</remarks>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Region.ItemMetadataCollection">
+            <summary>
+            Gets the collection with all the views along with their metadata.
+            </summary>
+            <value>An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata"/> with all the added views.</value>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.AllActiveRegion.Deactivate(System.Object)">
+            <summary>
+            Deactive is not valid in this Region. This method will always throw <see cref="T:System.InvalidOperationException"/>.
+            </summary>
+            <param name="view">The view to deactivate.</param>
+            <exception cref="T:System.InvalidOperationException">Every time this method is called.</exception>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.AllActiveRegion.ActiveViews">
+            <summary>
+            Gets a readonly view of the collection of all the active views in the region. These are all the added views.
+            </summary>
+            <value>An <see cref="T:Microsoft.Practices.Composite.Regions.IViewsCollection"/> of all the active views.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior">
+            <summary>
+            Behavior that creates a new <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>, when the control that will host the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> (see <see cref="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior.TargetElement"/>)
+            is added to the VisualTree. This behavior will use the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterMappings"/> class to find the right type of adapter to create
+            the region. After the region is created, this behavior will detach. 
+            </summary>
+            <remarks>
+            Attached property value inheritance is not available in Silverlight, so the current approach walks up the visual tree when requesting a region from a region manager.
+            The <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionManagerRegistrationBehavior"/> is now responsible for walking up the Tree. 
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior.#ctor(Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterMappings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior"/> class.
+            </summary>
+            <param name="regionAdapterMappings">
+            The region adapter mappings, that are used to find the correct adapter for 
+            a given controltype. The controltype is determined by the <see name="TargetElement"/> value. 
+            </param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior.Attach">
+            <summary>
+            Start monitoring the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionManager"/> and the <see cref="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior.TargetElement"/> to detect when the <see cref="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior.TargetElement"/> becomes
+            part of the Visual Tree. When that happens, the Region will be created and the behavior will <see cref="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior.Detach"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior.Detach">
+            <summary>
+            Stop monitoring the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionManager"/> and the  <see cref="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior.TargetElement"/>, so that this behavior can be garbage collected. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior.OnUpdatingRegions(System.Object,System.EventArgs)">
+            <summary>
+            Called when the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionManager"/> is updating it's <see cref="P:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.Regions"/> collection. 
+            </summary>
+            <remarks>
+            This method has to be public, because it has to be callable using weak references in silverlight and other partial trust environments.
+            </remarks>
+            <param name="sender">The <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionManager"/>. </param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior.CreateRegion(System.Windows.DependencyObject,System.String)">
+            <summary>
+            Method that will create the region, by calling the right <see cref="T:Microsoft.Practices.Composite.Regions.IRegionAdapter"/>. 
+            </summary>
+            <param name="targetElement">The target element that will host the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>.</param>
+            <param name="regionName">Name of the region.</param>
+            <returns>The created <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/></returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior.RegionManagerAccessor">
+            <summary>
+            Sets a class that interfaces between the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionManager"/> 's static properties/events and this behavior,
+            so this behavior can be tested in isolation. 
+            </summary>
+            <value>The region manager accessor.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.DelayedRegionCreationBehavior.TargetElement">
+            <summary>
+            The element that will host the Region. 
+            </summary>
+            <value>The target element.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.ContentControlRegionAdapter">
+            <summary>
+            Adapter that creates a new <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.SingleActiveRegion"/> and monitors its
+            active view to set it on the adapted <see cref="T:System.Windows.Controls.ContentControl"/>. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ContentControlRegionAdapter.#ctor(Microsoft.Practices.Composite.Presentation.Regions.IRegionBehaviorFactory)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.ContentControlRegionAdapter"/>.
+            </summary>
+            <param name="regionBehaviorFactory">The factory used to create the region behaviors to attach to the created regions.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ContentControlRegionAdapter.Adapt(Microsoft.Practices.Composite.Regions.IRegion,System.Windows.Controls.ContentControl)">
+            <summary>
+            Adapts a <see cref="T:System.Windows.Controls.ContentControl"/> to an <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>.
+            </summary>
+            <param name="region">The new region being used.</param>
+            <param name="regionTarget">The object to adapt.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ContentControlRegionAdapter.CreateRegion">
+            <summary>
+            Creates a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.SingleActiveRegion"/>.
+            </summary>
+            <returns>A new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.SingleActiveRegion"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.IRegionManagerAccessor">
+            <summary>
+            Provides an abstraction on top of the RegionManager static members.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.IRegionManagerAccessor.GetRegionName(System.Windows.DependencyObject)">
+            <summary>
+            Gets the value for the RegionName attached property.
+            </summary>
+            <param name="element">The object to adapt. This is typically a container (i.e a control).</param>
+            <returns>The name of the region that should be created when 
+            the RegionManager is also set in this element.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.IRegionManagerAccessor.GetRegionManager(System.Windows.DependencyObject)">
+            <summary>
+            Gets the value of the RegionName attached property.
+            </summary>
+            <param name="element">The target element.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> attached to the <paramref name="element"/> element.</returns>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.Presentation.Regions.IRegionManagerAccessor.UpdatingRegions">
+            <summary>
+            Notification used by attached behaviors to update the region managers appropriatelly if needed to.
+            </summary>
+            <remarks>This event uses weak references to the event handler to prevent this static event of keeping the
+            target element longer than expected. For security reasons, to use weak delegates in Silverlight you must provide
+            a delegate that is available in the public API of the class (no private or anonymous delegates allowed).</remarks>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Events.IDispatcherFacade">
+            <summary>
+            Defines the interface for invoking methods through a Dispatcher Facade
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Events.IDispatcherFacade.BeginInvoke(System.Delegate,System.Object)">
+            <summary>
+            Dispatches an invocation to the method received as parameter.
+            </summary>
+            <param name="method">Method to be invoked.</param>
+            <param name="arg">Arguments to pass to the invoked method.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Events.ThreadOption">
+            <summary>
+            Specifies on which thread a <see cref="T:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1"/> subscriber will be called.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Events.ThreadOption.PublisherThread">
+            <summary>
+            The call is done on the same thread on which the <see cref="T:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1"/> was published.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Events.ThreadOption.UIThread">
+            <summary>
+            The call is done on the UI thread.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Events.ThreadOption.BackgroundThread">
+            <summary>
+            The call is done asynchronously on a background thread.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionActiveAwareBehavior">
+            <summary>
+            Behavior that monitors a <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> object and 
+            changes the value for the <see cref="P:Microsoft.Practices.Composite.IActiveAware.IsActive"/> property when
+            an object that implements <see cref="T:Microsoft.Practices.Composite.IActiveAware"/> gets added or removed 
+            from the collection.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionActiveAwareBehavior.BehaviorKey">
+            <summary>
+            Name that identifies the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionActiveAwareBehavior"/> behavior in a collection of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionActiveAwareBehavior.Attach">
+            <summary>
+            Attaches the behavior to the specified region
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionActiveAwareBehavior.Detach">
+            <summary>
+            Detaches the behavior from the <see cref="T:System.Collections.Specialized.INotifyCollectionChanged"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionActiveAwareBehavior.Region">
+            <summary>
+            The region that this behavior is extending
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1">
+            <summary>
+            Defines a class that manages publication and subscription to events.
+            </summary>
+            <typeparam name="TPayload">The type of message that will be passed to the subscribers.</typeparam>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1.Subscribe(System.Action{`0})">
+            <summary>
+            Subscribes a delegate to an event that will be published on the <see cref="F:Microsoft.Practices.Composite.Presentation.Events.ThreadOption.PublisherThread"/>.
+            <see cref="T:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1"/> will maintain a <seealso cref="T:System.WeakReference"/> to the target of the supplied <paramref name="action"/> delegate.
+            </summary>
+            <param name="action">The delegate that gets executed when the event is published.</param>
+            <returns>A <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/> that uniquely identifies the added subscription.</returns>
+            <remarks>
+            The CompositePresentationEvent collection is thread-safe.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1.Subscribe(System.Action{`0},Microsoft.Practices.Composite.Presentation.Events.ThreadOption)">
+            <summary>
+            Subscribes a delegate to an event.
+            CompositePresentationEvent will maintain a <seealso cref="T:System.WeakReference"/> to the Target of the supplied <paramref name="action"/> delegate.
+            </summary>
+            <param name="action">The delegate that gets executed when the event is raised.</param>
+            <param name="threadOption">Specifies on which thread to receive the delegate callback.</param>
+            <returns>A <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/> that uniquely identifies the added subscription.</returns>
+            <remarks>
+            The CompositePresentationEvent collection is thread-safe.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1.Subscribe(System.Action{`0},System.Boolean)">
+            <summary>
+            Subscribes a delegate to an event that will be published on the <see cref="F:Microsoft.Practices.Composite.Presentation.Events.ThreadOption.PublisherThread"/>.
+            </summary>
+            <param name="action">The delegate that gets executed when the event is published.</param>
+            <param name="keepSubscriberReferenceAlive">When <see langword="true"/>, the <seealso cref="T:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1"/> keeps a reference to the subscriber so it does not get garbage collected.</param>
+            <returns>A <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/> that uniquely identifies the added subscription.</returns>
+            <remarks>
+            If <paramref name="keepSubscriberReferenceAlive"/> is set to <see langword="false"/>, <see cref="T:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1"/> will maintain a <seealso cref="T:System.WeakReference"/> to the Target of the supplied <paramref name="action"/> delegate.
+            If not using a WeakReference (<paramref name="keepSubscriberReferenceAlive"/> is <see langword="true"/>), the user must explicitly call Unsubscribe for the event when disposing the subscriber in order to avoid memory leaks or unexepcted behavior.
+            
+            The CompositePresentationEvent collection is thread-safe.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1.Subscribe(System.Action{`0},Microsoft.Practices.Composite.Presentation.Events.ThreadOption,System.Boolean)">
+            <summary>
+            Subscribes a delegate to an event.
+            </summary>
+            <param name="action">The delegate that gets executed when the event is published.</param>
+            <param name="threadOption">Specifies on which thread to receive the delegate callback.</param>
+            <param name="keepSubscriberReferenceAlive">When <see langword="true"/>, the <seealso cref="T:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1"/> keeps a reference to the subscriber so it does not get garbage collected.</param>
+            <returns>A <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/> that uniquely identifies the added subscription.</returns>
+            <remarks>
+            If <paramref name="keepSubscriberReferenceAlive"/> is set to <see langword="false"/>, <see cref="T:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1"/> will maintain a <seealso cref="T:System.WeakReference"/> to the Target of the supplied <paramref name="action"/> delegate.
+            If not using a WeakReference (<paramref name="keepSubscriberReferenceAlive"/> is <see langword="true"/>), the user must explicitly call Unsubscribe for the event when disposing the subscriber in order to avoid memory leaks or unexepcted behavior.
+            
+            The CompositePresentationEvent collection is thread-safe.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1.Subscribe(System.Action{`0},Microsoft.Practices.Composite.Presentation.Events.ThreadOption,System.Boolean,System.Predicate{`0})">
+            <summary>
+            Subscribes a delegate to an event.
+            </summary>
+            <param name="action">The delegate that gets executed when the event is published.</param>
+            <param name="threadOption">Specifies on which thread to receive the delegate callback.</param>
+            <param name="keepSubscriberReferenceAlive">When <see langword="true"/>, the <seealso cref="T:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1"/> keeps a reference to the subscriber so it does not get garbage collected.</param>
+            <param name="filter">Filter to evaluate if the subscriber should receive the event.</param>
+            <returns>A <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/> that uniquely identifies the added subscription.</returns>
+            <remarks>
+            If <paramref name="keepSubscriberReferenceAlive"/> is set to <see langword="false"/>, <see cref="T:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1"/> will maintain a <seealso cref="T:System.WeakReference"/> to the Target of the supplied <paramref name="action"/> delegate.
+            If not using a WeakReference (<paramref name="keepSubscriberReferenceAlive"/> is <see langword="true"/>), the user must explicitly call Unsubscribe for the event when disposing the subscriber in order to avoid memory leaks or unexepcted behavior.
+            
+            The CompositePresentationEvent collection is thread-safe.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1.Publish(`0)">
+            <summary>
+            Publishes the <see cref="T:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1"/>.
+            </summary>
+            <param name="payload">Message to pass to the subscribers.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1.Unsubscribe(System.Action{`0})">
+            <summary>
+            Removes the first subscriber matching <seealso cref="T:System.Action`1"/> from the subscribers' list.
+            </summary>
+            <param name="subscriber">The <see cref="T:System.Action`1"/> used when subscribing to the event.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1.Contains(System.Action{`0})">
+            <summary>
+            Returns <see langword="true"/> if there is a subscriber matching <seealso cref="T:System.Action`1"/>.
+            </summary>
+            <param name="subscriber">The <see cref="T:System.Action`1"/> used when subscribing to the event.</param>
+            <returns><see langword="true"/> if there is an <seealso cref="T:System.Action`1"/> that matches; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Events.CompositePresentationEvent`1.UIDispatcher">
+            <summary>
+            Gets the <see cref="T:System.Windows.Threading.Dispatcher"/> that is bound to the UI elements.
+            </summary>
+            <value>The <see cref="T:System.Windows.Threading.Dispatcher"/> to use when subscribing using <see cref="F:Microsoft.Practices.Composite.Presentation.Events.ThreadOption.UIThread"/>.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.ObservableObject`1">
+            <summary>
+            Class that wraps an object, so that other classes can notify for Change events. Typically, this class is set as 
+            a Dependency Property on DependencyObjects, and allows other classes to observe any changes in the Value. 
+            </summary>
+            <remarks>
+            This class is required, because in Silverlight, it's not possible to receive Change notifications for Dependency properties that you do not own. 
+            </remarks>
+            <typeparam name="T">The type of the property that's wrapped in the Observable object</typeparam>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.ObservableObject`1.ValueProperty">
+            <summary>
+            Identifies the Value property of the ObservableObject
+            </summary>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.Presentation.ObservableObject`1.PropertyChanged">
+            <summary>
+            Event that gets invoked when the Value property changes. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.ObservableObject`1.Value">
+            <summary>
+            The value that's wrapped inside the ObservableObject.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.UpdateRegionsException">
+            <summary>
+            Represents errors that occured during the regions' update.
+            </summary>
+            <summary>
+            Represents errors that occured during the regions' update.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.UpdateRegionsException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.UpdateRegionsException"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.UpdateRegionsException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.UpdateRegionsException"/> class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.UpdateRegionsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.UpdateRegionsException"/> class with a specified error message and a reference 
+            to the inner exception that is the cause of this exception. 
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference 
+            (Nothing in Visual Basic) if no inner exception is specified.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.UpdateRegionsException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.UpdateRegionsException"/> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionCreationException">
+            <summary>
+            
+            </summary>
+            <summary>
+            Represents errors that occured during region creation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionCreationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionCreationException"/> class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionCreationException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionCreationException"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionCreationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionCreationException"/> class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionCreationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.RegionCreationException"/> class with a specified error message and a reference 
+            to the inner exception that is the cause of this exception. 
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference 
+            (Nothing in Visual Basic) if no inner exception is specified.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Commands.ButtonBaseClickCommandBehavior">
+            <summary>
+            Behavior that allows controls that derrive from <see cref="T:System.Windows.Controls.Primitives.ButtonBase"/> to hook up with <see cref="T:System.Windows.Input.ICommand"/> objects. 
+            </summary>
+            <remarks>
+            This Behavior is required in Silverlight, because Silverlight does not have Commanding support.  
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Commands.ButtonBaseClickCommandBehavior.#ctor(System.Windows.Controls.Primitives.ButtonBase)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Commands.ButtonBaseClickCommandBehavior"/> class and hooks up the Click event of 
+            <paramref name="clickableObject"/> to the ExecuteCommand() method. 
+            </summary>
+            <param name="clickableObject">The clickable object.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.SingleActiveRegion">
+            <summary>
+            Region that allows a maximum of one active view at a time.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.SingleActiveRegion.Activate(System.Object)">
+            <summary>
+            Marks the specified view as active.
+            </summary>
+            <param name="view">The view to activate.</param>
+            <remarks>If there is an active view before calling this method,
+            that view will be deactivated automatically.</remarks>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.RegionManager">
+            <summary>
+            This class is responsible for maintaining a collection of regions and attaching regions to controls. 
+            </summary>
+            <remarks>
+            This class supplies the attached properties that can be used for simple region creation from XAML.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionNameProperty">
+            <summary>
+            Identifies the RegionName attached property.
+            </summary>
+            <remarks>
+            When a control has both the <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionNameProperty"/> and
+            <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionManagerProperty"/> attached properties set to
+            a value different than <see langword="null"/> and there is a
+            <see cref="T:Microsoft.Practices.Composite.Regions.IRegionAdapter"/> mapping registered for the control, it
+            will create and adapt a new region for that control, and register it
+            in the <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> with the specified region name.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.SetRegionName(System.Windows.DependencyObject,System.String)">
+            <summary>
+            Sets the <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionNameProperty"/> attached property.
+            </summary>
+            <param name="regionTarget">The object to adapt. This is typically a container (i.e a control).</param>
+            <param name="regionName">The name of the region to register.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.GetRegionName(System.Windows.DependencyObject)">
+            <summary>
+            Gets the value for the <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionNameProperty"/> attached property.
+            </summary>
+            <param name="regionTarget">The object to adapt. This is typically a container (i.e a control).</param>
+            <returns>The name of the region that should be created when 
+            <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionManagerProperty"/> is also set in this element.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.GetObservableRegion(System.Windows.DependencyObject)">
+            <summary>
+            Returns an <see cref="T:Microsoft.Practices.Composite.Presentation.ObservableObject`1"/> wrapper that can hold an <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>. Using this wrapper
+            you can detect when an <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> has been created by the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionAdapterBase`1"/>. 
+            
+            If the <see cref="T:Microsoft.Practices.Composite.Presentation.ObservableObject`1"/> wrapper does not yet exist, a new wrapper will be created. When the region
+            gets created and assigned to the wrapper, you can use the <see cref="E:Microsoft.Practices.Composite.Presentation.ObservableObject`1.PropertyChanged"/> event 
+            to get notified of that change. 
+            </summary>
+            <param name="view">The view that will host the region. </param>
+            <returns>Wrapper that can hold an <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> value and can notify when the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> value changes. </returns>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionManagerProperty">
+            <summary>
+            Identifies the RegionManager attached property.
+            </summary>
+            <remarks>
+            When a control has both the <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionNameProperty"/> and
+            <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionManagerProperty"/> attached properties set to
+            a value different than <see langword="null"/> and there is a
+            <see cref="T:Microsoft.Practices.Composite.Regions.IRegionAdapter"/> mapping registered for the control, it
+            will create and adapt a new region for that control, and register it
+            in the <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> with the specified region name.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.GetRegionManager(System.Windows.DependencyObject)">
+            <summary>
+            Gets the value of the <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionNameProperty"/> attached property.
+            </summary>
+            <param name="target">The target element.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> attached to the <paramref name="target"/> element.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.SetRegionManager(System.Windows.DependencyObject,Microsoft.Practices.Composite.Regions.IRegionManager)">
+            <summary>
+            Sets the <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionManagerProperty"/> attached property.
+            </summary>
+            <param name="target">The target element.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionContextProperty">
+            <summary>
+            Identifies the RegionContext attached property.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.GetRegionContext(System.Windows.DependencyObject)">
+            <summary>
+            Gets the value of the <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionContextProperty"/> attached property.
+            </summary>
+            <param name="target">The target element.</param>
+            <returns>The region context to pass to the contained views.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.SetRegionContext(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Sets the <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionContextProperty"/> attached property.
+            </summary>
+            <param name="target">The target element.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.UpdateRegions">
+            <summary>
+            Notifies attached behaviors to update the region managers appropriatelly if needed to. 
+            </summary>
+            <remarks>
+            This method is normally called internally, and there is usually no need to call this from user code.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionManager"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.CreateRegionManager">
+            <summary>
+            Creates a new region manager.
+            </summary>
+            <returns>A new region manager that can be used as a different scope from the current region manager.</returns>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.UpdatingRegions">
+            <summary>
+            Notification used by attached behaviors to update the region managers appropriatelly if needed to.
+            </summary>
+            <remarks>This event uses weak references to the event handler to prevent this static event of keeping the
+            target element longer than expected. For security reasons, to use weak delegates in Silverlight you must provide
+            a delegate that is available in the public API of the class (no private or anonymous delegates allowed).</remarks>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.Regions">
+            <summary>
+            Gets a collection of <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> that identify each region by name. You can use this collection to add or remove regions to the current region manager.
+            </summary>
+            <value>A <see cref="T:Microsoft.Practices.Composite.Regions.IRegionCollection"/> with all the registered regions.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorFactory">
+            <summary>
+            Defines a factory that allows the registration of the default set of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/>, that will
+            be added to the <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehaviorCollection"/> of all <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>s, unless overridden on a 'per-region' basis. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorFactory.#ctor(Microsoft.Practices.ServiceLocation.IServiceLocator)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorFactory"/>.
+            </summary>
+            <param name="serviceLocator"><see cref="T:Microsoft.Practices.ServiceLocation.IServiceLocator"/> used to create the instance of the behavior from its <see cref="T:System.Type"/>.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorFactory.AddIfMissing(System.String,System.Type)">
+            <summary>
+            Adds a particular type of RegionBehavior if it was not already registered. The <paramref name="behaviorKey"/> string is used to check if the behavior is already present
+            </summary>
+            <param name="behaviorKey">The behavior key that's used to find if a certain behavior is already added.</param>
+            <param name="behaviorType">Type of the behavior to add.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorFactory.CreateFromKey(System.String)">
+            <summary>
+            Creates an instance of the the behavior <see cref="T:System.Type"/> that is registered using the specified key.
+            </summary>
+            <param name="key">The key that is used to register a behavior type.</param>
+            <returns>A new instance of the behavior. </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorFactory.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
+            </returns>
+            <filterpriority>1</filterpriority>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorFactory.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorFactory.ContainsKey(System.String)">
+            <summary>
+            Determines whether a behavior with the specified key already exists.
+            </summary>
+            <param name="behaviorKey">The behavior key.</param>
+            <returns>
+            <see langword="true"/> if a behavior with the specified key is present; otherwise, <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.RegionContext">
+            <summary>
+            Class that holds methods to Set and Get the RegionContext from a DependencyObject. 
+            
+            RegionContext allows sharing of contextual information between the view that's hosting a <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>
+            and any views that are inside the Region. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionContext.GetObservableContext(System.Windows.DependencyObject)">
+            <summary>
+            Returns an <see cref="T:Microsoft.Practices.Composite.Presentation.ObservableObject`1"/> wrapper around the RegionContext value. The RegionContext
+            will be set on any views (dependency objects) that are inside the <see cref="P:Microsoft.Practices.Composite.Regions.IRegion.Views"/> collection by 
+            the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.BindRegionContextToDependencyObjectBehavior"/> Behavior.
+            The RegionContext will also be set to the control that hosts the Region, by the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.SyncRegionContextWithHostBehavior"/> Behavior.
+            
+            If the <see cref="T:Microsoft.Practices.Composite.Presentation.ObservableObject`1"/> wrapper does not already exist, an empty one will be created. This way, an observer can 
+            notify when the value is set for the first time. 
+            </summary>
+            <param name="view">Any view that hold the RegionContext value. </param>
+            <returns>Wrapper around the Regioncontext value. </returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.ViewsCollection">
+            <summary>
+            Implementation of <see cref="T:Microsoft.Practices.Composite.Regions.IViewsCollection"/> that takes an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata"/>
+            and filters it to display an <see cref="T:System.Collections.Specialized.INotifyCollectionChanged"/> collection of
+            <see cref="T:System.Object"/> elements (the items which the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata"/> wraps).
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ViewsCollection.#ctor(System.Collections.ObjectModel.ObservableCollection{Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata},System.Predicate{Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata})">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.ViewsCollection"/>.
+            </summary>
+            <param name="list">The list to wrap and filter.</param>
+            <param name="filter">A predicate to filter the <paramref name="list"/> collection.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ViewsCollection.Contains(System.Object)">
+            <summary>
+            Determines whether the collection contains a specific value.
+            </summary>
+            <param name="value">The object to locate in the collection.</param>
+            <returns><see langword="true" /> if <paramref name="value"/> is found in the collection; otherwise, <see langword="false" />.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ViewsCollection.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ViewsCollection.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.Presentation.Regions.ViewsCollection.CollectionChanged">
+            <summary>
+            Occurs when the collection changes.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata">
+            <summary>
+            Defines a class that wraps an item and adds metadata for it.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata.NameProperty">
+            <summary>
+            The name of the wrapped item.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata.IsActiveProperty">
+            <summary>
+            Value indicating whether the wrapped item is considered active.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata"/>.
+            </summary>
+            <param name="item">The item to wrap.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata.InvokeMetadataChanged">
+            <summary>
+            Explicitly invokes <see cref="E:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata.MetadataChanged"/> to notify listeners.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata.Item">
+            <summary>
+            Gets the wrapped item.
+            </summary>
+            <value>The wrapped item.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata.Name">
+            <summary>
+            Gets or sets a name for the wrapped item.
+            </summary>
+            <value>The name of the wrapped item.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata.IsActive">
+            <summary>
+            Gets or sets a value indicating whether the wrapped item is considered active.
+            </summary>
+            <value><see langword="true" /> if the item should be considered active; otherwise <see langword="false" />.</value>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.Presentation.Regions.ItemMetadata.MetadataChanged">
+            <summary>
+            Occurs when metadata on the item changes.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Events.DispatcherEventSubscription`1">
+            <summary>
+             Extends <see cref="T:Microsoft.Practices.Composite.Events.EventSubscription`1"/> to invoke the <see cref="P:Microsoft.Practices.Composite.Events.EventSubscription`1.Action"/> delegate
+             in a specific <see cref="T:System.Windows.Threading.Dispatcher"/>.
+            </summary>
+             <typeparam name="TPayload">The type to use for the generic <see cref="T:System.Action`1"/> and <see cref="T:System.Predicate`1"/> types.</typeparam>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Events.DispatcherEventSubscription`1.#ctor(Microsoft.Practices.Composite.Events.IDelegateReference,Microsoft.Practices.Composite.Events.IDelegateReference,Microsoft.Practices.Composite.Presentation.Events.IDispatcherFacade)">
+            <summary>
+             Creates a new instance of <see cref="T:Microsoft.Practices.Composite.Events.BackgroundEventSubscription`1"/>.
+            </summary>
+            <param name="actionReference">A reference to a delegate of type <see cref="T:System.Action`1"/>.</param>
+            <param name="filterReference">A reference to a delegate of type <see cref="T:System.Predicate`1"/>.</param>
+            <param name="dispatcher">The dispatcher to use when executing the <paramref name="actionReference"/> delegate.</param>
+            <exception cref="T:System.ArgumentNullException">When <paramref name="actionReference"/> or <see paramref="filterReference"/> are <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">When the target of <paramref name="actionReference"/> is not of type <see cref="T:System.Action`1"/>,
+            or the target of <paramref name="filterReference"/> is not of type <see cref="T:System.Predicate`1"/>.</exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Events.DispatcherEventSubscription`1.InvokeAction(System.Action{`0},`0)">
+            <summary>
+            Invokes the specified <see cref="T:System.Action`1"/> asynchronously in the specified <see cref="T:System.Windows.Threading.Dispatcher"/>.
+            </summary>
+            <param name="action">The action to execute.</param>
+            <param name="argument">The payload to pass <paramref name="action"/> while invoking it.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.DefaultRegionManagerAccessor.GetRegionName(System.Windows.DependencyObject)">
+            <summary>
+            Gets the value for the RegionName attached property.
+            </summary>
+            <param name="element">The object to adapt. This is typically a container (i.e a control).</param>
+            <returns>The name of the region that should be created when 
+            the RegionManager is also set in this element.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.DefaultRegionManagerAccessor.GetRegionManager(System.Windows.DependencyObject)">
+            <summary>
+            Gets the value of the RegionName attached property.
+            </summary>
+            <param name="element">The target element.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> attached to the <paramref name="element"/> element.</returns>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.Presentation.Regions.DefaultRegionManagerAccessor.UpdatingRegions">
+            <summary>
+            Notification used by attached behaviors to update the region managers appropriatelly if needed to.
+            </summary>
+            <remarks>This event uses weak references to the event handler to prevent this static event of keeping the
+            target element longer than expected. For security reasons, to use weak delegates in Silverlight you must provide
+            a delegate that is available in the public API of the class (no private or anonymous delegates allowed).</remarks>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Events.DefaultDispatcher">
+            <summary>
+            Wraps the Application Dispatcher.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Events.DefaultDispatcher.BeginInvoke(System.Delegate,System.Object)">
+            <summary>
+            Forwards the BeginInvoke to the current application's <see cref="T:System.Windows.Threading.Dispatcher"/>.
+            </summary>
+            <param name="method">Method to be invoked.</param>
+            <param name="arg">Arguments to pass to the invoked method.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.SyncRegionContextWithHostBehavior">
+            <summary>
+            Behavior that synchronizes the <see cref="P:Microsoft.Practices.Composite.Regions.IRegion.Context"/> property of a <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> with 
+            the control that hosts the Region. It does this by setting the <see cref="F:Microsoft.Practices.Composite.Presentation.Regions.RegionManager.RegionContextProperty"/> 
+            Dependency Property on the host control.
+            
+            This behavior allows the usage of two way databinding of the RegionContext from XAML. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.SyncRegionContextWithHostBehavior.BehaviorKey">
+            <summary>
+            Name that identifies the SyncRegionContextWithHostBehavior behavior in a collection of RegionsBehaviors. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.SyncRegionContextWithHostBehavior.OnAttach">
+            <summary>
+            Override this method to perform the logic after the behavior has been attached.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.Behaviors.SyncRegionContextWithHostBehavior.HostControl">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DependencyObject"/> that the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> is attached to.
+            </summary>
+            <value>
+            A <see cref="T:System.Windows.DependencyObject"/> that the <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> is attached to.
+            This is usually a <see cref="T:System.Windows.FrameworkElement"/> that is part of the tree.
+            </value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.RegionViewRegistry">
+            <summary>
+            Defines a registry for the content of the regions used on View Discovery composition.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionViewRegistry.#ctor(Microsoft.Practices.ServiceLocation.IServiceLocator)">
+            <summary>
+            Creates a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionViewRegistry"/> class.
+            </summary>
+            <param name="locator"><see cref="T:Microsoft.Practices.ServiceLocation.IServiceLocator"/> used to create the instance of the views from its <see cref="T:System.Type"/>.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionViewRegistry.GetContents(System.String)">
+            <summary>
+            Returns the contents registered for a region.
+            </summary>
+            <param name="regionName">Name of the region which content is being requested.</param>
+            <returns>Collection of contents registered for the region.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionViewRegistry.RegisterViewWithRegion(System.String,System.Type)">
+            <summary>
+            Registers a content type with a region name.
+            </summary>
+            <param name="regionName">Region name to which the <paramref name="viewType"/> will be registered.</param>
+            <param name="viewType">Content type to be registered for the <paramref name="regionName"/>.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionViewRegistry.RegisterViewWithRegion(System.String,System.Func{System.Object})">
+            <summary>
+            Registers a delegate that can be used to retrieve the content associated with a region name. 
+            </summary>
+            <param name="regionName">Region name to which the <paramref name="getContentDelegate"/> will be registered.</param>
+            <param name="getContentDelegate">Delegate used to retrieve the content associated with the <paramref name="regionName"/>.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionViewRegistry.CreateInstance(System.Type)">
+            <summary>
+            Creates an instance of a registered view <see cref="T:System.Type"/>. 
+            </summary>
+            <param name="type">Type of the registered view.</param>
+            <returns>Instance of the registered view.</returns>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.Presentation.Regions.RegionViewRegistry.ContentRegistered">
+            <summary>
+            Occurs whenever a new view is registered.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorCollection">
+            <summary>
+            A collection of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> instances, that are stored and retrieved by Key.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorCollection.#ctor(Microsoft.Practices.Composite.Regions.IRegion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorCollection"/> class and associates it with a region.
+            </summary>
+            <param name="region">The region to associate the behavior collection with.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorCollection.Add(System.String,Microsoft.Practices.Composite.Regions.IRegionBehavior)">
+            <summary>
+            Adds a <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> to the collection, using the specified key as an indexer.
+            </summary>
+            <param name="key">The key that specifies the type of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> that's added.</param>
+            <param name="regionBehavior">The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> to add.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown is the <paramref name="key"/> parameter is Null, 
+            or if the <paramref name="regionBehavior"/> parameter is Null.
+            </exception>
+            <exception cref="T:System.ArgumentException">Thrown if a behavior with the specified Key parameter already exists.</exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorCollection.ContainsKey(System.String)">
+            <summary>
+            Checks if a <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> with the specified key is already present.
+            </summary>
+            <param name="key">The key to use to find a particular <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorCollection.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorCollection.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Presentation.Regions.RegionBehaviorCollection.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> with the specified key.
+            </summary>
+            <value>The RegionBehavior that's registered with the key.</value>
+        </member>
+    </members>
+</doc>

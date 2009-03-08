@@ -38,17 +38,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdvanceMath, Version=1.7.0.28714, Culture=neutral, PublicKeyToken=b860f1b8cf45f41c, processorArchitecture=MSIL">
+    <Reference Include="AdvanceMath, Version=2.0.0.37974, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\AdvanceMath.dll</HintPath>
+      <HintPath>..\..\Libraries\Physics2DDotNet\AdvanceMath.dll</HintPath>
     </Reference>
     <Reference Include="DynamicUtilities, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\DynamicUtilities.dll</HintPath>
+      <HintPath>..\..\Libraries\DynamicUtilities\DynamicUtilities.dll</HintPath>
     </Reference>
-    <Reference Include="Physics2DDotNet, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b860f1b8cf45f41c, processorArchitecture=MSIL">
+    <Reference Include="Physics2DDotNet, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\Physics2DDotNet.dll</HintPath>
+      <HintPath>..\..\Libraries\Physics2DDotNet\Physics2DDotNet.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>

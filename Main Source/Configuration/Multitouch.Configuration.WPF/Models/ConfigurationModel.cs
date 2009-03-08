@@ -23,7 +23,7 @@ namespace Multitouch.Configuration.WPF.Models
 
 		static void OnSelectedProviderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			((ConfigurationModel)d).OnSelectedProviderChanged(e);
+			((ConfigurationModel)d).OnSelectedProviderChanged();
 		}
 
 		public ICommand SetCurrentProvider { get; private set; }
@@ -55,6 +55,9 @@ namespace Multitouch.Configuration.WPF.Models
 			SetCurrentProvider = new DelegateCommand(OnSetCurrentProvider, OnCanSetCurrentProvider);
 			RestartService = new DelegateCommand(OnRestartCommand);
 			ShowConfiguration = new DelegateCommand(OnShowConfiguration, OnCanExecuteShowConfiguration);
+
+			if(!DesignerProperties.GetIsInDesignMode(this))
+				Initialize();
 		}
 
 		bool OnCanExecuteShowConfiguration(object arg)
@@ -78,6 +81,8 @@ namespace Multitouch.Configuration.WPF.Models
 		void OnSetCurrentProvider(object obj)
 		{
 			CurrentProvider = logic.CurrentProvider = SelectedProvider;
+			RestartService.Execute(null);
+			((DelegateCommand)ShowConfiguration).RaiseCanExecuteChanged();
 		}
 
 		void OnRestartCommand(object obj)
@@ -85,14 +90,14 @@ namespace Multitouch.Configuration.WPF.Models
 			logic.RestartService();
 		}
 
-		public void Initialize()
+		void Initialize()
 		{
 			foreach (InputProvider provider in logic.AvailableProviders)
 				AvailableProviders.Add(provider);
 			CurrentProvider = logic.CurrentProvider;
 		}
 
-		void OnSelectedProviderChanged(DependencyPropertyChangedEventArgs e)
+		void OnSelectedProviderChanged()
 		{
 			((DelegateCommand)SetCurrentProvider).RaiseCanExecuteChanged();
 		}

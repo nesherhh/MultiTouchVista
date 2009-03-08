@@ -5,16 +5,16 @@ using Multitouch.Contracts;
 namespace Multitouch.Service.Logic.ExternalInterfaces
 {
 	[DataContract]
-	public class ImageData : IImageData
+	public class ImageData
 	{
-		public ImageData(IImageData imageData)
+		internal ImageData(Image image)
 		{
-			Width = imageData.Width;
-			Height = imageData.Height;
-			Stride = imageData.Stride;
-			BitsPerPixel = imageData.BitsPerPixel;
-			Type = imageData.Type;
-			Data = imageData.Data;
+			Width = image.Width;
+			Height = image.Height;
+			Stride = image.Stride;
+			BitsPerPixel = image.BitsPerPixel;
+			Type = image.Type;
+			Data = image.Data;
 		}
 
 		[DataMember]

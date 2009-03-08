@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Multitouch.Contracts.Contracts
+namespace Multitouch.Contracts
 {
 	public enum ImageType
 	{

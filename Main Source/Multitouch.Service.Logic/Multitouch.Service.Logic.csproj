@@ -39,10 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ManagedWinapi, Version=0.2.0.0, Culture=neutral, PublicKeyToken=b860f1b8cf45f41c, processorArchitecture=MSIL" />
-    <Reference Include="Multitouch.Views, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ManagedWinapi, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Output\AddInViews\Multitouch.Views.dll</HintPath>
+      <HintPath>..\Libraries\ManagedWinapi\ManagedWinapi.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -51,8 +50,9 @@
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.AddIn">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    <Reference Include="System.ComponentModel.Composition, Version=2009.1.23.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\MEF\System.ComponentModel.Composition.dll</HintPath>
     </Reference>
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExternalInterfaces\ImageData.cs" />
     <Compile Include="ExternalInterfaces\SessionContext.cs" />
     <Compile Include="ExternalInterfaces\ApplicationInterfaceService.cs" />
     <Compile Include="ExternalInterfaces\ConfigurationInterfaceService.cs" />
@@ -78,9 +79,9 @@
     <Compile Include="ExternalInterfaces\IApplicationInterfaceCallback.cs" />
     <Compile Include="ExternalInterfaces\IApplicationInterface.cs" />
     <Compile Include="ExternalInterfaces\IConfigurationInterface.cs" />
-    <Compile Include="ExternalInterfaces\ImageData.cs" />
     <Compile Include="ExternalInterfaces\InputProviderToken.cs" />
     <Compile Include="InputProviderManager.cs" />
+    <Compile Include="MEF\MultipleDirectoryCatalog.cs" />
     <Compile Include="MultitouchException.cs" />
     <Compile Include="MultitouchInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,9 +112,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Lib\ManagedWinapi.dll" />
-    <Content Include="Lib\ManagedWinapi.pdb" />
-    <Content Include="Lib\ManagedWinapi.XML" />
+    <ProjectReference Include="..\Multitouch.Contracts\Multitouch.Contracts.csproj">
+      <Project>{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}</Project>
+      <Name>Multitouch.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

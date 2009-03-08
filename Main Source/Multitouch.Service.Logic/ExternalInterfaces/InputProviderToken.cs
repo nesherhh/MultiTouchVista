@@ -1,33 +1,27 @@
 ﻿using System;
-using System.AddIn.Hosting;
 using System.Runtime.Serialization;
+using Multitouch.Contracts;
 
 namespace Multitouch.Service.Logic.ExternalInterfaces
 {
 	[DataContract]
 	public class InputProviderToken
 	{
-		public InputProviderToken(AddInToken token)
+		public InputProviderToken(IAddInView token)
 		{
-			AddInFullName = token.AddInFullName;
+			Name = token.Id;
 			Description = token.Description;
-			Name = token.Name;
 			Publisher = token.Publisher;
 			Version = token.Version;
-			AssemblyName = token.AssemblyName.FullName;
 		}
 
 		[DataMember(IsRequired = true)]
-		public string AddInFullName { get; private set; }
+		public string Name { get; private set; }
 		[DataMember(IsRequired = true)]
 		public string Description { get; private set; }
-		[DataMember(IsRequired = true)]
-		public string Name { get; private set; }
 		[DataMember(IsRequired = true)]
 		public string Publisher { get; private set; }
 		[DataMember(IsRequired = true)]
 		public string Version { get; private set; }
-		[DataMember(IsRequired = true)]
-		public string AssemblyName { get; private set; }
 	}
 }
