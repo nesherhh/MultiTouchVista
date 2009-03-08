@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Windows;
+using Microsoft.Practices.Unity;
 using Multitouch.Configuration.WPF.Models;
 
 namespace Multitouch.Configuration.WPF
@@ -9,22 +9,16 @@ namespace Multitouch.Configuration.WPF
 	/// </summary>
 	public partial class MainWindow
 	{
+		[Dependency]
+		public ConfigurationModel Model
+		{
+			get { return (ConfigurationModel)DataContext; }
+			set { DataContext = value; }
+		}
+
 		public MainWindow()
 		{
 			InitializeComponent();
-		}
-
-		private void Window_Loaded(object sender, RoutedEventArgs e)
-		{
-			ConfigurationModel model = (ConfigurationModel)DataContext;
-			try
-			{
-				model.Initialize();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
 		}
 	}
 }

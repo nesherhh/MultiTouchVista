@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Libraries</RootNamespace>
+    <AssemblyName>Libraries</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <None Include="ManagedWinapi\COPYING" />
+    <None Include="ManagedWinapi\ManagedWinapi.chm" />
+    <None Include="Prism\Microsoft.Practices.Composite.UnityExtensions.dll.lastcodeanalysissucceeded" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DynamicUtilities\DynamicUtilities.dll" />
+    <Content Include="DynamicUtilities\DynamicUtilities.pdb" />
+    <Content Include="DynamicUtilities\DynamicUtilities.xml" />
+    <Content Include="ManagedWinapi\ManagedWinapi.dll" />
+    <Content Include="ManagedWinapi\ManagedWinapiNativeHelper.dll" />
+    <Content Include="ManagedWinapi\readme.txt" />
+    <Content Include="MEF\System.ComponentModel.Composition.dll" />
+    <Content Include="MEF\System.ComponentModel.Composition.pdb" />
+    <Content Include="MEF\System.ComponentModel.Composition.xml" />
+    <Content Include="Physics2DDotNet\AdvanceMath.dll" />
+    <Content Include="Physics2DDotNet\AdvanceMath.pdb" />
+    <Content Include="Physics2DDotNet\AdvanceMath.XML" />
+    <Content Include="Physics2DDotNet\Physics2DDotNet.dll" />
+    <Content Include="Physics2DDotNet\Physics2DDotNet.pdb" />
+    <Content Include="Physics2DDotNet\Physics2DDotNet.XML" />
+    <Content Include="Prism\Microsoft.Practices.Composite.dll" />
+    <Content Include="Prism\Microsoft.Practices.Composite.Presentation.dll" />
+    <Content Include="Prism\Microsoft.Practices.Composite.Presentation.xml" />
+    <Content Include="Prism\Microsoft.Practices.Composite.UnityExtensions.dll" />
+    <Content Include="Prism\Microsoft.Practices.Composite.UnityExtensions.dll.CodeAnalysisLog.xml" />
+    <Content Include="Prism\Microsoft.Practices.Composite.UnityExtensions.XML" />
+    <Content Include="Prism\Microsoft.Practices.Composite.xml" />
+    <Content Include="Prism\Microsoft.Practices.ObjectBuilder2.dll" />
+    <Content Include="Prism\Microsoft.Practices.ObjectBuilder2.xml" />
+    <Content Include="Prism\Microsoft.Practices.ServiceLocation.dll" />
+    <Content Include="Prism\Microsoft.Practices.ServiceLocation.xml" />
+    <Content Include="Prism\Microsoft.Practices.Unity.dll" />
+    <Content Include="Prism\Microsoft.Practices.Unity.xml" />
+    <Content Include="TUIO\TUIO.dll" />
+    <Content Include="TUIO\TUIO.pdb" />
+  </ItemGroup>
+</Project>

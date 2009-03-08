@@ -8,7 +8,7 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 	[DataContract]
 	public class ContactData
 	{
-		public ContactData(IContactData contactData, IntPtr hwnd)
+		public ContactData(Contact contactData, IntPtr hwnd)
 		{
 			Id = contactData.Id;
             Position = Utils.ScreenToClient(contactData.Position, hwnd);

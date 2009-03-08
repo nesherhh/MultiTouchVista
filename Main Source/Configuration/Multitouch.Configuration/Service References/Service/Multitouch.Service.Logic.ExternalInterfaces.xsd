@@ -8,8 +8,6 @@
   <xs:element name="ArrayOfInputProviderToken" nillable="true" type="tns:ArrayOfInputProviderToken" />
   <xs:complexType name="InputProviderToken">
     <xs:sequence>
-      <xs:element name="AddInFullName" nillable="true" type="xs:string" />
-      <xs:element name="AssemblyName" nillable="true" type="xs:string" />
       <xs:element name="Description" nillable="true" type="xs:string" />
       <xs:element name="Name" nillable="true" type="xs:string" />
       <xs:element name="Publisher" nillable="true" type="xs:string" />

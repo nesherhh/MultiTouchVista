@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
@@ -105,13 +105,13 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 				return;
 
 			// For each contact determinte it's target handle and group by this handle
-			IEnumerable<IGrouping<IntPtr, IContactData>> contactsGroups = e.Contacts.GroupBy(contact => Utils.GetWindowFromPoint(contact.Position));
+			IEnumerable<IGrouping<IntPtr, Contact>> contactsGroups = e.Contacts.GroupBy(contact => Utils.GetWindowFromPoint(contact.Position));
 
 			// Create a list with sessions and contacts that belong to this session
 			Dictionary<SessionContext, List<ContactData>> sessionList = new Dictionary<SessionContext, List<ContactData>>();
 
 			IntPtr invalidHandle = new IntPtr(-1);
-			foreach (IGrouping<IntPtr, IContactData> contactsGroup in contactsGroups.Where(g => !g.Key.Equals(invalidHandle)))
+			foreach (IGrouping<IntPtr, Contact> contactsGroup in contactsGroups.Where(g => !g.Key.Equals(invalidHandle)))
 			{
 				List<ContactData> contacts;
 
@@ -164,10 +164,12 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 			}
 		}
 
-		static IEnumerable<IImageData> GetImages(SessionContext context, IEnumerable<IImageData> availableImages)
+		static IEnumerable<ImageData> GetImages(SessionContext context, IEnumerable<Image> availableImages)
 		{
+			if (availableImages == null)
+				return Enumerable.Empty<ImageData>();
 			IEnumerable<ImageType> imageTypes = context.ImagesToSend.Where(i => i.Value).Select(i => i.Key);
-			return availableImages.Where(i => imageTypes.Contains(i.Type));
+			return availableImages.Where(i => imageTypes.Contains(i.Type)).Select(i => new ImageData(i));
 		}
 	}
 }

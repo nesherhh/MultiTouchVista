@@ -6,4 +6,3 @@
 #include "InputProvider.h"
 #include "IInputCallback.h"
 #include "TouchListener.h"
-#include "TouchLibContactChangedEventArgs.h"

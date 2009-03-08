@@ -47,6 +47,14 @@ namespace Multitouch.Configuration
 			EndpointAddress remoteAddress = new EndpointAddress(configurationServiceAddress);
 			NetNamedPipeBinding namedPipeBinding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
 			configurationService = new ConfigurationInterfaceClient(namedPipeBinding, remoteAddress);
+			try
+			{
+				configurationService.GetCurrentInputProvider();
+			}
+			catch (EndpointNotFoundException e)
+			{
+				throw new ServiceErrorException("Multitouch service is not running. Please start multitouch service before trying to configure it.", e);
+			}
 		}
 
 		/// <summary>

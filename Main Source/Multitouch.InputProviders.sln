@@ -7,9 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuioProvider", "InputProvid
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TouchLibProvider", "InputProviders\TouchLibProvider\TouchLibProvider.vcproj", "{26F3FE35-0609-4732-9C90-EA19ACCEF139}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libraries", "Libraries\Libraries.csproj", "{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Contracts", "Multitouch.Contracts\Multitouch.Contracts.csproj", "{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
@@ -22,6 +26,12 @@ Global
 		SccProjectUniqueName3 = InputProviders\\TouchLibProvider\\TouchLibProvider.vcproj
 		SccProjectName3 = InputProviders/TouchLibProvider
 		SccLocalPath3 = InputProviders\\TouchLibProvider
+		SccProjectUniqueName4 = Libraries\\Libraries.csproj
+		SccProjectName4 = Libraries
+		SccLocalPath4 = Libraries
+		SccProjectUniqueName5 = Multitouch.Contracts\\Multitouch.Contracts.csproj
+		SccProjectName5 = Multitouch.Contracts
+		SccLocalPath5 = Multitouch.Contracts
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +72,26 @@ Global
 		{26F3FE35-0609-4732-9C90-EA19ACCEF139}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{26F3FE35-0609-4732-9C90-EA19ACCEF139}.Release|Win32.ActiveCfg = Release|Win32
 		{26F3FE35-0609-4732-9C90-EA19ACCEF139}.Release|Win32.Build.0 = Release|Win32
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Release|Win32.ActiveCfg = Release|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

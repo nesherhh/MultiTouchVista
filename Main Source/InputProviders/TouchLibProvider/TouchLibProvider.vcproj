@@ -183,11 +183,10 @@
 			AssemblyName="System.Xml, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
 			MinFrameworkVersion="131072"
 		/>
-		<AssemblyReference
-			RelativePath="..\..\Output\AddInViews\Multitouch.Views.dll"
-			AssemblyName="Multitouch.Views, Version=0.0.0.0, processorArchitecture=MSIL"
+		<ProjectReference
+			ReferencedProjectIdentifier="{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}"
 			CopyLocal="false"
-			MinFrameworkVersion="196613"
+			RelativePathToProject=".\Multitouch.Contracts\Multitouch.Contracts.csproj"
 		/>
 		<AssemblyReference
 			RelativePath="System.Drawing.dll"
@@ -200,8 +199,9 @@
 			MinFrameworkVersion="131072"
 		/>
 		<AssemblyReference
-			RelativePath="System.AddIn.dll"
-			AssemblyName="System.AddIn, Version=3.5.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+			RelativePath="..\..\Libraries\MEF\System.ComponentModel.Composition.dll"
+			AssemblyName="System.ComponentModel.Composition, Version=2009.1.23.0, processorArchitecture=MSIL"
+			CopyLocal="false"
 			MinFrameworkVersion="196613"
 		/>
 		<AssemblyReference
@@ -277,14 +277,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\TouchLibContactChangedEventArgs.h"
-				>
-			</File>
-			<File
-				RelativePath=".\TouchLibImage.h"
-				>
-			</File>
-			<File
 				RelativePath=".\TouchListener.h"
 				>
 			</File>
@@ -335,6 +327,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Lib\DSVLd.dll"
+				>
+			</File>
+			<File
 				RelativePath=".\Lib\glut32.dll"
 				>
 			</File>
@@ -360,6 +356,14 @@
 			</File>
 			<File
 				RelativePath=".\Lib\ml100.dll"
+				>
+			</File>
+			<File
+				RelativePath=".\Lib\msvcp71d.dll"
+				>
+			</File>
+			<File
+				RelativePath=".\Lib\msvcr71d.dll"
 				>
 			</File>
 			<File
@@ -399,18 +403,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\Lib\DSVLd.dll"
-			>
-		</File>
-		<File
-			RelativePath=".\Lib\msvcp71d.dll"
-			>
-		</File>
-		<File
-			RelativePath=".\Lib\msvcr71d.dll"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

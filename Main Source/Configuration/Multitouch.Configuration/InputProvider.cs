@@ -20,25 +20,7 @@ namespace Multitouch.Configuration
 		{
 			get { return token; }
 		}
-
-		/// <summary>
-		/// Full name of addin.
-		/// </summary>
-		public string AddInFullName
-		{
-			get { return token.AddInFullName; }
-			set { token.AddInFullName = value; }
-		}
-
-		/// <summary>
-		/// Addins full assembly name.
-		/// </summary>
-		public string AssemblyName
-		{
-			get { return token.AssemblyName; }
-			set { token.AssemblyName = value; }
-		}
-        
+		
 		/// <summary>
 		/// Description of addin.
 		/// </summary>
@@ -79,7 +61,7 @@ namespace Multitouch.Configuration
 		{
 			if(other == null)
 				return false;
-			return AddInFullName.Equals(other.AddInFullName);
+			return Name.Equals(other.Name);
 		}
 
 		public override bool Equals(object obj)
@@ -89,7 +71,7 @@ namespace Multitouch.Configuration
 
 		public override int GetHashCode()
 		{
-			return AddInFullName.GetHashCode();
+			return Name.GetHashCode();
 		}
 	}
 }

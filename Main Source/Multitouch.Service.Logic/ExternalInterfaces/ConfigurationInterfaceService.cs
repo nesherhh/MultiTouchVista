@@ -1,5 +1,5 @@
 ﻿using System;
-using System.AddIn.Hosting;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.ServiceModel;
 using Multitouch.Contracts;
@@ -10,26 +10,33 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 	[ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
 	class ConfigurationInterfaceService : IConfigurationInterface
 	{
+		readonly MultitouchInput input;
+
+		public ConfigurationInterfaceService(MultitouchInput input)
+		{
+			this.input = input;
+		}
+
 		public InputProviderToken[] GetAvailableInputProviders()
 		{
-			var list = from token in AddInStore.FindAddIns(typeof(IProvider), PipelineStoreLocation.ApplicationBase)
-					   select new InputProviderToken(token);
+			var list = from token in input.InputProviders
+					   select new InputProviderToken(token.MetadataView);
 			return list.ToArray();
 		}
 
 		public void SetCurrentInputProvider(InputProviderToken value)
 		{
-			Settings.Default.CurrentProvider = value.AddInFullName;
+			Settings.Default.CurrentProvider = value.Name;
 			Settings.Default.Save();
 		}
 
 		public InputProviderToken GetCurrentInputProvider()
 		{
-			AddInToken addInToken = (from token in AddInStore.FindAddIns(typeof(IProvider), PipelineStoreLocation.ApplicationBase)
-			                        where token.AddInFullName.Equals(Settings.Default.CurrentProvider)
-			                        select token).FirstOrDefault();
+			Export<IProvider, IAddInView> addInToken = (from token in input.InputProviders
+									 where token.MetadataView.Id == Settings.Default.CurrentProvider
+									 select token).FirstOrDefault();
 			if(addInToken != null)
-				return new InputProviderToken(addInToken);
+				return new InputProviderToken(addInToken.MetadataView);
 			return null;
 		}
 

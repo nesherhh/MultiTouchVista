@@ -2,7 +2,7 @@
 #include <vcclr.h>
 #include "cv.h"
 #include "cxcore.h"
-#include "highgui.h"
+//#include "highgui.h"
 #include "ITouchListener.h"
 #include "TouchData.h"
 #include "TouchScreenDevice.h"
@@ -29,7 +29,7 @@ public:
 
 	~TouchListener(void)
 	{
-		TouchScreenDevice::destroy();
+		//TouchScreenDevice::destroy();
 	}
 
 	void Start(void)
@@ -37,7 +37,7 @@ public:
 		screen = TouchScreenDevice::getTouchScreen();
 		screen->setDebugMode(showDebugWindows);
 		
-		System::String^ config = System::Environment::CurrentDirectory + "\\config.xml";
+		System::String^ config = System::IO::Path::GetDirectoryName(callback->GetType()->Assembly->Location) + "\\config.xml";
 		char* cfg = (char*)(void*)System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(config);
 		screen->loadConfig(cfg);
 
@@ -50,9 +50,9 @@ public:
 
 		do
 		{
-			int key = cvWaitKey(5);
-			if(key == 98)
-				screen->setParameter(bgLabel, "capture", "");
+			//int key = cvWaitKey(5);
+			//if(key == 98)
+			//	screen->setParameter(bgLabel, "capture", "");
 			
 			screen->getEvents();
 		}while(!stop);

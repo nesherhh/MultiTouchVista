@@ -1,0 +1,2746 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Practices.Composite</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleInitializeException">
+            <summary>
+            Exception thrown by <see cref="T:Microsoft.Practices.Composite.Modularity.IModuleInitializer"/> implementations whenever 
+            a module fails to load.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModularityException">
+            <summary>
+            Base class for exceptions that are thrown because of a problem with modules. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModularityException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModularityException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with information about the exception.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModularityException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModularityException"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModularityException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModularityException"/> class.
+            </summary>
+            <param name="message">The exception message.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModularityException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModularityException"/> class.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModularityException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes the exception with a particular module and error message.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModularityException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes the exception with a particular module, error message and inner exception that happened.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, 
+            or a <see langword="null"/> reference if no inner exception is specified.</param>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModularityException.ModuleName">
+            <summary>
+            Gets or sets the name of the module that this exception refers to.
+            </summary>
+            <value>The name of the module.</value>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInitializeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInitializeException.#ctor">
+            <summary>
+            Initializes a new instance.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInitializeException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInitializeException"/> class.
+            </summary>
+            <param name="message">The exception message.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInitializeException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInitializeException"/> class.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInitializeException.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes the exception with a particular module and error message.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="moduleAssembly">The assembly where the module is located.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInitializeException.#ctor(System.String,System.String,System.String,System.Exception)">
+            <summary>
+            Initializes the exception with a particular module, error message and inner exception 
+            that happened.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="moduleAssembly">The assembly where the module is located.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, 
+            or a <see langword="null"/> reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInitializeException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes the exception with a particular module, error message and inner exception that happened.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, 
+            or a <see langword="null"/> reference if no inner exception is specified.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.InitializationMode">
+            <summary>
+            Specifies on which stage the Module group will be initialized.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Modularity.InitializationMode.WhenAvailable">
+            <summary>
+            The module will be initialized when it is available on application start-up.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Modularity.InitializationMode.OnDemand">
+            <summary>
+            The module will be initialized when requested, and not automatically on application start-up.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement">
+            <summary>
+            A <see cref="T:System.Configuration.ConfigurationElement"/> for module dependencies.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement"/>.
+            </summary>
+            <param name="moduleName">A module name.</param>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement.ModuleName">
+            <summary>
+            Gets or sets the name of a module antoher module depends on.
+            </summary>
+            <value>The name of a module antoher module depends on.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroupExtensions">
+            <summary>
+            Defines extension methods for the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroupExtensions.AddModule(Microsoft.Practices.Composite.Modularity.ModuleInfoGroup,System.String,System.Type,System.String[])">
+            <summary>
+            Adds a new module that is statically referenced to the specified module info group.
+            </summary>
+            <param name="moduleInfoGroup">The group where to add the module info in.</param>
+            <param name="moduleName">The name for the module.</param>
+            <param name="moduleType">The type for the module. This type should be a descendant of <see cref="T:Microsoft.Practices.Composite.Modularity.IModule"/>.</param>
+            <param name="dependsOn">The names for the modules that this module depends on.</param>
+            <returns>Returns the instance of the passed in module info group, to provide a fluid interface.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroupExtensions.AddModule(Microsoft.Practices.Composite.Modularity.ModuleInfoGroup,System.Type,System.String[])">
+            <summary>
+            Adds a new module that is statically referenced to the specified module info group.
+            </summary>
+            <param name="moduleInfoGroup">The group where to add the module info in.</param>
+            <param name="moduleType">The type for the module. This type should be a descendant of <see cref="T:Microsoft.Practices.Composite.Modularity.IModule"/>.</param>
+            <param name="dependsOn">The names for the modules that this module depends on.</param>
+            <returns>Returns the instance of the passed in module info group, to provide a fluid interface.</returns>
+            <remarks>The name of the module will be the type name.</remarks>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.ServiceLocatorExtensions">
+            <summary>
+            Defines extension methods for the <see cref="T:Microsoft.Practices.ServiceLocation.ServiceLocator"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ServiceLocatorExtensions.TryResolve(Microsoft.Practices.ServiceLocation.IServiceLocator,System.Type)">
+            <summary>
+            Attempts to resolve specified type from the underlying <see cref="T:Microsoft.Practices.ServiceLocation.IServiceLocator"/>.
+            </summary>
+            <remarks>
+            This will return null on any <see cref="T:Microsoft.Practices.ServiceLocation.ActivationException"/>.</remarks>
+            <param name="locator">Locator to use in resolving.</param>
+            <param name="type">Type to resolve.</param>
+            <returns>T or null</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ServiceLocatorExtensions.TryResolve``1(Microsoft.Practices.ServiceLocation.IServiceLocator)">
+            <summary>
+            Attempts to resolve specified type from the underlying <see cref="T:Microsoft.Practices.ServiceLocation.IServiceLocator"/>.
+            </summary>
+            <remarks>
+            This will return null on any <see cref="T:Microsoft.Practices.ServiceLocation.ActivationException"/>.</remarks>
+            <typeparam name="T">Type to resolve.</typeparam>
+            <param name="locator">Locator to use in resolving.</param>
+            <returns>T or null</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Regions.RegionManagerExtensions">
+            <summary>
+            Class that creates a fluent interface for the <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> class, with respect to 
+            adding views to regions (View Injection pattern), registering view types to regions (View Discovery pattern)
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.RegionManagerExtensions.AddToRegion(Microsoft.Practices.Composite.Regions.IRegionManager,System.String,System.Object)">
+            <summary>
+                Add a view to the Views collection of a Region. Note that the region must already exist in this regionmanager. 
+            </summary>
+            <param name="regionManager">The regionmanager that this extension method effects.</param>
+            <param name="regionName">The name of the region to add a view to</param>
+            <param name="view">The view to add to the views collection</param>
+            <returns>The RegionManager, to easily add several views. </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.RegionManagerExtensions.RegisterViewWithRegion(Microsoft.Practices.Composite.Regions.IRegionManager,System.String,System.Type)">
+            <summary>
+            Associate a view with a region, by registering a type. When the region get's displayed
+            this type will be resolved using the ServiceLocator into a concrete instance. The instance
+            will be added to the Views collection of the region
+            </summary>
+            <param name="regionManager">The regionmanager that this extension method effects.</param>
+            <param name="regionName">The name of the region to associate the view with.</param>
+            <param name="viewType">The type of the view to register with the </param>
+            <returns>The regionmanager, for adding several views easily</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.RegionManagerExtensions.RegisterViewWithRegion(Microsoft.Practices.Composite.Regions.IRegionManager,System.String,System.Func{System.Object})">
+            <summary>
+            Associate a view with a region, using a delegate to resolve a concreate instance of the view. 
+            When the region get's displayed, this delelgate will be called and the result will be added to the
+            views collection of the region. 
+            </summary>
+            <param name="regionManager">The regionmanager that this extension method effects.</param>
+            <param name="regionName">The name of the region to associate the view with.</param>
+            <param name="getContentDelegate">The delegate used to resolve a concreate instance of the view.</param>
+            <returns>The regionmanager, for adding several views easily</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.RegionManagerExtensions.Add(Microsoft.Practices.Composite.Regions.IRegionCollection,System.String,Microsoft.Practices.Composite.Regions.IRegion)">
+            <summary>
+            Adds a region to the regionmanager with the name received as argument.
+            </summary>
+            <param name="regionCollection">The regionmanager's collection of regions.</param>
+            <param name="regionName">The name to be given to the region.</param>
+            <param name="region">The region to be added to the regionmanager.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup">
+            <summary>
+            Represents a group of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> instances that are usually deployed together. <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>s 
+            are also used by the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> to prevent common deployment problems such as having a module that's required 
+            at startup that depends on modules that will only be downloaded on demand. 
+            
+            The group also forwards <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.Ref"/> and <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.InitializationMode"/> values to the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s that it
+            contains. 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.IModuleCatalogItem">
+            <summary>
+            Marker interface that allows both <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>s and <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s to be
+            added to the <see cref="T:Microsoft.Practices.Composite.Modularity.IModuleCatalog"/> from code and XAML. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.Add(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Adds an <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> moduleInfo to the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            </summary>
+            <param name="item">The <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> to the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.ForwardValues(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Forwards <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.InitializationMode"/> and <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.Ref"/> properties from this <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>
+            to <paramref name="moduleInfo"/>.
+            </summary>
+            <param name="moduleInfo">The module info to forward values to.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.Clear">
+            <summary>
+            Removes all <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s from the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.Contains(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Determines whether the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/> contains a specific value.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.</param>
+            <returns>
+            true if <paramref name="item"/> is found in the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.CopyTo(Microsoft.Practices.Composite.Modularity.ModuleInfo[],System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="array"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="arrayIndex"/> is less than 0.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="array"/> is multidimensional.
+            -or-
+            <paramref name="arrayIndex"/> is equal to or greater than the length of <paramref name="array"/>.
+            -or-
+            The number of elements in the source <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.
+            </exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.Remove(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            </summary>
+            <param name="item">The object to remove from the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.</param>
+            <returns>
+            true if <paramref name="item"/> was successfully removed from the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.System#Collections#IList#Add(System.Object)">
+            <summary>
+            Adds an item to the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            </summary>
+            <param name="value">
+            The <see cref="T:System.Object"/> to add to the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            Must be of type <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>
+            </param>
+            <returns>
+            The position into which the new element was inserted.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.System#Collections#IList#Contains(System.Object)">
+            <summary>
+            Determines whether the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/> contains a specific value.
+            </summary>
+            <param name="value">
+            The <see cref="T:System.Object"/> to locate in the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            Must be of type <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>
+            </param>
+            <returns>
+            true if the <see cref="T:System.Object"/> is found in the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.IndexOf(System.Object)">
+            <summary>
+            Determines the index of a specific item in the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            </summary>
+            <param name="value">
+            The <see cref="T:System.Object"/> to locate in the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            Must be of type <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>
+            </param>
+            <returns>
+            The index of <paramref name="value"/> if found in the list; otherwise, -1.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.Insert(System.Int32,System.Object)">
+            <summary>
+            Inserts an item to the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/> at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which <paramref name="value"/> should be inserted.</param>
+            <param name="value">
+            The <see cref="T:System.Object"/> to insert into the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            Must be of type <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="index"/> is not a valid index in the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            If <paramref name="value"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If <paramref name="value"/> is not of type <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>
+            </exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.System#Collections#IList#Remove(System.Object)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            </summary>
+            <param name="value">
+            The <see cref="T:System.Object"/> to remove from the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>. 
+            Must be of type <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>
+            </param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.RemoveAt(System.Int32)">
+            <summary>
+            Removes the <see cref="T:System.Collections.Generic.IList`1"/> item at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the item to remove.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.
+            </exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
+            <param name="index">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="array"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="index"/> is less than zero.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="array"/> is multidimensional.
+            -or-
+            <paramref name="index"/> is equal to or greater than the length of <paramref name="array"/>.
+            -or-
+            The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>.
+            </exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.IndexOf(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1"/>.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1"/>.</param>
+            <returns>
+            The index of <paramref name="item"/> if found in the list; otherwise, -1.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.Insert(System.Int32,Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Inserts an item to the <see cref="T:System.Collections.Generic.IList`1"/> at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
+            <param name="item">The object to insert into the <see cref="T:System.Collections.Generic.IList`1"/>.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.
+            </exception>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.InitializationMode">
+            <summary>
+            Gets or sets the <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.InitializationMode"/> for the whole group. Any <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> classes that are
+            added after setting this value will also get this <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.InitializationMode"/>.
+            </summary>
+            <seealso cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.InitializationMode"/>
+            <value>The initialization mode.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.Ref">
+            <summary>
+            Gets or sets the <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.Ref"/> value for the whole group. Any <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> classes that are
+            added after setting this value will also get this <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.Ref"/>.
+            
+            The ref value will also be used by the <see cref="T:Microsoft.Practices.Composite.Modularity.IModuleManager"/> to determine which  <see cref="T:Microsoft.Practices.Composite.Modularity.IModuleTypeLoader"/> to use. 
+            For example, if the ref property can be converted to an URL, it the XapModuleTypeLoader will be used 
+            (Only available in the Silverlight version of CAL).
+            For example, using an "file://" prefix with a valid URL will cause the FileModuleTypeLoader to be used
+            (Only available in the desktop version of CAL).
+            </summary>
+            <seealso cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.Ref"/>
+            <value>The ref value that will be used.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            </summary>
+            <value></value>
+            <returns>
+            The number of elements contained in the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/> is read-only.
+            </summary>
+            <value></value>
+            <returns>false, because the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/> is not Read-Only.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.IsFixedSize">
+            <summary>
+            Gets a value indicating whether the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/> has a fixed size.
+            </summary>
+            <returns>false, because the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/> does not have a fixed length.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.System#Collections#IList#Item(System.Int32)">
+            <summary>
+            Gets or sets the <see cref="T:System.Object"/> at the specified index.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.IsSynchronized">
+            <summary>
+            Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
+            </summary>
+            <value></value>
+            <returns>true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.SyncRoot">
+            <summary>
+            Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+            </summary>
+            <value></value>
+            <returns>
+            An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup.Item(System.Int32)">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> at the specified index.
+            </summary>
+            <value>The <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> at the specified index </value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement">
+            <summary>
+            A configuration element to declare module metadata.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement.#ctor(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement"/>.
+            </summary>
+            <param name="assemblyFile">The assembly file where the module is located.</param>
+            <param name="moduleType">The type of the module.</param>
+            <param name="moduleName">The name of the module.</param>
+            <param name="startupLoaded">This attribute specifies whether the module is loaded at startup.</param>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement.AssemblyFile">
+            <summary>
+            Gets or sets the assembly file.
+            </summary>
+            <value>The assembly file.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement.ModuleType">
+            <summary>
+            Gets or sets the module type.
+            </summary>
+            <value>The module's type.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement.ModuleName">
+            <summary>
+            Gets or sets the module name.
+            </summary>
+            <value>The module's name.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement.StartupLoaded">
+            <summary>
+            Gets or sets a value indicating whether the module should be loaded at startup.
+            </summary>
+            <value>A value indicating whether the module should be loaded at startup.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement.Dependencies">
+            <summary>
+            Gets or sets the modules this module depends on.
+            </summary>
+            <value>The names of the modules that this depends on.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException">
+            <summary>
+            Exception thrown when a requested <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> is not found.
+            </summary>
+            <summary>
+            Exception thrown when a requested <see cref="F:Microsoft.Practices.Composite.Modularity.InitializationMode.OnDemand"/> <see cref="T:Microsoft.Practices.Composite.Modularity.IModule"/> was not found.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException"/> class
+            with the serialization data.
+            </summary>
+            <param name="info">Holds the serialized object data about the exception being thrown.</param>
+            <param name="context">Contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException"/> class with a specified error message.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException"/> class with a specified error message.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleNotFoundException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Events.EventBase">
+            <summary>
+             Defines a base class to publish and subscribe to events.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.EventBase.InternalSubscribe(Microsoft.Practices.Composite.Events.IEventSubscription)">
+            <summary>
+            Adds the specified <see cref="T:Microsoft.Practices.Composite.Events.IEventSubscription"/> to the subscribers' collection.
+            </summary>
+            <param name="eventSubscription">The subscriber.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/> that uniquely identifies every subscriber.</returns>
+            <remarks>
+            Adds the subscription to the internal list and assigns it a new <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.EventBase.InternalPublish(System.Object[])">
+            <summary>
+            Calls all the execution strategies exposed by the list of <see cref="T:Microsoft.Practices.Composite.Events.IEventSubscription"/>.
+            </summary>
+            <param name="arguments">The arguments that will be passed to the listeners.</param>
+            <remarks>Before executing the strategies, this class will prune all the subscribers from the
+            list that return a <see langword="null"/> <see cref="T:System.Action`1"/> when calling the
+            <see cref="M:Microsoft.Practices.Composite.Events.IEventSubscription.GetExecutionStrategy"/> method.</remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.EventBase.Unsubscribe(Microsoft.Practices.Composite.Events.SubscriptionToken)">
+            <summary>
+            Removes the subscriber matching the <seealso cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/>.
+            </summary>
+            <param name="token">The <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/> returned by <see cref="T:Microsoft.Practices.Composite.Events.EventBase"/> while subscribing to the event.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.EventBase.Contains(Microsoft.Practices.Composite.Events.SubscriptionToken)">
+            <summary>
+            Returns <see langword="true"/> if there is a subscriber matching <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/>.
+            </summary>
+            <param name="token">The <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/> returned by <see cref="T:Microsoft.Practices.Composite.Events.EventBase"/> while subscribing to the event.</param>
+            <returns><see langword="true"/> if there is a <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/> that matches; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Events.EventBase.Subscriptions">
+            <summary>
+            Gets the list of current subscriptions.
+            </summary>
+            <value>The current subscribers.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleTypeLoaderNotFoundException">
+            <summary>
+            Exception that's thrown when there is no <see cref="T:Microsoft.Practices.Composite.Modularity.IModuleTypeLoader"/> registered in 
+            <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleManager.ModuleTypeLoaders"/> that can handle this particular type of module. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleTypeLoaderNotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleTypeLoaderNotFoundException"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleTypeLoaderNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleTypeLoaderNotFoundException"/> class with a specified error message.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleTypeLoaderNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleTypeLoaderNotFoundException"/> class with a specified error message.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleTypeLoaderNotFoundException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes the exception with a particular module, error message and inner exception that happened.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, 
+            or a <see langword="null"/> reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleTypeLoaderNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.CyclicDependencyFoundException">
+            <summary>
+            Represents the exception that is thrown when there is a circular dependency
+            between modules during the module loading process.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.CyclicDependencyFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.CyclicDependencyFoundException"/> class
+            with the serialization data.
+            </summary>
+            <param name="info">Holds the serialized object data about the exception being thrown.</param>
+            <param name="context">Contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.CyclicDependencyFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.CyclicDependencyFoundException"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.CyclicDependencyFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.CyclicDependencyFoundException"/> class
+            with the specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.CyclicDependencyFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.CyclicDependencyFoundException"/> class
+            with the specified error message and inner exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.CyclicDependencyFoundException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes the exception with a particular module, error message and inner exception that happened.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, 
+            or a <see langword="null"/> reference if no inner exception is specified.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleState">
+            <summary>
+            Defines the states a <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> can be in, with regards to the module loading and initialization process. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Modularity.ModuleState.NotStarted">
+            <summary>
+            Initial state for <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s. The <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> is defined, 
+            but it has not been loaded, retrieved or initialized yet. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Modularity.ModuleState.LoadingTypes">
+            <summary>
+            The assembly that contains the type of the module is currently being loaded by an instance of a
+            <see cref="T:Microsoft.Practices.Composite.Modularity.IModuleTypeLoader"/>. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Modularity.ModuleState.ReadyForInitialization">
+            <summary>
+            The assembly that holds the Module is present. This means the type of the <see cref="T:Microsoft.Practices.Composite.Modularity.IModule"/> can be instantiated and initialized. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Modularity.ModuleState.Initializing">
+            <summary>
+            The module is currently Initializing, by the <see cref="T:Microsoft.Practices.Composite.Modularity.IModuleInitializer"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Modularity.ModuleState.Initialized">
+            <summary>
+            The module is initialized and ready to be used. 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleTypeLoadingException">
+            <summary>
+            Exception thrown by <see cref="T:Microsoft.Practices.Composite.Modularity.IModuleManager"/> implementations whenever 
+            a module fails to retrieve.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleTypeLoadingException.#ctor">
+            <summary>
+            Initializes a new instance.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleTypeLoadingException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleTypeLoadingException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance with a specified error message 
+            and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="exception">The exception that is the cause of the current exception, 
+            or a <see langword="null"/> reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleTypeLoadingException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes the exception with a particular module and error message.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleTypeLoadingException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes the exception with a particular module, error message and inner exception that happened.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, 
+            or a <see langword="null"/> reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleTypeLoadingException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.IModuleManager">
+            <summary>
+            Defines the interface for the service that will retrieve and initialize the application's modules.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.IModuleManager.Run">
+            <summary>
+            Initializes the modules marked as <see cref="F:Microsoft.Practices.Composite.Modularity.InitializationMode.WhenAvailable"/> on the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.IModuleManager.LoadModule(System.String)">
+            <summary>
+            Initializes the module on the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> with the name <paramref name="moduleName"/>.
+            </summary>
+            <param name="moduleName">Name of the module requested for initialization.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.IModule">
+            <summary>
+            Defines the contract for the modules deployed in the application.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.IModule.Initialize">
+            <summary>
+            Notifies the module that it has be initialized.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ConfigurationStore">
+            <summary>
+            Defines a store for the module metadata.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.IConfigurationStore">
+            <summary>
+            Defines a store for the module metadata.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.IConfigurationStore.RetrieveModuleConfigurationSection">
+            <summary>
+            Gets the module configuration data.
+            </summary>
+            <returns>A <see cref="T:Microsoft.Practices.Composite.Modularity.ModulesConfigurationSection"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ConfigurationStore.RetrieveModuleConfigurationSection">
+            <summary>
+            Gets the module configuration data.
+            </summary>
+            <returns>A <see cref="T:Microsoft.Practices.Composite.Modularity.ModulesConfigurationSection"/> instance.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Events.DelegateReference">
+            <summary>
+            Represents a reference to a <see cref="T:System.Delegate"/> that may contain a
+            <see cref="T:System.WeakReference"/> to the target. This class is used
+            internally by the Composite Application Library.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Events.IDelegateReference">
+            <summary>
+            Represents a reference to a <see cref="T:System.Delegate"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Events.IDelegateReference.Target">
+            <summary>
+            Gets the referenced <see cref="T:System.Delegate"/> object.
+            </summary>
+            <value>A <see cref="T:System.Delegate"/> instance if the target is valid; otherwise <see langword="null"/>.</value>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.DelegateReference.#ctor(System.Delegate,System.Boolean)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Events.DelegateReference"/>.
+            </summary>
+            <param name="delegate">The original <see cref="T:System.Delegate"/> to create a reference for.</param>
+            <param name="keepReferenceAlive">If <see langword="false"/> the class will create a weak reference to the delegate, allowing it to be garbage collected. Otherwise it will keep a strong reference to the target.</param>
+            <exception cref="T:System.ArgumentNullException">If the passed <paramref name="delegate"/> is not assignable to <see cref="T:System.Delegate"/>.</exception>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Events.DelegateReference.Target">
+            <summary>
+            Gets the <see cref="T:System.Delegate"/> (the target) referenced by the current <see cref="T:Microsoft.Practices.Composite.Events.DelegateReference"/> object.
+            </summary>
+            <value><see langword="null"/> if the object referenced by the current <see cref="T:Microsoft.Practices.Composite.Events.DelegateReference"/> object has been garbage collected; otherwise, a reference to the <see cref="T:System.Delegate"/> referenced by the current <see cref="T:Microsoft.Practices.Composite.Events.DelegateReference"/> object.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Regions.IRegionBehaviorCollection">
+            <summary>
+            Defines the interface for a collection of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> classes on a Region.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegionBehaviorCollection.Add(System.String,Microsoft.Practices.Composite.Regions.IRegionBehavior)">
+            <summary>
+            Adds a <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> to the collection, using the specified key as an indexer. 
+            </summary>
+            <param name="key">
+            The key that specifies the type of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> that's added. 
+            </param>
+            <param name="regionBehavior">The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> to add.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegionBehaviorCollection.ContainsKey(System.String)">
+            <summary>
+            Checks if a <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> with the specified key is already present. 
+            </summary>
+            <param name="key">The key to use to find a particular <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Regions.IRegionBehaviorCollection.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/> with the specified key.
+            </summary>
+            <value>The registered <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/></value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModulesConfigurationSection">
+            <summary>
+            A <see cref="T:System.Configuration.ConfigurationSection"/> for module configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModulesConfigurationSection.Modules">
+            <summary>
+            Gets or sets the collection of modules configuration.
+            </summary>
+            <value>A <seealso cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection"/> of <seealso cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement"/>.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Events.IEventSubscription">
+            <summary>
+             Defines a contract for an event subscription to be used by <see cref="T:Microsoft.Practices.Composite.Events.EventBase"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.IEventSubscription.GetExecutionStrategy">
+            <summary>
+            Gets the execution strategy to publish this event.
+            </summary>
+            <returns>An <see cref="T:System.Action`1"/> with the execution strategy, or <see langword="null"/> if the <see cref="T:Microsoft.Practices.Composite.Events.IEventSubscription"/> is no longer valid.</returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Events.IEventSubscription.SubscriptionToken">
+            <summary>
+            Gets or sets a <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/> that identifies this <see cref="T:Microsoft.Practices.Composite.Events.IEventSubscription"/>.
+            </summary>
+            <value>A token that identifies this <see cref="T:Microsoft.Practices.Composite.Events.IEventSubscription"/>.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Regions.IRegionManager">
+            <summary>
+            Defines an interface to manage a set of <see cref="T:Microsoft.Practices.Composite.Regions.IRegion">regions</see> and to attach regions to objects (typically controls).
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegionManager.CreateRegionManager">
+            <summary>
+            Creates a new region manager.
+            </summary>
+            <returns>A new region manager that can be used as a different scope from the current region manager.</returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Regions.IRegionManager.Regions">
+            <summary>
+            Gets a collection of <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> that identify each region by name. You can use this collection to add or remove regions to the current region manager.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.IModuleInitializer">
+            <summary>
+            Declares a service which initializes the modules into the application.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.IModuleInitializer.Initialize(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Initializes the specified module.
+            </summary>
+            <param name="moduleInfo">The module to initialize</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.IModuleCatalog">
+            <summary>
+            This is the expected catalog definition for the ModuleManager. 
+            The ModuleCatalog holds information about the modules that can be used by the 
+            application. Each module is described in a ModuleInfo class, that records the 
+            name, type and location of the module. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.IModuleCatalog.GetDependentModules(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Return the list of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s that <paramref name="moduleInfo"/> depends on.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> to get the </param>
+            <returns>An enumeration of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> that <paramref name="moduleInfo"/> depends on.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.IModuleCatalog.CompleteListWithDependencies(System.Collections.Generic.IEnumerable{Microsoft.Practices.Composite.Modularity.ModuleInfo})">
+            <summary>
+            Returns the collection of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s that contain both the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s in 
+            <paramref name="modules"/>, but also all the modules they depend on. 
+            </summary>
+            <param name="modules">The modules to get the dependencies for.</param>
+            <returns>
+            A collection of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> that contains both all <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s in <paramref name="modules"/>
+            and also all the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> they depend on.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.IModuleCatalog.Initialize">
+            <summary>
+            Initializes the catalog, which may load and validate the modules.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.IModuleCatalog.Modules">
+            <summary>
+            Gets all the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> classes that are in the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.DuplicateModuleException">
+            <summary>
+            Exception thrown when a module is declared twice in the same catalog.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.DuplicateModuleException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.DuplicateModuleException"/> class
+            with the serialization data.
+            </summary>
+            <param name="info">Holds the serialized object data about the exception being thrown.</param>
+            <param name="context">Contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.DuplicateModuleException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.DuplicateModuleException"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.DuplicateModuleException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.DuplicateModuleException"/> class.
+            </summary>
+            <param name="message">The exception message.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.DuplicateModuleException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.DuplicateModuleException"/> class.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.DuplicateModuleException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.DuplicateModuleException"/> class with a specified error message.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.DuplicateModuleException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.DuplicateModuleException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="moduleName">The name of the module.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Logging.TextLogger">
+            <summary>
+            Implementation of <see cref="T:Microsoft.Practices.Composite.Logging.ILoggerFacade"/> that logs into a <see cref="T:System.IO.TextWriter"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Logging.ILoggerFacade">
+            <summary>
+            Defines a simple logger façade to be used by the Composite Application Library.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Logging.ILoggerFacade.Log(System.String,Microsoft.Practices.Composite.Logging.Category,Microsoft.Practices.Composite.Logging.Priority)">
+            <summary>
+            Write a new log entry with the specified category and priority.
+            </summary>
+            <param name="message">Message body to log.</param>
+            <param name="category">Category of the entry.</param>
+            <param name="priority">The priority of the entry.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Logging.TextLogger.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Logging.TextLogger"/> that writes to
+            the console output.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Logging.TextLogger.#ctor(System.IO.TextWriter)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Logging.TextLogger"/>.
+            </summary>
+            <param name="writer">The writer to use for writing log entries.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Logging.TextLogger.Log(System.String,Microsoft.Practices.Composite.Logging.Category,Microsoft.Practices.Composite.Logging.Priority)">
+            <summary>
+            Write a new log entry with the specified category and priority.
+            </summary>
+            <param name="message">Message body to log.</param>
+            <param name="category">Category of the entry.</param>
+            <param name="priority">The priority of the entry.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Logging.TextLogger.Dispose(System.Boolean)">
+            <summary>
+            Disposes the associated <see cref="T:System.IO.TextWriter"/>.
+            </summary>
+            <param name="disposing">When <see langword="true"/>, disposes the associated <see cref="T:System.IO.TextWriter"/>.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Logging.TextLogger.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+             <remarks>Calls <see cref="M:Microsoft.Practices.Composite.Logging.TextLogger.Dispose(System.Boolean)"/></remarks>.
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.IActiveAware">
+            <summary>
+            Interface that defines if the object instance is active
+            and notifies when the activity changes.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.IActiveAware.IsActive">
+            <summary>
+            Gets or sets a value indicating whether the object is active.
+            </summary>
+            <value><see langword="true" /> if the object is active; otherwise <see langword="false" />.</value>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.IActiveAware.IsActiveChanged">
+            <summary>
+            Notifies that the value for <see cref="P:Microsoft.Practices.Composite.IActiveAware.IsActive"/> property has changed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Regions.IRegionAdapter">
+            <summary>
+            Defines an interfaces to adapt an object and bind it to a new <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegionAdapter.Initialize(System.Object,System.String)">
+            <summary>
+            Adapts an object and binds it to a new <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/>.
+            </summary>
+            <param name="regionTarget">The object to adapt.</param>
+            <param name="regionName">The name of the region to be created.</param>
+            <returns>The new instance of <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> that the <paramref name="regionTarget"/> is bound to.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Logging.Category">
+            <summary>
+            Defines values for the categories used by <see cref="T:Microsoft.Practices.Composite.Logging.ILoggerFacade"/>.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Logging.Category.Debug">
+            <summary>
+            Debug category.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Logging.Category.Exception">
+            <summary>
+            Exception category.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Logging.Category.Info">
+            <summary>
+            Informational category.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Logging.Category.Warn">
+            <summary>
+            Warning category.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Events.IEventAggregator">
+            <summary>
+            Defines an interface to get instances of an event type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.IEventAggregator.GetEvent``1">
+            <summary>
+            Gets an instance of an event type.
+            </summary>
+            <typeparam name="TEventType">The type of event to get.</typeparam>
+            <returns>An instance of an event object of type <typeparamref name="TEventType"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Events.BackgroundEventSubscription`1">
+            <summary>
+            Extends <see cref="T:Microsoft.Practices.Composite.Events.EventSubscription`1"/> to invoke the <see cref="P:Microsoft.Practices.Composite.Events.EventSubscription`1.Action"/> delegate in a background thread.
+            </summary>
+            <typeparam name="TPayload">The type to use for the generic <see cref="T:System.Action`1"/> and <see cref="T:System.Predicate`1"/> types.</typeparam>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Events.EventSubscription`1">
+            <summary>
+            Provides a way to retrieve a <see cref="T:System.Delegate"/> to execute an action dependending
+            on the value of a second filter predicate that returns true if the action should execute.
+            </summary>
+            <typeparam name="TPayload">The type to use for the generic <see cref="T:System.Action`1"/> and <see cref="T:System.Predicate`1"/> types.</typeparam>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.EventSubscription`1.#ctor(Microsoft.Practices.Composite.Events.IDelegateReference,Microsoft.Practices.Composite.Events.IDelegateReference)">
+            <summary>
+             Creates a new instance of <see cref="T:Microsoft.Practices.Composite.Events.EventSubscription`1"/>.
+            </summary>
+            <param name="actionReference">A reference to a delegate of type <see cref="T:System.Action`1"/>.</param>
+            <param name="filterReference">A reference to a delegate of type <see cref="T:System.Predicate`1"/>.</param>
+            <exception cref="T:System.ArgumentNullException">When <paramref name="actionReference"/> or <see paramref="filterReference"/> are <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">When the target of <paramref name="actionReference"/> is not of type <see cref="T:System.Action`1"/>,
+            or the target of <paramref name="filterReference"/> is not of type <see cref="T:System.Predicate`1"/>.</exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.EventSubscription`1.GetExecutionStrategy">
+            <summary>
+            Gets the execution strategy to publish this event.
+            </summary>
+            <returns>An <see cref="T:System.Action`1"/> with the execution strategy, or <see langword="null"/> if the <see cref="T:Microsoft.Practices.Composite.Events.IEventSubscription"/> is no longer valid.</returns>
+            <remarks>
+            If <see cref="P:Microsoft.Practices.Composite.Events.EventSubscription`1.Action"/> or <see cref="P:Microsoft.Practices.Composite.Events.EventSubscription`1.Filter"/> are no longer valid because they were
+            garbage collected, this method will return <see langword="null"/>.
+            Otherwise it will return a delegate that evaluates the <see cref="P:Microsoft.Practices.Composite.Events.EventSubscription`1.Filter"/> and if it
+            returns <see langword="true"/> will then call <see cref="M:Microsoft.Practices.Composite.Events.EventSubscription`1.InvokeAction(System.Action{`0},`0)"/>. The returned
+            delegate holds hard references to the <see cref="P:Microsoft.Practices.Composite.Events.EventSubscription`1.Action"/> and <see cref="P:Microsoft.Practices.Composite.Events.EventSubscription`1.Filter"/> target
+            <see cref="T:System.Delegate">delegates</see>. As long as the returned delegate is not garbage collected,
+            the <see cref="P:Microsoft.Practices.Composite.Events.EventSubscription`1.Action"/> and <see cref="P:Microsoft.Practices.Composite.Events.EventSubscription`1.Filter"/> references delegates won't get collected either.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.EventSubscription`1.InvokeAction(System.Action{`0},`0)">
+            <summary>
+            Invokes the specified <see cref="T:System.Action`1"/> synchronously when not overriden.
+            </summary>
+            <param name="action">The action to execute.</param>
+            <param name="argument">The payload to pass <paramref name="action"/> while invoking it.</param>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Events.EventSubscription`1.Action">
+            <summary>
+            Gets the target <see cref="T:System.Action`1"/> that is referenced by the <see cref="T:Microsoft.Practices.Composite.Events.IDelegateReference"/>.
+            </summary>
+            <value>An <see cref="T:System.Action`1"/> or <see langword="null"/> if the referenced target is not alive.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Events.EventSubscription`1.Filter">
+            <summary>
+            Gets the target <see cref="T:System.Predicate`1"/> that is referenced by the <see cref="T:Microsoft.Practices.Composite.Events.IDelegateReference"/>.
+            </summary>
+            <value>An <see cref="T:System.Predicate`1"/> or <see langword="null"/> if the referenced target is not alive.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Events.EventSubscription`1.SubscriptionToken">
+            <summary>
+            Gets or sets a <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/> that identifies this <see cref="T:Microsoft.Practices.Composite.Events.IEventSubscription"/>.
+            </summary>
+            <value>A token that identifies this <see cref="T:Microsoft.Practices.Composite.Events.IEventSubscription"/>.</value>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.BackgroundEventSubscription`1.#ctor(Microsoft.Practices.Composite.Events.IDelegateReference,Microsoft.Practices.Composite.Events.IDelegateReference)">
+            <summary>
+            Creates a new instance of <see cref="T:Microsoft.Practices.Composite.Events.BackgroundEventSubscription`1"/>.
+            </summary>
+            <param name="actionReference">A reference to a delegate of type <see cref="T:System.Action`1"/>.</param>
+            <param name="filterReference">A reference to a delegate of type <see cref="T:System.Predicate`1"/>.</param>
+            <exception cref="T:System.ArgumentNullException">When <paramref name="actionReference"/> or <see paramref="filterReference"/> are <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">When the target of <paramref name="actionReference"/> is not of type <see cref="T:System.Action`1"/>,
+            or the target of <paramref name="filterReference"/> is not of type <see cref="T:System.Predicate`1"/>.</exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.BackgroundEventSubscription`1.InvokeAction(System.Action{`0},`0)">
+            <summary>
+            Invokes the specified <see cref="T:System.Action`1"/> in an asynchronous thread by using a <see cref="T:System.ComponentModel.BackgroundWorker"/>.
+            </summary>
+            <param name="action">The action to execute.</param>
+            <param name="argument">The payload to pass <paramref name="action"/> while invoking it.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.AssemblyResolver">
+            <summary>
+            Handles AppDomain's AssemblyResolve event to be able to load assemblies dynamically in 
+            the LoadFrom context, but be able to reference the type from assemblies loaded in the Load context.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.IAssemblyResolver">
+            <summary>
+            Interface for classes that are responsible for resolving and loading assembly files. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.IAssemblyResolver.LoadAssemblyFrom(System.String)">
+            <summary>
+            Load an assembly when it's required by the application. 
+            </summary>
+            <param name="assemblyFilePath"></param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.AssemblyResolver.LoadAssemblyFrom(System.String)">
+            <summary>
+            Registers the specified assembly and resolves the types in it when the AppDomain requests for it.
+            </summary>
+            <param name="assemblyFilePath">The path to the assemly to load in the LoadFrom context.</param>
+            <remarks>This method does not load the assembly immediately, but lazily until someone requests a <see cref="T:System.Type"/>
+            declared in the assembly.</remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.AssemblyResolver.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <remarks>Calls <see cref="M:Microsoft.Practices.Composite.Modularity.AssemblyResolver.Dispose(System.Boolean)"/></remarks>.
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.AssemblyResolver.Dispose(System.Boolean)">
+            <summary>
+            Disposes the associated <see cref="T:Microsoft.Practices.Composite.Modularity.AssemblyResolver"/>.
+            </summary>
+            <param name="disposing">When <see langword="true"/>, it is being called from the Dispose method.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Logging.TraceLogger">
+            <summary>
+            Implementation of <see cref="T:Microsoft.Practices.Composite.Logging.ILoggerFacade"/> that logs to .NET <see cref="T:System.Diagnostics.Trace"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Logging.TraceLogger.Log(System.String,Microsoft.Practices.Composite.Logging.Category,Microsoft.Practices.Composite.Logging.Priority)">
+            <summary>
+            Write a new log entry with the specified category and priority.
+            </summary>
+            <param name="message">Message body to log.</param>
+            <param name="category">Category of the entry.</param>
+            <param name="priority">The priority of the entry.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.ListDictionary`2">
+            <summary>
+            A dictionary of lists.
+            </summary>
+            <typeparam name="TKey">The key to use for lists.</typeparam>
+            <typeparam name="TValue">The type of the value held by lists.</typeparam>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.Add(`0)">
+            <summary>
+            If a list does not already exist, it will be created automatically.
+            </summary>
+            <param name="key">The key of the list that will hold the value.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.Add(`0,`1)">
+            <summary>
+            Adds a value to a list with the given key. If a list does not already exist, 
+            it will be created automatically.
+            </summary>
+            <param name="key">The key of the list that will hold the value.</param>
+            <param name="value">The value to add to the list under the given key.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.Clear">
+            <summary>
+            Removes all entries in the dictionary.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.ContainsValue(`1)">
+            <summary>
+            Determines whether the dictionary contains the specified value.
+            </summary>
+            <param name="value">The value to locate.</param>
+            <returns>true if the dictionary contains the value in any list; otherwise, false.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.ContainsKey(`0)">
+            <summary>
+            Determines whether the dictionary contains the given key.
+            </summary>
+            <param name="key">The key to locate.</param>
+            <returns>true if the dictionary contains the given key; otherwise, false.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.FindAllValuesByKey(System.Predicate{`0})">
+            <summary>
+            Retrieves the all the elements from the list which have a key that matches the condition 
+            defined by the specified predicate.
+            </summary>
+            <param name="keyFilter">The filter with the condition to use to filter lists by their key.</param>
+            <returns>The elements that have a key that matches the condition defined by the specified predicate.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.FindAllValues(System.Predicate{`1})">
+            <summary>
+            Retrieves all the elements that match the condition defined by the specified predicate.
+            </summary>
+            <param name="valueFilter">The filter with the condition to use to filter values.</param>
+            <returns>The elements that match the condition defined by the specified predicate.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.Remove(`0)">
+            <summary>
+            Removes a list by key.
+            </summary>
+            <param name="key">The key of the list to remove.</param>
+            <returns><see langword="true" /> if the element was removed.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.Remove(`0,`1)">
+            <summary>
+            Removes a value from the list with the given key.
+            </summary>
+            <param name="key">The key of the list where the value exists.</param>
+            <param name="value">The value to remove.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.Remove(`1)">
+            <summary>
+            Removes a value from all lists where it may be found.
+            </summary>
+            <param name="value">The value to remove.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.System#Collections#Generic#IDictionary{TKey@System#Collections#Generic#IList{TValue}}#Add(`0,System.Collections.Generic.IList{`1})">
+            <summary>
+            See <see cref="M:System.Collections.Generic.IDictionary`2.Add(`0,`1)"/> for more information.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.System#Collections#Generic#IDictionary{TKey@System#Collections#Generic#IList{TValue}}#TryGetValue(`0,System.Collections.Generic.IList{`1}@)">
+            <summary>
+            See <see cref="M:System.Collections.Generic.IDictionary`2.TryGetValue(`0,`1@)"/> for more information.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{TKey@System#Collections#Generic#IList{TValue}}}#Add(System.Collections.Generic.KeyValuePair{`0,System.Collections.Generic.IList{`1}})">
+            <summary>
+            See <see cref="M:System.Collections.Generic.ICollection`1.Add(`0)"/> for more information.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{TKey@System#Collections#Generic#IList{TValue}}}#Contains(System.Collections.Generic.KeyValuePair{`0,System.Collections.Generic.IList{`1}})">
+            <summary>
+            See <see cref="M:System.Collections.Generic.ICollection`1.Contains(`0)"/> for more information.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{TKey@System#Collections#Generic#IList{TValue}}}#CopyTo(System.Collections.Generic.KeyValuePair{`0,System.Collections.Generic.IList{`1}}[],System.Int32)">
+            <summary>
+            See <see cref="M:System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)"/> for more information.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{TKey@System#Collections#Generic#IList{TValue}}}#Remove(System.Collections.Generic.KeyValuePair{`0,System.Collections.Generic.IList{`1}})">
+            <summary>
+            See <see cref="M:System.Collections.Generic.ICollection`1.Remove(`0)"/> for more information.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.System#Collections#Generic#IEnumerable{System#Collections#Generic#KeyValuePair{TKey@System#Collections#Generic#IList{TValue}}}#GetEnumerator">
+            <summary>
+            See <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator"/> for more information.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ListDictionary`2.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            See <see cref="M:System.Collections.IEnumerable.GetEnumerator"/> for more information.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.ListDictionary`2.Values">
+            <summary>
+            Gets a shallow copy of all values in all lists.
+            </summary>
+            <value>List of values.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.ListDictionary`2.Keys">
+            <summary>
+            Gets the list of keys in the dictionary.
+            </summary>
+            <value>Collection of keys.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.ListDictionary`2.Item(`0)">
+            <summary>
+            Gets or sets the list associated with the given key. The 
+            access always succeeds, eventually returning an empty list.
+            </summary>
+            <param name="key">The key of the list to access.</param>
+            <returns>The list associated with the key.</returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.ListDictionary`2.Count">
+            <summary>
+            Gets the number of lists in the dictionary.
+            </summary>
+            <value>Value indicating the values count.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.ListDictionary`2.System#Collections#Generic#IDictionary{TKey@System#Collections#Generic#IList{TValue}}#Values">
+            <summary>
+            See <see cref="P:System.Collections.Generic.IDictionary`2.Values"/> for more information.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.ListDictionary`2.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{TKey@System#Collections#Generic#IList{TValue}}}#IsReadOnly">
+            <summary>
+            See <see cref="P:System.Collections.Generic.ICollection`1.IsReadOnly"/> for more information.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Regions.IViewsCollection">
+            <summary>
+            Defines a view of a collection.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IViewsCollection.Contains(System.Object)">
+            <summary>
+            Determines whether the collection contains a specific value.
+            </summary>
+            <param name="value">The object to locate in the collection.</param>
+            <returns><see langword="true" /> if <paramref name="value"/> is found in the collection; otherwise, <see langword="false" />.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyAttribute">
+            <summary>
+            Specifies that the current module has a dependency on another module. This attribute should be used on classes that implement <see cref="T:Microsoft.Practices.Composite.Modularity.IModule"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleDependencyAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyAttribute"/>.
+            </summary>
+            <param name="moduleName">The name of the module that this module is dependant upon.</param>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleDependencyAttribute.ModuleName">
+            <summary>
+            Gets the name of the module that this module is dependant upon.
+            </summary>
+            <value>The name of the module that this module is dependant upon.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.FileModuleTypeLoader">
+            <summary>
+            Loads modules from an arbitrary location on the filesystem. This typeloader is only called if 
+            <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> classes have a Ref parameter that starts with "file://". 
+            This class is only used on the Desktop version of the Composite Application Library.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.IModuleTypeLoader">
+            <summary>
+            Defines the interface for moduleTypeLoaders
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.IModuleTypeLoader.CanLoadModuleType(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Evaluates the <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.Ref"/> property to see if the current typeloader will be able to retrieve the <paramref name="moduleInfo"/>.
+            </summary>
+            <param name="moduleInfo">Module that should have it's type loaded.</param>
+            <returns><see langword="true"/> if the current typeloader is able to retrieve the module, otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.IModuleTypeLoader.BeginLoadModuleType(Microsoft.Practices.Composite.Modularity.ModuleInfo,Microsoft.Practices.Composite.Modularity.ModuleTypeLoadedCallback)">
+            <summary>
+            Starts retrieving the <paramref name="moduleInfo"/> and calls the <paramref name="callback"/> when it is done.
+            </summary>
+            <param name="moduleInfo">Module that should have it's type loaded.</param>
+            <param name="callback">Delegate to be called when typeloading process completes or fails.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.FileModuleTypeLoader.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.FileModuleTypeLoader"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.FileModuleTypeLoader.#ctor(Microsoft.Practices.Composite.Modularity.IAssemblyResolver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.FileModuleTypeLoader"/> class.
+            </summary>
+            <param name="assemblyResolver">The assembly resolver.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.FileModuleTypeLoader.CanLoadModuleType(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Evaluates the <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.Ref"/> property to see if the current typeloader will be able to retrieve the <paramref name="moduleInfo"/>.
+            Returns true if the <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.Ref"/> property starts with "file://", because this indicates that the file
+            is a local file. 
+            </summary>
+            <param name="moduleInfo">Module that should have it's type loaded.</param>
+            <returns>
+            	<see langword="true"/> if the current typeloader is able to retrieve the module, otherwise <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.FileModuleTypeLoader.BeginLoadModuleType(Microsoft.Practices.Composite.Modularity.ModuleInfo,Microsoft.Practices.Composite.Modularity.ModuleTypeLoadedCallback)">
+            <summary>
+            Starts retrieving the <paramref name="moduleInfo"/> and calls the <paramref name="callback"/> when it is done.
+            </summary>
+            <param name="moduleInfo">Module that should have it's type loaded.</param>
+            <param name="callback">Delegate to be called when typeloading process completes or fails.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.DirectoryModuleCatalog">
+            <summary>
+            Represets a catalog created from a directory on disk.
+            </summary>
+            <remarks>
+            The directory catalog will scan the contents of a directory, locating classes that implement
+            <see cref="T:Microsoft.Practices.Composite.Modularity.IModule"/> and add them to the catalog based on contents in their associated <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleAttribute"/>.
+            Assemblies are loaded into a new application domain with ReflectionOnlyLoad.  The application domain is destroyed
+            once the assemblies have been discovered.
+            
+            The diretory catalog does not continue to monitor the directory after it has created the initialze catalog.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog">
+            <summary>
+            The <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> holds information about the modules that can be used by the 
+            application. Each module is described in a <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> class, that records the 
+            name, type and location of the module. 
+            
+            It also verifies that the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> is internally valid. That means that
+            it does not have:
+            <list>
+                <item>Circular dependencies</item>
+                <item>Missing dependencies</item>
+                <item>
+                    Invalid dependencies, such as a Module that's loaded at startup that depends on a module 
+                    that might need to be retrieved.
+                </item>
+            </list>
+            The <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> also serves as a baseclass for more specialized Catalogs .
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Practices.Composite.Modularity.ModuleInfo})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> class while providing an 
+            initial list of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s.
+            </summary>
+            <param name="modules">The initial list of modules.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.CreateFromXaml(System.IO.Stream)">
+            <summary>
+            Creates a <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> from XAML.
+            </summary>
+            <param name="xamlStream"><see cref="T:System.IO.Stream"/> that contains the XAML declaration of the catalog.</param>
+            <returns>An instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> built from the XAML.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.CreateFromXaml(System.Uri)">
+            <summary>
+            Creates a <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> from a XAML included as an Application Resource.
+            </summary>
+            <param name="builderResourceUri">Relative <see cref="T:System.Uri"/> that identifies the XAML included as an Application Resource.</param>
+            <returns>An instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> build from the XAML.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.Load">
+            <summary>
+            Loads the catalog if necessary.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.GetDependentModules(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Return the list of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s that <paramref name="moduleInfo"/> depends on.
+            </summary>
+            <remarks>
+            If  the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> was not yet validated, this method will call <see cref="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.Validate"/>.
+            </remarks>
+            <param name="moduleInfo">The <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> to get the </param>
+            <returns>An enumeration of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> that <paramref name="moduleInfo"/> depends on.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.AddModule(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Adds a <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> to the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/>.
+            </summary>
+            <param name="moduleInfo">The <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> to add.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> for easily adding multiple modules.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.CompleteListWithDependencies(System.Collections.Generic.IEnumerable{Microsoft.Practices.Composite.Modularity.ModuleInfo})">
+            <summary>
+            Returns a list of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s that contain both the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s in 
+            <paramref name="modules"/>, but also all the modules they depend on. 
+            </summary>
+            <param name="modules">The modules to get the dependencies for.</param>
+            <returns>
+            A list of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> that contains both all <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s in <paramref name="modules"/>
+            but also all the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> they depend on.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.Validate">
+            <summary>
+            Validates the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/>.
+            </summary>
+            <exception cref="T:Microsoft.Practices.Composite.Modularity.ModularityException">When validation of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> fails.</exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.AddModule(System.Type,System.String[])">
+            <summary>
+            Adds a groupless <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> to the catalog.
+            </summary>
+            <param name="moduleType"><see cref="T:System.Type"/> of the module to be added.</param>
+            <param name="dependsOn">Collection of module names (<see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.ModuleName"/>) of the modules on which the module to be added logically depends on.</param>
+            <returns>The same <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> instance with the added module.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.AddModule(System.Type,Microsoft.Practices.Composite.Modularity.InitializationMode,System.String[])">
+            <summary>
+            Adds a groupless <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> to the catalog.
+            </summary>
+            <param name="moduleType"><see cref="T:System.Type"/> of the module to be added.</param>
+            <param name="initializationMode">Stage on which the module to be added will be initialized.</param>
+            <param name="dependsOn">Collection of module names (<see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.ModuleName"/>) of the modules on which the module to be added logically depends on.</param>
+            <returns>The same <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> instance with the added module.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.AddModule(System.String,System.String,System.String[])">
+            <summary>
+            Adds a groupless <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> to the catalog.
+            </summary>
+            <param name="moduleName">Name of the module to be added.</param>
+            <param name="moduleType"><see cref="T:System.Type"/> of the module to be added.</param>
+            <param name="dependsOn">Collection of module names (<see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.ModuleName"/>) of the modules on which the module to be added logically depends on.</param>
+            <returns>The same <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> instance with the added module.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.AddModule(System.String,System.String,Microsoft.Practices.Composite.Modularity.InitializationMode,System.String[])">
+            <summary>
+            Adds a groupless <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> to the catalog.
+            </summary>
+            <param name="moduleName">Name of the module to be added.</param>
+            <param name="moduleType"><see cref="T:System.Type"/> of the module to be added.</param>
+            <param name="initializationMode">Stage on which the module to be added will be initialized.</param>
+            <param name="dependsOn">Collection of module names (<see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.ModuleName"/>) of the modules on which the module to be added logically depends on.</param>
+            <returns>The same <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> instance with the added module.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.AddModule(System.String,System.String,System.String,Microsoft.Practices.Composite.Modularity.InitializationMode,System.String[])">
+            <summary>
+            Adds a groupless <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> to the catalog.
+            </summary>
+            <param name="moduleName">Name of the module to be added.</param>
+            <param name="moduleType"><see cref="T:System.Type"/> of the module to be added.</param>
+            <param name="refValue">Reference to the location of the module to be added assembly.</param>
+            <param name="initializationMode">Stage on which the module to be added will be initialized.</param>
+            <param name="dependsOn">Collection of module names (<see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.ModuleName"/>) of the modules on which the module to be added logically depends on.</param>
+            <returns>The same <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> instance with the added module.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.Initialize">
+            <summary>
+            Initializes the catalog, which may load and validate the modules.
+            </summary>
+            <exception cref="T:Microsoft.Practices.Composite.Modularity.ModularityException">When validation of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> fails, because this method calls <see cref="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.Validate"/>.</exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.AddGroup(Microsoft.Practices.Composite.Modularity.InitializationMode,System.String,Microsoft.Practices.Composite.Modularity.ModuleInfo[])">
+            <summary>
+            Creates and adds a <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/> to the catalog.
+            </summary>
+            <param name="initializationMode">Stage on which the module group to be added will be initialized.</param>
+            <param name="refValue">Reference to the location of the module group to be added.</param>
+            <param name="moduleInfos">Collection of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> included in the group.</param>
+            <returns><see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> with the added module group.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.SolveDependencies(System.Collections.Generic.IEnumerable{Microsoft.Practices.Composite.Modularity.ModuleInfo})">
+            <summary>
+            Checks for cyclic dependencies, by calling the dependencysolver. 
+            </summary>
+            <param name="modules">the.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.ValidateDependencies(System.Collections.Generic.IEnumerable{Microsoft.Practices.Composite.Modularity.ModuleInfo})">
+            <summary>
+            Ensures that all the dependencies within <paramref name="modules"/> refer to <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s
+            within that list.
+            </summary>
+            <param name="modules">The modules to validate modules for.</param>
+            <exception cref="T:Microsoft.Practices.Composite.Modularity.ModularityException">
+            Throws if a <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> in <paramref name="modules"/> depends on a module that's 
+            not in <paramref name="modules"/>.
+            </exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.InnerLoad">
+            <summary>
+            Does the actual work of loading the catalog.  The base implementation does nothing.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.Sort(System.Collections.Generic.IEnumerable{Microsoft.Practices.Composite.Modularity.ModuleInfo})">
+            <summary>
+            Sorts a list of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s. This method is called by <see cref="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.CompleteListWithDependencies(System.Collections.Generic.IEnumerable{Microsoft.Practices.Composite.Modularity.ModuleInfo})"/>
+            to return a sorted list. 
+            </summary>
+            <param name="modules">The <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s to sort.</param>
+            <returns>Sorted list of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.ValidateUniqueModules">
+            <summary>
+            Makes sure all modules have an Unique name. 
+            </summary>
+            <exception cref="T:Microsoft.Practices.Composite.Modularity.DuplicateModuleException">
+            Thrown if the names of one or more modules are not unique. 
+            </exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.ValidateDependencyGraph">
+            <summary>
+            Ensures that there are no cyclic dependencies. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.ValidateCrossGroupDependencies">
+            <summary>
+            Ensures that there are no dependencies between modules on different groups.
+            </summary>
+            <remarks>
+            A groupless module can only depend on other groupless modules.
+            A module within a group can depend on other modules within the same group and/or on groupless modules.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.ValidateDependenciesInitializationMode">
+            <summary>
+            Ensures that there are no modules marked to be loaded <see cref="F:Microsoft.Practices.Composite.Modularity.InitializationMode.WhenAvailable"/>
+            depending on modules loaded <see cref="F:Microsoft.Practices.Composite.Modularity.InitializationMode.OnDemand"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.GetDependentModulesInner(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Returns the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> on which the received module dependens on.
+            </summary>
+            <param name="moduleInfo">Module whose dependant modules are requested.</param>
+            <returns>Collection of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> dependants of <paramref name="moduleInfo"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleCatalog.EnsureCatalogValidated">
+            <summary>
+            Ensures that the catalog is validated.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleCatalog.Items">
+            <summary>
+            Gets the items in the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/>. This property is mainly used to add <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>s or 
+            <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s through XAML. 
+            </summary>
+            <value>The items in the catalog.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleCatalog.Modules">
+            <summary>
+            Gets all the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> classes that are in the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/>, regardless 
+            if they are within a <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/> or not. 
+            </summary>
+            <value>The modules.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleCatalog.Groups">
+            <summary>
+            Gets the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>s that have been added to the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/>. 
+            </summary>
+            <value>The groups.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleCatalog.Validated">
+            <summary>
+            Gets or sets a value that remembers whether the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> has been validated already. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleCatalog.GrouplessModules">
+            <summary>
+            Returns the list of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>s that are not contained within any <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfoGroup"/>. 
+            </summary>
+            <value>The groupless modules.</value>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.DirectoryModuleCatalog.InnerLoad">
+            <summary>
+            Drives the main logic of building the child domain and searching for the assemblies.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.DirectoryModuleCatalog.BuildChildDomain(System.AppDomain)">
+            <summary>
+            Creates a new child domain and copies the evidence from a parent domain.
+            </summary>
+            <param name="parentDomain">The parent domain.</param>
+            <returns>The new child domain.</returns>
+            <remarks>
+            Grabs the <paramref name="parentDomain"/> evidence and uses it to construct the new
+            <see cref="T:System.AppDomain"/> because in a ClickOnce execution environment, creating an
+            <see cref="T:System.AppDomain"/> will by default pick up the partial trust environment of 
+            the AppLaunch.exe, which was the root executable. The AppLaunch.exe does a 
+            create domain and applies the evidence from the ClickOnce manifests to 
+            create the domain that the application is actually executing in. This will 
+            need to be Full Trust for Composite Application Library applications.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.DirectoryModuleCatalog.ModulePath">
+            <summary>
+            Directory containing modules to search for.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Events.DataEventArgs`1">
+            <summary>
+            Generic arguments class to pass to event handlers that need to receive data.
+            </summary>
+            <typeparam name="TData">The type of data to pass.</typeparam>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.DataEventArgs`1.#ctor(`0)">
+            <summary>
+            Initializes the DataEventArgs class.
+            </summary>
+            <param name="value">Information related to the event.</param>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Events.DataEventArgs`1.Value">
+            <summary>
+            Gets the information related to the event.
+            </summary>
+            <value>Information related to the event.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleManager">
+            <summary>
+            Component responsible for coordinating the modules' type loading and module initialization process. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleManager.#ctor(Microsoft.Practices.Composite.Modularity.IModuleInitializer,Microsoft.Practices.Composite.Modularity.IModuleCatalog,Microsoft.Practices.Composite.Logging.ILoggerFacade)">
+            <summary>
+            Initializes an instance of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleManager"/> class.
+            </summary>
+            <param name="moduleInitializer">Service used for initialization of modules.</param>
+            <param name="moduleCatalog">Catalog that enumerates the modules to be loaded and initialized.</param>
+            <param name="loggerFacade">Logger used during the load and initialization of modules.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleManager.Run">
+            <summary>
+            Initializes the modules marked as <see cref="F:Microsoft.Practices.Composite.Modularity.InitializationMode.WhenAvailable"/> on the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleManager.LoadModule(System.String)">
+            <summary>
+            Initializes the module on the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleCatalog"/> with the name <paramref name="moduleName"/>.
+            </summary>
+            <param name="moduleName">Name of the module requested for initialization.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleManager.ModuleNeedsRetrieval(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Checks if the module needs to be retrieved before it's initialized.
+            </summary>
+            <param name="moduleInfo">Module that is being checked if needs retrieval.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleManager.HandleModuleTypeLoadingError(Microsoft.Practices.Composite.Modularity.ModuleInfo,System.Exception)">
+            <summary>
+            Handles any exception ocurred in the module typeloading process,
+            logs the error using the <seealso cref="T:Microsoft.Practices.Composite.Logging.ILoggerFacade"/> and throws a <seealso cref="T:Microsoft.Practices.Composite.Modularity.ModuleTypeLoadingException"/>.
+            This method can be overriden to provide a different behavior. 
+            </summary>
+            <param name="moduleInfo">The module metadata where the error happenened.</param>
+            <param name="exception">The exception thrown that is the cause of the current error.</param>
+            <exception cref="T:Microsoft.Practices.Composite.Modularity.ModuleTypeLoadingException"></exception>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleManager.ModuleTypeLoaders">
+            <summary>
+            Returns the list of registered <see cref="T:Microsoft.Practices.Composite.Modularity.IModuleTypeLoader"/> instances that will be 
+            used to load the types of modules. 
+            </summary>
+            <value>The module type loaders.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleTypeLoadedCallback">
+            <summary>
+            Callback to be called when module's type is loaded.
+            </summary>
+            <param name="moduleInfo">The retrieved module.</param>
+            <param name="error">Exception ocurred during module group retrieval or null if no error ocurred.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Events.SubscriptionToken">
+            <summary>
+            Subsription token returned from <see cref="T:Microsoft.Practices.Composite.Events.EventBase"/> on subscribe.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.SubscriptionToken.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Events.SubscriptionToken"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.SubscriptionToken.Equals(Microsoft.Practices.Composite.Events.SubscriptionToken)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <returns>
+            <see langword="true"/> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <see langword="false"/>.
+            </returns>
+            <param name="other">An object to compare with this object.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.SubscriptionToken.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />.
+            </summary>
+            <returns>
+            true if the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />; otherwise, false.
+            </returns>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.Object" />. </param>
+            <exception cref="T:System.NullReferenceException">The <paramref name="obj" /> parameter is null.</exception><filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.SubscriptionToken.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type. 
+            </summary>
+            <returns>
+            A hash code for the current <see cref="T:System.Object" />.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Events.EventAggregator">
+            <summary>
+            Implements <see cref="T:Microsoft.Practices.Composite.Events.IEventAggregator"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Events.EventAggregator.GetEvent``1">
+            <summary>
+            Gets the single instance of the event managed by this EventAggregator. Multiple calls to this method with the same <typeparamref name="TEventType"/> returns the same event instance.
+            </summary>
+            <typeparam name="TEventType">The type of event to get. This must inherit from <see cref="T:Microsoft.Practices.Composite.Events.EventBase"/>.</typeparam>
+            <returns>A singleton instance of an event object of type <typeparamref name="TEventType"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ConfigurationModuleCatalog">
+            <summary>
+            A catalog built from a configuration file.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ConfigurationModuleCatalog.#ctor">
+            <summary>
+            Builds an instance of ConfigurationModuleCatalog with a <see cref="T:Microsoft.Practices.Composite.Modularity.ConfigurationStore"/> as the default store.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ConfigurationModuleCatalog.InnerLoad">
+            <summary>
+            Loads the catalog from the configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ConfigurationModuleCatalog.Store">
+            <summary>
+            Gets or sets the store where the configuration is kept.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Regions.IRegionBehavior">
+            <summary>
+            Interface for allowing extensible behavior on regions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegionBehavior.Attach">
+            <summary>
+            Attaches the behavior to the specified region.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Regions.IRegionBehavior.Region">
+            <summary>
+            The region that this behavior is extending.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Regions.ViewRegisteredEventArgs">
+            <summary>
+            Argument class used by the <see cref="E:Microsoft.Practices.Composite.Regions.IRegionViewRegistry.ContentRegistered"/> event when a new content is registered.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.ViewRegisteredEventArgs.#ctor(System.String,System.Func{System.Object})">
+            <summary>
+            Initializes the ViewRegisteredEventArgs class.
+            </summary>
+            <param name="regionName">The region name to which the content was registered.</param>
+            <param name="getViewDelegate">The content which was registered.</param>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Regions.ViewRegisteredEventArgs.RegionName">
+            <summary>
+            Gets the region name to which the content was registered.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Regions.ViewRegisteredEventArgs.GetView">
+            <summary>
+            Gets the content which was registered.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Logging.EmptyLogger">
+            <summary>
+            Implementation of <see cref="T:Microsoft.Practices.Composite.Logging.ILoggerFacade"/> that does nothing. This
+            implementation is useful when the application does not need logging
+            but there are infrastructure pieces that assume there is a logger.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Logging.EmptyLogger.Log(System.String,Microsoft.Practices.Composite.Logging.Category,Microsoft.Practices.Composite.Logging.Priority)">
+            <summary>
+            This method does nothing.
+            </summary>
+            <param name="message">Message body to log.</param>
+            <param name="category">Category of the entry.</param>
+            <param name="priority">The priority of the entry.</param>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Regions.IRegionCollection">
+            <summary>
+            Defines a collection of <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> uniquely identified by their Name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegionCollection.Add(Microsoft.Practices.Composite.Regions.IRegion)">
+            <summary>
+            Adds a <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> to the collection.
+            </summary>
+            <param name="region">Region to be added to the collection.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegionCollection.Remove(System.String)">
+            <summary>
+            Removes a <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> from the collection.
+            </summary>
+            <param name="regionName">Name of the region to be removed.</param>
+            <returns><see langword="true"/> if the region was removed from the collection, otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegionCollection.ContainsRegionWithName(System.String)">
+            <summary>
+            Checks if the collection contains a <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> with the name received as parameter.
+            </summary>
+            <param name="regionName">The name of the region to look for.</param>
+            <returns><see langword="true"/> if the region is contained in the collection, otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Regions.IRegionCollection.Item(System.String)">
+            <summary>
+            Gets the IRegion with the name received as index.
+            </summary>
+            <param name="regionName">Name of the region to be retrieved.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> identified with the requested name.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.CollectionExtensions">
+            <summary>
+            Class that provides extension methods to Collection
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.CollectionExtensions.AddRange``1(System.Collections.ObjectModel.Collection{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Add a range of items to a collection.
+            </summary>
+            <typeparam name="T">Type of objects within the collection.</typeparam>
+            <param name="collection">The collection to add items to.</param>
+            <param name="items">The items to add to the collection.</param>
+            <returns>The collection.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleAttribute">
+            <summary>
+            Indicates that the class should be considered a named module using the
+            provided module name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleAttribute.ModuleName">
+            <summary>
+            Gets or sets the name of the module.
+            </summary>
+            <value>The name of the module.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleAttribute.StartupLoaded">
+            <summary>
+            Gets or sets a value indicating whether the module should be loaded at startup. 
+            </summary>
+            When <see langword="true"/> (default value), it indicates that this module should be loaded at startup. 
+            Otherwise you should explicitly load this module on demand.
+            <value>A <see cref="T:System.Boolean"/> value.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleAttribute.OnDemand">
+            <summary>
+            Gets or sets the value indicating whether the module should be loaded OnDemand.
+            </summary>
+            When <see langword="false"/> (default value), it indicates the module should be loaded as soon as it's dependencies are satisfied.
+            Otherwise you should explicitily load this module via the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleManager"/>.
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleInfo">
+            <summary>
+            Defines the metadata that describes a module.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfo.#ctor">
+            <summary>
+            Initializes a new empty instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfo.#ctor(System.String,System.String,System.String[])">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>.
+            </summary>
+            <param name="name">The module's name.</param>
+            <param name="type">The module <see cref="T:System.Type"/>'s AssemblyQualifiedName.</param>
+            <param name="dependsOn">The modules this instance depends on.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInfo.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/>.
+            </summary>
+            <param name="name">The module's name.</param>
+            <param name="type">The module's type.</param>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.ModuleName">
+            <summary>
+            Gets or sets the name of the module.
+            </summary>
+            <value>The name of the module.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.ModuleType">
+            <summary>
+            Gets or sets the module <see cref="T:System.Type"/>'s AssemblyQualifiedName.
+            </summary>
+            <value>The type of the module.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.DependsOn">
+            <summary>
+            Gets or sets the list of modules that this module depends upon.
+            </summary>
+            <value>The list of modules that this module depends upon.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.InitializationMode">
+            <summary>
+            Specifies on which stage the Module will be initialized.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.Ref">
+            <summary>
+            Reference to the location of the module assembly.
+            <example>The following are examples of valid <see cref="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.Ref"/> values:
+            http://myDomain/ClientBin/MyModules.xap for remote module in Silverlight
+            file:///c:/MyProject/Modules/MyModule.dll for a loose DLL in WPF.
+            </example>
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleInfo.State">
+            <summary>
+            Gets or sets the state of the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInfo"/> with regards to the module loading and initialization process.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.ExceptionExtensions">
+            <summary>
+            Class that provides extension methods for the Exception class. These extension methods provide
+            a mechanism for developers to get more easily to the root cause of an exception, especially in combination with 
+            DI-containers such as Unity. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ExceptionExtensions.RegisterFrameworkExceptionType(System.Type)">
+            <summary>
+            Register the type of an Exception that is thrown by the framework. The <see cref="M:Microsoft.Practices.Composite.ExceptionExtensions.GetRootException(System.Exception)"/> method uses
+            this list of Exception types to find out if something has gone wrong.  
+            </summary>
+            <param name="frameworkExceptionType">The type of exception to register.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ExceptionExtensions.IsFrameworkExceptionRegistered(System.Type)">
+            <summary>
+            Determines whether the exception type is already registered using the <see cref="M:Microsoft.Practices.Composite.ExceptionExtensions.RegisterFrameworkExceptionType(System.Type)"/> 
+            method
+            </summary>
+            <param name="frameworkExceptionType">The type of framework exception to find.</param>
+            <returns>
+            	<c>true</c> if the exception type is already registered; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.ExceptionExtensions.GetRootException(System.Exception)">
+            <summary>
+            Looks at all the inner exceptions of the <paramref name="exception"/> parameter to find the 
+            most likely root cause of the exception. This works by skipping all registered exception types.
+            </summary>
+            <remarks>
+            This method is not 100% accurate and should only be used to point a developer into the most likely direction.
+            It should not be used to replace the Inner Exception stack of an exception, because this might hide required exception
+            information. 
+            </remarks>
+            <param name="exception">The exception that will provide the list of inner exeptions to examine.</param>
+            <returns>
+            The exception that most likely caused the exception to occur. If it can't find the root exception, it will return the 
+            <paramref name="exception"/> value itself.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Regions.IRegionViewRegistry">
+            <summary>
+            Defines the interface for the registry of region's content.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegionViewRegistry.GetContents(System.String)">
+            <summary>
+            Returns the contents associated with a region name.
+            </summary>
+            <param name="regionName">Region name for which contents are requested.</param>
+            <returns>Collection of contents associated with the <paramref name="regionName"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegionViewRegistry.RegisterViewWithRegion(System.String,System.Type)">
+            <summary>
+            Registers a content type with a region name.
+            </summary>
+            <param name="regionName">Region name to which the <paramref name="viewType"/> will be registered.</param>
+            <param name="viewType">Content type to be registered for the <paramref name="regionName"/>.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegionViewRegistry.RegisterViewWithRegion(System.String,System.Func{System.Object})">
+            <summary>
+            Registers a delegate that can be used to retrieve the content associated with a region name. 
+            </summary>
+            <param name="regionName">Region name to which the <paramref name="getContentDelegate"/> will be registered.</param>
+            <param name="getContentDelegate">Delegate used to retrieve the content associated with the <paramref name="regionName"/>.</param>
+        </member>
+        <member name="E:Microsoft.Practices.Composite.Regions.IRegionViewRegistry.ContentRegistered">
+            <summary>
+            Event triggered when a content is registered to a region name.
+            </summary>
+            <remarks>
+            This event uses weak references to the event handler to prevent this service (typically a singleton) of keeping the
+            target element longer than expected. For security reasons, to use weak delegates in Silverlight you must provide
+            a delegate that is available in the public API of the class (no private or anonymous delegates allowed).
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleInitializer">
+            <summary>
+            Implements the <see cref="T:Microsoft.Practices.Composite.Modularity.IModuleInitializer"/> interface. Handles loading of a module based on a type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInitializer.#ctor(Microsoft.Practices.ServiceLocation.IServiceLocator,Microsoft.Practices.Composite.Logging.ILoggerFacade)">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInitializer"/>.
+            </summary>
+            <param name="serviceLocator">The container that will be used to resolve the modules by specifying its type.</param>
+            <param name="loggerFacade">The logger to use.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInitializer.Initialize(Microsoft.Practices.Composite.Modularity.ModuleInfo)">
+            <summary>
+            Initializes the specified module.
+            </summary>
+            <param name="moduleInfo">The module to initialize</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInitializer.HandleModuleInitializationError(Microsoft.Practices.Composite.Modularity.ModuleInfo,System.String,System.Exception)">
+            <summary>
+            Handles any exception ocurred in the module Initialization process,
+            logs the error using the <seealso cref="T:Microsoft.Practices.Composite.Logging.ILoggerFacade"/> and throws a <seealso cref="T:Microsoft.Practices.Composite.Modularity.ModuleInitializeException"/>.
+            This method can be overriden to provide a different behavior. 
+            </summary>
+            <param name="moduleInfo">The module metadata where the error happenened.</param>
+            <param name="assemblyName">The assembly name.</param>
+            <param name="exception">The exception thrown that is the cause of the current error.</param>
+            <exception cref="T:Microsoft.Practices.Composite.Modularity.ModuleInitializeException"></exception>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleInitializer.CreateModule(System.String)">
+            <summary>
+            Uses the container to resolve a new <see cref="T:Microsoft.Practices.Composite.Modularity.IModule"/> by specifying its <see cref="T:System.Type"/>.
+            </summary>
+            <param name="typeName">The type name to resolve. This type must implement <see cref="T:Microsoft.Practices.Composite.Modularity.IModule"/>.</param>
+            <returns>A new instance of <paramref name="typeName"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Regions.IRegion">
+            <summary>
+            Defines a model that can be used to compose views.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegion.Add(System.Object)">
+            <overloads>Adds a new view to the region.</overloads>
+             <summary>
+             Adds a new view to the region.
+             </summary>
+             <param name="view">The view to add.</param>
+             <returns>The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> that is set on the view if it is a <see cref="T:System.Windows.DependencyObject"/>. It will be the current region manager when using this overload.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegion.Add(System.Object,System.String)">
+            <summary>
+            Adds a new view to the region.
+            </summary>
+            <param name="view">The view to add.</param>
+            <param name="viewName">The name of the view. This can be used to retrieve it later by calling <see cref="M:Microsoft.Practices.Composite.Regions.IRegion.GetView(System.String)"/>.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> that is set on the view if it is a <see cref="T:System.Windows.DependencyObject"/>. It will be the current region manager when using this overload.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegion.Add(System.Object,System.String,System.Boolean)">
+            <summary>
+            Adds a new view to the region.
+            </summary>
+            <param name="view">The view to add.</param>
+            <param name="viewName">The name of the view. This can be used to retrieve it later by calling <see cref="M:Microsoft.Practices.Composite.Regions.IRegion.GetView(System.String)"/>.</param>
+            <param name="createRegionManagerScope">When <see langword="true"/>, the added view will receive a new instance of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/>, otherwise it will use the current region manager for this region.</param>
+            <returns>The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> that is set on the view if it is a <see cref="T:System.Windows.DependencyObject"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegion.Remove(System.Object)">
+            <summary>
+            Removes the specified view from the region.
+            </summary>
+            <param name="view">The view to remove.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegion.Activate(System.Object)">
+            <summary>
+            Marks the specified view as active. 
+            </summary>
+            <param name="view">The view to activate.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegion.Deactivate(System.Object)">
+            <summary>
+            Marks the specified view as inactive. 
+            </summary>
+            <param name="view">The view to deactivate.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Regions.IRegion.GetView(System.String)">
+            <summary>
+            Returns the view instance that was added to the region using a specific name.
+            </summary>
+            <param name="viewName">The name used when adding the view to the region.</param>
+            <returns>Returns the named view or <see langword="null"/> if the view with <paramref name="viewName"/> does not exist in the current region.</returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Regions.IRegion.Views">
+            <summary>
+            Gets a readonly view of the collection of views in the region.
+            </summary>
+            <value>An <see cref="T:Microsoft.Practices.Composite.Regions.IViewsCollection"/> of all the added views.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Regions.IRegion.ActiveViews">
+            <summary>
+            Gets a readonly view of the collection of all the active views in the region.
+            </summary>
+            <value>An <see cref="T:Microsoft.Practices.Composite.Regions.IViewsCollection"/> of all the active views.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Regions.IRegion.Context">
+            <summary>
+            Gets or sets a context for the region. This value can be used by the user to share context with the views.
+            </summary>
+            <value>The context value to be shared.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Regions.IRegion.Name">
+            <summary>
+            Gets the name of the region that uniequely identifies the region within a <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/>.
+            </summary>
+            <value>The name of the region.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Regions.IRegion.RegionManager">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> that will be passed to the views when adding them to the region, unless the view is added by specifying createRegionManagerScope as <see langword="true"/>.
+            </summary>
+            <value>The <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> where this <see cref="T:Microsoft.Practices.Composite.Regions.IRegion"/> is registered.</value>
+            <remarks>This is usually used by implementations of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionManager"/> and should not be
+            used by the developer explicitely.</remarks>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Regions.IRegion.Behaviors">
+            <summary>
+                Gets the collection of <see cref="T:Microsoft.Practices.Composite.Regions.IRegionBehavior"/>s that can extend the behavior of regions. 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Logging.Priority">
+            <summary>
+            Defines values for the priorities used by <see cref="T:Microsoft.Practices.Composite.Logging.ILoggerFacade"/>.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Logging.Priority.None">
+            <summary>
+            No priority specified.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Logging.Priority.High">
+            <summary>
+            High priority entry.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Logging.Priority.Medium">
+            <summary>
+            Medium priority entry.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Practices.Composite.Logging.Priority.Low">
+            <summary>
+            Low priority entry.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleDependencySolver">
+            <summary>
+            Used by <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleInitializer"/> to get the load sequence
+            for the modules to load according to their dependencies.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleDependencySolver.AddModule(System.String)">
+            <summary>
+            Adds a module to the solver.
+            </summary>
+            <param name="name">The name that uniquely identifies the module.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleDependencySolver.AddDependency(System.String,System.String)">
+            <summary>
+            Adds a module dependency between the modules specified by dependingModule and
+            dependentModule.
+            </summary>
+            <param name="dependingModule">The name of the module with the dependency.</param>
+            <param name="dependentModule">The name of the module dependingModule
+            depends on.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleDependencySolver.Solve">
+            <summary>
+            Calculates an ordered vector according to the defined dependencies.
+            Non-dependant modules appears at the beginning of the resulting array.
+            </summary>
+            <returns>The resulting ordered list of modules.</returns>
+            <exception cref="T:Microsoft.Practices.Composite.Modularity.CyclicDependencyFoundException">This exception is thrown
+            when a cycle is found in the defined depedency graph.</exception>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleDependencySolver.ModuleCount">
+            <summary>
+            Gets the number of modules added to the solver.
+            </summary>
+            <value>The number of modules.</value>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyCollection">
+            <summary>
+            A collection of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleDependencyCollection.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyCollection"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleDependencyCollection.#ctor(Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement[])">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyCollection"/>.
+            </summary>
+            <param name="dependencies">An array of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement"/> with initial list of dependencies.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleDependencyCollection.CreateNewElement">
+            <summary>
+            Creates a new <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement"/>.
+            </summary>
+            <returns>A <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleDependencyCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key for a specified configuration element when overridden in a derived class.
+            </summary>
+            <param name="element">The <see cref="T:System.Configuration.ConfigurationElement" /> to return the key for. </param>
+            <returns>
+            An <see cref="T:System.Object" /> that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement" />.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleDependencyCollection.CollectionType">
+            <summary>
+            Gets the type of the <see cref="T:System.Configuration.ConfigurationElementCollection" />.
+            </summary>
+            <value>
+            The <see cref="T:System.Configuration.ConfigurationElementCollectionType" /> of this collection.
+            </value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleDependencyCollection.ElementName">
+            <summary>
+            Gets the name used to identify this collection of elements in the configuration file when overridden in a derived class.
+            </summary>
+            <value>
+            The name of the collection; otherwise, an empty string.
+            </value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleDependencyCollection.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement"/> located at the specified index in the collection.
+            </summary>
+            <param name="index">The index of the element in the collection.</param>
+            <returns>A <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleDependencyConfigurationElement"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection">
+            <summary>
+            A collection of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection.#ctor(Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement[])">
+            <summary>
+            Initializes a new <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection"/>.
+            </summary>
+            <param name="modules">The initial set of <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement"/>.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection.Add(Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement)">
+            <summary>
+            Adds a <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement"/> to the collection.
+            </summary>
+            <param name="module">A <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement"/> instance.</param>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection.Contains(System.String)">
+            <summary>
+            Tests if the collection contains the configuration for the specified module name.
+            </summary>
+            <param name="moduleName">The name of the module to search the configuration for.</param>
+            <returns><see langword="true"/> if a configuration for the module is present; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection.FindAll(System.Predicate{Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement})">
+            <summary>
+            Searches the collection for all the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement"/> that match the specified predicate.
+            </summary>
+            <param name="match">A <see cref="T:System.Predicate`1"/> that implements the match test.</param>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> with the successful matches.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection.CreateNewElement">
+            <summary>
+            Creates a new <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement"/>.
+            </summary>
+            <returns>A <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key for a specified configuration element when overridden in a derived class.
+            </summary>
+            <param name="element">The <see cref="T:System.Configuration.ConfigurationElement" /> to return the key for. </param>
+            <returns>
+            An <see cref="T:System.Object" /> that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement" />.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection.ThrowOnDuplicate">
+            <summary>
+            Gets a value indicating whether an exception should be raised if a duplicate element is found.
+            This property will always return true.
+            </summary>
+            <value>A <see cref="T:System.Boolean"/> value.</value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection.CollectionType">
+            <summary>
+            Gets the type of the <see cref="T:System.Configuration.ConfigurationElementCollection" />.
+            </summary>
+            <value>
+            The <see cref="T:System.Configuration.ConfigurationElementCollectionType" /> of this collection.
+            </value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection.ElementName">
+            <summary>
+            Gets the name used to identify this collection of elements in the configuration file when overridden in a derived class.
+            </summary>
+            <value>
+            The name of the collection; otherwise, an empty string.
+            </value>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElementCollection.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement"/> located at the specified index in the collection.
+            </summary>
+            <param name="index">The index of the element in the collection.</param>
+            <returns>A <see cref="T:Microsoft.Practices.Composite.Modularity.ModuleConfigurationElement"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.Composite.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.ConfigurationStoreCannotBeNull">
+            <summary>
+              Looks up a localized string similar to The ConfigurationStore cannot contain a null value. .
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.CyclicDependencyFound">
+            <summary>
+              Looks up a localized string similar to At least one cyclic dependency has been found in the module catalog. Cycles in the module dependencies must be avoided..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.DefaultTextLoggerPattern">
+            <summary>
+              Looks up a localized string similar to {1}: {2}. Priority: {3}. Timestamp:{0:u}..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.DependencyForUnknownModule">
+            <summary>
+              Looks up a localized string similar to Cannot add dependency for unknown module {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.DependencyOnMissingModule">
+            <summary>
+              Looks up a localized string similar to A module declared a dependency on another module which is not declared to be loaded. Missing module(s): {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.DirectoryNotFound">
+            <summary>
+              Looks up a localized string similar to Directory {0} was not found..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.DuplicatedModule">
+            <summary>
+              Looks up a localized string similar to A duplicated module with name {0} has been found by the loader..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.DuplicatedModuleGroup">
+            <summary>
+              Looks up a localized string similar to A duplicated module group with name {0} has been found by the loader..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.FailedToGetType">
+            <summary>
+              Looks up a localized string similar to Unable to retrieve the module type {0} from the loaded assemblies.  You may need to specify a more fully-qualified type name..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.FailedToLoadModule">
+            <summary>
+              Looks up a localized string similar to An exception occurred while initializing module &apos;{0}&apos;. 
+               - The exception message was: {2}
+               - The Assembly that the module was trying to be loaded from was:{1}
+               Check the InnerException property of the exception for more information. If the exception occurred while creating an object in a DI container, you can exception.GetRootException() to help locate the root cause of the problem. 
+             .
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.FailedToLoadModuleNoAssemblyInfo">
+            <summary>
+              Looks up a localized string similar to An exception occurred while initializing module &apos;{0}&apos;. 
+               - The exception message was: {1}
+               Check the InnerException property of the exception for more information. If the exception occurred 
+               while creating an object in a DI container, you can exception.GetRootException() to help locate the 
+               root cause of the problem. .
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.FailedToRetrieveModule">
+            <summary>
+              Looks up a localized string similar to Failed to load type for module {0}. Error was: {1}..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.IEnumeratorObsolete">
+            <summary>
+              Looks up a localized string similar to The IModuleEnumerator interface is no longer used and has been replaced by ModuleCatalog..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.InvalidArgumentAssemblyUri">
+            <summary>
+              Looks up a localized string similar to The argument must be a valid absolute Uri to an assembly file..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.InvalidDelegateRerefenceTypeException">
+            <summary>
+              Looks up a localized string similar to The Target of the IDelegateReference should be of type {0}..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.ModuleDependenciesNotMetInGroup">
+            <summary>
+              Looks up a localized string similar to Module {0} depends on other modules that don&apos;t belong to the same group..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.ModuleNotFound">
+            <summary>
+              Looks up a localized string similar to Module {0} was not found in the catalog..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.ModulePathCannotBeNullOrEmpty">
+            <summary>
+              Looks up a localized string similar to The ModulePath cannot contain a null value or be empty.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.ModuleTypeNotFound">
+            <summary>
+              Looks up a localized string similar to Failed to load type &apos;{0}&apos; from assembly &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.NoRetrieverCanRetrieveModule">
+            <summary>
+              Looks up a localized string similar to There is currently no moduleTypeLoader in the ModuleManager that can retrieve the specified module..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.RegionManagerWithDifferentNameException">
+            <summary>
+              Looks up a localized string similar to The region being added already has a name of &apos;{0}&apos; and cannot be added to the region manager with a different name (&apos;{1}&apos;)..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.RegionNotFound">
+            <summary>
+              Looks up a localized string similar to This RegionManager does not contain a Region with the name &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.StartupModuleDependsOnAnOnDemandModule">
+            <summary>
+              Looks up a localized string similar to Module {0} is marked for automatic initialization when the application starts, but it depends on modules that are marked as OnDemand initialization. To fix this error, mark the dependency modules for InitializationMode=WhenAvailable, or remove this validation by extending the ModuleCatalog class..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.StringCannotBeNullOrEmpty">
+            <summary>
+              Looks up a localized string similar to The provided String argument {0} must not be null or empty..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Practices.Composite.Properties.Resources.ValueMustBeOfTypeModuleInfo">
+            <summary>
+              Looks up a localized string similar to The value must be of type ModuleInfo..
+            </summary>
+        </member>
+    </members>
+</doc>

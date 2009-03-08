@@ -1,7 +1,6 @@
 ﻿using System;
-using System.AddIn.Hosting;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
@@ -10,67 +9,74 @@ using System.Windows;
 using System.Windows.Interop;
 using Multitouch.Contracts;
 using Multitouch.Service.Logic.ExternalInterfaces;
+using Multitouch.Service.Logic.MEF;
 using Multitouch.Service.Logic.Properties;
 
 namespace Multitouch.Service.Logic
 {
 	public class MultitouchInput
 	{
-		InputProviderManager providerManager;
-		ServiceHost serviceHost;
-
 		internal static MultitouchInput Instance { get; private set; }
+
+		ServiceHost serviceHost;
+        internal InputProviderManager ProviderManager { get; private set; }
 
 		public bool HasConfiguration
 		{
-			get { return providerManager.Provider.HasConfiguration; }
+			get { return ProviderManager.Provider.HasConfiguration; }
 		}
+
+		[Import(typeof(IProvider))]
+		public ExportCollection<IProvider, IAddInView> InputProviders { get; set; }
 
 		public MultitouchInput()
 		{
+			Combine();
+
 			Instance = this;
 			StartConfigurationService();
 		}
 
+		void Combine()
+		{
+			MultipleDirectoryCatalog catalog = new MultipleDirectoryCatalog("AddIns", false, "*.dll");
+			CompositionContainer container = new CompositionContainer(catalog);
+			CompositionBatch batch = new CompositionBatch();
+			batch.AddPart(this);
+			container.Compose(batch);
+		}
+
 		public void Start()
 		{
-			string provider = Settings.Default.CurrentProvider;
+			string providerId = Settings.Default.CurrentProvider;
 
-			Console.WriteLine("Input provider in settings - " + provider);
+			Console.WriteLine("Input provider in settings - " + providerId);
 
-			if (!string.IsNullOrEmpty(provider))
+			if (!string.IsNullOrEmpty(providerId))
 			{
-				AddInToken.EnableDirectConnect = true;
-
-				string[] warnings = AddInStore.Update(PipelineStoreLocation.ApplicationBase);
-				Array.ForEach(warnings, w => Trace.TraceWarning(w));
-
-				Collection<AddInToken> providerTokens = AddInStore.FindAddIns(typeof(IProvider), PipelineStoreLocation.ApplicationBase);
-
-				AddInToken currentProviderToken = (from token in providerTokens
-				                                   where token.AddInFullName.Equals(provider)
-				                                   select token).FirstOrDefault();
-				if (currentProviderToken == null)
-					throw new MultitouchException(string.Format("Input provider '{0}' could not be found", provider));
+				Export<IProvider, IAddInView> currentProvider = (from provider in InputProviders
+																 where provider.MetadataView.Id == providerId
+																 select provider).FirstOrDefault();
+				if (currentProvider == null)
+					throw new MultitouchException(string.Format("Input provider '{0}' could not be found", providerId));
 
 				string text = "Found:" + Environment.NewLine +
-				              "Name: " + currentProviderToken.Name + Environment.NewLine +
-				              "Description: " + currentProviderToken.Description + Environment.NewLine +
-				              "Publisher: " + currentProviderToken.Publisher + Environment.NewLine +
-				              "Version: " + currentProviderToken.Version;
+							  "Name: " + currentProvider.MetadataView.Id + Environment.NewLine +
+							  "Description: " + currentProvider.MetadataView.Description + Environment.NewLine +
+							  "Publisher: " + currentProvider.MetadataView.Publisher + Environment.NewLine +
+							  "Version: " + currentProvider.MetadataView.Version;
 				Console.WriteLine(text);
 
-				IProvider activatedProvider = currentProviderToken.Activate<IProvider>(AppDomain.CurrentDomain);
-				providerManager = new InputProviderManager(activatedProvider);
+				ProviderManager = new InputProviderManager(currentProvider.GetExportedObject());
 			}
 		}
 
 		public void Stop()
 		{
-			if (providerManager != null)
+			if (ProviderManager != null)
 			{
-				providerManager.Dispose();
-				providerManager = null;
+				ProviderManager.Dispose();
+				ProviderManager = null;
 			}
 		}
 
@@ -83,7 +89,7 @@ namespace Multitouch.Service.Logic
 		void StartConfigurationService()
 		{
 			Uri baseAddress = new Uri("net.pipe://localhost/Multitouch.Service/ConfigurationInterface");
-			serviceHost = new ServiceHost(typeof(ConfigurationInterfaceService), baseAddress);
+			serviceHost = new ServiceHost(new ConfigurationInterfaceService(this), baseAddress);
 			NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
 			binding.MaxBufferSize = int.MaxValue;
 			binding.MaxReceivedMessageSize = int.MaxValue;
@@ -103,8 +109,7 @@ namespace Multitouch.Service.Logic
 		{
 			Thread t = new Thread(() =>
 								  {
-
-									  UIElement configuration = providerManager.Provider.GetConfiguration();
+									  UIElement configuration = ProviderManager.Provider.GetConfiguration();
 									  Window window = configuration as Window;
 									  if (window == null)
 									  {

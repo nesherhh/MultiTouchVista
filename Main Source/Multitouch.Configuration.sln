@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Configuration.WP
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Multitouch.Configuration.Resources", "Configuration\Multitouch.Configuration.Resources\Multitouch.Configuration.Resources.vcproj", "{EA73BF50-359E-4589-9CB7-70526F698208}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libraries", "Libraries\Libraries.csproj", "{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
@@ -22,6 +24,9 @@ Global
 		SccProjectUniqueName3 = Configuration\\Multitouch.Configuration.Resources\\Multitouch.Configuration.Resources.vcproj
 		SccProjectName3 = Configuration/Multitouch.Configuration.Resources
 		SccLocalPath3 = Configuration\\Multitouch.Configuration.Resources
+		SccProjectUniqueName4 = Libraries\\Libraries.csproj
+		SccProjectName4 = Libraries
+		SccLocalPath4 = Libraries
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +67,16 @@ Global
 		{EA73BF50-359E-4589-9CB7-70526F698208}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{EA73BF50-359E-4589-9CB7-70526F698208}.Release|Win32.ActiveCfg = Release|Win32
 		{EA73BF50-359E-4589-9CB7-70526F698208}.Release|Win32.Build.0 = Release|Win32
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

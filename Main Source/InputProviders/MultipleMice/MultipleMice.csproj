@@ -37,10 +37,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ManagedWinapi, Version=0.2.0.0, Culture=neutral, PublicKeyToken=b860f1b8cf45f41c, processorArchitecture=MSIL" />
-    <Reference Include="Multitouch.Views, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ManagedWinapi, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Output\AddInViews\Multitouch.Views.dll</HintPath>
+      <HintPath>..\..\Libraries\ManagedWinapi\ManagedWinapi.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore">
@@ -50,25 +49,16 @@
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.AddIn">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    <Reference Include="System.ComponentModel.Composition, Version=2009.1.23.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\MEF\System.ComponentModel.Composition.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationProvider">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -86,7 +76,6 @@
     <Compile Include="DeviceStatus.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="InputProvider.cs" />
-    <Compile Include="MouseContactChangedEventArgs.cs" />
     <Compile Include="MouseContact.cs" />
     <Compile Include="Native\Win32.cs" />
     <Compile Include="Native\Win32Interop.cs" />
@@ -120,16 +109,17 @@
     <None Include="Resources\GlassDiscImage.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Lib\ManagedWinapi.dll" />
-    <Content Include="Lib\ManagedWinapi.pdb" />
-    <Content Include="Lib\ManagedWinapi.xml" />
-    <Content Include="Lib\ManagedWinapiNativeHelper.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="ConfigurationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Multitouch.Contracts\Multitouch.Contracts.csproj">
+      <Project>{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}</Project>
+      <Name>Multitouch.Contracts</Name>
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
