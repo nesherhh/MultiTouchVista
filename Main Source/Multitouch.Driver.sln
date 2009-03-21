@@ -5,9 +5,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Driver.Logic", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Driver.Console", "Multitouch.Driver\Multitouch.Driver.Console\Multitouch.Driver.Console.csproj", "{D8138474-1BDB-44DE-9486-9CF54D711D47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Driver.Tests", "Multitouch.Driver\Multitouch.Driver.Tests\Multitouch.Driver.Tests.csproj", "{5CD2E056-21BD-457F-A0DF-77E0B89B0684}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8965C7AA-81AA-4F3E-A70E-CC0E52DC3984}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		Multitouch.Driver.vsmdi = Multitouch.Driver.vsmdi
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
@@ -17,6 +25,12 @@ Global
 		SccProjectUniqueName2 = Multitouch.Driver\\Multitouch.Driver.Logic\\Multitouch.Driver.Logic.csproj
 		SccProjectName2 = Multitouch.Driver/Multitouch.Driver.Logic
 		SccLocalPath2 = Multitouch.Driver\\Multitouch.Driver.Logic
+		SccProjectUniqueName3 = Multitouch.Driver\\Multitouch.Driver.Tests\\Multitouch.Driver.Tests.csproj
+		SccProjectName3 = Multitouch.Driver/Multitouch.Driver.Tests
+		SccLocalPath3 = Multitouch.Driver\\Multitouch.Driver.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Multitouch.Driver.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +45,10 @@ Global
 		{D8138474-1BDB-44DE-9486-9CF54D711D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8138474-1BDB-44DE-9486-9CF54D711D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8138474-1BDB-44DE-9486-9CF54D711D47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CD2E056-21BD-457F-A0DF-77E0B89B0684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CD2E056-21BD-457F-A0DF-77E0B89B0684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CD2E056-21BD-457F-A0DF-77E0B89B0684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CD2E056-21BD-457F-A0DF-77E0B89B0684}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

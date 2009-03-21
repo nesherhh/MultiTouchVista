@@ -61,7 +61,7 @@ namespace Multitouch.Driver.Logic
 
 					if (tmpList.Count - index == 0)
 						SendReport(report);
-					else if (index % MultiTouchReport.MaxContactsProReport == 0)
+					else if (index % MultiTouchReport.MaxContactsPerReport == 0)
 					{
 						SendReport(report);
 
