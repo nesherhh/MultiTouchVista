@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="CurrentProvider" Type="System.String" Scope="User">
-      <Value Profile="(Default)">MultipleMice.InputProvider</Value>
+      <Value Profile="(Default)">MultipleMice</Value>
     </Setting>
   </Settings>
 </SettingsFile>
