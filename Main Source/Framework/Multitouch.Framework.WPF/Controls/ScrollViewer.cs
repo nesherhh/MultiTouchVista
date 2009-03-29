@@ -23,8 +23,8 @@ namespace Multitouch.Framework.WPF.Controls
 		internal Body Body { get; private set; }
 		Point startPoint;
 		Point startOffset;
-		PhysicsEngine engine;
-		PhysicsTimer timer;
+		readonly PhysicsEngine engine;
+		readonly PhysicsTimer timer;
 		FixedHingeJoint scrollJoint;
 		int? firstContactId;
 

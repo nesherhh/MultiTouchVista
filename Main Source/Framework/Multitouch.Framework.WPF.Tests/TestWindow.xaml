@@ -1,0 +1,16 @@
+﻿<Window x:Class="Multitouch.Framework.WPF.Tests.TestWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Tests="clr-namespace:Multitouch.Framework.WPF.Tests"
+    Height="300" Width="500">
+    <Canvas x:Name="canvas">
+		<Tests:TestUIElement x:Name="testElement" Width="100" Height="100" Canvas.Left="50" Canvas.Top="50"/>
+		<Tests:TestUIElement x:Name="testElement2" Width="50" Height="50" Canvas.Left="50" Canvas.Top="200"/>
+		
+		<ItemsControl Canvas.Left="300" Canvas.Top="50" Padding="20" Background="AliceBlue" x:Name="list">
+			<Button x:Name="b1">hello</Button>
+			<Button x:Name="b2">hello</Button>
+			<Button x:Name="b3">hello</Button>
+		</ItemsControl>
+    </Canvas>
+</Window>

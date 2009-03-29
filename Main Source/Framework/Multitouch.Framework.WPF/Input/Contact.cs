@@ -1,115 +1,123 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using System.Windows;
-using Multitouch.Framework.Input;
+using System.Windows.Input;
 
 namespace Multitouch.Framework.WPF.Input
 {
 	/// <summary>
 	/// Represents a contact.
 	/// </summary>
-	public class Contact : IEquatable<Contact>
+	public class Contact : InputDevice
 	{
-		readonly MultitouchDevice device;
+		internal RawMultitouchReport InputArgs { get; set; }
 
-		/// <summary>
-		/// Area
-		/// </summary>
-		public double Area { get; private set; }
-        /// <summary>
-		/// Bounding box
-		/// </summary>
-		public Rect Bounds { get; private set; }
-		/// <summary>
-		/// Contact Id
-		/// </summary>
-		public int Id { get; private set; }
-		/// <summary>
-		/// Major axis for an ellipse
-		/// </summary>
-		public double MajorAxis { get; private set; }
-		/// <summary>
-		/// Minor axis for an ellipse
-		/// </summary>
-		public double MinorAxis { get; private set; }
-		/// <summary>
-		/// Orientation
-		/// </summary>
-		public double Orientation { get; private set; }
-		/// <summary>
-		/// Center coordinates
-		/// </summary>
-		public Point Position { get; private set; }
-		/// <summary>
-		/// Contacts state
-		/// </summary>
-		public ContactState State { get; private set; }
-		/// <summary>
-		/// Timestamp of frame
-		/// </summary>
-		public long Timestamp { get; private set; }
-		/// <summary>
-		/// Element under contact
-		/// </summary>
-		public UIElement Element { get; private set; }
-
-		internal Contact(MultitouchDevice multitouchDevice, Framework.Input.Contact contact)
+		internal Contact(RawMultitouchReport report)
 		{
-			device = multitouchDevice;
-			Area = contact.Area;
-			Bounds = contact.Bounds;
-			Id = contact.Id;
-			MajorAxis = contact.MajorAxis;
-			MinorAxis = contact.MinorAxis;
-			Orientation = contact.Orientation;
-			Position = contact.Position;
-			State = contact.State;
-			Timestamp = contact.Timestamp;
+			InputArgs = report;
 		}
 
 		/// <summary>
-		/// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+		/// Id of this contact.
 		/// </summary>
-		/// <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:System.Object"/>.</param>
+		public int Id
+		{
+			get { return InputArgs.Context.Contact.Id; }
+		}
+
+		/// <summary>
+		/// When overridden in a derived class, gets the element that receives input from this device.
+		/// </summary>
+		/// <value></value>
 		/// <returns>
-		/// true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>; otherwise, false.
+		/// The element that receives input.
 		/// </returns>
-		/// <exception cref="T:System.NullReferenceException">The <paramref name="obj"/> parameter is null.</exception>
-		public override bool Equals(object obj)
+		public override IInputElement Target
 		{
-			Contact other = obj as Contact;
-			return Equals(other);
+			get { return InputArgs.Context.OverElement; }
 		}
 
 		/// <summary>
-		/// Indicates whether the current object is equal to another object of the same type.
+		/// Gets the directly over.
 		/// </summary>
-		/// <param name="other">An object to compare with this object.</param>
-		/// <returns>
-		/// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
-		/// </returns>
-		public bool Equals(Contact other)
+		/// <value>The directly over.</value>
+		public IInputElement DirectlyOver
 		{
-			if (other == null)
-				return false;
-			return Id.Equals(other.Id);
+			get { return InputArgs.Context.OverElement; }
 		}
 
 		/// <summary>
-		/// Serves as a hash function for a particular type.
+		/// Gets the object that has captured this contact.
 		/// </summary>
-		/// <returns>
-		/// A hash code for the current <see cref="T:System.Object"/>.
-		/// </returns>
-		public override int GetHashCode()
+		/// <value>The captured.</value>
+		public IInputElement Captured
 		{
-			return Id.GetHashCode();
+			get { return InputArgs.Captured as IInputElement; }
 		}
 
-		internal void SetElement(UIElement element)
+		/// <summary>
+		/// When overridden in a derived class, gets the <see cref="T:System.Windows.PresentationSource"/> that is reporting input for this device.
+		/// </summary>
+		/// <value></value>
+		/// <returns>
+		/// The source that is reporting input for this device.
+		/// </returns>
+		public override PresentationSource ActiveSource
 		{
-			Element = element;
+			get { return PresentationSource.FromVisual(InputArgs.Context.Root); }
+		}
+
+		/// <summary>
+		/// Get position relative to <see cref="UIElement"/>
+		/// </summary>
+		/// <param name="relativeTo">Position relative to this object. If <c>null</c>, then result will be relative to the root visual.</param>
+		public Point GetPosition(UIElement relativeTo)
+		{
+			if (relativeTo != null)
+				return InputArgs.Context.Root.TranslatePoint(InputArgs.Context.Contact.Position, relativeTo);
+			return InputArgs.Context.Contact.Position;
+		}
+
+		/// <summary>
+		/// Gets the history of points that was generated by this contact
+		/// </summary>
+		/// <param name="relativeTo">Positions relative to this object. If <c>null</c>, then result will be relative to the root visual.</param>
+		/// <returns></returns>
+		public IEnumerable<Point> GetPoints(UIElement relativeTo)
+		{
+			if (relativeTo != null)
+				return InputArgs.Context.History.Select(c => InputArgs.Context.Root.TranslatePoint(c.Position, relativeTo));
+			return InputArgs.Context.History.Select(c => c.Position);
+		}
+
+		/// <summary>
+		/// Captures the specified element.
+		/// </summary>
+		/// <param name="element">The element.</param>
+		/// <param name="captureMode">The capture mode.</param>
+		/// <returns></returns>
+		public bool Capture(IInputElement element, CaptureMode captureMode)
+		{
+			return MultitouchLogic.Current.ContactsManager.Capture(this, element, captureMode);
+		}
+
+		/// <summary>
+		/// Captures the specified element.
+		/// </summary>
+		/// <param name="element">The element.</param>
+		/// <returns></returns>
+		public bool Capture(IInputElement element)
+		{
+			return Capture(element, CaptureMode.Element);
+		}
+
+		/// <summary>
+		/// Releases the capture.
+		/// </summary>
+		public void ReleaseCapture()
+		{
+			MultitouchLogic.Current.ContactsManager.Capture(this, null, CaptureMode.None);
 		}
 
 		/// <summary>
@@ -120,28 +128,39 @@ namespace Multitouch.Framework.WPF.Input
 		/// </returns>
 		public override string ToString()
 		{
-			return string.Format("Id: {0}, Position: {1}, State: {2}", Id, Position, State);
+			return InputArgs.Context.Contact.ToString();
 		}
 
 		/// <summary>
-		/// Returns all coordinates history of this contact
+		/// Gets the area of contact
 		/// </summary>
-		public IList<Point> ContactHistory
+		public double Area
 		{
-			get { return device.ContactHistory; }
+			get { return InputArgs.Context.Contact.Area; }
 		}
 
 		/// <summary>
-		/// Returns previous coordinates of contact
+		/// Gets the bounding rect of contact
 		/// </summary>
-		public Point PreviousPosition
+		public Rect BoundingRect
 		{
-			get
-			{
-				if (device.ContactHistory.Count > 2)
-					return device.ContactHistory[device.ContactHistory.Count - 2];
-				return device.ContactHistory.Last();
-			}
+			get { return InputArgs.Context.Contact.Bounds; }
+		}
+
+		/// <summary>
+		/// Gets the major axis for an ellipse
+		/// </summary>
+		public double MajorAxis
+		{
+			get { return InputArgs.Context.Contact.MajorAxis; }
+		}
+
+		/// <summary>
+		/// Gets the minor axis for an ellipse
+		/// </summary>
+		public double MinorAxis
+		{
+			get { return InputArgs.Context.Contact.MinorAxis; }
 		}
 	}
 }

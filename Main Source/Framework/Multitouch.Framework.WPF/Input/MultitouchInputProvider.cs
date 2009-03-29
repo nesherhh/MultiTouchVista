@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -12,12 +11,12 @@ namespace Multitouch.Framework.WPF.Input
 	class MultitouchInputProvider : DispatcherObject, IDisposable
 	{
 		readonly PresentationSource source;
-		InputManager inputManager;
+		readonly InputManager inputManager;
 		MultitouchLogic multitouchLogic;
-		object lockContactsQueue = new object();
-		Queue<RawMultitouchReport> contactsQueue;
-		DispatcherOperationCallback inputManagerProcessInput;
-		ContactHandler contactHandler;
+		readonly object lockContactsQueue = new object();
+		readonly Queue<RawMultitouchReport> contactsQueue;
+		readonly DispatcherOperationCallback inputManagerProcessInput;
+		readonly ContactHandler contactHandler;
 
 		public MultitouchInputProvider(PresentationSource source)
 		{
@@ -48,18 +47,13 @@ namespace Multitouch.Framework.WPF.Input
 
 		void HandleContact(object sender, Framework.Input.ContactEventArgs e)
 		{
-			MultitouchDevice device = multitouchLogic.DeviceManager.GetDevice(e.Contact.Id, e.Contact.State);
-			if (device != null)
+			ContactContext context = new ContactContext(e.Contact, source.RootVisual as UIElement);
+			RawMultitouchReport rawReport = new RawMultitouchReport(context);
+			lock (lockContactsQueue)
 			{
-				RawMultitouchReport rawReport = new RawMultitouchReport(device, source, e.Contact);
-				lock (lockContactsQueue)
-				{
-					contactsQueue.Enqueue(rawReport);
-				}
-				Dispatcher.BeginInvoke(DispatcherPriority.Input, inputManagerProcessInput, null);
+				contactsQueue.Enqueue(rawReport);
 			}
-			else
-				Trace.TraceError(string.Format("Can't find MultitouchDevice for contact id: {0}, state: {1}", e.Contact.Id, e.Contact.State));
+			Dispatcher.BeginInvoke(DispatcherPriority.Input, inputManagerProcessInput, null);
 		}
 
 		object InputManagerProcessInput(object arg)

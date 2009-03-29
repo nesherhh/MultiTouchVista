@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Controls;
 using Multitouch.Framework.WPF.Input;
 
@@ -16,39 +17,53 @@ namespace Multitouch.Framework.WPF.Controls
 		{
 			AddHandler(MultitouchScreen.NewContactEvent, (NewContactEventHandler)OnNewContact);
 			AddHandler(MultitouchScreen.ContactRemovedEvent, (ContactEventHandler)OnContactRemoved);
-			AddHandler(MultitouchScreen.ContactLeaveEvent, (ContactEventHandler)OnContactLeave);
-			AddHandler(MultitouchScreen.ContactEnterEvent, (ContactEventHandler)OnContactEnter);
-		}
-
-		void OnContactEnter(object sender, ContactEventArgs e)
-		{
-			if (e.GetContacts(this, MatchCriteria.LogicalParent).Count == 1 && !IsPressed && e.Captured == this)
-				IsPressed = true;
-		}
-
-		void OnContactLeave(object sender, ContactEventArgs e)
-		{
-			if (e.GetContacts(this, MatchCriteria.LogicalParent).Count == 1 && IsPressed)
-				IsPressed = false;
 		}
 
 		void OnContactRemoved(object sender, ContactEventArgs e)
 		{
-			if (e.GetContacts(this, MatchCriteria.LogicalParent).Count == 0 && IsPressed)
+			if (ClickMode != ClickMode.Hover)
 			{
-				IsPressed = false;
-				if (ClickMode == ClickMode.Release)
-					OnClick();
+				e.Handled = true;
+				if (e.Contact.Captured == this)
+				{
+					bool shouldMakeClick = IsPressed && ClickMode == ClickMode.Release;
+					e.Contact.ReleaseCapture();
+					if (MultitouchScreen.GetContactsCaptured(this).Count() == 0)
+					{
+						if(shouldMakeClick)
+							OnClick();
+						IsPressed = false;
+					}
+				}
 			}
 		}
 
 		void OnNewContact(object sender, NewContactEventArgs e)
 		{
-			if (e.GetContacts(this, MatchCriteria.LogicalParent).Count == 1)
+			if (ClickMode != ClickMode.Hover)
 			{
-				IsPressed = true;
-				if (ClickMode == ClickMode.Press)
-					OnClick();
+				e.Handled = true;
+				if (e.Contact.Capture(this))
+				{
+					IsPressed = true;
+					if (ClickMode == ClickMode.Press && MultitouchScreen.GetContactsCaptured(this).Count() == 1)
+					{
+						bool failed = true;
+						try
+						{
+							OnClick();
+							failed = false;
+						}
+						finally
+						{
+							if (failed)
+							{
+								IsPressed = false;
+								e.Contact.ReleaseCapture();
+							}
+						}
+					}
+				}
 			}
 		}
 	}
