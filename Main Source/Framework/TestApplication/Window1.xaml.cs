@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -29,7 +30,7 @@ namespace TestApplication
 			typeof(ObservableCollection<string>), typeof(Window1), new PropertyMetadata(null));
 		public static readonly DependencyProperty PicturesProperty = PicturesPropertyKey.DependencyProperty;
 
-		public static ICommand TestCommand = new RoutedUICommand("Command", "TestCommand", typeof(Window1));
+		public static readonly ICommand TestCommand = new RoutedUICommand("Command", "TestCommand", typeof(Window1));
 
 		public static readonly DependencyProperty CameraImageProperty =
 			DependencyProperty.Register("CameraImage", typeof(ImageSource), typeof(Window1), new UIPropertyMetadata(null));
@@ -51,6 +52,9 @@ namespace TestApplication
 			InitializeComponent();
 
 			Loaded += Window1_Loaded;
+
+			ICollectionView view = CollectionViewSource.GetDefaultView(Contacts1);
+			view.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Ascending));
 		}
 
 		void Window1_Loaded(object sender, RoutedEventArgs e)
@@ -62,7 +66,7 @@ namespace TestApplication
 			contactHandler.ReceiveEmptyFrames = true;
 		}
 
-		protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+		protected override void OnClosing(CancelEventArgs e)
 		{
 			contactHandler.Dispose();
 			base.OnClosing(e);
@@ -98,34 +102,10 @@ namespace TestApplication
 			base.OnInitialized(e);
 		}
 
-		private void list1_NewContact(object sender, NewContactEventArgs e)
-		{
-			IDictionary<int, Contact> contacts = e.GetContacts(list1, MatchCriteria.LogicalParent);
-			foreach (KeyValuePair<int, Contact> pair in contacts)
-				Contacts1.Add(pair.Value);
-		}
-
 		private void list1_ContactMoved(object sender, ContactEventArgs e)
 		{
-			Contacts1.Clear();
-			IDictionary<int, Contact> contacts = e.GetContacts(list1, MatchCriteria.LogicalParent);
-			foreach (KeyValuePair<int, Contact> pair in contacts)
-				Contacts1.Add(pair.Value);
-		}
-
-		private void list1_ContactRemoved(object sender, ContactEventArgs e)
-		{
-			Contact contact = e.Contact;
-			if (IsParent(contact.Element, list1))
-				Contacts1.Remove(contact);
-		}
-
-		bool IsParent(UIElement element, UIElement parent)
-		{
-			UIElement current = element;
-			while (current != null && current != parent)
-				current = VisualTreeHelper.GetParent(current) as UIElement;
-			return current != null;
+			Contacts1.Remove(e.Contact);
+			Contacts1.Add(e.Contact);
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
@@ -142,6 +122,16 @@ namespace TestApplication
 		private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			MessageBox.Show("command executed");
+		}
+
+		private void list1_ContactEnter(object sender, ContactEventArgs e)
+		{
+			Contacts1.Add(e.Contact);
+		}
+
+		private void list1_ContactLeave(object sender, ContactEventArgs e)
+		{
+			Contacts1.Remove(e.Contact);
 		}
 	}
 }

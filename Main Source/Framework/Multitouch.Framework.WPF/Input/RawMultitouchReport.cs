@@ -6,41 +6,37 @@ namespace Multitouch.Framework.WPF.Input
 {
 	class RawMultitouchReport : InputEventArgs
 	{
-		public PresentationSource InputSource { get; private set; }
-		public Contact Contact { get; private set; }
+		public ContactContext Context { get; set; }
+        public CaptureMode CaptureState { get; set; }
+		public DependencyObject Captured { get; set; }
+        public bool CleanUp { get; set; }
 
-		public MultitouchDevice MultitouchDevice
+		public RawMultitouchReport(ContactContext contactContext)
+			: base(null, (int)contactContext.Contact.Timestamp)
 		{
-			get { return (MultitouchDevice)Device; }
-		}
-
-		public RawMultitouchReport(MultitouchDevice device, PresentationSource source, Framework.Input.Contact contact)
-			: base(device, (int)contact.Timestamp)
-		{
-			if (device == null)
-				throw new ArgumentNullException("device");
-
-			InputSource = source;
 			RoutedEvent = MultitouchLogic.PreviewRawInputEvent;
-			Contact = new Contact(device, contact);
-		}
-
-		public RawMultitouchReport(RawMultitouchReport copy)
-			: base(copy.Device, copy.Timestamp - 1)
-		{
-			InputSource = copy.InputSource;
-			Contact = copy.Contact;
-		}
-
-		public Point GetPosition(IInputElement relativeTo)
-		{
-			return MultitouchDevice.GetPosition(relativeTo);
+			Context = contactContext;
 		}
 
 		protected override void InvokeEventHandler(Delegate genericHandler, object genericTarget)
 		{
 			RawMultitouchReportHandler handler = (RawMultitouchReportHandler)genericHandler;
 			handler(genericTarget, this);
+		}
+
+		public RawMultitouchReport Clone()
+		{
+			return new RawMultitouchReport(Context.Clone());
+		}
+
+		public void UpdateFromPrevious(RawMultitouchReport previousReport)
+		{
+			Context.OverElement = previousReport.Context.OverElement;
+			Context.ElementsList = previousReport.Context.ElementsList;
+			CaptureState = previousReport.CaptureState;
+			Captured = previousReport.Captured;
+			Context.History = previousReport.Context.History;
+			Context.History.Insert(0, previousReport.Context.Contact);
 		}
 	}
 }

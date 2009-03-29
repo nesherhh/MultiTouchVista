@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -61,3 +60,5 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("http://schemas.multitouch.com/Multitouch/2008/04", "Multitouch.Framework.WPF.Controls.Primitives")]
 [assembly: XmlnsDefinition("http://schemas.multitouch.com/Multitouch/2008/04", "Multitouch.Framework.WPF.Input")]
 [assembly: XmlnsPrefix("http://schemas.multitouch.com/Multitouch/2008/04", "mt")]
+
+[assembly: InternalsVisibleTo("Multitouch.Framework.WPF.Tests")]

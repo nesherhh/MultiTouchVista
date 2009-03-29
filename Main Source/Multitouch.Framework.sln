@@ -11,9 +11,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApplication", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libraries", "Libraries\Libraries.csproj", "{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Framework.WPF.Tests", "Framework\Multitouch.Framework.WPF.Tests\Multitouch.Framework.WPF.Tests.csproj", "{ABCADFE4-A9AB-444F-9FFF-9860E25E29A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C65D83C8-A673-4955-9529-E7E25AF25297}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		Multitouch.Framework.vsmdi = Multitouch.Framework.vsmdi
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
@@ -32,6 +40,12 @@ Global
 		SccProjectUniqueName5 = Libraries\\Libraries.csproj
 		SccProjectName5 = Libraries
 		SccLocalPath5 = Libraries
+		SccProjectUniqueName6 = Framework\\Multitouch.Framework.WPF.Tests\\Multitouch.Framework.WPF.Tests.csproj
+		SccProjectName6 = Framework/Multitouch.Framework.WPF.Tests
+		SccLocalPath6 = Framework\\Multitouch.Framework.WPF.Tests
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Multitouch.Framework.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +72,10 @@ Global
 		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11B2B8CF-48A7-4A68-A1F4-40FA01EBDA55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABCADFE4-A9AB-444F-9FFF-9860E25E29A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABCADFE4-A9AB-444F-9FFF-9860E25E29A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABCADFE4-A9AB-444F-9FFF-9860E25E29A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABCADFE4-A9AB-444F-9FFF-9860E25E29A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

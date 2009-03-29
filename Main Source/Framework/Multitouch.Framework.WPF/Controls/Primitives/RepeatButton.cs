@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Controls;
 using Multitouch.Framework.WPF.Input;
 using Phydeaux.Utilities;
@@ -10,8 +11,8 @@ namespace Multitouch.Framework.WPF.Controls.Primitives
 	/// </summary>
 	public class RepeatButton : System.Windows.Controls.Primitives.RepeatButton
 	{
-		Proc<System.Windows.Controls.Primitives.RepeatButton> startTimerMethod;
-		Proc<System.Windows.Controls.Primitives.RepeatButton> stopTimerMethod;
+		readonly Proc<System.Windows.Controls.Primitives.RepeatButton> startTimerMethod;
+		readonly Proc<System.Windows.Controls.Primitives.RepeatButton> stopTimerMethod;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="RepeatButton"/> class.
@@ -23,39 +24,51 @@ namespace Multitouch.Framework.WPF.Controls.Primitives
 
 			AddHandler(MultitouchScreen.NewContactEvent, (NewContactEventHandler)OnNewContact);
 			AddHandler(MultitouchScreen.ContactRemovedEvent, (ContactEventHandler)OnContactRemoved);
-			AddHandler(MultitouchScreen.ContactLeaveEvent, (ContactEventHandler)OnContactLeave);
-			AddHandler(MultitouchScreen.ContactEnterEvent, (ContactEventHandler)OnContactEnter);
-		}
-
-		void OnContactEnter(object sender, ContactEventArgs e)
-		{
-			if (e.GetContacts(this, MatchCriteria.LogicalParent).Count == 1 && !IsPressed && e.Captured == this)
-				IsPressed = true;
-		}
-
-		void OnContactLeave(object sender, ContactEventArgs e)
-		{
-			if (e.GetContacts(this, MatchCriteria.LogicalParent).Count == 1 && IsPressed)
-				IsPressed = false;
 		}
 
 		void OnContactRemoved(object sender, ContactEventArgs e)
 		{
-			if (e.GetContacts(this, MatchCriteria.LogicalParent).Count == 0 && IsPressed)
+			if (ClickMode != ClickMode.Hover)
 			{
-				IsPressed = false;
-				if (ClickMode != ClickMode.Hover)
-					StopTimer();
+				e.Handled = true;
+				if (e.Contact.Captured == this)
+				{
+					e.Contact.ReleaseCapture();
+					if (MultitouchScreen.GetContactsCaptured(this).Count() == 0)
+					{
+						StopTimer();
+						IsPressed = false;
+					}
+				}
 			}
 		}
 
 		void OnNewContact(object sender, NewContactEventArgs e)
 		{
-			if (e.GetContacts(this, MatchCriteria.LogicalParent).Count == 1)
+			if (ClickMode != ClickMode.Hover)
 			{
-				IsPressed = true;
-				if (ClickMode != ClickMode.Hover)
-					StartTimer();
+				e.Handled = true;
+				if (e.Contact.Capture(this))
+				{
+					IsPressed = true;
+					if (ClickMode == ClickMode.Press && MultitouchScreen.GetContactsCaptured(this).Count() == 1)
+					{
+						bool failed = true;
+						try
+						{
+							StartTimer();
+							failed = false;
+						}
+						finally
+						{
+							if (failed)
+							{
+								IsPressed = false;
+								e.Contact.ReleaseCapture();
+							}
+						}
+					}
+				}
 			}
 		}
 

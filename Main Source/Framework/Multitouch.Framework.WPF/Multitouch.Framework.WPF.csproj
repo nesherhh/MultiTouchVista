@@ -87,7 +87,7 @@
   <ItemGroup>
     <Compile Include="Controls\ContentDecorator.cs" />
     <Compile Include="Controls\Button.cs" />
-    <Compile Include="Controls\DraggableScrollViewer.cs" />
+    <None Include="Controls\DraggableScrollViewer.cs" />
     <Compile Include="Controls\Panels\PhysicsExtensions.cs" />
     <Compile Include="Controls\Panels\RandomCanvas.cs" />
     <Compile Include="Controls\Panels\TouchablePanel.cs" />
@@ -100,20 +100,15 @@
     <None Include="Controls\TouchCanvas.cs" />
     <Compile Include="Input\Contact.cs" />
     <Compile Include="Input\ContactsManager.cs" />
-    <Compile Include="Input\Extensions.cs" />
-    <Compile Include="Input\GestureEventArgs.cs" />
-    <Compile Include="Input\GestureManager.cs" />
-    <Compile Include="Input\InputElement.cs" />
-    <Compile Include="Input\MultitouchDeviceManager.cs" />
+    <Compile Include="Input\ContactContext.cs" />
     <Compile Include="Input\MultitouchInputProvider.cs" />
     <Compile Include="Input\MultitouchLogic.cs" />
     <Compile Include="Input\ContactEventArgs.cs" />
     <Compile Include="Input\MultitouchScreen.cs" />
-    <Compile Include="Input\MultitouchDevice.cs" />
     <Compile Include="Input\NewContactEventArgs.cs" />
     <Compile Include="Input\PointUtil.cs" />
-    <Compile Include="Input\RawMultitouchGestureReport.cs" />
     <Compile Include="Input\RawMultitouchReport.cs" />
+    <Compile Include="Input\UIElementsList.cs" />
     <Compile Include="Native\NativeMethods.cs" />
     <Compile Include="Physics\BoundsConstrainLogic.cs" />
     <Compile Include="Physics\FixedSlidingHingeJoint.cs" />

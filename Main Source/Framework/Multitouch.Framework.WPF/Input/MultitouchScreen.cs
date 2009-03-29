@@ -1,26 +1,10 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Ink;
 using Phydeaux.Utilities;
 
 namespace Multitouch.Framework.WPF.Input
 {
-	/// <summary>
-	/// Represents the method that will handle contact event.
-	/// </summary>
-	public delegate void ContactEventHandler(object sender, ContactEventArgs e);
-	/// <summary>
-	/// Represents the method that will handle a new contact event.
-	/// </summary>
-	public delegate void NewContactEventHandler(object sender, NewContactEventArgs e);
-	/// <summary>
-	/// Represents the method that will handle gesture event.
-	/// </summary>
-	public delegate void GestureEventHandler(object sender, GestureEventArgs e);
-
-	delegate void RawMultitouchReportHandler(object sender, RawMultitouchReport e);
-
 	/// <summary>
 	/// Represents a Multitouch Screen.
 	/// </summary>
@@ -61,33 +45,33 @@ namespace Multitouch.Framework.WPF.Input
 		/// <summary>
 		/// Identifies <see cref="ContactEnterEvent"/> attached event.
 		/// </summary>
-		public static readonly RoutedEvent ContactEnterEvent = EventManager.RegisterRoutedEvent("ContactEnter", RoutingStrategy.Bubble,
+		public static readonly RoutedEvent ContactEnterEvent = EventManager.RegisterRoutedEvent("ContactEnter", RoutingStrategy.Direct,
 			typeof(ContactEventHandler), typeof(MultitouchScreen));
 		/// <summary>
 		/// Identifies <see cref="ContactLeaveEvent"/> attached event.
 		/// </summary>
-		public static readonly RoutedEvent ContactLeaveEvent = EventManager.RegisterRoutedEvent("ContactLeave", RoutingStrategy.Bubble,
+		public static readonly RoutedEvent ContactLeaveEvent = EventManager.RegisterRoutedEvent("ContactLeave", RoutingStrategy.Direct,
 			typeof(ContactEventHandler), typeof(MultitouchScreen));
 
 		/// <summary>
-		/// Identifies <see cref="PreviewGestureEvent"/> attached event.
+		/// Idenitfies <see cref="GotContactCaptureEvent"/> attached event.
 		/// </summary>
-		public static readonly RoutedEvent PreviewGestureEvent = EventManager.RegisterRoutedEvent("PreviewGesture", RoutingStrategy.Tunnel, typeof(GestureEventHandler),
-			typeof(MultitouchScreen));
+		public static readonly RoutedEvent GotContactCaptureEvent = EventManager.RegisterRoutedEvent("GotContactCapture", RoutingStrategy.Bubble,
+			typeof(ContactEventHandler), typeof(MultitouchScreen));
 		/// <summary>
-		/// Identifies <see cref="GestureEvent"/> attached event.
+		/// Identifies <see cref="LostContactCaptureEvent"/> attached event.
 		/// </summary>
-		public static readonly RoutedEvent GestureEvent = EventManager.RegisterRoutedEvent("Gesture", RoutingStrategy.Bubble, typeof(GestureEventHandler),
-			typeof(MultitouchScreen));
+		public static readonly RoutedEvent LostContactCaptureEvent = EventManager.RegisterRoutedEvent("LostContactCapture", RoutingStrategy.Bubble,
+			typeof(ContactEventHandler), typeof(MultitouchScreen));
 
-		static StaticProc<UIElement, DependencyObject, RoutedEvent, Delegate> addHandlerMethod;
-		static StaticProc<UIElement, DependencyObject, RoutedEvent, Delegate> removeHandlerMethod;
+		static readonly StaticProc<UIElement, DependencyObject, RoutedEvent, Delegate> addHandlerMethod;
+		static readonly StaticProc<UIElement, DependencyObject, RoutedEvent, Delegate> removeHandlerMethod;
 
 		static MultitouchScreen()
 		{
 			addHandlerMethod = Dynamic<UIElement>.Static.Procedure.Explicit<DependencyObject, RoutedEvent, Delegate>.CreateDelegate("AddHandler");
 			removeHandlerMethod = Dynamic<UIElement>.Static.Procedure.Explicit<DependencyObject, RoutedEvent, Delegate>.CreateDelegate("RemoveHandler");
-			//AllowMouseEvents = true;
+			//AllowNonContactEvents = true;
 		}
 
 		/// <summary>
@@ -191,67 +175,133 @@ namespace Multitouch.Framework.WPF.Input
 		}
 
 		/// <summary>
-		/// Adds a handler for the <see cref="PreviewGestureEvent"/> attached event.
+		/// Adds a handler for the <see cref="GotContactCaptureEvent"/> attached event.
 		/// </summary>
 		/// <param name="element"><see cref="UIElement"/> or <see cref="ContentElement"/> that listens to this event.</param>
 		/// <param name="handler">The handler.</param>
-		public static void AddPreviewGestureHandler(DependencyObject element, GestureEventHandler handler)
+		public static void AddGotContactCaptureHandler(DependencyObject element, ContactEventHandler handler)
 		{
-			addHandlerMethod.Invoke(element, PreviewGestureEvent, handler);
+			addHandlerMethod.Invoke(element, GotContactCaptureEvent, handler);
 		}
 
 		/// <summary>
-		/// Removes a handler for the <see cref="PreviewGestureEvent"/> attached event.
+		/// Removes a handler for the <see cref="GotContactCaptureEvent"/> attached event.
 		/// </summary>
 		/// <param name="element"><see cref="UIElement"/> or <see cref="ContentElement"/> that listens to this event.</param>
 		/// <param name="handler">The handler.</param>
-		public static void RemovePreviewGestureHandler(DependencyObject element, GestureEventHandler handler)
+		public static void RemoveGotContactCaptureHandler(DependencyObject element, ContactEventHandler handler)
 		{
-			removeHandlerMethod.Invoke(element, PreviewGestureEvent, handler);
+			removeHandlerMethod.Invoke(element, GotContactCaptureEvent, handler);
 		}
 
 		/// <summary>
-		/// Adds a handler <see cref="GestureEvent"/> attached event.
+		/// Adds a handler for the <see cref="LostContactCaptureEvent"/> attached event.
 		/// </summary>
 		/// <param name="element"><see cref="UIElement"/> or <see cref="ContentElement"/> that listens to this event.</param>
 		/// <param name="handler">The handler.</param>
-		public static void AddGestureHandler(DependencyObject element, GestureEventHandler handler)
+		public static void AddLostContactCaptureHandler(DependencyObject element, ContactEventHandler handler)
 		{
-			addHandlerMethod.Invoke(element, GestureEvent, handler);
+			addHandlerMethod.Invoke(element, LostContactCaptureEvent, handler);
 		}
 
 		/// <summary>
-		/// Removes a handler for the <see cref="GestureEvent"/> attached event.
+		/// Removes a handler for the <see cref="LostContactCaptureEvent"/> attached event.
 		/// </summary>
 		/// <param name="element"><see cref="UIElement"/> or <see cref="ContentElement"/> that listens to this event.</param>
 		/// <param name="handler">The handler.</param>
-		public static void RemoveGestureHandler(DependencyObject element, GestureEventHandler handler)
+		public static void RemoveLostContactCaptureHandler(DependencyObject element, ContactEventHandler handler)
 		{
-			removeHandlerMethod.Invoke(element, GestureEvent, handler);
+			removeHandlerMethod.Invoke(element, LostContactCaptureEvent, handler);
 		}
 
 		/// <summary>
-		/// Gets or sets a value indicating whether gestures are enabled.
+		/// Adds a handler for the <see cref="PreviewNewContactEvent"/> attached event.
 		/// </summary>
-		/// <value>
-		/// 	<c>true</c> if gestures are enabled; otherwise, <c>false</c>.
-		/// </value>
-		public static bool IsGesturesEnabled { get; set; }
+		/// <param name="element"><see cref="UIElement"/> or <see cref="ContentElement"/> that listens to this event.</param>
+		/// <param name="handler">The handler.</param>
+		public static void AddPreviewNewContactHandler(DependencyObject element, NewContactEventHandler handler)
+		{
+			addHandlerMethod.Invoke(element, PreviewNewContactEvent, handler);
+		}
 
 		/// <summary>
-		/// Enables the specified gestures.
+		/// Removes a handler for the <see cref="PreviewNewContactEvent"/> attached event.
 		/// </summary>
-		/// <param name="gesture">The gesture.</param>
-		public static void EnableGestures(params ApplicationGesture[] gesture)
+		/// <param name="element"><see cref="UIElement"/> or <see cref="ContentElement"/> that listens to this event.</param>
+		/// <param name="handler">The handler.</param>
+		public static void RemovePreviewNewContactHandler(DependencyObject element, NewContactEventHandler handler)
 		{
-			IsGesturesEnabled = !gesture.Contains(ApplicationGesture.NoGesture);
-			MultitouchLogic.Current.GestureManager.EnableGestures(gesture);
+			removeHandlerMethod.Invoke(element, PreviewNewContactEvent, handler);
+		}
+
+		/// <summary>
+		/// Adds a handler for the <see cref="PreviewContactRemovedEvent"/> attached event.
+		/// </summary>
+		/// <param name="element"><see cref="UIElement"/> or <see cref="ContentElement"/> that listens to this event.</param>
+		/// <param name="handler">The handler.</param>
+		public static void AddPreviewContactRemovedHandler(DependencyObject element, ContactEventHandler handler)
+		{
+			addHandlerMethod.Invoke(element, PreviewContactRemovedEvent, handler);
+		}
+
+		/// <summary>
+		/// Removes a handler for the <see cref="PreviewContactRemovedEvent"/> attached event.
+		/// </summary>
+		/// <param name="element"><see cref="UIElement"/> or <see cref="ContentElement"/> that listens to this event.</param>
+		/// <param name="handler">The handler.</param>
+		public static void RemovePreviewContactRemovedHandler(DependencyObject element, ContactEventHandler handler)
+		{
+			removeHandlerMethod.Invoke(element, PreviewContactRemovedEvent, handler);
+		}
+
+		/// <summary>
+		/// Adds a handler for the <see cref="PreviewContactMovedEvent"/> attached event.
+		/// </summary>
+		/// <param name="element"><see cref="UIElement"/> or <see cref="ContentElement"/> that listens to this event.</param>
+		/// <param name="handler">The handler.</param>
+		public static void AddPreviewContactMovedHandler(DependencyObject element, ContactEventHandler handler)
+		{
+			addHandlerMethod.Invoke(element, PreviewContactMovedEvent, handler);
+		}
+
+		/// <summary>
+		/// Removes a handler for the <see cref="PreviewContactMovedEvent"/> attached event.
+		/// </summary>
+		/// <param name="element"><see cref="UIElement"/> or <see cref="ContentElement"/> that listens to this event.</param>
+		/// <param name="handler">The handler.</param>
+		public static void RemovePreviewContactMovedHandler(DependencyObject element, ContactEventHandler handler)
+		{
+			removeHandlerMethod.Invoke(element, PreviewContactMovedEvent, handler);
 		}
 
 		/// <summary>
 		/// Gets or sets a value indicating whether mouse events are allowed.
 		/// </summary>
 		/// <value><c>false</c> - all mouse events will be canceled in MultitouchLogic at PreProcessInput stage.</value>
-		public static bool AllowMouseEvents { get; set; }
+		public static bool AllowNonContactEvents { get; set; }
+
+		/// <summary>
+		/// Gets the contacts captured in specified element
+		/// </summary>
+		/// <param name="element">The element.</param>
+		public static IEnumerable<Contact> GetContactsCaptured(IInputElement element)
+		{
+			return MultitouchLogic.Current.ContactsManager.GetContactsCaptured(element);
+		}
 	}
+
+	/// <summary>
+	/// Represents the method that will handle contact event.
+	/// </summary>
+	public delegate void ContactEventHandler(object sender, ContactEventArgs e);
+	/// <summary>
+	/// Represents the method that will handle a new contact event.
+	/// </summary>
+	public delegate void NewContactEventHandler(object sender, NewContactEventArgs e);
+	///// <summary>
+	///// Represents the method that will handle gesture event.
+	///// </summary>
+	//public delegate void GestureEventHandler(object sender, GestureEventArgs e);
+
+	delegate void RawMultitouchReportHandler(object sender, RawMultitouchReport e);
 }

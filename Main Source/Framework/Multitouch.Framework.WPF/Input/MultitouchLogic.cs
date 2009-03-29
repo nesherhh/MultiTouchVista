@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Reflection;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Input.StylusPlugIns;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Multitouch.Framework.Input;
@@ -13,79 +13,38 @@ namespace Multitouch.Framework.WPF.Input
 	class MultitouchLogic : DispatcherObject
 	{
 		static MultitouchLogic current;
-		static object lockCurrent = new object();
+		static readonly object lockCurrent = new object();
 
 		internal static readonly RoutedEvent PreviewRawInputEvent = EventManager.RegisterRoutedEvent("PreviewRawInput", RoutingStrategy.Tunnel,
 			typeof(RawMultitouchReportHandler), typeof(MultitouchLogic));
-		internal static readonly RoutedEvent RawInputEvent = EventManager.RegisterRoutedEvent("RawInput", RoutingStrategy.Bubble,
-			typeof(RawMultitouchReportHandler), typeof(MultitouchLogic));
+		internal ContactsManager ContactsManager { get; private set; }
 
-		object stylusLogic;
-		Type stylusLogicType;
-		MethodInfo getPenContextsFromHwndMethod;
-		PropertyInfo getMousePointDescriptionProperty;
+		readonly InputManager inputManager;
+		readonly Type contactType;
+		readonly IEnumerable<RoutedEvent> contactEvents;
 
-		Assembly presentationCoreAssembly;
-		Type rawStylusInputReportType;
-		Type rawStylusActionsType;
-		ConstructorInfo constructor;
-
-		Type penContextsType;
-		MethodInfo invokeStylusPluginCollectionForMouseMethod;
-		MethodInfo verifyStylusPlugInCollectionTargetMethod;
-
-		InputManager inputManager;
-		int doubleTapDeltaTime;
-		StylusPlugInCollection activeMousePluginCollection;
-		static StylusPointDescription mousePointerDescription;
-		object stylusActionDown;
-		object stylusActionMove;
-		object stylusActionUp;
-
-
-		internal GestureManager GestureManager { get; private set; }
-		internal MultitouchDeviceManager DeviceManager { get; private set; }
-
-		public MultitouchLogic(InputManager inputManager)
+		MultitouchLogic(InputManager inputManager)
 		{
-			if(!MouseHelper.SingleMouseFallback)
+			if (!MouseHelper.SingleMouseFallback)
 				Mouse.OverrideCursor = Cursors.None;
 
-            presentationCoreAssembly = typeof(InputManager).Assembly;
-			rawStylusInputReportType = presentationCoreAssembly.GetType("System.Windows.Input.RawStylusInputReport");
-			rawStylusActionsType = presentationCoreAssembly.GetType("System.Windows.Input.RawStylusActions");
-			penContextsType = presentationCoreAssembly.GetType("System.Windows.Input.PenContexts");
-			stylusLogicType = presentationCoreAssembly.GetType("System.Windows.Input.StylusLogic");
-			constructor = rawStylusInputReportType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null,
-			                                                      new[]
-			                                                      	{
-			                                                      		typeof(InputMode), typeof(int), typeof(PresentationSource),
-			                                                      		rawStylusActionsType, typeof(StylusPointDescription), typeof(int[])
-			                                                      	}, null);
-
-			FieldInfo field = rawStylusActionsType.GetField("Down");
-			stylusActionDown = field.GetValue(null);
-			field = rawStylusActionsType.GetField("Move");
-			stylusActionMove = field.GetValue(null);
-			field = rawStylusActionsType.GetField("Up");
-			stylusActionUp = field.GetValue(null);
-
-			invokeStylusPluginCollectionForMouseMethod = penContextsType.GetMethod("InvokeStylusPluginCollectionForMouse", BindingFlags.NonPublic | BindingFlags.Instance);
-			getPenContextsFromHwndMethod = stylusLogicType.GetMethod("GetPenContextsFromHwnd", BindingFlags.NonPublic | BindingFlags.Instance);
-			stylusLogic = typeof(InputManager).GetProperty("StylusLogic", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(InputManager.Current, null);
-			getMousePointDescriptionProperty = stylusLogicType.GetProperty("GetMousePointDescription", BindingFlags.Instance | BindingFlags.NonPublic);
-			verifyStylusPlugInCollectionTargetMethod = stylusLogicType.GetMethod("VerifyStylusPlugInCollectionTarget", BindingFlags.Instance | BindingFlags.NonPublic);
-
-
-			doubleTapDeltaTime = 800;
-
-			DeviceManager = new MultitouchDeviceManager();
-			GestureManager = new GestureManager();
+			ContactsManager = new ContactsManager(inputManager.Dispatcher);
 
 			this.inputManager = inputManager;
 			this.inputManager.PreProcessInput += inputManager_PreProcessInput;
 			this.inputManager.PreNotifyInput += inputManager_PreNotifyInput;
 			this.inputManager.PostProcessInput += inputManager_PostProcessInput;
+			contactType = typeof(Contact);
+
+			Dispatcher.ShutdownFinished += Dispatcher_ShutdownFinished;
+
+			Type routedEventType = typeof(RoutedEvent);
+			contactEvents = typeof(MultitouchScreen).GetFields().Where(m => m.FieldType == routedEventType).Select(f => (RoutedEvent)f.GetValue(null));
+		}
+
+		static void Dispatcher_ShutdownFinished(object sender, EventArgs e)
+		{
+			current = null;
 		}
 
 		public static MultitouchLogic Current
@@ -113,40 +72,39 @@ namespace Multitouch.Framework.WPF.Input
 				RawMultitouchReport report = e.StagingItem.Input as RawMultitouchReport;
 				if (report != null && !report.Handled)
 				{
-					MultitouchDevice multitouchDevice = report.MultitouchDevice;
-
-					if (report.Contact.State != ContactState.Removed)
-						multitouchDevice.AllContacts[report.Contact.Id] = report.Contact;
-					else
-						multitouchDevice.AllContacts.Remove(report.Contact.Id);
-
-					if (GestureManager.IsGestureEnabled)
-						GestureManager.PreProcessInput(e);
-
-					Point clientPoint = report.Contact.Position;
-					HitTestResult test = VisualTreeHelper.HitTest(report.InputSource.RootVisual, clientPoint);
-					if (test != null)
+					switch (report.Context.Contact.State)
 					{
-						IInputElement hitTest = test.VisualHit as IInputElement;
-						report.Source = hitTest;
+						case ContactState.New:
+							return;
+						case ContactState.Removed:
+						case ContactState.Moved:
+							{
+								Contact contact;
+								if (!ContactsManager.ExistingContacts.TryGetValue(report.Context.Contact.Id, out contact))
+									break;
+								report.UpdateFromPrevious(contact.InputArgs);
+								return;
+							}
+						default:
+							return;
 					}
+					report.Handled = true;
 				}
 			}
-			else if (!MultitouchScreen.AllowMouseEvents)
+			else if (!MultitouchScreen.AllowNonContactEvents)
 			{
-				if (!(routedEvent == RawInputEvent ||
-				      routedEvent == MultitouchScreen.ContactEnterEvent || routedEvent == MultitouchScreen.ContactLeaveEvent ||
-				      routedEvent == MultitouchScreen.ContactMovedEvent || routedEvent == MultitouchScreen.ContactRemovedEvent ||
-				      routedEvent == MultitouchScreen.NewContactEvent || routedEvent == MultitouchScreen.PreviewContactMovedEvent ||
-				      routedEvent == MultitouchScreen.PreviewContactRemovedEvent || routedEvent == MultitouchScreen.PreviewNewContactEvent ||
-				      routedEvent == GestureManager.RawGestureInputEvent || routedEvent == MultitouchScreen.PreviewGestureEvent ||
-				      routedEvent == MultitouchScreen.GestureEvent))
+				if (!IsContactEvent(routedEvent))
 				{
 					e.StagingItem.Input.Handled = true;
 					e.Cancel();
 				}
 			}
 			Debug.Assert(routedEvent != null, "routed event null");
+		}
+
+		bool IsContactEvent(RoutedEvent routedEvent)
+		{
+			return contactEvents.Contains(routedEvent);
 		}
 
 		void inputManager_PreNotifyInput(object sender, NotifyInputEventArgs e)
@@ -156,97 +114,196 @@ namespace Multitouch.Framework.WPF.Input
 				RawMultitouchReport report = e.StagingItem.Input as RawMultitouchReport;
 				if (report != null && !report.Handled)
 				{
-					MultitouchDevice multitouchDevice = report.MultitouchDevice;
-					multitouchDevice.UpdateState(report);
+					report.Context.OverElement = GetTargetElement(report.Context.Contact.Position, report.Context.Root, report);
 
-					Point position = multitouchDevice.GetPosition(null);
-					IInputElement target = multitouchDevice.FindTarget(multitouchDevice.ActiveSource, position);
-					multitouchDevice.ChangeOver(target, report);
-
-					Visual visual = (Visual)report.MultitouchDevice.Target;
-					if (visual != null)
+					Contact contact;
+					if (!report.CleanUp)
 					{
-						PresentationSource source = PresentationSource.FromVisual(visual);
-						if (source != null)
+						if (ContactsManager.ExistingContacts.TryGetValue(report.Context.Contact.Id, out contact))
+							contact.InputArgs = report;
+						else
 						{
-							object rawStylusInputReport = CreateRawStylusInputReport(e, report, source);
-							verifyStylusPlugInCollectionTargetMethod.Invoke(stylusLogic, new[] {rawStylusInputReport});
+							contact = new Contact(report);
+							ContactsManager.ExistingContacts[report.Context.Contact.Id] = contact;
 						}
 					}
-				}
-			}
-
-			if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewNewContactEvent)
-			{
-				NewContactEventArgs newContact = e.StagingItem.Input as NewContactEventArgs;
-				if (newContact != null)
-				{
-					MultitouchDevice multitouchDevice = newContact.MultitouchDevice;
-					Point position = multitouchDevice.GetPosition(null);
-					Point lastTapPoint = multitouchDevice.LastTapPoint;
-
-					int timeSpan = Math.Abs(newContact.Timestamp - multitouchDevice.LastTapTime);
-
-					Size doubleTapSize = new Size(25, 25);
-					bool isSameSpot = (Math.Abs(position.X - lastTapPoint.X) < doubleTapSize.Width) &&
-									  (Math.Abs(position.Y - lastTapPoint.Y) < doubleTapSize.Height);
-
-					if (timeSpan < doubleTapDeltaTime && isSameSpot)
-						multitouchDevice.TapCount++;
 					else
 					{
-						multitouchDevice.TapCount = 1;
-						multitouchDevice.LastTapPoint = new Point(position.X, position.Y);
-						multitouchDevice.LastTapTime = newContact.Timestamp;
+						contact = ContactsManager.ExistingContacts[report.Context.Contact.Id];
+						contact.InputArgs = report;
+						report.Handled = true;
+					}
+
+					UIElementsList mergedList;
+
+					report.Context.ElementsList = BuildElementsList(report, report.Context.OverElement, report.Context.ElementsList, out mergedList);
+					if(mergedList != null)
+						RaiseEnterLeave(contact, mergedList);
+
+					if(report.CleanUp)
+					{
+						if (report.Captured != null)
+							contact.Capture(null);
+						ContactsManager.ExistingContacts.Remove(contact.Id);
 					}
 				}
 			}
 			Debug.Assert(e.StagingItem.Input.RoutedEvent != null, "routed event null");
 		}
 
-		void inputManager_PostProcessInput(object sender, ProcessInputEventArgs e)
+		static UIElementsList BuildElementsList(RawMultitouchReport report, DependencyObject newOver, UIElementsList oldList, out UIElementsList mergedList)
 		{
-			if (e.StagingItem.Input.RoutedEvent == RawInputEvent)
+			UIElementsList newList = null;
+			if (newOver != null)
 			{
-				RawMultitouchReport report = e.StagingItem.Input as RawMultitouchReport;
-				if (report != null && !report.Handled)
-					PromoteRawToPreview(report, e);
+				newList = new UIElementsList(newOver);
+				if (!report.CleanUp)
+					BuildElementsList(newList, newOver);
 			}
-			if (e.StagingItem.Input.RoutedEvent == PreviewRawInputEvent)
-			{
-				RawMultitouchReport report = e.StagingItem.Input as RawMultitouchReport;
-				if (report != null)
-				{
-					RawMultitouchReport args = new RawMultitouchReport(report);
-					args.RoutedEvent = RawInputEvent;
-					e.PushInput(args, e.StagingItem);
-				}
-			}
-
-			if (GestureManager.IsGestureEnabled)
-				GestureManager.PostProcessInput(e);
-
-			CallPlugInsForMultitouch(e);
-
-			PromotePreviewToMain(e);
+			mergedList = UIElementsList.BuildDifference(newList, oldList);
+			return newList;
 		}
 
-		void PromoteRawToPreview(RawMultitouchReport report, ProcessInputEventArgs e)
+		static void BuildElementsList(UIElementsList list, DependencyObject over)
 		{
-			RoutedEvent routedEvent = GetPreviewEventFromRawMultitouchState(report.Contact.State);
-			if (routedEvent != null)
+			if(!list.Contains(over))
 			{
+				list.Add(over, ContactState.New);
+
+				DependencyObject visualParent = over is Visual ? VisualTreeHelper.GetParent(over) : null;
+				DependencyObject logicalParent = LogicalTreeHelper.GetParent(over);
+				if(visualParent != null)
+					BuildElementsList(list, visualParent);
+				if(logicalParent != null && logicalParent != visualParent)
+					BuildElementsList(list, logicalParent);
+			}
+		}
+
+		static void RaiseEnterLeave(Contact contact, UIElementsList list)
+		{
+			foreach (DependencyObject treeElement in list)
+			{
+				ContactState state = list.GetState(treeElement);
+				switch (state)
+				{
+					case ContactState.New:
+						RaiseEnterLeaveEvents(contact, treeElement, MultitouchScreen.ContactEnterEvent);
+						break;
+					case ContactState.Removed:
+						RaiseEnterLeaveEvents(contact, treeElement, MultitouchScreen.ContactLeaveEvent);
+						break;
+				}
+			}
+		}
+
+		static void RaiseEnterLeaveEvents(Contact contact, DependencyObject element, RoutedEvent routedEvent)
+		{
+			ContactEventArgs e = new ContactEventArgs(contact, Environment.TickCount);
+			e.RoutedEvent = routedEvent;
+			e.Source = element;
+			RaiseEvent(element, e);
+		}
+
+		internal static void RaiseEvent(DependencyObject source, RoutedEventArgs args)
+		{
+			UIElement element = source as UIElement;
+			if (element != null)
+				element.RaiseEvent(args);
+			else
+			{
+				ContentElement contentElement = source as ContentElement;
+				if (contentElement != null)
+					contentElement.RaiseEvent(args);
+			}
+		}
+
+		void inputManager_PostProcessInput(object sender, ProcessInputEventArgs e)
+		{
+			InputEventArgs input = e.StagingItem.Input;
+			if (input.RoutedEvent == PreviewRawInputEvent && !input.Handled)
+				PromoteRawToPreview(e, (RawMultitouchReport)input);
+			else if (input.Device != null && input.Device.GetType() == contactType)
+			{
+				if (!input.Handled)
+					PromotePreviewToMain(e, input);
+				
+				if (input.RoutedEvent == MultitouchScreen.ContactRemovedEvent)
+				{
+					ContactEventArgs args = (ContactEventArgs)input;
+					RawMultitouchReport report = args.Contact.InputArgs.Clone();
+					report.CleanUp = true;
+					e.PushInput(report, e.StagingItem);
+				}
+			}
+		}
+
+		UIElement GetTargetElement(Point position, UIElement root, RawMultitouchReport report)
+		{
+			DependencyObject captured;
+			if (report.CaptureState == CaptureMode.Element)
+				captured = report.Captured;
+			else
+			{
+				captured = HitTest(root, position);
+				if (captured != null && report.Captured != null && report.CaptureState == CaptureMode.SubTree)
+				{
+					if (!IsPartOfSubTree(captured, report.Captured))
+						captured = report.Captured;
+				}
+			}
+			if (captured != null)
+			{
+				DependencyObject currentObject = captured;
+				UIElement target = currentObject as UIElement;
+				while (target == null)
+				{
+					currentObject = LogicalTreeHelper.GetParent(currentObject);
+					target = currentObject as UIElement;
+				}
+				return target;
+			}
+			return null;
+		}
+
+		static DependencyObject HitTest(UIElement root, Point position)
+		{
+			return root.InputHitTest(position) as DependencyObject;
+		}
+
+		bool IsPartOfSubTree(DependencyObject child, DependencyObject parent)
+		{
+			if (!IsPartOfSubTree(child, parent, VisualTreeHelper.GetParent))
+				return IsPartOfSubTree(child, parent, LogicalTreeHelper.GetParent);
+			return true;
+		}
+
+		bool IsPartOfSubTree(DependencyObject child, DependencyObject parent, Func<DependencyObject, DependencyObject> getParent)
+		{
+			DependencyObject childsParent = getParent(child);
+			if (childsParent != null && (childsParent == parent || IsPartOfSubTree(childsParent, parent)))
+				return true;
+			return false;
+		}
+
+		void PromoteRawToPreview(ProcessInputEventArgs e, RawMultitouchReport report)
+		{
+			ContactContext context = report.Context;
+			RoutedEvent routedEvent = GetPreviewEventFromRawMultitouchState(context.Contact.State);
+			if (report.Context.OverElement != null && routedEvent != null)
+			{
+				Contact contact = ContactsManager.ExistingContacts[report.Context.Contact.Id];
 				ContactEventArgs args;
 				if (routedEvent == MultitouchScreen.PreviewNewContactEvent)
-					args = new NewContactEventArgs(report.MultitouchDevice, report, report.Timestamp);
+					args = new NewContactEventArgs(contact, report.Timestamp);
 				else
-					args = new ContactEventArgs(report.MultitouchDevice, report, report.Timestamp);
+					args = new ContactEventArgs(contact, report.Timestamp);
 				args.RoutedEvent = routedEvent;
+				args.Source = report.Context.OverElement;
 				e.PushInput(args, e.StagingItem);
 			}
 		}
 
-		RoutedEvent GetPreviewEventFromRawMultitouchState(ContactState state)
+		static RoutedEvent GetPreviewEventFromRawMultitouchState(ContactState state)
 		{
 			if (state == ContactState.New)
 				return MultitouchScreen.PreviewNewContactEvent;
@@ -257,30 +314,27 @@ namespace Multitouch.Framework.WPF.Input
 			return null;
 		}
 
-		void PromotePreviewToMain(ProcessInputEventArgs e)
+		static void PromotePreviewToMain(ProcessInputEventArgs e, InputEventArgs input)
 		{
-			if (!e.StagingItem.Input.Handled)
+			ContactEventArgs previewArgs = (ContactEventArgs)input;
+			RoutedEvent mainEvent = GetMainEventFromPreviewEvent(input.RoutedEvent);
+			if (mainEvent != null)
 			{
-				RoutedEvent mainEvent = GetMainEventFromPreviewEvent(e.StagingItem.Input.RoutedEvent);
-				if (mainEvent != null)
+				ContactEventArgs mainArgs;
+				if (mainEvent == MultitouchScreen.NewContactEvent || mainEvent == MultitouchScreen.PreviewNewContactEvent)
 				{
-					ContactEventArgs previewArgs = (ContactEventArgs)e.StagingItem.Input;
-					MultitouchDevice multitouchDevice = previewArgs.MultitouchDevice;
-					ContactEventArgs mainArgs;
-					if (mainEvent == MultitouchScreen.NewContactEvent || mainEvent == MultitouchScreen.PreviewNewContactEvent)
-					{
-						NewContactEventArgs newContactEventArgs = (NewContactEventArgs)previewArgs;
-						mainArgs = new NewContactEventArgs(multitouchDevice, newContactEventArgs.Contact, previewArgs.Timestamp);
-					}
-					else
-						mainArgs = new ContactEventArgs(multitouchDevice, previewArgs.Contact, previewArgs.Timestamp);
-					mainArgs.RoutedEvent = mainEvent;
-					e.PushInput(mainArgs, e.StagingItem);
+					NewContactEventArgs newContactEventArgs = (NewContactEventArgs)previewArgs;
+					mainArgs = new NewContactEventArgs(newContactEventArgs.Contact, previewArgs.Timestamp);
 				}
+				else
+					mainArgs = new ContactEventArgs(previewArgs.Contact, previewArgs.Timestamp);
+				mainArgs.RoutedEvent = mainEvent;
+				mainArgs.Source = previewArgs.Source;
+				e.PushInput(mainArgs, e.StagingItem);
 			}
 		}
 
-		RoutedEvent GetMainEventFromPreviewEvent(RoutedEvent routedEvent)
+		static RoutedEvent GetMainEventFromPreviewEvent(RoutedEvent routedEvent)
 		{
 			if (routedEvent == MultitouchScreen.PreviewContactMovedEvent)
 				return MultitouchScreen.ContactMovedEvent;
@@ -289,68 +343,6 @@ namespace Multitouch.Framework.WPF.Input
 			if (routedEvent == MultitouchScreen.PreviewNewContactEvent)
 				return MultitouchScreen.NewContactEvent;
 			return null;
-		}
-
-		void CallPlugInsForMultitouch(ProcessInputEventArgs e)
-		{
-			ContactEventArgs args = e.StagingItem.Input as ContactEventArgs;
-			if (args != null && args.MultitouchDevice.Target != null)
-			{
-				PresentationSource source = PresentationSource.FromVisual((Visual)args.MultitouchDevice.Target);
-				if (source != null)
-				{
-					object rawStylusInputReport = CreateRawStylusInputReport(e, args, source);
-
-					using (Dispatcher.DisableProcessing())
-					{
-						object penContexts = getPenContextsFromHwndMethod.Invoke(stylusLogic, new object[] {source});
-						activeMousePluginCollection = (StylusPlugInCollection)invokeStylusPluginCollectionForMouseMethod.Invoke(
-						                                                      	penContexts,
-						                                                      	new[] {rawStylusInputReport, args.MultitouchDevice.Target, activeMousePluginCollection});
-					}
-				}
-			}
-		}
-
-		object CreateRawStylusInputReport(NotifyInputEventArgs e, ContactEventArgs args, PresentationSource source)
-		{
-			return CreateRawStylusInputReport(e, element => args.GetPosition(element), args.Timestamp, source);
-		}
-
-		object CreateRawStylusInputReport(NotifyInputEventArgs e, RawMultitouchReport report, PresentationSource source)
-		{
-			return CreateRawStylusInputReport(e, element => report.GetPosition(element), report.Timestamp, source);
-		}
-
-		object CreateRawStylusInputReport(NotifyInputEventArgs e, Func<IInputElement, Point> getPosition, int timestamp, PresentationSource source)
-		{
-			object stylusActions = null;
-			if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewNewContactEvent)
-				stylusActions = stylusActionDown;
-			else if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewContactMovedEvent)
-				stylusActions = stylusActionMove;
-			else if (e.StagingItem.Input.RoutedEvent == MultitouchScreen.PreviewContactRemovedEvent)
-				stylusActions = stylusActionUp;
-
-			Point ptClient = getPosition(source.RootVisual as IInputElement);
-			ptClient = source.CompositionTarget.TransformToDevice.Transform(ptClient);
-			int[] data = new[] {(int)ptClient.X, (int)ptClient.Y, 1, 1};
-
-			return constructor.Invoke(new[]
-			                          	{
-			                          		InputMode.Foreground, timestamp, source,
-			                          		stylusActions, GetMousePointerDescription, data
-			                          	});
-		}
-
-		internal StylusPointDescription GetMousePointerDescription
-		{
-			get
-			{
-				if(mousePointerDescription == null)
-					mousePointerDescription = (StylusPointDescription)getMousePointDescriptionProperty.GetValue(stylusLogic, null);
-				return mousePointerDescription;
-			}
 		}
 	}
 }

@@ -10,9 +10,9 @@ namespace Multitouch.Framework.WPF.Controls.Primitives
 	/// </summary>
 	public class Thumb : System.Windows.Controls.Primitives.Thumb
 	{
-		Point originThumbPoint;
-		Point previousScrennCoordPosition;
-		Point originScreenCoordPosition;
+		Point originalThumbPosition;
+		Point lastThumbPosition;
+		Vector screenTotalDelta;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Thumb"/> class.
@@ -22,62 +22,68 @@ namespace Multitouch.Framework.WPF.Controls.Primitives
 			AddHandler(MultitouchScreen.NewContactEvent, (NewContactEventHandler)OnNewContact);
 			AddHandler(MultitouchScreen.ContactRemovedEvent, (ContactEventHandler)OnContactRemoved);
 			AddHandler(MultitouchScreen.ContactMovedEvent, (ContactEventHandler)OnContactMoved);
+			AddHandler(MultitouchScreen.LostContactCaptureEvent, (ContactEventHandler)OnLostContactCapture);
+			AddHandler(MultitouchScreen.GotContactCaptureEvent, (ContactEventHandler)OnGotContactCapture);
+		}
+
+		void OnGotContactCapture(object sender, ContactEventArgs e)
+		{
+			if (!IsDragging)
+			{
+				IsDragging = true;
+
+				screenTotalDelta = new Vector();
+				originalThumbPosition = e.GetPosition(this);
+				lastThumbPosition = originalThumbPosition;
+
+				bool failed = true;
+				try
+				{
+					RaiseEvent(new DragStartedEventArgs(originalThumbPosition.X, originalThumbPosition.Y));
+					failed = false;
+				}
+				finally
+				{
+					if (failed)
+						CancelDrag();
+				}
+			}
+		}
+
+		void OnLostContactCapture(object sender, ContactEventArgs e)
+		{
+			IsDragging = false;
+
+			RaiseEvent(new DragCompletedEventArgs(screenTotalDelta.X, screenTotalDelta.Y, false));
+			originalThumbPosition.X = 0.0;
+			originalThumbPosition.Y = 0.0;
 		}
 
 		void OnContactMoved(object sender, ContactEventArgs e)
 		{
 			if(IsDragging)
 			{
-				Point position = e.GetPosition(this);
-				Point point = PointToScreen(position);
-				if(point != previousScrennCoordPosition)
+				Point currentPosition = e.GetPosition(this);
+				if (currentPosition != lastThumbPosition)
 				{
-					previousScrennCoordPosition = point;
 					e.Handled = true;
-					RaiseEvent(new DragDeltaEventArgs(position.X - originThumbPoint.X, position.Y - originThumbPoint.Y));
+					RaiseEvent(new DragDeltaEventArgs(currentPosition.X - lastThumbPosition.X, currentPosition.Y - lastThumbPosition.Y));
+					lastThumbPosition = currentPosition;
 				}
 			}
 		}
 
 		void OnContactRemoved(object sender, ContactEventArgs e)
 		{
-			if(e.Captured != this && IsDragging)
-			{
-				e.Handled = true;
-				IsDragging = false;
-				e.MultitouchDevice.Capture(null);
-
-				Point point = PointToScreen(e.GetPosition(this));
-				RaiseEvent(new DragCompletedEventArgs(point.X - originScreenCoordPosition.X, point.Y - originScreenCoordPosition.Y, false));
-
-				originThumbPoint.X = 0.0;
-				originThumbPoint.Y = 0.0;
-			}
+			e.Handled = true;
+			if (e.Contact.Captured == this)
+				e.Contact.Capture(null);
 		}
 
 		void OnNewContact(object sender, NewContactEventArgs e)
 		{
-			if(!IsDragging)
-			{
-				e.Handled = true;
-				e.MultitouchDevice.Capture(this);
-				IsDragging = true;
-
-				originThumbPoint = e.GetPosition(this);
-				previousScrennCoordPosition = originScreenCoordPosition = PointToScreen(originThumbPoint);
-
-				bool ok = false;
-				try
-				{
-					RaiseEvent(new DragStartedEventArgs(originThumbPoint.X, originThumbPoint.Y));
-					ok = true;
-				}
-				finally
-				{
-					if(!ok)
-						CancelDrag();
-				}
-			}
+			e.Handled = true;
+			e.Contact.Capture(this);
 		}
 	}
 }
