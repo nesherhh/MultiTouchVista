@@ -40,7 +40,7 @@ namespace Multitouch.Framework.WPF.Controls
         /// </summary>
         /// <param name="relativeTo">The relative to.</param>
         /// <returns></returns>
-        public Point GetPosition(IInputElement relativeTo)
+        public Point GetPosition(UIElement relativeTo)
         {
             return contactEventArgs.GetPosition(relativeTo);
         }
