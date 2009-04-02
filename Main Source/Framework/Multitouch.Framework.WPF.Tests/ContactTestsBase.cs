@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Multitouch.Framework.Input.Service;
@@ -54,6 +55,14 @@ namespace Multitouch.Framework.WPF.Tests
 		{
 			Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Normal, action);
 			Dispatcher.Run();
+		}
+
+		protected Point GetPosition(UIElement relativeTo, FrameworkElement element, bool centered)
+		{
+			Point point = new Point(Canvas.GetLeft(element), Canvas.GetTop(element));
+			if(centered)
+				point.Offset(element.Width / 2, element.Height / 2);
+			return relativeTo.TranslatePoint(point, window);
 		}
 
 		[TestInitialize]

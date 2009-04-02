@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using AdvanceMath;
@@ -63,11 +62,6 @@ namespace Multitouch.Framework.WPF.Controls
             engine.Solver = new SequentialImpulsesSolver();
             timer = new PhysicsTimer(PhysicsTimerCallback, 0.01);
 
-            AddHandler(MultitouchScreen.NewContactEvent, (NewContactEventHandler)OnNewContact);
-            AddHandler(MultitouchScreen.ContactMovedEvent, (ContactEventHandler)OnContactMoved);
-            AddHandler(MultitouchScreen.ContactRemovedEvent, (ContactEventHandler)OnContactRemoved);
-            AddHandler(MultitouchScreen.ContactLeaveEvent, (ContactEventHandler)OnContactRemoved);
-
             Loaded += TouchablePanel_Loaded;
         }
 
@@ -107,146 +101,131 @@ namespace Multitouch.Framework.WPF.Controls
                 CreateWalls();
         }
 
-        void OnContactMoved(object sender, ContactEventArgs e)
-        {
+		void OnContactMoved(object sender, ContactEventArgs e)
+		{
 			Point position = e.GetPosition(this);
 
-			HitTestResult hitTestResult = VisualTreeHelper.HitTest(this, position);
-			if (hitTestResult != null)
+			FixedHingeJoint joint;
+			if (contactJoints.TryGetValue(e.Contact.Id, out joint))
 			{
-				FrameworkElement element = hitTestResult.VisualHit as FrameworkElement;
-				if (element != null)
+				joint.Anchor = position.ToVector2D();
+
+				//scale
+				Body body = joint.Bodies.First();
+				FrameworkElement frameworkElement = body.Tag as FrameworkElement;
+				if (frameworkElement != null && GetIsScalable(frameworkElement))
 				{
-					FrameworkElement parent = element.Parent as FrameworkElement;
-					while (parent != null && !parent.Equals(sender))
+					ScaleState state;
+					if (elementToScale.TryGetValue(frameworkElement, out state))
 					{
-						element = parent;
-						parent = element.Parent as FrameworkElement;
-					}
+						IEnumerable<Contact> contacts = MultitouchScreen.GetContactsCaptured((IInputElement)e.Source);
+						double previousDistance = 0;
+						double currentDistance = 0;
+						int divisor = 0;
+						Contact[] contactsArray = contacts.ToArray();
 
-					FixedHingeJoint joint;
-					if (contactJoints.TryGetValue(e.Contact.Id, out joint))
-					{
-						joint.Anchor = position.ToVector2D();
+						Point center = new Point(frameworkElement.ActualWidth / 2, frameworkElement.ActualHeight / 2);
 
-						//scale
-						Body body = joint.Bodies.First();
-						FrameworkElement frameworkElement = body.Tag as FrameworkElement;
-						if (frameworkElement != null && GetIsScalable(frameworkElement))
+						for (int i = 0; i < contactsArray.Length; i++)
 						{
-							ScaleState state;
-							if (elementToScale.TryGetValue(frameworkElement, out state))
+							for (int j = i + 1; j < contactsArray.Length; j++)
 							{
-								IEnumerable<Contact> contacts = MultitouchScreen.GetContactsCaptured(frameworkElement);
-								double previousDistance = 0;
-								double currentDistance = 0;
-								int divisor = 0;
-								Contact[] contactsArray = contacts.ToArray();
+								Point currFirst = contactsArray[j].GetPosition(this);
+								Point currSecond = contactsArray[i].GetPosition(this);
+								Vector vector = frameworkElement.PointFromScreen(currFirst) - frameworkElement.PointFromScreen(currSecond);
+								currentDistance += vector.Length;
 
-								Point center = new Point(frameworkElement.ActualWidth / 2, frameworkElement.ActualHeight / 2);
-
-								for (int i = 0; i < contactsArray.Length; i++)
-								{
-									for (int j = i + 1; j < contactsArray.Length; j++)
-									{
-										Point currFirst = contactsArray[j].GetPosition(this);
-										Point currSecond = contactsArray[i].GetPosition(this);
-										Vector vector = frameworkElement.PointFromScreen(currFirst) - frameworkElement.PointFromScreen(currSecond);
-										currentDistance += vector.Length;
-
-										Point prevFirst = contactsArray[j].GetPoints(this).FirstOrDefault();
-										if(default(Point) == prevFirst)
-											prevFirst = currFirst;
-										Point prevSecond = contactsArray[i].GetPoints(this).FirstOrDefault();
-										if(default(Point) == prevSecond)
-											prevSecond = currSecond;
-										Vector previousVector = frameworkElement.PointFromScreen(prevFirst) - frameworkElement.PointFromScreen(prevSecond);
-										previousDistance += previousVector.Length;
-										divisor++;
-									}
-								}
-								if (divisor == 0)
-									divisor = 1;
-
-								previousDistance /= divisor;
-								currentDistance /= divisor;
-
-								double delta = currentDistance / previousDistance;
-								if (double.IsNaN(delta))
-									delta = 1;
-
-								var newScale = state.Scale * delta;
-								if (newScale > MaxScale)
-									delta = MaxScale / state.Scale;
-								else if (newScale < MinScale)
-									delta = MinScale / state.Scale;
-
-								state.Scale *= delta;
-								state.Center = center;
-								body.Transformation *= Matrix2x3.FromScale(new Vector2D(delta, delta));
+								Point prevFirst = contactsArray[j].GetPoints(this).FirstOrDefault();
+								if (default(Point) == prevFirst)
+									prevFirst = currFirst;
+								Point prevSecond = contactsArray[i].GetPoints(this).FirstOrDefault();
+								if (default(Point) == prevSecond)
+									prevSecond = currSecond;
+								Vector previousVector = frameworkElement.PointFromScreen(prevFirst) - frameworkElement.PointFromScreen(prevSecond);
+								previousDistance += previousVector.Length;
+								divisor++;
 							}
 						}
+						if (divisor == 0)
+							divisor = 1;
+
+						previousDistance /= divisor;
+						currentDistance /= divisor;
+
+						double delta = currentDistance / previousDistance;
+						if (double.IsNaN(delta))
+							delta = 1;
+
+						var newScale = state.Scale * delta;
+						if (newScale > MaxScale)
+							delta = MaxScale / state.Scale;
+						else if (newScale < MinScale)
+							delta = MinScale / state.Scale;
+
+						state.Scale *= delta;
+						state.Center = center;
+						body.Transformation *= Matrix2x3.FromScale(new Vector2D(delta, delta));
 					}
 				}
 			}
+		}
+
+    	static void OnNewContact(object sender, NewContactEventArgs e)
+        {
+			if(e.Contact.Captured != e.Source)
+        		e.Contact.Capture((IInputElement)e.Source);
         }
 
-        void OnNewContact(object sender, NewContactEventArgs e)
-        {
-            Point position = e.GetPosition(this);
+		void OnGotContactCapture(object sender, ContactEventArgs e)
+		{
+			FrameworkElement element = (FrameworkElement)e.Source;
+			FrameworkElement container = ItemsControl.ContainerFromElement(null, element) as FrameworkElement;
+			if (container != null)
+				element = container;
+			else
+			{
+				FrameworkElement parent = element.Parent as FrameworkElement;
+				while (parent != null && !parent.Equals(sender))
+				{
+					element = parent;
+					parent = element.Parent as FrameworkElement;
+				}
+			}
 
-            HitTestResult hitTestResult = VisualTreeHelper.HitTest(this, position);
-            if (hitTestResult != null)
-            {
-                FrameworkElement element = hitTestResult.VisualHit as FrameworkElement;
-                if (element != null)
-                {
-					FrameworkElement container = ItemsControl.ContainerFromElement(null, element) as FrameworkElement;
-					if (container != null)
-						element = container;
-					else
+			Body body;
+			if (elementToBody.TryGetValue(element, out body))
+			{
+				Point position = e.GetPosition(this);
+				Vector2D contactPoint = position.ToVector2D();
+				if (body.Shape.CanGetIntersection)
+				{
+					Vector2D temp = body.Matrices.ToBody * contactPoint;
+					IntersectionInfo intersectionInfo;
+					if (body.Shape.TryGetIntersection(temp, out intersectionInfo))
 					{
-						FrameworkElement parent = element.Parent as FrameworkElement;
-						while (parent != null && !parent.Equals(sender))
-						{
-							element = parent;
-							parent = element.Parent as FrameworkElement;
-						}
+						FixedHingeJoint joint = new FixedHingeJoint(body, contactPoint, new Lifespan());
+						joint.Softness = 0.3;
+						engine.AddJoint(joint);
+						contactJoints[e.Contact.Id] = joint;
 					}
+				}
+			}
+			SetZTop(element);
+		}
 
-                	Body body;
-                    if (elementToBody.TryGetValue(element, out body))
-                    {
-						e.Contact.Capture(element);
-
-                        Vector2D contactPoint = position.ToVector2D();
-                        if (body.Shape.CanGetIntersection)
-                        {
-                            Vector2D temp = body.Matrices.ToBody * contactPoint;
-                            IntersectionInfo intersectionInfo;
-                            if (body.Shape.TryGetIntersection(temp, out intersectionInfo))
-                            {
-                                FixedHingeJoint joint = new FixedHingeJoint(body, contactPoint, new Lifespan());
-                                joint.Softness = 0.3;
-                                engine.AddJoint(joint);
-                                contactJoints[e.Contact.Id] = joint;
-                            }
-                        }
-                    }
-                    SetZTop(element);
-                }
-            }
+    	static void OnContactRemoved(object sender, ContactEventArgs e)
+        {
+        	if (e.Contact.Captured == e.Source)
+        		e.Contact.Capture(null);
         }
 
-        void OnContactRemoved(object sender, ContactEventArgs e)
-        {
-            FixedHingeJoint removedJoint;
+		void OnLostContactCapture(object sender, ContactEventArgs e)
+		{
+			FixedHingeJoint removedJoint;
             if (contactJoints.TryGetValue(e.Contact.Id, out removedJoint))
             {
                 removedJoint.Lifetime.IsExpired = true;
                 contactJoints.Remove(e.Contact.Id);
-
-				e.Contact.Capture(null);
             }
         }
 
@@ -388,20 +367,42 @@ namespace Multitouch.Framework.WPF.Controls
             transform.Children.Add(new RotateTransform());
             frameworkElement.RenderTransform = transform;
             SetZTop(frameworkElement);
+		
+			SubscribeEventsToChild(frameworkElement);
         }
 
-        void RemoveBody(FrameworkElement frameworkElement)
-        {
-            Body body;
-            if (elementToBody.TryGetValue(frameworkElement, out body))
-            {
-                body.Lifetime.IsExpired = true;
-                elementToBody.Remove(frameworkElement);
-                elementToScale.Remove(frameworkElement);
-            }
-        }
+    	void RemoveBody(FrameworkElement frameworkElement)
+    	{
+    		Body body;
+    		if (elementToBody.TryGetValue(frameworkElement, out body))
+    		{
+    			UnsubscribeEventsFromChild(frameworkElement);
 
-        #region MinScale
+    			body.Lifetime.IsExpired = true;
+    			elementToBody.Remove(frameworkElement);
+    			elementToScale.Remove(frameworkElement);
+    		}
+    	}
+
+    	void UnsubscribeEventsFromChild(DependencyObject frameworkElement)
+    	{
+    		MultitouchScreen.RemoveGotContactCaptureHandler(frameworkElement, OnGotContactCapture);
+    		MultitouchScreen.RemoveLostContactCaptureHandler(frameworkElement, OnLostContactCapture);
+			MultitouchScreen.RemoveNewContactHandler(frameworkElement, OnNewContact);
+			MultitouchScreen.RemoveContactMovedHandler(frameworkElement, OnContactMoved);
+			MultitouchScreen.RemoveContactRemovedHandler(frameworkElement, OnContactRemoved);
+    	}
+
+    	void SubscribeEventsToChild(DependencyObject frameworkElement)
+    	{
+    		MultitouchScreen.AddGotContactCaptureHandler(frameworkElement, OnGotContactCapture);
+    		MultitouchScreen.AddLostContactCaptureHandler(frameworkElement, OnLostContactCapture);
+    		MultitouchScreen.AddNewContactHandler(frameworkElement, OnNewContact);
+    		MultitouchScreen.AddContactMovedHandler(frameworkElement, OnContactMoved);
+    		MultitouchScreen.AddContactRemovedHandler(frameworkElement, OnContactRemoved);
+    	}
+
+    	#region MinScale
 
         /// <summary>
         /// MinScale Dependency Property
@@ -417,10 +418,7 @@ namespace Multitouch.Framework.WPF.Controls
         public double MinScale
         {
             get { return (double)GetValue(MinScaleProperty); }
-            set
-            {
-                SetValue(MinScaleProperty, value);
-            }
+            set { SetValue(MinScaleProperty, value); }
         }
 
         #endregion
