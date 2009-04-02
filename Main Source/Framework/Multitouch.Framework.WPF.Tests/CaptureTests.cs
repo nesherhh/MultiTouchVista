@@ -238,5 +238,46 @@ namespace Multitouch.Framework.WPF.Tests
 				});
 			resetEvent.WaitOne();
 		}
+
+		[TestMethod, Ignore, Description("Physic engine in TouchablePanel does not have enough time to move elements")]
+		public void TouchablePanelCapture()
+		{
+			Run(() =>
+				{
+					window = new TestWindow();
+					window.Show();
+
+					HwndSource source = (HwndSource)PresentationSource.FromVisual(window);
+
+					Point rectPosition = GetPosition(window.panel, window.rect, true);
+					Point contactPosition = rectPosition;
+					contactPosition.Offset(-20, 0);
+					MultitouchScreen.AddContactEnterHandler(window.rect, (sender, e) => e.Contact.Capture((IInputElement)e.Source));
+
+					RawMultitouchReport report = new RawMultitouchReport(CreateContact(GetContactData(0, ContactState.New, contactPosition), 1, source));
+					InputManager.Current.ProcessInput(report);
+					Assert.AreEqual(rectPosition, GetPosition(window.panel, window.rect, true));
+
+					contactPosition.Offset(20, 0);
+					report = new RawMultitouchReport(CreateContact(GetContactData(0, ContactState.Moved, contactPosition), 2, source));
+					InputManager.Current.ProcessInput(report);
+					Assert.AreEqual(rectPosition, GetPosition(window.panel, window.rect, true));
+
+					contactPosition.Offset(20, 0);
+					report = new RawMultitouchReport(CreateContact(GetContactData(0, ContactState.Moved, contactPosition), 3, source));
+					InputManager.Current.ProcessInput(report);
+					
+					Point newPosition = rectPosition;
+					newPosition.Offset(20, 0);
+
+					Point position = GetPosition(window.panel, window.rect, true);
+					Assert.AreNotEqual(rectPosition, position);
+					Assert.AreEqual(newPosition, position);
+
+					Dispatcher.ExitAllFrames();
+					resetEvent.Set();
+				});
+			resetEvent.WaitOne();
+		}
 	}
 }
