@@ -18,7 +18,7 @@ namespace Multitouch.Driver.Logic
 		private const int ReportLength = MaxContactsPerReport * (HidContactInfo.HidContactInfoSize) + 1;
 
 		public ReportContacts Contacts { get; private set; }
-		public const int MaxContactsPerReport = 1;
+		public const int MaxContactsPerReport = 2;
 
 		public MultiTouchReport(byte actualContactsCount, bool firstReport)
 			: base(ReportLength)
