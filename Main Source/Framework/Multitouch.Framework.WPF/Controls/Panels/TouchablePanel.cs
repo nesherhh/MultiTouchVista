@@ -182,15 +182,6 @@ namespace Multitouch.Framework.WPF.Controls
 			FrameworkElement container = ItemsControl.ContainerFromElement(null, element) as FrameworkElement;
 			if (container != null)
 				element = container;
-			else
-			{
-				FrameworkElement parent = element.Parent as FrameworkElement;
-				while (parent != null && !parent.Equals(sender))
-				{
-					element = parent;
-					parent = element.Parent as FrameworkElement;
-				}
-			}
 
 			Body body;
 			if (elementToBody.TryGetValue(element, out body))
