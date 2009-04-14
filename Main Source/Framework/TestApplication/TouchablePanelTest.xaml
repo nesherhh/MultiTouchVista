@@ -5,17 +5,17 @@
 		xmlns:themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
 		xmlns:local="clr-namespace:TestApplication"
 		Title="TouchablePanelTest">
+	<!--<mt:TouchablePanel>
+		<TextBlock Text="hello world" FontSize="24" FontWeight="Bold" Foreground="White"/>
+		<TextBlock Text="hello world" FontSize="24" FontWeight="Bold" Foreground="White"/>
+		<TextBlock Text="hello world" FontSize="24" FontWeight="Bold" Foreground="White"/>
+		<local:TestUserControl Filename="{Binding Pictures[0]}" MinWidth="100" MinHeight="100"/>
+	</mt:TouchablePanel>-->
     <ItemsControl ItemsSource="{Binding Pictures}">
 		<ItemsControl.ItemTemplate>
 			<DataTemplate>
-				<local:TestUserControl Filename="{Binding}" MinWidth="100" MinHeight="100"/>
-				<!--<themes:SystemDropShadowChrome>
-					<Border BorderBrush="Black" BorderThickness="1">
-						<Border BorderBrush="White" BorderThickness="10">
-							<Image Source="{Binding}" MaxWidth="480"/>
-						</Border>
-					</Border>
-				</themes:SystemDropShadowChrome>-->
+				<!--<local:TestUserControl Filename="{Binding}" MinWidth="100" MinHeight="100"/>-->
+				<Image Source="{Binding}" MinWidth="100" MinHeight="100"/>
 			</DataTemplate>
 		</ItemsControl.ItemTemplate>
 		<ItemsControl.ItemsPanel>
