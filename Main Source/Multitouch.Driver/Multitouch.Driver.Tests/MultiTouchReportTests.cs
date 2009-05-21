@@ -18,7 +18,7 @@ namespace Multitouch.Driver.Tests
 			MultiTouchReport report = new MultiTouchReport(1, true);
 
 			Point point = HidContactInfo.GetPoint(new Point(2,3), IntPtr.Zero);
-			report.Contacts.Add(CreateContact(true, true, 1, 2, 3, 4, 5));
+			report.Contacts.Add(CreateContact(HidContactState.Updated, 1, 2, 3, 4, 5));
 			const int expectedPressure = 4 * 5;
 			
 			report.ToBytes();
@@ -45,8 +45,8 @@ namespace Multitouch.Driver.Tests
 			MultiTouchReport report = new MultiTouchReport(2, true);
 
 			Point point = HidContactInfo.GetPoint(new Point(2,3), IntPtr.Zero);
-			report.Contacts.Add(CreateContact(true, true, 1, 2, 3, 4, 5));
-			report.Contacts.Add(CreateContact(true, true, 2, 2, 3, 4, 5));
+			report.Contacts.Add(CreateContact(HidContactState.Updated, 1, 2, 3, 4, 5));
+			report.Contacts.Add(CreateContact(HidContactState.Updated, 2, 2, 3, 4, 5));
 			const int expectedPresure = 4 * 5;
 
 			report.ToBytes();
@@ -75,7 +75,7 @@ namespace Multitouch.Driver.Tests
 			Assert.AreEqual(2, reader.ReadByte());
 		}
 
-		private HidContactInfo CreateContact(bool tip, bool inRange, int id, int x, int y, int width, int height)
+		private HidContactInfo CreateContact(HidContactState state, int id, int x, int y, int width, int height)
 		{
 			long timestamp = Stopwatch.GetTimestamp();
 
@@ -86,7 +86,7 @@ namespace Multitouch.Driver.Tests
 			data.MinorAxis = height;
 			data.Area = width * height;
 			Contact contact = new Contact(data, timestamp);
-			HidContactInfo hidContactInfo = new HidContactInfo(tip, inRange, contact);
+			HidContactInfo hidContactInfo = new HidContactInfo(state, contact);
 			return hidContactInfo;
 		}
 	}

@@ -8,8 +8,7 @@ namespace Multitouch.Driver.Logic
 {
 	class HidContactInfo : IEquatable<HidContactInfo>
 	{
-		public bool TipSwitch { get; set; }
-		public bool InRange { get; set; }
+		public HidContactState State { get; set; }
 		public ushort X { get; set; }
 		public ushort Y { get; set; }
 		public ushort Pressure { get; set; }
@@ -24,20 +23,55 @@ namespace Multitouch.Driver.Logic
 		/// </summary>
 		public const byte HidContactInfoSize = 14;
 
-		const ushort MAX_SIZE = 32767;
-		static readonly double XRatio = SystemParameters.VirtualScreenWidth / MAX_SIZE;
-		static readonly double YRatio = SystemParameters.VirtualScreenHeight / MAX_SIZE;
+		const ushort MaxSize = 32767;
+		static readonly double XRatio = SystemParameters.VirtualScreenWidth / MaxSize;
+		static readonly double YRatio = SystemParameters.VirtualScreenHeight / MaxSize;
 
-		internal HidContactInfo(bool tipSwitch, bool inRange, Contact contact)
+		public bool TipSwitch
 		{
-			TipSwitch = tipSwitch;
-			InRange = inRange;
+			get
+			{
+				switch (State)
+				{
+					case HidContactState.Adding:
+					case HidContactState.Removing:
+					case HidContactState.Removed:
+						return false;
+					case HidContactState.Updated:
+						return true;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
+		}
+
+		public bool InRange
+		{
+			get
+			{
+				switch (State)
+				{
+					case HidContactState.Adding:
+					case HidContactState.Updated:
+					case HidContactState.Removing:
+						return true;
+					case HidContactState.Removed:
+						return false;
+					default:
+						throw new ArgumentOutOfRangeException();
+				}
+			}
+		}
+
+		internal HidContactInfo(HidContactState state, Contact contact)
+		{
+			State = state;
 			Point point = GetPoint(contact.Position, contact.Hwnd);
 			X = Convert.ToUInt16(point.X);
 			Y = Convert.ToUInt16(point.Y);
 			Width = Convert.ToUInt16(contact.MajorAxis);
 			Height = Convert.ToUInt16(contact.MinorAxis);
-			Pressure = Convert.ToUInt16(Math.Max(0, Math.Min(MAX_SIZE, contact.Area)));
+			Pressure = Convert.ToUInt16(Math.Max(0, Math.Min(MaxSize, contact.Area)));
 			Id = Convert.ToUInt16(contact.Id);
 			Timestamp = DateTime.Now;
 		}
@@ -88,8 +122,8 @@ namespace Multitouch.Driver.Logic
 
 		public override string ToString()
 		{
-			return string.Format("Tip: {0}, In: {1}, Id: {2}, X,Y: {3},{4}, W,H: {5},{6}, Pressure: {7}\r\n",
-				TipSwitch, InRange, Id, X, Y, Width, Height, Pressure);
+			return string.Format("Id: {0}, State: {1}, TipSwitch: {2}, InRange: {3}, X,Y: {4},{5}, W,H: {6},{7}, Pressure: {8}, TimeStamp: {9}",
+				Id, State, TipSwitch, InRange, X, Y, Width, Height, Pressure, Timestamp.Ticks);
 		}
 	}
 }

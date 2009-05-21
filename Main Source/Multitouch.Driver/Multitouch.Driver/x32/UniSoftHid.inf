@@ -3,9 +3,10 @@ Signature="$WINDOWS NT$"
 Class=HIDClass
 ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
 Provider=%VENDOR%
-CatalogFile=UniSoftHid.cat
+CatalogFile.NTx86=UniSoftHid_x86.cat
+CatalogFile.NTAMD64=UniSoftHid_amd64.cat
 LayoutFile=layout.inf
-DriverVer=03/21/2009,6.1.7000.0
+DriverVer=05/21/2009,6.1.7100.0
 
 ;
 ;   Layout.inf (etc.) list all files shipped with the operating system so the 
@@ -24,6 +25,9 @@ DriverVer=03/21/2009,6.1.7000.0
 [SourceDisksFiles]
 unisofthid.sys = 99
 
+[SourceDisksNames.AMD64]
+99 = %DISK_NAME%,,,\amd64
+
 [SourceDisksNames.x86]
 99 = %DISK_NAME%,,,\i386
 
@@ -39,7 +43,7 @@ CopyFilesSYS = 12     ; should it be 10 to take care of 98 stuff??????
 %UniSoftHidDevice%  = UniSoftHidDevice.Inst,  HID\UniSoftHidDevice
 
 [ControlFlags]
-ExcludeFromSelect  = HID\MyVirtualHidDevice
+ExcludeFromSelect  = HID\UniSoftHidDevice
 
 ;===============================================================
 ;   UniSoftHid install section

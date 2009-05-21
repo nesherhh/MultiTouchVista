@@ -259,26 +259,21 @@ namespace MultipleMice.Native
 		{
 			uint numDevices = 0;
 
-			uint res = Win32.GetRawInputDeviceList(IntPtr.Zero,
-			                                       ref numDevices, Win32.SIZEOF_RAWINPUTDEVICELIST);
+			uint res = Win32.GetRawInputDeviceList(null, ref numDevices, Win32.SIZEOF_RAWINPUTDEVICELIST);
 
 			if (res != 0)
 				throw new Win32Exception(Marshal.GetLastWin32Error());
 
-			List<RawDevice> deviceList = new List<RawDevice>((int)numDevices);
+			List<RawDevice> deviceList = new List<RawDevice>((int) numDevices);
 
 			if (numDevices > 0)
 			{
 				RAWINPUTDEVICELIST[] rawDevices = new RAWINPUTDEVICELIST[numDevices];
 
-				fixed (RAWINPUTDEVICELIST* pRawDevices = rawDevices)
-				{
-					res = Win32.GetRawInputDeviceList((IntPtr)pRawDevices,
-					                                  ref numDevices, Win32.SIZEOF_RAWINPUTDEVICELIST);
+				res = Win32.GetRawInputDeviceList(rawDevices, ref numDevices, Win32.SIZEOF_RAWINPUTDEVICELIST);
 
-					if (res != numDevices)
-						throw new Win32Exception(Marshal.GetLastWin32Error());
-				}
+				if (res != numDevices)
+					throw new Win32Exception(Marshal.GetLastWin32Error());
 
 				foreach (RAWINPUTDEVICELIST rawDevice in rawDevices)
 				{
@@ -419,11 +414,14 @@ namespace MultipleMice.Native
 		{
 			uint charCount = 0;
 
-			uint res = Win32.GetRawInputDeviceInfo(hDevice,
-			                                       Win32.RIDI_DEVICENAME, IntPtr.Zero, ref charCount);
+
+			RID_DEVICE_INFO info = new RID_DEVICE_INFO();
+			info.cbSize = (uint) Marshal.SizeOf(typeof (RID_DEVICE_INFO));
+			charCount = info.cbSize;
+			uint res = Win32.GetRawInputDeviceInfo(hDevice, Win32.RIDI_DEVICENAME, ref info, ref charCount);
 
 #if DEBUG
-			if (res != 0)
+			if (res < 1)
 				throw new Win32Exception(Marshal.GetLastWin32Error());
 #endif // DEBUG
 
@@ -434,8 +432,7 @@ namespace MultipleMice.Native
 				char* pName = stackalloc char[(int)charCount + 1];
 				pName[0] = '\0';
 
-				res = Win32.GetRawInputDeviceInfo(hDevice,
-				                                  Win32.RIDI_DEVICENAME, (IntPtr)pName, ref charCount);
+				res = Win32.GetRawInputDeviceInfo(hDevice, Win32.RIDI_DEVICENAME, (IntPtr)pName, ref charCount);
 
 #if DEBUG
 				if (res != charCount)
@@ -670,14 +667,10 @@ namespace MultipleMice.Native
 			info.cbSize = Win32.SIZEOF_RID_DEVICE_INFO;
 			uint dataSize = Win32.SIZEOF_RID_DEVICE_INFO;
 
-			fixed (RID_DEVICE_INFO* pInfo = &info)
-			{
-				uint res = Win32.GetRawInputDeviceInfo(hDevice,
-				                                       Win32.RIDI_DEVICEINFO, (IntPtr)pInfo, ref dataSize);
+			uint res = Win32.GetRawInputDeviceInfo(hDevice, Win32.RIDI_DEVICEINFO, ref info, ref dataSize);
 
-				if (res == unchecked((uint)-1)) // UInt32.MaxValue;
-					throw new Win32Exception(Marshal.GetLastWin32Error());
-			}
+			if (res == unchecked((uint) -1)) // UInt32.MaxValue;
+				throw new Win32Exception(Marshal.GetLastWin32Error());
 		}
 	}
 
@@ -1009,14 +1002,33 @@ namespace MultipleMice.Native
 	/// </summary>
 	public sealed class MouseData : RawData
 	{
-		private RAWINPUT input;
+		private readonly RAWINPUT32 input32;
+		private readonly RAWINPUT64 input64;
+
+		private MouseData()
+		{
+			if (IntPtr.Size == 4)
+				input32 = new RAWINPUT32();
+			else
+				input64 = new RAWINPUT64();
+		}
+
+		private IRAWINPUT Input
+		{
+			get
+			{
+				if (IntPtr.Size == 4)
+					return input32;
+				return input64;
+			}
+		}
 
 		/// <summary>
 		/// Information about the state of the mouse.
 		/// </summary>
 		public MouseState State
 		{
-			get { return (MouseState)input.mouse.usFlags; }
+			get { return (MouseState)Input.Mouse.usFlags; }
 		}
 
 		/// <summary>
@@ -1027,7 +1039,7 @@ namespace MultipleMice.Native
 		/// </remarks>
 		public int X
 		{
-			get { return input.mouse.lLastX; }
+			get { return Input.Mouse.lLastX; }
 		}
 
 		/// <summary>
@@ -1038,7 +1050,7 @@ namespace MultipleMice.Native
 		/// </remarks>
 		public int Y
 		{
-			get { return input.mouse.lLastY; }
+			get { return Input.Mouse.lLastY; }
 		}
 
 		/// <summary>
@@ -1046,7 +1058,7 @@ namespace MultipleMice.Native
 		/// </summary>
 		public int Wheel
 		{
-			get { return (short)input.mouse.usButtonData; } // Signed value.
+			get { return (short)Input.Mouse.usButtonData; } // Signed value.
 		}
 
 		/// <summary>
@@ -1054,7 +1066,7 @@ namespace MultipleMice.Native
 		/// </summary>
 		public MouseButtonState ButtonState
 		{
-			get { return (MouseButtonState)(input.mouse.usButtonFlags & ~Win32.RI_MOUSE_WHEEL); }
+			get { return (MouseButtonState)(Input.Mouse.usButtonFlags & ~Win32.RI_MOUSE_WHEEL); }
 		}
 
 		/// <summary>
@@ -1062,22 +1074,28 @@ namespace MultipleMice.Native
 		/// </summary>
 		public long RawButtonState
 		{
-			get { return input.mouse.ulRawButtons; }
+			get { return Input.Mouse.ulRawButtons; }
 		}
 
-		internal unsafe MouseData(IntPtr hRawInput)
+		internal unsafe MouseData(IntPtr hRawInput) : this()
 		{
-			uint dataSize = Win32.SIZEOF_RAWINPUT;
+			uint dataSize = (uint) Marshal.SizeOf(Input);
 
-			fixed (RAWINPUT* pInput = &input)
+			uint res;
+			if (IntPtr.Size == 4)
 			{
-				uint res = Win32.GetRawInputData(hRawInput, Win32.RID_INPUT,
-				                                 (IntPtr)pInput, ref dataSize, Win32.SIZEOF_RAWINPUTHEADER);
-
-				if (res == unchecked((uint)-1)) // UInt32.MaxValue;
-					throw new Win32Exception(Marshal.GetLastWin32Error());
+				res = Win32.GetRawInputData(hRawInput, Win32.RID_INPUT,
+				                            out input32, ref dataSize, Win32.SIZEOF_RAWINPUTHEADER);
 			}
-		}
+			else
+			{
+				res = Win32.GetRawInputData(hRawInput, Win32.RID_INPUT,
+							out input64, ref dataSize, Win32.SIZEOF_RAWINPUTHEADER);
+			}
+
+			if (res == unchecked((uint) -1)) // UInt32.MaxValue;
+			    throw new Win32Exception(Marshal.GetLastWin32Error());
+		 }
 	}
 
 	/// <summary>
@@ -1085,7 +1103,26 @@ namespace MultipleMice.Native
 	/// </summary>
 	public sealed class KeyboardData : RawData
 	{
-		private RAWINPUT input;
+		private readonly RAWINPUT32 input32;
+		private readonly RAWINPUT64 input64;
+
+		private KeyboardData()
+		{
+			if (IntPtr.Size == 4)
+				input32 = new RAWINPUT32();
+			else
+				input64 = new RAWINPUT64();
+		}
+
+		private IRAWINPUT Input
+		{
+			get
+			{
+				if (IntPtr.Size == 4)
+					return input32;
+				return input64;
+			}
+		}
 
 		/// <summary>
 		/// Scan code.
@@ -1097,7 +1134,7 @@ namespace MultipleMice.Native
 		/// </remarks>
 		public int MakeCode
 		{
-			get { return input.keyboard.MakeCode; }
+			get { return Input.Keyboard.MakeCode; }
 		}
 
 		/// <summary>
@@ -1113,7 +1150,7 @@ namespace MultipleMice.Native
 		/// </remarks>
 		public int ScanCode
 		{
-			get { return input.keyboard.Flags; }
+			get { return Input.Keyboard.Flags; }
 		}
 
 		/// <summary>
@@ -1121,7 +1158,7 @@ namespace MultipleMice.Native
 		/// </summary>
 		public Keys Key
 		{
-			get { return (Keys)input.keyboard.VKey; }
+			get { return (Keys)Input.Keyboard.VKey; }
 		}
 
 		/// <summary>
@@ -1129,21 +1166,21 @@ namespace MultipleMice.Native
 		/// </summary>
 		public KeyState KeyState
 		{
-			get { return (KeyState)input.keyboard.Message; }
+			get { return (KeyState)Input.Keyboard.Message; }
 		}
 
-		internal unsafe KeyboardData(IntPtr hRawInput)
+		internal unsafe KeyboardData(IntPtr hRawInput) : this()
 		{
-			uint dataSize = Win32.SIZEOF_RAWINPUT;
+			uint dataSize = (uint) Marshal.SizeOf(Input);
 
-			fixed (RAWINPUT* pInput = &input)
-			{
-				uint res = Win32.GetRawInputData(hRawInput, Win32.RID_INPUT,
-				                                 (IntPtr)pInput, ref dataSize, Win32.SIZEOF_RAWINPUTHEADER);
+			uint res;
+			if(IntPtr.Size == 4)
+				res = Win32.GetRawInputData(hRawInput, Win32.RID_INPUT, out input32, ref dataSize, Win32.SIZEOF_RAWINPUTHEADER);
+			else
+				res = Win32.GetRawInputData(hRawInput, Win32.RID_INPUT, out input64, ref dataSize, Win32.SIZEOF_RAWINPUTHEADER);
 
-				if (res == unchecked((uint)-1)) // UInt32.MaxValue;
-					throw new Win32Exception(Marshal.GetLastWin32Error());
-			}
+			if (res == unchecked((uint) -1)) // UInt32.MaxValue;
+				throw new Win32Exception(Marshal.GetLastWin32Error());
 		}
 	}
 
@@ -1232,10 +1269,20 @@ namespace MultipleMice.Native
 			if (hGlobal == IntPtr.Zero)
 				throw new ObjectDisposedException("DeviceData");
 
-			RAWINPUT* pInput = (RAWINPUT*)hGlobal;
-			dataSize = (int)pInput->hid.dwSizeHid;
-			dataCount = (int)pInput->hid.dwCount;
-			return (IntPtr)(&pInput->hid.bRawData);
+			if (IntPtr.Size == 4)
+			{
+				RAWINPUT32* pInput = (RAWINPUT32*) hGlobal;
+				dataSize = (int) pInput->Hid.dwSizeHid;
+				dataCount = (int) pInput->Hid.dwCount;
+				return (IntPtr) (&pInput->hid.bRawData);
+			}
+			else
+			{
+				RAWINPUT64* pInput = (RAWINPUT64*) hGlobal;
+				dataSize = (int) pInput->Hid.dwSizeHid;
+				dataCount = (int) pInput->Hid.dwCount;
+				return (IntPtr) (&pInput->hid.bRawData);
+			}
 		}
 
 		/// <summary>

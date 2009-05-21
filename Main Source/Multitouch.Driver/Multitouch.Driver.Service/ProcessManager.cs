@@ -4,9 +4,9 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using Multitouch.Service.Native;
+using Multitouch.Driver.Service.Native;
 
-namespace Multitouch.Service
+namespace Multitouch.Driver.Service
 {
 	class ProcessManager : IDisposable
 	{
@@ -21,30 +21,32 @@ namespace Multitouch.Service
 
 		public void Dispose()
 		{
-			Process process = Process.GetProcessById(processInfo.dwProcessId);
-			process.Kill();
-			NativeMethods.CloseHandle(processInfo.hThread);
-			NativeMethods.CloseHandle(processInfo.hProcess);
+			if (processInfo.dwProcessId != 0)
+			{
+				Process process = Process.GetProcessById(processInfo.dwProcessId);
+				process.Kill();
+				NativeMethods.CloseHandle(processInfo.hThread);
+				NativeMethods.CloseHandle(processInfo.hProcess);
 
-			if (environment != IntPtr.Zero)
-				NativeMethods.DestroyEnvironmentBlock(environment);
+				if (environment != IntPtr.Zero)
+					NativeMethods.DestroyEnvironmentBlock(environment);
 
-			if (tokenCopy != IntPtr.Zero)
-				NativeMethods.CloseHandle(tokenCopy);
+				if (tokenCopy != IntPtr.Zero)
+					NativeMethods.CloseHandle(tokenCopy);
+			}
 		}
 
 		private void StartProcess()
 		{
-			Debugger.Break();
 			uint id = (uint)NativeMethods.WTSGetActiveConsoleSessionId();
 
 			IntPtr token;
 			bool ok = NativeMethods.WTSQueryUserToken(id, out token);
-            
+
 			NativeMethods.SECURITY_ATTRIBUTES security = new NativeMethods.SECURITY_ATTRIBUTES();
 			security.nLength = Marshal.SizeOf(typeof(NativeMethods.SECURITY_ATTRIBUTES));
 			if (!NativeMethods.DuplicateTokenEx(token, NativeMethods.ACCESS_MASK.MAXIMUM_ALLOWED, ref security,
-				NativeMethods.SECURITY_IMPERSONATION_LEVEL.SecurityIdentification, NativeMethods.TOKEN_TYPE.TokenPrimary, out tokenCopy))
+			                                    NativeMethods.SECURITY_IMPERSONATION_LEVEL.SecurityIdentification, NativeMethods.TOKEN_TYPE.TokenPrimary, out tokenCopy))
 			{
 				throw new Exception("Can't create duplicate token");
 			}
@@ -63,12 +65,13 @@ namespace Multitouch.Service
 
 			string location = Assembly.GetEntryAssembly().Location;
 			StringBuilder cmd = new StringBuilder();
-			cmd.AppendFormat("{0} {1}", location, EMBEDDING);
+			cmd.AppendFormat("\"{0}\" {1}", location, EMBEDDING);
 
+			string directory = Path.GetDirectoryName(location);
 			if (!NativeMethods.CreateProcessAsUser(tokenCopy, null, cmd, ref security, ref security, false,
-				NativeMethods.CREATE_UNICODE_ENVIRONMENT, environment, Path.GetDirectoryName(location), ref startupInfo, out processInfo))
+				NativeMethods.CREATE_UNICODE_ENVIRONMENT, environment, directory, ref startupInfo, out processInfo))
 			{
-				throw new Exception("Can't create process as a user");
+				throw new Exception("Can't create process as a user. Error: " + Marshal.GetLastWin32Error());
 			}
 		}
 
