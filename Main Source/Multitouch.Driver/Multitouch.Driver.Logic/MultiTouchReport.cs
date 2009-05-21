@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 using HIDLibrary;
 using System.IO;
 
@@ -54,11 +55,11 @@ namespace Multitouch.Driver.Logic
 
 		public override string ToString()
 		{
-			string format = string.Empty;
+			StringBuilder sb = new StringBuilder();
 			foreach (HidContactInfo contactInfo in Contacts)
-				format += contactInfo.ToString();
-			format += "-----------------------------------";
-			return format;
+				sb.AppendLine(contactInfo.ToString());
+			sb.AppendLine("-----------------------------------");
+			return sb.ToString();
 		}
 	}
 }

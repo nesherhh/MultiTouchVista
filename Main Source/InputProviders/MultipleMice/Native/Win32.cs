@@ -80,16 +80,17 @@ namespace MultipleMice.Native
 	[StructLayout(LayoutKind.Explicit)]
 	internal struct RID_DEVICE_INFO
 	{
+		// Fields
 		[FieldOffset(0)]
 		public uint cbSize;
 		[FieldOffset(4)]
 		public uint dwType;
 		[FieldOffset(8)]
-		public RID_DEVICE_INFO_MOUSE mouse;
+		public RID_DEVICE_INFO_HID hid;
 		[FieldOffset(8)]
 		public RID_DEVICE_INFO_KEYBOARD keyboard;
 		[FieldOffset(8)]
-		public RID_DEVICE_INFO_HID hid;
+		public RID_DEVICE_INFO_MOUSE mouse;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -107,7 +108,7 @@ namespace MultipleMice.Native
 		public uint dwType;
 		public uint dwSize;
 		public IntPtr hDevice;
-		public UIntPtr wParam;
+		public IntPtr wParam;
 	}
 
 	[StructLayout(LayoutKind.Explicit)]
@@ -150,17 +151,82 @@ namespace MultipleMice.Native
 		public byte bRawData; // fixed byte bRawData[ 1 ];
 	}
 
-	[StructLayout(LayoutKind.Explicit)]
-	internal struct RAWINPUT
+	internal interface IRAWINPUT
 	{
-		[FieldOffset(0)]
-		public RAWINPUTHEADER header;
-		[FieldOffset(16)]
-		public RAWMOUSE mouse;
+		RAWINPUTHEADER Header { get; set; }
+		RAWMOUSE Mouse { get; set; }
+		RAWKEYBOARD Keyboard { get; set; }
+		RAWHID Hid { get; set; }
+	}
+
+	[StructLayout(LayoutKind.Explicit)]
+	internal struct RAWINPUT32 : IRAWINPUT
+	{
+		[FieldOffset(0)] public RAWINPUTHEADER header;
+		[FieldOffset(16)] public RAWMOUSE mouse;
 		[FieldOffset(16)] // Union.
 			public RAWKEYBOARD keyboard;
 		[FieldOffset(16)] // Union.
 			public RAWHID hid;
+
+		public RAWINPUTHEADER Header
+		{
+			get { return header; }
+			set { header = value; }
+		}
+
+		public RAWMOUSE Mouse
+		{
+			get { return mouse; }
+			set { mouse = value; }
+		}
+
+		public RAWKEYBOARD Keyboard
+		{
+			get { return keyboard; }
+			set { keyboard = value; }
+		}
+
+		public RAWHID Hid
+		{
+			get { return hid; }
+			set { hid = value; }
+		}
+	}
+
+	[StructLayout(LayoutKind.Explicit)]
+	internal struct RAWINPUT64 : IRAWINPUT
+	{
+		[FieldOffset(0)] public RAWINPUTHEADER header;
+		[FieldOffset(24)] public RAWMOUSE mouse;
+		[FieldOffset(24)] // Union.
+			public RAWKEYBOARD keyboard;
+		[FieldOffset(24)] // Union.
+			public RAWHID hid;
+
+		public RAWINPUTHEADER Header
+		{
+			get { return header; }
+			set { header = value; }
+		}
+
+		public RAWMOUSE Mouse
+		{
+			get { return mouse; }
+			set { mouse = value; }
+		}
+
+		public RAWKEYBOARD Keyboard
+		{
+			get { return keyboard; }
+			set { keyboard = value; }
+		}
+
+		public RAWHID Hid
+		{
+			get { return hid; }
+			set { hid = value; }
+		}
 	}
 
 	[SuppressUnmanagedCodeSecurity]
@@ -208,25 +274,20 @@ namespace MultipleMice.Native
 			(uint)Marshal.SizeOf(typeof(RAWINPUTDEVICE));
 		public static readonly uint SIZEOF_RAWINPUTHEADER =
 			(uint)Marshal.SizeOf(typeof(RAWINPUTHEADER));
-		public static readonly uint SIZEOF_RAWINPUT =
-			(uint)Marshal.SizeOf(typeof(RAWINPUT));
+		public static readonly uint SIZEOF_RAWINPUT64 =
+			(uint)Marshal.SizeOf(typeof(RAWINPUT64));
+		public static readonly uint SIZEOF_RAWINPUT32 =
+			(uint)Marshal.SizeOf(typeof(RAWINPUT32));
 
-		[DllImport("user32.dll", SetLastError = true)]
-		public static extern uint GetRawInputDeviceList
-			(
-			IntPtr pRawInputDeviceList, // [ In, Out ] RAWINPUTDEVICELIST[ ]
-			ref uint puiNumDevices,
-			uint cbSize
-			);
+		[SuppressUnmanagedCodeSecurity, SecurityCritical, DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+		public static extern uint GetRawInputDeviceList([In, Out] RAWINPUTDEVICELIST[] ridl, [In, Out] ref uint numDevices, uint sizeInBytes);
 
-		[DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-		public static extern uint GetRawInputDeviceInfo
-			(
-			IntPtr hDevice,
-			uint uiCommand,
-			IntPtr pData, // ref RID_DEVICE_INFO
-			ref uint pcbSize
-			);
+		[SecurityCritical, SuppressUnmanagedCodeSecurity, DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+		public static extern uint GetRawInputDeviceInfo(IntPtr hDevice, uint command, [In] ref RID_DEVICE_INFO ridInfo, ref uint sizeInBytes);
+
+		[SecurityCritical, SuppressUnmanagedCodeSecurity, DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+		public static extern uint GetRawInputDeviceInfo(IntPtr hDevice, uint command, [In] IntPtr ridInfo, ref uint sizeInBytes);
+ 
 
 		[DllImport("user32.dll", SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
@@ -251,6 +312,26 @@ namespace MultipleMice.Native
 			IntPtr hRawInput,
 			uint uiCommand,
 			IntPtr pData, // [ In, Out ] byte[ ] // ref RAWINPUTHEADER
+			ref uint pcbSize,
+			uint cbSizeHeader
+			);
+
+		[DllImport("user32.dll")]
+		public static extern uint GetRawInputData
+			(
+			IntPtr hRawInput,
+			uint uiCommand,
+			[Out] out RAWINPUT32 input,
+			ref uint pcbSize,
+			uint cbSizeHeader
+			);
+
+		[DllImport("user32.dll")]
+		public static extern uint GetRawInputData
+			(
+			IntPtr hRawInput,
+			uint uiCommand,
+			[Out] out RAWINPUT64 input,
 			ref uint pcbSize,
 			uint cbSizeHeader
 			);

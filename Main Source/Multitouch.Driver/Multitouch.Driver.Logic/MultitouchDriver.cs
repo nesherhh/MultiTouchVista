@@ -30,13 +30,13 @@ namespace Multitouch.Driver.Logic
 				switch (contact.State)
 				{
 					case ContactState.New:
-						communicator.AddContact(new HidContactInfo(true, true, contact));
+						communicator.AddContact(new HidContactInfo(HidContactState.Adding, contact));
 						break;
 					case ContactState.Moved:
-						communicator.UpdateContact(new HidContactInfo(true, true, contact));
+						communicator.UpdateContact(new HidContactInfo(HidContactState.Updated, contact));
 						break;
 					case ContactState.Removed:
-						communicator.RemoveContact(new HidContactInfo(false, false, contact));
+						communicator.RemoveContact(new HidContactInfo(HidContactState.Removing, contact));
 						break;
 					default:
 						throw new ArgumentOutOfRangeException();

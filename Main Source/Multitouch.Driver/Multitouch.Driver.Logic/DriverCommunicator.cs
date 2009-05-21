@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Timers;
 using HIDLibrary;
 
@@ -15,19 +16,28 @@ namespace Multitouch.Driver.Logic
 		readonly Timer timer;
 		private readonly HidDevice device;
 
+		// Device interface detail data
+		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+		public struct SP_DEVICE_INTERFACE_DETAIL_DATA
+		{
+			public UInt32 cbSize;
+			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
+			public string DevicePath;
+		}
+
 		public DriverCommunicator()
 		{
 			device = HidDevices.Enumerate(0xdddd, 0x0001).FirstOrDefault();
 			if (device == null)
 				throw new InvalidOperationException("Universal Software HID driver was not found. Please ensure that it is installed.");
 
-			device.OpenDevice(HidDevice.DeviceMode.Overlapped, HidDevice.DeviceMode.NonOverlapped);
+			device.Open(HidDevice.DeviceMode.Overlapped, HidDevice.DeviceMode.NonOverlapped);
 
 			contacts = new ContactCollection();
 
 			timer = new Timer();
 			timer.AutoReset = false;
-			timer.Interval = 50d / 1000;
+			timer.Interval = 15d / 1000;
 			timer.Elapsed += timer_Elapsed;
 			timer.Start();
 		}
@@ -40,7 +50,6 @@ namespace Multitouch.Driver.Logic
 
 		public void SendContacts()
 		{
-			bool firstReport = true;
 			int index = 0;
 
 			DateTime now = DateTime.Now;
@@ -49,12 +58,12 @@ namespace Multitouch.Driver.Logic
 			try
 			{
 				List<HidContactInfo> tmpList = new List<HidContactInfo>(contacts);
-				MultiTouchReport report = new MultiTouchReport((byte)tmpList.Count, firstReport);
+				MultiTouchReport report = new MultiTouchReport((byte) tmpList.Count, true);
 				foreach (HidContactInfo info in tmpList)
 				{
 					TimeSpan span = now - info.Timestamp;
 					if (span.Seconds > ContactTimeout)
-						info.InRange = info.TipSwitch = false;
+						info.State = HidContactState.Removing;
 
 					report.Contacts.Add(info);
 					index++;
@@ -65,17 +74,35 @@ namespace Multitouch.Driver.Logic
 					{
 						SendReport(report);
 
-						firstReport = false;
-						report = new MultiTouchReport((byte)tmpList.Count, firstReport);
+						report = new MultiTouchReport((byte) tmpList.Count, false);
 					}
 				}
 
-				foreach (HidContactInfo info in tmpList.Where(c => !c.InRange && !c.TipSwitch))
+				foreach (HidContactInfo info in tmpList.Where(c => c.State == HidContactState.Removed).ToList())
+				{
 					contacts.Remove(info);
+					tmpList.Remove(info);
+				}
+
+				UpdateStateTransition(tmpList, HidContactState.Removing, HidContactState.Removed);
+				UpdateStateTransition(tmpList, HidContactState.Adding, HidContactState.Updated);
 			}
 			finally
 			{
 				contacts.LockObject.ExitWriteLock();
+			}
+		}
+
+		private void UpdateStateTransition(IEnumerable<HidContactInfo> tmpList, HidContactState startState, HidContactState endState)
+		{
+			foreach (HidContactInfo info in tmpList.Where(c => c.State == startState))
+			{
+				HidContactInfo contact;
+				if (contacts.TryGet(info.Id, out contact))
+				{
+					info.State = endState;
+					info.Timestamp = DateTime.Now;
+				}
 			}
 		}
 
@@ -100,20 +127,13 @@ namespace Multitouch.Driver.Logic
 
 		public void UpdateContact(HidContactInfo info)
 		{
-			int index = 0;
 			contacts.LockObject.EnterWriteLock();
 			try
 			{
-				foreach (HidContactInfo contact in contacts)
-				{
-					if (contact.Equals(info))
-					{
-						info.Timestamp = DateTime.Now;
-						contacts[index] = info;
-						break;
-					}
-					index++;
-				}
+				info.Timestamp = DateTime.Now;
+				int index = contacts.IndexOf(info);
+				if(index >= 0)
+					contacts[index] = info;
 			}
 			finally
 			{

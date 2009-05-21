@@ -13,9 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Multitouch.Driver.vsmdi = Multitouch.Driver.vsmdi
 	EndProjectSection
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "HIDLibrary", "Libraries\HIDLibrary\HIDLibrary.vbproj", "{E619EB3B-FA9E-43DE-8555-244E20C28E96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Driver.Service", "Multitouch.Driver\Multitouch.Driver.Service\Multitouch.Driver.Service.csproj", "{18E78819-C37F-4E5D-B6B4-B114DDA41967}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Service.Logic", "Multitouch.Service.Logic\Multitouch.Service.Logic.csproj", "{1720CC0B-4411-4FE5-A51C-D539BB19AC54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multitouch.Contracts", "Multitouch.Contracts\Multitouch.Contracts.csproj", "{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
@@ -28,6 +36,18 @@ Global
 		SccProjectUniqueName3 = Multitouch.Driver\\Multitouch.Driver.Tests\\Multitouch.Driver.Tests.csproj
 		SccProjectName3 = Multitouch.Driver/Multitouch.Driver.Tests
 		SccLocalPath3 = Multitouch.Driver\\Multitouch.Driver.Tests
+		SccProjectUniqueName4 = Libraries\\HIDLibrary\\HIDLibrary.vbproj
+		SccProjectName4 = Libraries/HIDLibrary
+		SccLocalPath4 = Libraries\\HIDLibrary
+		SccProjectUniqueName5 = Multitouch.Driver\\Multitouch.Driver.Service\\Multitouch.Driver.Service.csproj
+		SccProjectName5 = Multitouch.Driver/Multitouch.Driver.Service
+		SccLocalPath5 = Multitouch.Driver\\Multitouch.Driver.Service
+		SccProjectUniqueName6 = Multitouch.Service.Logic\\Multitouch.Service.Logic.csproj
+		SccProjectName6 = Multitouch.Service.Logic
+		SccLocalPath6 = Multitouch.Service.Logic
+		SccProjectUniqueName7 = Multitouch.Contracts\\Multitouch.Contracts.csproj
+		SccProjectName7 = Multitouch.Contracts
+		SccLocalPath7 = Multitouch.Contracts
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Multitouch.Driver.vsmdi
@@ -49,6 +69,22 @@ Global
 		{5CD2E056-21BD-457F-A0DF-77E0B89B0684}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CD2E056-21BD-457F-A0DF-77E0B89B0684}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CD2E056-21BD-457F-A0DF-77E0B89B0684}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E619EB3B-FA9E-43DE-8555-244E20C28E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E619EB3B-FA9E-43DE-8555-244E20C28E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E619EB3B-FA9E-43DE-8555-244E20C28E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E619EB3B-FA9E-43DE-8555-244E20C28E96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18E78819-C37F-4E5D-B6B4-B114DDA41967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18E78819-C37F-4E5D-B6B4-B114DDA41967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18E78819-C37F-4E5D-B6B4-B114DDA41967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18E78819-C37F-4E5D-B6B4-B114DDA41967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1720CC0B-4411-4FE5-A51C-D539BB19AC54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{741BC9A8-EFDE-4BA7-8F91-DC9B4F548A20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

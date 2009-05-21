@@ -2,7 +2,7 @@
 using System.ServiceProcess;
 using System.Windows.Forms;
 
-namespace Multitouch.Service
+namespace Multitouch.Driver.Service
 {
 	static class Program
 	{
@@ -12,11 +12,11 @@ namespace Multitouch.Service
 		static void Main(string[] args)
 		{
 			if (args.Length == 0)
-				ServiceBase.Run(new MultitouchService());
+				ServiceBase.Run(new DriverService());
 			else
 			{
 				if (args[0].Equals(ProcessManager.EMBEDDING, StringComparison.InvariantCultureIgnoreCase))
-					Application.Run(new MultitouchInputContext());
+					Application.Run(new Context());
 			}
 		}
 	}
