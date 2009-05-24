@@ -11,12 +11,14 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 	public class ApplicationInterfaceService : IApplicationInterface
 	{
 		readonly Dictionary<string, SessionContext> sessions;
-		readonly Dictionary<IntPtr, SessionContext> handleToSessionMap;
+		
+		//several sessions can receive data for the same handle.
+		readonly Dictionary<SessionContext, ICollection<IntPtr>> sessionToHandlesMap;
 
 		public ApplicationInterfaceService()
 		{
 			sessions = new Dictionary<string, SessionContext>();
-			handleToSessionMap = new Dictionary<IntPtr, SessionContext>();
+			sessionToHandlesMap = new Dictionary<SessionContext, ICollection<IntPtr>>();
 		}
 
 		public void CreateSession()
@@ -24,7 +26,9 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 			string sessionId = OperationContext.Current.SessionId;
 			if (sessions.ContainsKey(sessionId))
 				throw new MultitouchException(string.Format("session '{0}' is already created", sessionId));
-			sessions.Add(sessionId, new SessionContext(sessionId, OperationContext.Current.GetCallbackChannel<IApplicationInterfaceCallback>()));
+			SessionContext context = new SessionContext(sessionId, OperationContext.Current.GetCallbackChannel<IApplicationInterfaceCallback>());
+			sessions.Add(sessionId, context);
+			sessionToHandlesMap.Add(context, new HashSet<IntPtr>());
 
 			UpdateGlobalSendEmptyFrames();
 			UpdateGlobalImageSetting(ImageType.Binarized);
@@ -38,8 +42,7 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 
 		void RemoveSession(SessionContext session)
 		{
-			foreach (IntPtr handle in session)
-				handleToSessionMap.Remove(handle);
+			sessionToHandlesMap.Remove(session);
 			if (OperationContext.Current != null)
 				sessions.Remove(OperationContext.Current.SessionId);
 			else
@@ -54,13 +57,20 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 		{
 			SessionContext sessionContext = GetSessionContext();
 			sessionContext.Add(windowHandle);
-			handleToSessionMap.Add(windowHandle, sessionContext);
+
+			ICollection<IntPtr> handlesList;
+			if(sessionToHandlesMap.TryGetValue(sessionContext, out handlesList))
+				handlesList.Add(windowHandle);
 		}
 
 		public void RemoveWindowHandleFromSession(IntPtr windowHandle)
 		{
-			GetSessionContext().Remove(windowHandle);
-			handleToSessionMap.Remove(windowHandle);
+			SessionContext context = GetSessionContext();
+			context.Remove(windowHandle);
+
+			ICollection<IntPtr> handlesList;
+			if (sessionToHandlesMap.TryGetValue(context, out handlesList))
+				handlesList.Remove(windowHandle);
 		}
 
 		SessionContext GetSessionContext()
@@ -105,30 +115,26 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 				return;
 
 			// For each contact determinte it's target handle and group by this handle
-			IEnumerable<IGrouping<IntPtr, Contact>> contactsGroups = e.Contacts.GroupBy(contact => Utils.GetWindowFromPoint(contact.Position));
+			IEnumerable<IGrouping<IntPtr, Contact>> contactsGroupedByHandle = e.Contacts.GroupBy(contact => Utils.GetWindowFromPoint(contact.Position));
 
 			// Create a list with sessions and contacts that belong to this session
 			Dictionary<SessionContext, List<ContactData>> sessionList = new Dictionary<SessionContext, List<ContactData>>();
 
-			IntPtr invalidHandle = new IntPtr(-1);
-			foreach (IGrouping<IntPtr, Contact> contactsGroup in contactsGroups.Where(g => !g.Key.Equals(invalidHandle)))
+			foreach (IGrouping<IntPtr, Contact> handleWithContacts in contactsGroupedByHandle.Where(g => !g.Key.Equals(Utils.InvalidWindow)))
 			{
 				List<ContactData> contacts;
 
-				SessionContext sessionContext;
-				if (!handleToSessionMap.TryGetValue(contactsGroup.Key, out sessionContext))
+				foreach (SessionContext sessionContext in from map in sessionToHandlesMap
+														  where map.Value.Contains(handleWithContacts.Key) || map.Value.Contains(IntPtr.Zero)
+														  select map.Key)
 				{
-					if (!handleToSessionMap.TryGetValue(IntPtr.Zero, out sessionContext))
-						continue;
+					if (!sessionList.TryGetValue(sessionContext, out contacts))
+					{
+						contacts = new List<ContactData>();
+						sessionList.Add(sessionContext, contacts);
+					}
+					contacts.AddRange(handleWithContacts.Select(c => new ContactData(c, handleWithContacts.Key)));
 				}
-
-				if(!sessionList.TryGetValue(sessionContext, out contacts))
-				{
-					contacts = new List<ContactData>();
-					sessionList.Add(sessionContext, contacts);
-				}
-
-				contacts.AddRange(contactsGroup.Select(c => new ContactData(c, contactsGroup.Key)));
 			}
 
 			List<SessionContext> emptyFrameReceivers = new List<SessionContext>(sessions.Values);
@@ -154,7 +160,7 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 			{
 				try
 				{
-					session.Callback.Frame(new FrameData(e.Timestamp, new ContactData[0], GetImages(session, e.Images)));
+					session.Callback.Frame(new FrameData(e.Timestamp, Enumerable.Empty<ContactData>(), GetImages(session, e.Images)));
 				}
 				catch (Exception exc)
 				{

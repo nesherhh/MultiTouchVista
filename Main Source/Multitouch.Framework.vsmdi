@@ -3,4 +3,10 @@
   <TestList name="Lists of Tests" id="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
     <RunConfiguration id="b266432b-3fb9-4c59-bb4a-80cf981ac529" name="Local Test Run" storage="localtestrun.testrunconfig" type="Microsoft.VisualStudio.TestTools.Common.TestRunConfiguration, Microsoft.VisualStudio.QualityTools.Common,   PublicKeyToken=b03f5f7f11d50a3a" />
   </TestList>
+  <TestList name="Tests Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+    <TestLinks>
+      <TestLink id="4f9876fa-daf6-1ab2-ead4-51d9280dd753" name="TouchablePanelCapture" storage="framework\multitouch.framework.wpf.tests\bin\debug\multitouch.framework.wpf.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="6d58bdbc-43c9-ddf2-b5e1-4c3a6cbc3708" name="CaptureSubTree" storage="framework\multitouch.framework.wpf.tests\bin\debug\multitouch.framework.wpf.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    </TestLinks>
+  </TestList>
 </TestLists>
