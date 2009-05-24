@@ -20,11 +20,13 @@ namespace Multitouch.Service.Logic
 			return new Point(point.X, point.Y);
 		}
 
+		public static readonly IntPtr InvalidWindow = new IntPtr(-1);
+
 		public static IntPtr GetWindowFromPoint(Point position)
 		{
 			SystemWindow window = SystemWindow.FromPoint((int)(position.X + 0.5), (int)(position.Y+ 0.5));
 			if (window == null)
-				return new IntPtr(-1);
+				return InvalidWindow;
 			return window.HWnd;
 		}
 

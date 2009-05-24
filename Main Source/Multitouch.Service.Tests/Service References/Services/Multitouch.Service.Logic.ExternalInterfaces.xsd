@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Multitouch.Service.Logic.ExternalInterfaces" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Multitouch.Service.Logic.ExternalInterfaces" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Windows" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Multitouch.Contracts" />
+  <xs:complexType name="FrameData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Contacts" nillable="true" type="tns:ArrayOfContactData" />
+      <xs:element minOccurs="0" name="Images" nillable="true" type="tns:ArrayOfImageData" />
+      <xs:element minOccurs="0" name="Timestamp" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FrameData" nillable="true" type="tns:FrameData" />
+  <xs:complexType name="ArrayOfContactData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContactData" nillable="true" type="tns:ContactData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContactData" nillable="true" type="tns:ArrayOfContactData" />
+  <xs:complexType name="ContactData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Area" type="xs:double" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="Bounds" type="q1:Rect" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="Hwnd" type="q2:IntPtr" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="MajorAxis" type="xs:double" />
+      <xs:element minOccurs="0" name="MinorAxis" type="xs:double" />
+      <xs:element minOccurs="0" name="Orientation" type="xs:double" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.Windows" minOccurs="0" name="Position" type="q3:Point" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Multitouch.Contracts" minOccurs="0" name="State" type="q4:ContactState" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ContactData" nillable="true" type="tns:ContactData" />
+  <xs:complexType name="ArrayOfImageData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ImageData" nillable="true" type="tns:ImageData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfImageData" nillable="true" type="tns:ArrayOfImageData" />
+  <xs:complexType name="ImageData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BitsPerPixel" type="xs:int" />
+      <xs:element minOccurs="0" name="Data" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="Height" type="xs:int" />
+      <xs:element minOccurs="0" name="Stride" type="xs:int" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Multitouch.Contracts" minOccurs="0" name="Type" type="q5:ImageType" />
+      <xs:element minOccurs="0" name="Width" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImageData" nillable="true" type="tns:ImageData" />
+</xs:schema>
