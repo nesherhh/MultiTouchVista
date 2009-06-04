@@ -10,7 +10,7 @@ namespace Multitouch.Framework.Input
 	/// </summary>
 	public class Contact
 	{
-		internal Contact(ContactData contact, long timestamp)
+		internal Contact(ContactData contact, IntPtr relativeTo, long timestamp)
 		{
 			Area = contact.Area;
 			Bounds = contact.Bounds;
@@ -18,8 +18,9 @@ namespace Multitouch.Framework.Input
 			MajorAxis = contact.MajorAxis;
 			MinorAxis = contact.MinorAxis;
 			Orientation = contact.Orientation;
-			Position = contact.Position;
 			Hwnd = contact.Hwnd;
+			RelativeTo = relativeTo;
+			Position = ConvertPosition(contact.Position);
 
 			switch (contact.State)
 			{
@@ -36,6 +37,17 @@ namespace Multitouch.Framework.Input
 					throw new ArgumentOutOfRangeException();
 			}
 			Timestamp = timestamp;
+		}
+
+		private Point ConvertPosition(Point position)
+		{
+			if (!Hwnd.Equals(RelativeTo))
+			{
+				NativeMethods.POINT point = position.ToPOINT();
+				NativeMethods.MapWindowPoints(Hwnd, RelativeTo, ref point, 1);
+				return point.ToPoint();
+			}
+			return position;
 		}
 
 		/// <summary>
@@ -78,6 +90,11 @@ namespace Multitouch.Framework.Input
 		/// Contact state
 		/// </summary>
 		public ContactState State { get; private set; }
+
+		/// <summary>
+		/// Coordinates are relative to this window
+		/// </summary>
+		public IntPtr RelativeTo { get; set; }
 
 		/// <summary>
 		/// Timestamp of frame
