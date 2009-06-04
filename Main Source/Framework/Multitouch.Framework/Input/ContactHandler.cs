@@ -9,11 +9,23 @@ namespace Multitouch.Framework.Input
 	public class ContactHandler : IDisposable
 	{
 		bool receiveEmptyFrames;
-		CommunicationLogic logic;
+		readonly CommunicationLogic logic;
 
+		/// <summary>
+		/// Indicates that a frame from camera is received
+		/// </summary>
 		public event EventHandler<FrameEventArgs> Frame;
+		/// <summary>
+		/// A new contact is on surface
+		/// </summary>
 		public event EventHandler<ContactEventArgs> NewContact;
+		/// <summary>
+		/// Contact has been moved
+		/// </summary>
 		public event EventHandler<ContactEventArgs> ContactMoved;
+		/// <summary>
+		/// Contact has been removed
+		/// </summary>
 		public event EventHandler<ContactEventArgs> ContactRemoved;
 
 		/// <summary>
@@ -23,14 +35,36 @@ namespace Multitouch.Framework.Input
 		public IntPtr Handle { get; private set; }
 
 		/// <summary>
+		/// x,y will be relative to this window handle
+		/// </summary>
+		public IntPtr RelativeTo { get; set; }
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="ContactHandler"/> class.
 		/// </summary>
-		/// <param name="handle">The handle.</param>
+		/// <param name="handle">Window handle for which contacts should be received</param>
+		/// <remarks>
+		/// If /// <paramref name="handle"/> is <c>IntPtr.Zero</c> contacts for all windows will be received
+		/// </remarks>
 		public ContactHandler(IntPtr handle)
+			: this(handle, handle)
+		{ }
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ContactHandler"/> class.
+		/// </summary>
+		/// <param name="handle">Window handle for which contacts should be received</param>
+		/// <param name="relativeTo">Contacts coordinates will be relative to this window handle</param>
+		/// <remarks>
+		/// If <paramref name="handle"/> is <c>IntPtr.Zero</c> contacts for all windows will be received
+		/// Use <c>IntPtr.Zero</c> in <paramref name="relativeTo"/> to get x,y in screen coordinates.
+		/// </remarks>
+		public ContactHandler(IntPtr handle, IntPtr relativeTo)
 		{
 			Handle = handle;
 			logic = CommunicationLogic.Instance;
 			logic.RegisterHandler(this);
+			RelativeTo = relativeTo;
 		}
 
 		/// <summary>
@@ -57,7 +91,8 @@ namespace Multitouch.Framework.Input
 
 		protected virtual void Dispose(bool disposing)
 		{
-			logic.UnregisterHandler(this);
+			if(disposing)
+				logic.UnregisterHandler(this);
 		}
 
 		/// <summary>
@@ -65,7 +100,7 @@ namespace Multitouch.Framework.Input
 		/// </summary>
 		/// <param name="imageType">Type of the image.</param>
 		/// <param name="value">if set to <c>true</c> images will be received.</param>
-		/// <returns>Returns a value indicating whether image of specified type will be realy received</returns>
+		/// <returns>Returns a value indicating whether image of specified type will be really received</returns>
 		public bool ReceiveImageType(ImageType imageType, bool value)
 		{
 			Service.ImageType type;
@@ -101,14 +136,14 @@ namespace Multitouch.Framework.Input
 					throw new ArgumentOutOfRangeException();
 			}
 			if(handler != null)
-				handler(this, new ContactEventArgs(contact, timestamp));
+				handler(this, new ContactEventArgs(contact, RelativeTo, timestamp));
 		}
 
 		internal void HandleFrame(FrameData frame)
 		{
 			EventHandler<FrameEventArgs> eventHandler = Frame;
 			if(eventHandler != null)
-				eventHandler(this, new FrameEventArgs(frame));
+				eventHandler(this, new FrameEventArgs(frame, RelativeTo));
 		}
 	}
 }

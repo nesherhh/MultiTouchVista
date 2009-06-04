@@ -14,9 +14,9 @@ namespace Multitouch.Framework.Input
 		/// <value>The contact.</value>
 		public Contact Contact { get; private set; }
 
-		internal ContactEventArgs(ContactData contact, long timestamp)
+		internal ContactEventArgs(ContactData contact, IntPtr relativeTo, long timestamp)
 		{
-			Contact = new Contact(contact, timestamp);
+			Contact = new Contact(contact, relativeTo, timestamp);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Multitouch.Framework.Input.Service;
 
 namespace Multitouch.Framework.Input
 {
@@ -9,11 +10,13 @@ namespace Multitouch.Framework.Input
 	/// </summary>
 	public class FrameEventArgs : EventArgs
 	{
-		readonly Service.FrameData data;
+		readonly FrameData data;
+		private readonly IntPtr relativeTo;
 
-		internal FrameEventArgs(Service.FrameData data)
+		internal FrameEventArgs(FrameData data, IntPtr relativeTo)
 		{
 			this.data = data;
+			this.relativeTo = relativeTo;
 		}
 
 		/// <summary>
@@ -21,7 +24,7 @@ namespace Multitouch.Framework.Input
 		/// </summary>
 		public IEnumerable<Contact> Contacts
 		{
-			get { return data.Contacts.Select(c => new Contact(c, data.Timestamp)); }
+			get { return data.Contacts.Select(c => new Contact(c, relativeTo, data.Timestamp)); }
 		}
 
 		/// <summary>
@@ -57,7 +60,7 @@ namespace Multitouch.Framework.Input
 			return result;
 		}
 
-		Service.ImageType GetImageType(ImageType imageType)
+		static Service.ImageType GetImageType(ImageType imageType)
 		{
 			switch (imageType)
 			{

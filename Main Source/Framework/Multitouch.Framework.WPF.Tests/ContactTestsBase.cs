@@ -48,7 +48,7 @@ namespace Multitouch.Framework.WPF.Tests
 
 		internal static ContactContext CreateContact(ContactData contactData, long timestamp, PresentationSource source)
 		{
-			return new ContactContext(new Contact(contactData, timestamp), source.RootVisual as UIElement);
+			return new ContactContext(new Contact(contactData, contactData.Hwnd, timestamp), source.RootVisual as UIElement);
 		}
 
 		protected static void Run(Action action)

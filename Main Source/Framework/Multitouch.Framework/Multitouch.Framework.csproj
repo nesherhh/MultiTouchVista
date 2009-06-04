@@ -76,6 +76,7 @@
     <Compile Include="Input\MouseHelper.cs" />
     <Compile Include="Input\MultitouchServiceContactDispatcher.cs" />
     <Compile Include="Input\CommunicationLogic.cs" />
+    <Compile Include="Input\NativeMethods.cs" />
     <Compile Include="Input\ServiceCommunicator.cs" />
     <Compile Include="Input\ContactState.cs" />
     <Compile Include="Input\SingleMouseClientAndDispatcher.cs" />
