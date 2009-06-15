@@ -62,6 +62,9 @@ namespace Multitouch.Service.Logic
 			Uri baseAddress = new Uri("net.pipe://localhost/Multitouch.Service/ApplicationInterface");
 			serviceHost = new ServiceHost(applicationService, baseAddress);
 			NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
+			binding.ReceiveTimeout = TimeSpan.MaxValue;
+			binding.MaxBufferSize = int.MaxValue;
+			binding.MaxReceivedMessageSize = int.MaxValue;
 			serviceHost.AddServiceEndpoint(typeof(IApplicationInterface), binding, string.Empty);
 
 			ServiceMetadataBehavior serviceMetadataBehavior = serviceHost.Description.Behaviors.Find<ServiceMetadataBehavior>();

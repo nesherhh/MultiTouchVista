@@ -35,7 +35,6 @@ namespace Multitouch.Service
 
 		private void StartProcess()
 		{
-			Debugger.Break();
 			uint id = (uint)NativeMethods.WTSGetActiveConsoleSessionId();
 
 			IntPtr token;
