@@ -7,7 +7,7 @@ namespace Multitouch.Framework.Input
 {
 	class ServiceCommunicator : IDisposable
 	{
-		CommunicationLogic logic;
+		readonly CommunicationLogic logic;
 		IApplicationInterface service;
 		IApplicationInterfaceCallback contactDispatcher;
 		bool sendEmptyFrames;
@@ -35,6 +35,7 @@ namespace Multitouch.Framework.Input
 			namedPipeBinding.MaxReceivedMessageSize = int.MaxValue;
 			namedPipeBinding.MaxBufferSize = int.MaxValue;
 			namedPipeBinding.ReaderQuotas.MaxArrayLength = int.MaxValue;
+			namedPipeBinding.ReceiveTimeout = TimeSpan.MaxValue;
 
 			IApplicationInterfaceCallback dispatcher = new MultitouchServiceContactDispatcher(logic);
 			InstanceContext instanceContext = new InstanceContext(dispatcher);

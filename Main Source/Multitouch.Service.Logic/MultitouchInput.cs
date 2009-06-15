@@ -91,6 +91,7 @@ namespace Multitouch.Service.Logic
 			Uri baseAddress = new Uri("net.pipe://localhost/Multitouch.Service/ConfigurationInterface");
 			serviceHost = new ServiceHost(new ConfigurationInterfaceService(this), baseAddress);
 			NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
+			binding.ReceiveTimeout = TimeSpan.MaxValue;
 			binding.MaxBufferSize = int.MaxValue;
 			binding.MaxReceivedMessageSize = int.MaxValue;
 			serviceHost.AddServiceEndpoint(typeof(IConfigurationInterface), binding, string.Empty);
