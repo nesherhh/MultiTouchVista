@@ -85,7 +85,7 @@ namespace Multitouch.Driver.Tests
 			data.MajorAxis = width;
 			data.MinorAxis = height;
 			data.Area = width * height;
-			Contact contact = new Contact(data, timestamp);
+			Contact contact = new Contact(data, IntPtr.Zero, timestamp);
 			HidContactInfo hidContactInfo = new HidContactInfo(state, contact);
 			return hidContactInfo;
 		}
