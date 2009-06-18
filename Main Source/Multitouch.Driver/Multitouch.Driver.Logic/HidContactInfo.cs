@@ -66,7 +66,7 @@ namespace Multitouch.Driver.Logic
 		internal HidContactInfo(HidContactState state, Contact contact)
 		{
 			State = state;
-			Point point = GetPoint(contact.Position, contact.Hwnd);
+			Point point = GetPoint(contact.Position);
 			X = Convert.ToUInt16(point.X);
 			Y = Convert.ToUInt16(point.Y);
 			Width = Convert.ToUInt16(contact.MajorAxis);
@@ -76,10 +76,9 @@ namespace Multitouch.Driver.Logic
 			Timestamp = DateTime.Now;
 		}
 
-		internal static Point GetPoint(Point position, IntPtr hwnd)
+		internal static Point GetPoint(Point position)
 		{
-			Point screen = Utility.ClientToScreen(position, hwnd);
-			return new Point(Math.Max(0, screen.X / XRatio), Math.Max(0, screen.Y / YRatio));
+			return new Point(Math.Max(0, position.X / XRatio), Math.Max(0, position.Y / YRatio));
 		}
 
 		public bool Equals(HidContactInfo obj)

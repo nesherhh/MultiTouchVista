@@ -17,7 +17,7 @@ namespace Multitouch.Driver.Tests
 		{
 			MultiTouchReport report = new MultiTouchReport(1, true);
 
-			Point point = HidContactInfo.GetPoint(new Point(2,3), IntPtr.Zero);
+			Point point = HidContactInfo.GetPoint(new Point(2,3));
 			report.Contacts.Add(CreateContact(HidContactState.Updated, 1, 2, 3, 4, 5));
 			const int expectedPressure = 4 * 5;
 			
@@ -44,7 +44,7 @@ namespace Multitouch.Driver.Tests
 		{
 			MultiTouchReport report = new MultiTouchReport(2, true);
 
-			Point point = HidContactInfo.GetPoint(new Point(2,3), IntPtr.Zero);
+			Point point = HidContactInfo.GetPoint(new Point(2,3));
 			report.Contacts.Add(CreateContact(HidContactState.Updated, 1, 2, 3, 4, 5));
 			report.Contacts.Add(CreateContact(HidContactState.Updated, 2, 2, 3, 4, 5));
 			const int expectedPresure = 4 * 5;

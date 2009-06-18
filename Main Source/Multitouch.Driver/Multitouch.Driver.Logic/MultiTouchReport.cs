@@ -50,7 +50,7 @@ namespace Multitouch.Driver.Logic
 				else
 					writer.Write((byte)0);
 			}
-			Trace.TraceInformation(ToString());
+			//Trace.TraceInformation(ToString());
 		}
 
 		public override string ToString()
