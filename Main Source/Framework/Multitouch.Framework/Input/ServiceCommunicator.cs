@@ -24,7 +24,12 @@ namespace Multitouch.Framework.Input
 
 		public void RemoveWindowFromSession(IntPtr handle)
 		{
-			GetService().RemoveWindowHandleFromSession(handle);
+			try
+			{
+				GetService().RemoveWindowHandleFromSession(handle);
+			}
+			catch (CommunicationException)
+			{ }
 		}
 
 		internal void CreateSession()

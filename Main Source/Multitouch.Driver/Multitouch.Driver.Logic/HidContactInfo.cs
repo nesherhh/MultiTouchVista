@@ -8,7 +8,7 @@ namespace Multitouch.Driver.Logic
 {
 	class HidContactInfo : IEquatable<HidContactInfo>
 	{
-		public HidContactState State { get; set; }
+		public HidContactState State { get; private set; }
 		public ushort X { get; set; }
 		public ushort Y { get; set; }
 		public ushort Pressure { get; set; }
@@ -52,8 +52,8 @@ namespace Multitouch.Driver.Logic
 				switch (State)
 				{
 					case HidContactState.Adding:
-					case HidContactState.Updated:
 					case HidContactState.Removing:
+					case HidContactState.Updated:
 						return true;
 					case HidContactState.Removed:
 						return false;
@@ -66,15 +66,21 @@ namespace Multitouch.Driver.Logic
 		internal HidContactInfo(HidContactState state, Contact contact)
 		{
 			State = state;
-			Point point = GetPoint(contact.Position);
-			X = Convert.ToUInt16(point.X);
-			Y = Convert.ToUInt16(point.Y);
-			Width = Convert.ToUInt16(contact.MajorAxis);
-			Height = Convert.ToUInt16(contact.MinorAxis);
-			Pressure = Convert.ToUInt16(Math.Max(0, Math.Min(MaxSize, contact.Area)));
-			Id = Convert.ToUInt16(contact.Id);
-			Timestamp = DateTime.Now;
+			if (contact != null)
+			{
+				Point point = GetPoint(contact.Position);
+				X = Convert.ToUInt16(point.X);
+				Y = Convert.ToUInt16(point.Y);
+				Width = Convert.ToUInt16(contact.MajorAxis);
+				Height = Convert.ToUInt16(contact.MinorAxis);
+				Pressure = Convert.ToUInt16(Math.Max(0, Math.Min(MaxSize, contact.Area)));
+				Id = Convert.ToUInt16(contact.Id);
+				Timestamp = DateTime.Now;
+				Contact = contact;
+			}
 		}
+
+		public Contact Contact { get; set; }
 
 		internal static Point GetPoint(Point position)
 		{
