@@ -27,20 +27,22 @@ namespace Multitouch.Driver.Logic
 		{
 			foreach (Contact contact in e.Contacts)
 			{
+				HidContactInfo contactInfo;
 				switch (contact.State)
 				{
 					case ContactState.New:
-						communicator.AddContact(new HidContactInfo(HidContactState.Adding, contact));
+						contactInfo = new HidContactInfo(HidContactState.Adding, contact);
 						break;
 					case ContactState.Moved:
-						communicator.UpdateContact(new HidContactInfo(HidContactState.Updated, contact));
+						contactInfo = new HidContactInfo(HidContactState.Updated, contact);
 						break;
 					case ContactState.Removed:
-						communicator.RemoveContact(new HidContactInfo(HidContactState.Removing, contact));
+						contactInfo = new HidContactInfo(HidContactState.Removing, contact);
 						break;
 					default:
 						throw new ArgumentOutOfRangeException();
 				}
+				communicator.Enqueue(contactInfo);
 			}
 		}
 	}

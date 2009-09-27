@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
@@ -16,6 +17,7 @@ namespace Multitouch.Service.Logic
 {
 	public class MultitouchInput
 	{
+		private const string AddInsDirectory = "AddIns";
 		internal static MultitouchInput Instance { get; private set; }
 
 		ServiceHost serviceHost;
@@ -39,11 +41,14 @@ namespace Multitouch.Service.Logic
 
 		void Combine()
 		{
-			MultipleDirectoryCatalog catalog = new MultipleDirectoryCatalog("AddIns", false, "*.dll");
-			CompositionContainer container = new CompositionContainer(catalog);
-			CompositionBatch batch = new CompositionBatch();
-			batch.AddPart(this);
-			container.Compose(batch);
+			if (Directory.Exists(Path.Combine(Environment.CurrentDirectory, AddInsDirectory)))
+			{
+				MultipleDirectoryCatalog catalog = new MultipleDirectoryCatalog(AddInsDirectory, false, "*.dll");
+				CompositionContainer container = new CompositionContainer(catalog);
+				CompositionBatch batch = new CompositionBatch();
+				batch.AddPart(this);
+				container.Compose(batch);
+			}
 		}
 
 		public void Start()

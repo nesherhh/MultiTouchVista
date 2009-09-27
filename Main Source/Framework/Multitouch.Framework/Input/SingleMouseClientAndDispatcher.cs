@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Windows;
-using ManagedWinapi.Hooks;
-using ManagedWinapi.Windows;
 using Multitouch.Framework.Input.Service;
 
 namespace Multitouch.Framework.Input
@@ -10,78 +9,85 @@ namespace Multitouch.Framework.Input
 	class SingleMouseClientAndDispatcher : IApplicationInterface, IApplicationInterfaceCallback, IDisposable
 	{
 		readonly CommunicationLogic logic;
-		readonly LowLevelMouseHook mouseHook;
+		readonly NativeMethods.LowLevelMouseProc mouseProc;
+		readonly IntPtr hookId;
+
 		int id;
+		bool contactPressent;
 
 		public SingleMouseClientAndDispatcher(CommunicationLogic logic)
 		{
 			this.logic = logic;
-			mouseHook = new LowLevelMouseHook();
-			mouseHook.MessageIntercepted += mouseHook_MessageIntercepted;
-			mouseHook.StartHook();
+			mouseProc = mouseHook_MessageIntercepted;
+			hookId = SetHook(mouseProc);
 			id = 0;
 		}
 
-		void mouseHook_MessageIntercepted(LowLevelMessage evt, ref bool handled)
+		private static IntPtr SetHook(NativeMethods.LowLevelMouseProc proc)
 		{
-			handled = false;
+			using (Process curProcess = Process.GetCurrentProcess())
+			{
+				using (ProcessModule curModule = curProcess.MainModule)
+				{
+					return NativeMethods.SetWindowsHookEx(NativeMethods.WH_MOUSE_LL, proc, NativeMethods.GetModuleHandle(curModule.ModuleName), 0);
+				}
+			}
+		}
 
-			LowLevelMouseMessage message = evt as LowLevelMouseMessage;
-			if (message != null)
+		IntPtr mouseHook_MessageIntercepted(int nCode, IntPtr wParam, IntPtr lParam)
+		{
+			if (nCode >= 0)
 			{
 				FrameData data = new FrameData();
 				data.Timestamp = Stopwatch.GetTimestamp();
 				data.Images = new Service.ImageData[0];
 
+				NativeMethods.MSLLHOOKSTRUCT mouseStructure = (NativeMethods.MSLLHOOKSTRUCT) Marshal.PtrToStructure(lParam, typeof (NativeMethods.MSLLHOOKSTRUCT));
+
 				ContactData contact = new ContactData();
 				contact.MajorAxis = 10;
 				contact.MinorAxis = 10;
 				contact.Orientation = 0;
-				contact.Position = new Point(message.Point.X, message.Point.Y);
 
-				SystemWindow window = SystemWindow.FromPointEx(message.Point.X, message.Point.Y, true, true);
-				if (window != null)
+				IntPtr hwnd = NativeMethods.WindowFromPoint(mouseStructure.pt);
+				if (hwnd != IntPtr.Zero)
 				{
-					contact.Hwnd = window.HWnd;
+					contact.Hwnd = hwnd;
 
-					switch ((MouseEventFlagValues)message.MouseEventFlags)
+					NativeMethods.POINT clientPoint = NativeMethods.ScreenToClient(mouseStructure.pt, hwnd);
+					contact.Position = new Point(clientPoint.X, clientPoint.Y);
+
+					if (wParam == (IntPtr) NativeMethods.MouseMessages.WM_LBUTTONDOWN)
 					{
-						case MouseEventFlagValues.LEFTDOWN:
-							id++;
-							if (id == int.MaxValue)
-								id = 0;
-							contact.State = Service.ContactState.New;
-							break;
-						case MouseEventFlagValues.LEFTUP:
-							contact.State = Service.ContactState.Removed;
-							break;
-						case MouseEventFlagValues.MOVE:
-							contact.State = Service.ContactState.Moved;
-							break;
-						default:
-							return;
+						id++;
+						if (id == int.MaxValue)
+							id = 0;
+						contact.State = Service.ContactState.New;
+					}
+					else if (wParam == (IntPtr) NativeMethods.MouseMessages.WM_LBUTTONUP)
+					{
+						contact.State = Service.ContactState.Removed;
+					}
+					else if (wParam == (IntPtr) NativeMethods.MouseMessages.WM_MOUSEMOVE)
+					{
+						contact.State = Service.ContactState.Moved;
 					}
 					contact.Id = id;
-					contact.Bounds = new Rect(contact.Position.X - (contact.MajorAxis / 2), contact.Position.Y - (contact.MinorAxis / 2), contact.MajorAxis, contact.MinorAxis);
+					contact.Bounds = new Rect(contact.Position.X - (contact.MajorAxis/2), contact.Position.Y - (contact.MinorAxis/2),
+					                          contact.MajorAxis, contact.MinorAxis);
 					data.Contacts = new[] {contact};
 
-					Frame(data);
+					if (contact.State == Service.ContactState.New)
+						contactPressent = true;
+
+					if (contactPressent)
+						Frame(data);
+
+					else if (contact.State == Service.ContactState.Removed)
+						contactPressent = false;
 				}
 			}
-		}
-
-		[Flags]
-		private enum MouseEventFlagValues
-		{
-			LEFTDOWN = 0x00000002,
-			LEFTUP = 0x00000004,
-			MIDDLEDOWN = 0x00000020,
-			MIDDLEUP = 0x00000040,
-			MOVE = 0x00000001,
-			RIGHTDOWN = 0x00000008,
-			RIGHTUP = 0x00000010,
-			WHEEL = 0x00000800,
-			HWHEEL = 0x00001000
+			return NativeMethods.CallNextHookEx(hookId, nCode, wParam, lParam);
 		}
 
 		public void CreateSession()
@@ -111,8 +117,8 @@ namespace Multitouch.Framework.Input
 
 		public void Dispose()
 		{
-			if(mouseHook != null)
-				mouseHook.Unhook();
+			if(hookId != IntPtr.Zero)
+				NativeMethods.UnhookWindowsHookEx(hookId);
 		}
 	}
 }

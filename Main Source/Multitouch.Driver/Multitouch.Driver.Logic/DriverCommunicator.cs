@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Timers;
 using HIDLibrary;
 
@@ -9,35 +8,31 @@ namespace Multitouch.Driver.Logic
 {
 	class DriverCommunicator : IDisposable
 	{
-		private const int ContactTimeout = 3;
+		private readonly Queue<HidContactInfo> currentContacts;
+		private readonly Dictionary<int, HidContactInfo> lastContactInfo;
 
-		readonly ContactCollection contacts;
-
-		readonly Timer timer;
+		private readonly Timer timer;
 		private readonly HidDevice device;
-
-		// Device interface detail data
-		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-		public struct SP_DEVICE_INTERFACE_DETAIL_DATA
-		{
-			public UInt32 cbSize;
-			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
-			public string DevicePath;
-		}
+		private readonly HidContactInfoEqualityComparer comparer;
+		private readonly object lockCurrentContacts;
 
 		public DriverCommunicator()
 		{
+			comparer = new HidContactInfoEqualityComparer();
+			lockCurrentContacts = new object();
+
 			device = HidDevices.Enumerate(0xdddd, 0x0001).FirstOrDefault();
 			if (device == null)
 				throw new InvalidOperationException("Universal Software HID driver was not found. Please ensure that it is installed.");
 
 			device.Open(HidDevice.DeviceMode.Overlapped, HidDevice.DeviceMode.NonOverlapped);
 
-			contacts = new ContactCollection();
+			currentContacts = new Queue<HidContactInfo>();
+			lastContactInfo = new Dictionary<int, HidContactInfo>();
 
 			timer = new Timer();
 			timer.AutoReset = false;
-			timer.Interval = 15d / 1000;
+			timer.Interval = 1000 / 133d;
 			timer.Elapsed += timer_Elapsed;
 			timer.Start();
 		}
@@ -48,60 +43,55 @@ namespace Multitouch.Driver.Logic
 			timer.Start();
 		}
 
-		public void SendContacts()
+		private void SendContacts()
 		{
-			int index = 0;
-
-			DateTime now = DateTime.Now;
-
-			contacts.LockObject.EnterWriteLock();
-			try
+			List<HidContactInfo> contactsToSend = new List<HidContactInfo>();
+			lock (lockCurrentContacts)
 			{
-				List<HidContactInfo> tmpList = new List<HidContactInfo>(contacts);
-				MultiTouchReport report = new MultiTouchReport((byte) tmpList.Count, true);
-				foreach (HidContactInfo info in tmpList)
+				while (currentContacts.Count > 0)
 				{
-					TimeSpan span = now - info.Timestamp;
-					if (span.Seconds > ContactTimeout)
-						info.State = HidContactState.Removing;
+					HidContactInfo contactInfo = currentContacts.Dequeue();
 
-					report.Contacts.Add(info);
-					index++;
-
-					if (tmpList.Count - index == 0)
-						SendReport(report);
-					else if (index % MultiTouchReport.MaxContactsPerReport == 0)
+					HidContactInfo lastContact;
+					if (lastContactInfo.TryGetValue(contactInfo.Id, out lastContact))
 					{
-						SendReport(report);
-
-						report = new MultiTouchReport((byte) tmpList.Count, false);
+						if (contactInfo.State == HidContactState.Updated && lastContact.State == HidContactState.Removing)
+							continue;
 					}
-				}
 
-				foreach (HidContactInfo info in tmpList.Where(c => c.State == HidContactState.Removed).ToList())
-				{
-					contacts.Remove(info);
-					tmpList.Remove(info);
+					lastContactInfo[contactInfo.Id] = contactInfo;
+					contactsToSend.Add(contactInfo);
 				}
+			}
+			contactsToSend.AddRange(lastContactInfo.Values.Except(contactsToSend, comparer).Where(c => c.State == HidContactState.Updated).ToList());
 
-				UpdateStateTransition(tmpList, HidContactState.Removing, HidContactState.Removed);
-				UpdateStateTransition(tmpList, HidContactState.Adding, HidContactState.Updated);
-			}
-			finally
-			{
-				contacts.LockObject.ExitWriteLock();
-			}
+			if (contactsToSend.Count > 0)
+				SendContacts(contactsToSend);
+
+			foreach (ushort id in lastContactInfo.Values.Where(c => c.State == HidContactState.Removed).Select(c => c.Id).ToList())
+				lastContactInfo.Remove(id);
+			foreach (HidContactInfo contactInfo in lastContactInfo.Values.Where(c => c.State == HidContactState.Removing).ToList())
+				Enqueue(new HidContactInfo(HidContactState.Removed, contactInfo.Contact));
+			foreach (HidContactInfo contactInfo in lastContactInfo.Values.Where(c => c.State == HidContactState.Adding).ToList())
+				Enqueue(new HidContactInfo(HidContactState.Updated, contactInfo.Contact));
 		}
 
-		private void UpdateStateTransition(IEnumerable<HidContactInfo> tmpList, HidContactState startState, HidContactState endState)
+		private void SendContacts(ICollection<HidContactInfo> contactsToSend)
 		{
-			foreach (HidContactInfo info in tmpList.Where(c => c.State == startState))
+			MultiTouchReport report = new MultiTouchReport((byte) contactsToSend.Count, true);
+			int index = 0;
+			foreach (HidContactInfo contactInfo in contactsToSend)
 			{
-				HidContactInfo contact;
-				if (contacts.TryGet(info.Id, out contact))
+				contactInfo.Timestamp = DateTime.Now;
+				report.Contacts.Add(contactInfo);
+				index++;
+
+				if (contactsToSend.Count - index == 0)
+					SendReport(report);
+				else if (index % MultiTouchReport.MaxContactsPerReport == 0)
 				{
-					info.State = endState;
-					info.Timestamp = DateTime.Now;
+					SendReport(report);
+					report = new MultiTouchReport((byte) contactsToSend.Count, false);
 				}
 			}
 		}
@@ -112,38 +102,12 @@ namespace Multitouch.Driver.Logic
 			device.WriteReport(report);
 		}
 
-		public void AddContact(HidContactInfo info)
+		public void Enqueue(HidContactInfo contactInfo)
 		{
-			contacts.LockObject.EnterWriteLock();
-			try
+			lock (lockCurrentContacts)
 			{
-				contacts.Add(info);
+				currentContacts.Enqueue(contactInfo);
 			}
-			finally
-			{
-				contacts.LockObject.ExitWriteLock();
-			}
-		}
-
-		public void UpdateContact(HidContactInfo info)
-		{
-			contacts.LockObject.EnterWriteLock();
-			try
-			{
-				info.Timestamp = DateTime.Now;
-				int index = contacts.IndexOf(info);
-				if(index >= 0)
-					contacts[index] = info;
-			}
-			finally
-			{
-				contacts.LockObject.ExitWriteLock();
-			}
-		}
-
-		public void RemoveContact(HidContactInfo info)
-		{
-			UpdateContact(info);
 		}
 
 		public void Dispose()

@@ -23,8 +23,13 @@ namespace Multitouch.Driver.Service
 		{
 			if (processInfo.dwProcessId != 0)
 			{
-				Process process = Process.GetProcessById(processInfo.dwProcessId);
-				process.Kill();
+				try
+				{
+					Process process = Process.GetProcessById(processInfo.dwProcessId);
+					process.Kill();
+				}
+				catch (ArgumentException)
+				{ }
 				NativeMethods.CloseHandle(processInfo.hThread);
 				NativeMethods.CloseHandle(processInfo.hProcess);
 
