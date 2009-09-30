@@ -52,5 +52,9 @@
 		<Border Grid.Column="3" Grid.Row="3" Background="White" BorderThickness="3">
 			<Image Source="{Binding CameraImage}" x:Name="image"/>
 		</Border>
+		<StackPanel>
+			<ListBox x:Name="listInkEditingModes" SelectedItem="{Binding InkEditingMode}" ItemsSource="{Binding InkEditingModes}" mt:MultitouchScreen.NewContact="ListBox_NewContact"/>
+			<mt:InkCanvas EditingMode="{Binding InkEditingMode}" />
+		</StackPanel>
 	</UniformGrid>
 </mt:Window>

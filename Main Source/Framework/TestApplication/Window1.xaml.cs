@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -25,6 +27,17 @@ namespace TestApplication
 
 		public ObservableCollection<Contact> Contacts1 { get; private set; }
 		public ObservableCollection<Contact> Contacts2 { get; private set; }
+		public IEnumerable<InkCanvasEditingMode> InkEditingModes { get; private set; }
+        
+		public InkCanvasEditingMode InkEditingMode
+		{
+			get { return (InkCanvasEditingMode)GetValue(InkEditingModeProperty); }
+			set { SetValue(InkEditingModeProperty, value); }
+		}
+
+		// Using a DependencyProperty as the backing store for InkEditingMode.  This enables animation, styling, binding, etc...
+		public static readonly DependencyProperty InkEditingModeProperty =
+			DependencyProperty.Register("InkEditingMode", typeof(InkCanvasEditingMode), typeof(Window1), new UIPropertyMetadata(InkCanvasEditingMode.Ink));
 
 		public static readonly DependencyPropertyKey PicturesPropertyKey = DependencyProperty.RegisterReadOnly("Pictures",
 			typeof(ObservableCollection<string>), typeof(Window1), new PropertyMetadata(null));
@@ -48,6 +61,7 @@ namespace TestApplication
 			Contacts1 = new ObservableCollection<Contact>();
 			Contacts2 = new ObservableCollection<Contact>();
 			SetValue(PicturesPropertyKey, new ObservableCollection<string>());
+			InkEditingModes = new[] {InkCanvasEditingMode.Ink, InkCanvasEditingMode.EraseByPoint, InkCanvasEditingMode.EraseByStroke };
 			DataContext = this;
 			InitializeComponent();
 
@@ -132,6 +146,14 @@ namespace TestApplication
 		private void list1_ContactLeave(object sender, ContactEventArgs e)
 		{
 			Contacts1.Remove(e.Contact);
+		}
+
+		private void ListBox_NewContact(object sender, NewContactEventArgs e)
+		{
+			IInputElement element = listInkEditingModes.InputHitTest(e.GetPosition(listInkEditingModes));
+			ListBoxItem container = ItemsControl.ContainerFromElement(listInkEditingModes, (DependencyObject) element) as ListBoxItem;
+			if (container != null)
+				container.IsSelected = true;
 		}
 	}
 }

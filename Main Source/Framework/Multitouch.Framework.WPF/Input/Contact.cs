@@ -11,6 +11,8 @@ namespace Multitouch.Framework.WPF.Input
 	/// </summary>
 	public class Contact : InputDevice
 	{
+		private Dictionary<object, object> userData;
+
 		internal RawMultitouchReport InputArgs { get; set; }
 
 		internal Contact(RawMultitouchReport report)
@@ -161,6 +163,39 @@ namespace Multitouch.Framework.WPF.Input
 		public double MinorAxis
 		{
 			get { return InputArgs.Context.Contact.MinorAxis; }
+		}
+
+		/// <summary>
+		/// Sets user specified data
+		/// </summary>
+		/// <param name="key">Key</param>
+		/// <param name="value">Data</param>
+		public void SetUserData(object key, object value)
+		{
+			Check.NotNull(key, "key");
+
+			if(userData == null && value != null)
+				userData = new Dictionary<object, object>();
+
+			if (value != null)
+				userData[key] = value;
+			else if(userData != null)
+				userData.Remove(key);
+		}
+
+		/// <summary>
+		/// Gets user specified data
+		/// </summary>
+		/// <param name="key">Key</param>
+		/// <returns>User data</returns>
+		public object GetUserData(object key)
+		{
+			Check.NotNull(key, "key");
+
+			object value;
+			if (userData != null && userData.TryGetValue(key, out value))
+				return value;
+			return null;
 		}
 	}
 }
