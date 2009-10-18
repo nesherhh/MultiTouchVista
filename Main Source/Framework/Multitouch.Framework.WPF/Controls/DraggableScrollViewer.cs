@@ -80,7 +80,7 @@ namespace Multitouch.Framework.WPF.Controls
 
         public DraggableScrollViewer()
         {
-            AddHandler(MultitouchScreen.ContactLeaveEvent, (ContactEventHandler)OnContactLeave);
+            AddHandler(MultitouchScreen.ContactMovedEvent, (ContactEventHandler)OnContactMoved);
             AddHandler(MultitouchScreen.NewContactEvent, (NewContactEventHandler)OnNewContact);
         }
 
@@ -109,23 +109,31 @@ namespace Multitouch.Framework.WPF.Controls
                     }
                     else
                     {
-                        contactElements.Add(e.Contact.Id, element);
+                        if (contactElements.ContainsKey(e.Contact.Id))
+                            contactElements[e.Contact.Id] = element;
+                        else
+                            contactElements.Add(e.Contact.Id, element);
                         eltOffset.Add(element, e.GetPosition(element));
                     }
                 }
             }
         }
 
-        void OnContactLeave(object sender, ContactEventArgs e)
+        void OnContactMoved(object sender, ContactEventArgs e)
         {
             HitTestResult hitTestResult = VisualTreeHelper.HitTest(this, e.GetPosition(this));
             if (hitTestResult != null) return;
 
             if (contactElements.ContainsKey(e.Contact.Id) && eltOffset.ContainsKey(contactElements[e.Contact.Id]))
             {
-                RaiseElementDraggedEvent(contactElements[e.Contact.Id] as FrameworkElement,
-                                         eltOffset[contactElements[e.Contact.Id]], e);
+                var contactElement = contactElements[e.Contact.Id] as FrameworkElement;
+                var offset = eltOffset[contactElements[e.Contact.Id]];
+
                 eltOffset.Remove(contactElements[e.Contact.Id]);
+                
+                RaiseElementDraggedEvent(contactElement, offset, e);
+                
+                e.Contact.ReleaseCapture();
             }
         }
     }
