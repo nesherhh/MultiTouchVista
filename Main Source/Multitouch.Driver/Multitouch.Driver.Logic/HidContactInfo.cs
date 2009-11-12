@@ -74,7 +74,10 @@ namespace Multitouch.Driver.Logic
 				Width = Convert.ToUInt16(contact.MajorAxis);
 				Height = Convert.ToUInt16(contact.MinorAxis);
 				Pressure = Convert.ToUInt16(Math.Max(0, Math.Min(MaxSize, contact.Area)));
-				Id = Convert.ToUInt16(contact.Id);
+
+				UInt16 id = unchecked((UInt16)contact.Id);
+
+				Id = id;
 				Timestamp = DateTime.Now;
 				Contact = contact;
 			}

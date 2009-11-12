@@ -11,7 +11,8 @@
     <RootNamespace>Multitouch.Service.Logic</RootNamespace>
     <AssemblyName>Multitouch.Service.Logic</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+		<!--{3D9AD99F-2412-4246-B90B-4EAA41C64699};-->
     <FileAlignment>512</FileAlignment>
     <StartupObject>
     </StartupObject>
