@@ -1,15 +1,28 @@
-﻿using System;
-using Multitouch.Driver.Logic;
+﻿using Multitouch.Driver.Logic;
+using Multitouch.Service.Logic;
 
 namespace Multitouch.Driver.Console
 {
-	using Console = System.Console;
+	using System;
 
 	class Program
 	{
-		static void Main()
+		private static MultitouchInput input;
+		private static MultitouchDriver driver;
+
+		private static void Main(string[] args)
 		{
-			MultitouchDriver driver = new MultitouchDriver();
+			if(args.Length == 1)
+			{
+				string parameter = args[0];
+				if(parameter.Equals("-standalone"))
+				{
+					input = new MultitouchInput();
+					input.Start();					
+				}
+			}
+
+			driver = new MultitouchDriver();
 			try
 			{
 				driver.Start();

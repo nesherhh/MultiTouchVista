@@ -57,7 +57,7 @@ namespace Multitouch.Service.Logic
 
 			Console.WriteLine("Input provider in settings - " + providerId);
 
-			if (!string.IsNullOrEmpty(providerId))
+			if (!string.IsNullOrEmpty(providerId) && InputProviders != null)
 			{
 				Export<IProvider, IAddInView> currentProvider = (from provider in InputProviders
 																 where provider.MetadataView.Id == providerId

@@ -114,18 +114,21 @@ namespace Multitouch.Service.Logic.ExternalInterfaces
 			if(sessions.Count == 0)
 				return;
 
+
 			// For each contact determinte it's target handle and group by this handle
 			IEnumerable<IGrouping<IntPtr, Contact>> contactsGroupedByHandle = e.Contacts.GroupBy(contact => Utils.GetWindowFromPoint(contact.Position));
+
 
 			// Create a list with sessions and contacts that belong to this session
 			Dictionary<SessionContext, List<ContactData>> sessionList = new Dictionary<SessionContext, List<ContactData>>();
 
-			foreach (IGrouping<IntPtr, Contact> handleWithContacts in contactsGroupedByHandle.Where(g => !g.Key.Equals(Utils.InvalidWindow)))
+			foreach (IGrouping<IntPtr, Contact> handleWithContacts in contactsGroupedByHandle)
 			{
 				List<ContactData> contacts;
 
 				foreach (SessionContext sessionContext in from map in sessionToHandlesMap
-														  where map.Value.Contains(handleWithContacts.Key) || map.Value.Contains(IntPtr.Zero)
+														  where map.Value.Contains(handleWithContacts.Key)
+														  || map.Value.Contains(IntPtr.Zero)
 														  select map.Key)
 				{
 					if (!sessionList.TryGetValue(sessionContext, out contacts))

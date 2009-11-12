@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -81,8 +82,15 @@ namespace MultipleMice
 
 		public void Dispose()
 		{
-			if(hook != null)
-				hook.Dispose();
+			if (hook != null)
+			{
+				try
+				{
+					hook.Dispose();
+				}
+				catch (Win32Exception)
+				{}
+			}
 
 			RawDevice.UnregisterRawDevices(0x01, 0x02);
 			RawDevice.UnregisterRawDevices(HID_USAGE_PAGE_DIGITIZER, HID_USAGE_DIGITIZER_PEN);
