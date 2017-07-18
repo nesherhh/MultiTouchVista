@@ -14,8 +14,8 @@ Here you will find video how to install multitouch driver in Windows 7 [http://w
 
 Or you can read step-by-step instruction [here](http://michaelsync.net/2010/04/06/step-by-step-tutorial-installing-multi-touch-simulator-for-silverlight-phone-7). It also shows how to use MultiTouchVista with Windows Phone 7 emulator to develop and test multitouch Apps.
 
-<br\>
-<br\>
+<br/>
+<br/>
 
 UniSoftHID driver is not Open Source and can be used only with MultiTouchVista.
 
