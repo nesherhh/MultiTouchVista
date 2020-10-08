@@ -4,9 +4,9 @@ Multi-Touch Vista is a user input management layer that handles input from vario
 
 **With the release of .NET 4 Framework we recommend to use WPF 4.0 with Windows 7 driver from MultiTouchVista (UniSoftHID).**
 
-If you want to try out recent check-in please read [this](How-to-compile) compile instructions.
+If you want to try out recent check-in please read [this](docs/How%20to%20compile.md) compile instructions.
 
-[Here](HelloWorld) you will find simple "Hello World" tutorial.
+[Here](docks/../docs/HelloWorld.md) you will find simple "Hello World" tutorial.
 
 Some [videos](http://www.youtube.com/nesherhh) made with this project.
 
