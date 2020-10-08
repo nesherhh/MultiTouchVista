@@ -21,7 +21,7 @@ UniSoftHID driver is not Open Source and can be used only with MultiTouchVista.
 
 **If you interested in using UniSoftHID (Windows 7 multitouch driver) in commercial products please contact me.**
 
-**Download latest binaries here: [release:28979](release_28979)**
+**Download latest binaries [here](https://github.com/nesherhh/MultiTouchVista/releases/tag/v1.0)**
 
 ----
 
